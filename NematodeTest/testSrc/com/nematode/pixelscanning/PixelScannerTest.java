@@ -40,6 +40,8 @@ public class PixelScannerTest extends TestCase {
 		int percentOfImageWithinTolerance = pixelScanner
 				.getPercentOfImageWithinTolerance();
 
+		fail("not yet implemented");
+
 		assertEquals(10, percentOfImageWithinTolerance);
 	}
 }
