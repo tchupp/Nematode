@@ -6,15 +6,14 @@ import java.io.File;
 
 import javax.imageio.ImageIO;
 
-import junit.framework.TestCase;
-
 import org.junit.Test;
 
 import com.nematode.model.ScanningColorModel;
 import com.nematode.model.ScanningReferenceColor;
 import com.nematode.model.ScanningTolerancePercentage;
+import com.nematode.unittesting.AssertTestCase;
 
-public class PixelScannerTest extends TestCase {
+public class PixelScannerTest extends AssertTestCase {
 
 	private BufferedImage bufferedImage;
 
@@ -29,15 +28,15 @@ public class PixelScannerTest extends TestCase {
 
 	@Test
 	public void testCorrectlyCalculatesValuesToScanWith() throws Exception {
-		Color nematodeColor = new Color(49, 55, 55);
-		ScanningColorModel scanningColorModel = new ScanningColorModel(
+		final Color nematodeColor = new Color(49, 55, 55);
+		final ScanningColorModel scanningColorModel = new ScanningColorModel(
 				new ScanningReferenceColor(nematodeColor),
 				new ScanningTolerancePercentage(5));
 
-		PixelScanner pixelScanner = new PixelScanner(this.bufferedImage,
+		final PixelScanner pixelScanner = new PixelScanner(this.bufferedImage,
 				scanningColorModel);
 
-		int percentOfImageWithinTolerance = pixelScanner
+		final int percentOfImageWithinTolerance = pixelScanner
 				.getPercentOfImageWithinTolerance();
 
 		fail("not yet implemented");

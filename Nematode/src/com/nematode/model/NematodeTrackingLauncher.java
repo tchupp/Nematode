@@ -1,11 +1,10 @@
 package com.nematode.model;
 
-import com.nematode.gui.NematodeMainWindow;
-import com.nematode.gui.NematodeVideoContainerPanel;
+import com.nematode.gui.NematodeMainView;
 
 public class NematodeTrackingLauncher {
 
-	public static void main(String[] args) {
-		new NematodeMainWindow(new NematodeVideoContainerPanel());
+	public static void main(final String[] args) {
+		new NematodeMainView();
 	}
 }

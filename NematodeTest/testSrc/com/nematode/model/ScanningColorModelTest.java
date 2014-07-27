@@ -1,22 +1,21 @@
 package com.nematode.model;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertSame;
-
 import java.awt.Color;
 
 import org.junit.Test;
 
-public class ScanningColorModelTest {
+import com.nematode.unittesting.AssertTestCase;
+
+public class ScanningColorModelTest extends AssertTestCase {
 
 	@Test
 	public void testGetsCorrectValuesPassedInConstruction() throws Exception {
-		ScanningTolerancePercentage tolerancePercentage = new ScanningTolerancePercentage(
+		final ScanningTolerancePercentage tolerancePercentage = new ScanningTolerancePercentage(
 				10);
-		ScanningReferenceColor referenceColor = new ScanningReferenceColor(
+		final ScanningReferenceColor referenceColor = new ScanningReferenceColor(
 				Color.GRAY);
 
-		ScanningColorModel pixelScanningTolerenceModel = new ScanningColorModel(
+		final ScanningColorModel pixelScanningTolerenceModel = new ScanningColorModel(
 				referenceColor, tolerancePercentage);
 
 		assertSame(referenceColor,
@@ -27,8 +26,8 @@ public class ScanningColorModelTest {
 
 	@Test
 	public void testCorrectlyCalculatesHighAndLowRGBColors() throws Exception {
-		Color simpleRGBColor = new Color(100, 100, 100);
-		ScanningColorModel scanningColorModel = new ScanningColorModel(
+		final Color simpleRGBColor = new Color(100, 100, 100);
+		final ScanningColorModel scanningColorModel = new ScanningColorModel(
 				new ScanningReferenceColor(simpleRGBColor),
 				new ScanningTolerancePercentage(10));
 
