@@ -10,5 +10,4 @@ public class AssertTestCaseTest extends AssertTestCase {
 	public void testExtendsTestCase() throws Exception {
 		assertExtends(TestCase.class, AssertTestCase.class);
 	}
-
 }

@@ -15,6 +15,7 @@ import junit.framework.AssertionFailedError;
 import junit.framework.TestCase;
 
 public class AssertTestCase extends TestCase {
+
 	public static void assertEquals(final String message,
 			final Object[] expected, final Object[] actual) {
 		assertNotNull(message + " Expected was null. Huh? Your test is wrong.",
@@ -283,5 +284,4 @@ public class AssertTestCase extends TestCase {
 		assertTrue(msg,
 				Modifier.isPrivate(declaredConstructors[0].getModifiers()));
 	}
-
 }
