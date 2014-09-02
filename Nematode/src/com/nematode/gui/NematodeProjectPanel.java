@@ -12,8 +12,8 @@ public class NematodeProjectPanel extends JPanel {
 
 	public NematodeProjectPanel() {
 
-		this.setupBorder();
-		this.setupOpenImageButton();
+		setupBorder();
+		setupOpenImageButton();
 	}
 
 	private void setupOpenImageButton() {
@@ -31,6 +31,6 @@ public class NematodeProjectPanel extends JPanel {
 		final CompoundBorder compoundBorder = BorderFactory
 				.createCompoundBorder(raisedBevelBorder, loweredBevelBorder);
 
-		this.setBorder(compoundBorder);
+		setBorder(compoundBorder);
 	}
 }
