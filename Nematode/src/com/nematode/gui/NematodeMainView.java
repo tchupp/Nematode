@@ -15,11 +15,19 @@ public class NematodeMainView extends JFrame {
 
 		this.contentPane.setLayout(new BorderLayout());
 
-		this.contentPane.add(new NematodeProjectPanel(), BorderLayout.WEST);
-		this.contentPane.add(new NematodeVideoPanel(), BorderLayout.CENTER);
-		this.contentPane.add(new NematodeTrackingPanel(), BorderLayout.EAST);
+		final NematodeProjectPanelViewController nematodeProjectPanelViewController = new NematodeProjectPanelViewController();
+		final NematodeVideoPanelViewController nematodeVideoPanelViewController = new NematodeVideoPanelViewController();
+		final NematodeTrackingPanelViewController nematodeTrackingPanelViewController = new NematodeTrackingPanelViewController();
+
+		this.contentPane.add(
+				nematodeProjectPanelViewController.getNematodeProjectPanel(),
+				BorderLayout.WEST);
+		this.contentPane.add(
+				nematodeVideoPanelViewController.getNematodeVideoPanel(),
+				BorderLayout.CENTER);
+		this.contentPane.add(nematodeTrackingPanelViewController
+				.getNematodeTrackingPanel(), BorderLayout.EAST);
 
 		this.setSize(800, 800);
 	}
-
 }

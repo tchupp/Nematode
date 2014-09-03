@@ -9,13 +9,18 @@ import javax.swing.border.CompoundBorder;
 public class NematodeTrackingPanel extends JPanel {
 
 	private static final long serialVersionUID = 1L;
+	private JButton scanButton;
 
 	public NematodeTrackingPanel() {
-		final JButton scanButton = new JButton();
-		scanButton.setName("scanButton");
-		scanButton.setText("Scan Image");
-		this.add(scanButton);
+		setupTrackingButton();
 		setupBorder();
+	}
+
+	private void setupTrackingButton() {
+		this.scanButton = new JButton();
+		this.scanButton.setName("scanButton");
+		this.scanButton.setText("Scan Image");
+		this.add(this.scanButton);
 	}
 
 	private void setupBorder() {
@@ -27,6 +32,10 @@ public class NematodeTrackingPanel extends JPanel {
 				.createCompoundBorder(raisedBevelBorder, loweredBevelBorder);
 
 		this.setBorder(compoundBorder);
+	}
+
+	public JButton getScanButton() {
+		return this.scanButton;
 	}
 
 }
