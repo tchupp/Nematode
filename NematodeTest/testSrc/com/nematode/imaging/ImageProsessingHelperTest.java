@@ -23,15 +23,15 @@ public class ImageProsessingHelperTest extends AssertTestCase {
 		super.setUp();
 
 		final File shadesOfBlue = new File(
-				"testResources/pngOfThe7ShadesOfBlue.png");
+				"testResources/Images/pngOfThe7ShadesOfBlue.png");
 		this.bufferedShadesOfBlue = ImageIO.read(shadesOfBlue);
 
 		final File shadesOfGrey = new File(
-				"testResources/pngOfThe7ShadesOfGrey.png");
+				"testResources/Images/pngOfThe7ShadesOfGrey.png");
 		this.bufferedShadesOfGrey = ImageIO.read(shadesOfGrey);
 
 		final File shadesOfBlackAndWhite = new File(
-				"testResources/expectedBitmapOfShadesOfBlackAndWhite.png");
+				"testResources/Images/expectedBitmapOfShadesOfBlackAndWhite.png");
 		this.bufferedShadesOfBlackAndWhite = ImageIO
 				.read(shadesOfBlackAndWhite);
 	}

@@ -19,6 +19,7 @@ public class NematodeTrackingPanelTest extends AssertTestCase {
 	@Test
 	public void testConstructorCorrectlySetsUpPanel() throws Exception {
 		final NematodeTrackingPanel nematodeTrackingPanel = new NematodeTrackingPanel();
+
 		assertEquals(1, nematodeTrackingPanel.getComponentCount());
 		assertIsOfTypeAndGet(CompoundBorder.class,
 				nematodeTrackingPanel.getBorder());
@@ -27,6 +28,7 @@ public class NematodeTrackingPanelTest extends AssertTestCase {
 	@Test
 	public void testScanButton() throws Exception {
 		final NematodeTrackingPanel nematodeTrackingPanel = new NematodeTrackingPanel();
+
 		final JButton scanButtonFromIOTAG = assertIsOfTypeAndGet(JButton.class,
 				nematodeTrackingPanel.getComponent(0));
 		final JButton scanButtonFromGetter = nematodeTrackingPanel

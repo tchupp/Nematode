@@ -9,6 +9,7 @@ import javax.swing.border.CompoundBorder;
 public class NematodeProjectPanel extends JPanel {
 
 	private static final long serialVersionUID = 1L;
+	private JButton openImageButton;
 
 	public NematodeProjectPanel() {
 		setupBorder();
@@ -16,10 +17,10 @@ public class NematodeProjectPanel extends JPanel {
 	}
 
 	private void setupOpenImageButton() {
-		final JButton openImageButton = new JButton();
-		openImageButton.setName("openImageButton");
-		openImageButton.setText("Open Image");
-		this.add(openImageButton);
+		this.openImageButton = new JButton();
+		this.openImageButton.setName("openImageButton");
+		this.openImageButton.setText("Open Image");
+		this.add(this.openImageButton);
 	}
 
 	private void setupBorder() {
@@ -31,5 +32,9 @@ public class NematodeProjectPanel extends JPanel {
 				.createCompoundBorder(raisedBevelBorder, loweredBevelBorder);
 
 		setBorder(compoundBorder);
+	}
+
+	public JButton getOpenImageButton() {
+		return this.openImageButton;
 	}
 }

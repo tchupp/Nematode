@@ -20,15 +20,21 @@ public class NematodeProjectPanelTest extends AssertTestCase {
 	public void testConstructorCorrectlySetsUpPanel() throws Exception {
 		final NematodeProjectPanel nematodeProjectPanel = new NematodeProjectPanel();
 
+		assertEquals(1, nematodeProjectPanel.getComponents().length);
 		assertIsOfTypeAndGet(CompoundBorder.class,
 				nematodeProjectPanel.getBorder());
-
-		assertEquals(1, nematodeProjectPanel.getComponents().length);
-
-		final JButton openImageButton = assertIsOfTypeAndGet(JButton.class,
-				nematodeProjectPanel.getComponent(0));
-		assertEquals("openImageButton", openImageButton.getName());
-		assertEquals("Open Image", openImageButton.getText());
 	}
 
+	@Test
+	public void testGetOpenImageButton() throws Exception {
+		final NematodeProjectPanel nematodeProjectPanel = new NematodeProjectPanel();
+
+		final JButton openImageButtonFromIOTAG = assertIsOfTypeAndGet(
+				JButton.class, nematodeProjectPanel.getComponent(0));
+		final JButton openImageButtonFromGetter = nematodeProjectPanel
+				.getOpenImageButton();
+		assertSame(openImageButtonFromGetter, openImageButtonFromIOTAG);
+		assertEquals("openImageButton", openImageButtonFromIOTAG.getName());
+		assertEquals("Open Image", openImageButtonFromIOTAG.getText());
+	}
 }
