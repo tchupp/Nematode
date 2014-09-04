@@ -5,25 +5,25 @@ import javax.swing.JButton;
 import com.nematode.fileIO.ImageFileChooser;
 import com.nematode.fileIO.OpenImageButtonActionListener;
 
-public class NematodeProjectPanelViewController {
+public class NematodeProjectPanelViewController implements
+NematodePanelViewControllerInterface {
 
-	private final NematodeProjectPanel nematodeProjectPanel;
+	private final NematodeProjectPanel nematodeProjectPanel = new NematodeProjectPanel();
 
 	public NematodeProjectPanelViewController() {
-		this.nematodeProjectPanel = new NematodeProjectPanel();
 		addListenerToOpenImageButton();
 	}
 
 	private void addListenerToOpenImageButton() {
-		final JButton openImageButton = this.nematodeProjectPanel
-				.getOpenImageButton();
-
 		final OpenImageButtonActionListener openImageButtonActionListener = new OpenImageButtonActionListener(
 				new ImageFileChooser());
+		final JButton openImageButton = this.nematodeProjectPanel
+				.getOpenImageButton();
 		openImageButton.addActionListener(openImageButtonActionListener);
 	}
 
-	public NematodeProjectPanel getNematodeProjectPanel() {
+	@Override
+	public NematodePanel getNematodePanel() {
 		return this.nematodeProjectPanel;
 	}
 

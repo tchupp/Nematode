@@ -1,7 +1,6 @@
 package com.nematode.gui;
 
 import java.awt.BorderLayout;
-import java.awt.Component;
 import java.awt.Container;
 
 import javax.swing.JFrame;
@@ -27,15 +26,7 @@ public class NematodeMainViewTest extends AssertTestCase {
 				nematodeMainView.getDefaultCloseOperation());
 
 		final Container contentPane = nematodeMainView.getContentPane();
-		final Component[] components = contentPane.getComponents();
-
-		assertEquals(3, components.length);
-
-		assertIsOfTypeAndGet(NematodeProjectPanel.class, components[0]);
-		assertIsOfTypeAndGet(NematodeVideoPanel.class, components[1]);
-		assertIsOfTypeAndGet(NematodeTrackingPanel.class, components[2]);
-		assertIsOfTypeAndGet(BorderLayout.class, nematodeMainView.getLayout());
-
+		assertIsOfTypeAndGet(BorderLayout.class, contentPane.getLayout());
 		assertEquals(800, nematodeMainView.getHeight());
 		assertEquals(800, nematodeMainView.getWidth());
 		assertTrue(nematodeMainView.isResizable());

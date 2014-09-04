@@ -6,7 +6,6 @@ import javax.swing.filechooser.FileFilter;
 
 import org.junit.Test;
 
-import com.nematode.fileIO.ImageFileFilter;
 import com.nematode.unittesting.AssertTestCase;
 
 public class ImageFileFilterTest extends AssertTestCase {
@@ -27,6 +26,12 @@ public class ImageFileFilterTest extends AssertTestCase {
 				"testResources/Images/testJPG.jpg")));
 		assertTrue(imageFileFilter.accept(new File(
 				"testResources/Images/testBMP.bmp")));
+	}
+
+	@Test
+	public void testAcceptReturnsTrueForDirectories() throws Exception {
+		final ImageFileFilter imageFileFilter = new ImageFileFilter();
+		assertTrue(imageFileFilter.accept(new File("testResources")));
 	}
 
 	@Test

@@ -10,20 +10,27 @@ import com.nematode.unittesting.AssertTestCase;
 public class NematodeProjectPanelViewControllerTest extends AssertTestCase {
 
 	@Test
+	public void testImplementsInterface() throws Exception {
+		assertImplementsInterface(NematodePanelViewControllerInterface.class,
+				NematodeProjectPanelViewController.class);
+	}
+
+	@Test
 	public void testGetsNematodeProjectPanel() throws Exception {
 		final NematodeProjectPanelViewController nematodeProjectViewController = new NematodeProjectPanelViewController();
 
 		assertIsOfTypeAndGet(NematodeProjectPanel.class,
-				nematodeProjectViewController.getNematodeProjectPanel());
+				nematodeProjectViewController.getNematodePanel());
 	}
 
 	@Test
 	public void testConstructionAddsListener_OpenImageButtonOnPanel()
 			throws Exception {
-
 		final NematodeProjectPanelViewController nematodeProjectPanelViewController = new NematodeProjectPanelViewController();
-		final NematodeProjectPanel nematodeProjectPanel = nematodeProjectPanelViewController
-				.getNematodeProjectPanel();
+
+		final NematodeProjectPanel nematodeProjectPanel = assertIsOfTypeAndGet(
+				NematodeProjectPanel.class,
+				nematodeProjectPanelViewController.getNematodePanel());
 
 		final JButton openImageButton = nematodeProjectPanel
 				.getOpenImageButton();

@@ -1,16 +1,15 @@
 package com.nematode.gui;
 
 import javax.swing.BorderFactory;
-import javax.swing.JPanel;
 import javax.swing.border.Border;
 import javax.swing.border.CompoundBorder;
 
-public class NematodeVideoPanel extends JPanel {
+public class NematodeVideoPanel extends NematodePanel {
 
 	private static final long serialVersionUID = 1L;
 
 	public NematodeVideoPanel() {
-		this.setupBorder();
+		setupBorder();
 	}
 
 	private void setupBorder() {

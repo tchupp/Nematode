@@ -8,11 +8,17 @@ import com.nematode.unittesting.AssertTestCase;
 public class NematodeVideoPanelViewControllerTest extends AssertTestCase {
 
 	@Test
+	public void testImplementsInterface() throws Exception {
+		assertImplementsInterface(NematodePanelViewControllerInterface.class,
+				NematodeVideoPanelViewController.class);
+	}
+
+	@Test
 	public void testGetsNematodeVideoPanel() throws Exception {
 		final NematodeVideoPanelViewController nematodeVideoPanelViewController = new NematodeVideoPanelViewController();
 
 		assertIsOfTypeAndGet(NematodeVideoPanel.class,
-				nematodeVideoPanelViewController.getNematodeVideoPanel());
+				nematodeVideoPanelViewController.getNematodePanel());
 	}
 
 	@Test

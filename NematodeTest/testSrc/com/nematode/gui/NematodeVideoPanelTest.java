@@ -1,6 +1,5 @@
 package com.nematode.gui;
 
-import javax.swing.JPanel;
 import javax.swing.border.CompoundBorder;
 
 import org.junit.Test;
@@ -11,8 +10,7 @@ public class NematodeVideoPanelTest extends AssertTestCase {
 
 	@Test
 	public void testExtendsJFrame() throws Exception {
-		final NematodeVideoPanel nematodeVideoPanel = new NematodeVideoPanel();
-		assertExtends(JPanel.class, nematodeVideoPanel.getClass());
+		assertExtends(NematodePanel.class, NematodeVideoPanel.class);
 	}
 
 	@Test

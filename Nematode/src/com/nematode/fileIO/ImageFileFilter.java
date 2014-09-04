@@ -8,6 +8,10 @@ public class ImageFileFilter extends FileFilter {
 
 	@Override
 	public boolean accept(final File file) {
+		if (file.isDirectory()) {
+			return true;
+		}
+
 		final String fileExtention = getFileExtention(file);
 
 		if (fileExtention.equals("jpeg") || fileExtention.equals("jpg")
