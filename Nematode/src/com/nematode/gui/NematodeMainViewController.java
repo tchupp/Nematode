@@ -3,6 +3,10 @@ package com.nematode.gui;
 import java.awt.BorderLayout;
 import java.awt.Container;
 
+import com.nematode.imaging.VideoFrameBuilder;
+import com.nematode.model.NematodeVideoFrame;
+import com.nematode.nullmodel.NullVideoFrameImage;
+
 public class NematodeMainViewController {
 
 	private final NematodeMainView nematodeMainView;
@@ -12,7 +16,11 @@ public class NematodeMainViewController {
 
 	public NematodeMainViewController() {
 		this.nematodeMainView = new NematodeMainView();
-		this.nematodeProjectPanelViewController = new NematodeProjectPanelViewController();
+
+		NematodeVideoFrame nematodeVideoFrame = new NematodeVideoFrame(
+				NullVideoFrameImage.NULL);
+		this.nematodeProjectPanelViewController = new NematodeProjectPanelViewController(
+				new VideoFrameBuilder(nematodeVideoFrame));
 		this.nematodeVideoPanelViewController = new NematodeVideoPanelViewController();
 		this.nematodeTrackingPanelViewController = new NematodeTrackingPanelViewController();
 
@@ -20,7 +28,6 @@ public class NematodeMainViewController {
 	}
 
 	private void addPanelsToFrame() {
-
 		final Container contentPane = this.nematodeMainView.getContentPane();
 
 		contentPane.add(

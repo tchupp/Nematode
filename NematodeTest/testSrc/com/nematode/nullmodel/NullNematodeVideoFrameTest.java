@@ -31,4 +31,11 @@ public class NullNematodeVideoFrameTest extends AssertTestCase {
 				NullNematodeVideoFrame.NULL);
 	}
 
+	@Test
+	public void testGetVideoFrameImageReturnsNullFrameImage() throws Exception {
+		final NematodeVideoFrameInterface nullNematodeVideoFrame = NullNematodeVideoFrame.NULL;
+		assertIsOfTypeAndGet(NullVideoFrameImage.class,
+				nullNematodeVideoFrame.getVideoFrameImage());
+	}
+
 }

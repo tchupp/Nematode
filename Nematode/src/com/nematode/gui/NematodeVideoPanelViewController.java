@@ -7,24 +7,19 @@ public class NematodeVideoPanelViewController implements
 NematodePanelViewControllerInterface {
 
 	private final NematodeVideoPanel nematodeVideoPanel;
-	private NematodeVideoFrameInterface nematodeVideoFrame;
+	private final NematodeVideoFrameInterface nematodeVideoFrame;
 
 	public NematodeVideoPanelViewController() {
 		this.nematodeVideoPanel = new NematodeVideoPanel();
 		this.nematodeVideoFrame = NullNematodeVideoFrame.NULL;
 	}
 
-	public NematodeVideoFrameInterface getNematodeVideoFrame() {
-		return this.nematodeVideoFrame;
-	}
-
-	public void setNematodeVideoFrame(
-			final NematodeVideoFrameInterface nematodeVideoFrame) {
-		this.nematodeVideoFrame = nematodeVideoFrame;
-	}
-
 	@Override
 	public NematodePanel getNematodePanel() {
 		return this.nematodeVideoPanel;
+	}
+
+	public NematodeVideoFrameInterface getNematodeVideoFrame() {
+		return this.nematodeVideoFrame;
 	}
 }

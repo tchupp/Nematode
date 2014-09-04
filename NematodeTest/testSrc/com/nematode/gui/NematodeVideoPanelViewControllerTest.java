@@ -28,18 +28,4 @@ public class NematodeVideoPanelViewControllerTest extends AssertTestCase {
 		assertIsOfTypeAndGet(NullNematodeVideoFrame.class,
 				nematodeVideoPanelViewController.getNematodeVideoFrame());
 	}
-
-	@Test
-	public void testGetVideoFrameReturns_CorrectVideoFrame_AfterSet()
-			throws Exception {
-		final NematodeVideoPanelViewController nematodeVideoPanelViewController = new NematodeVideoPanelViewController();
-
-		final MockNematodeVideoFrame mockNematodeVideoFrame = new MockNematodeVideoFrame();
-		nematodeVideoPanelViewController
-				.setNematodeVideoFrame(mockNematodeVideoFrame);
-
-		assertSame(mockNematodeVideoFrame,
-				nematodeVideoPanelViewController.getNematodeVideoFrame());
-	}
-
 }
