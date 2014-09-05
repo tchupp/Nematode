@@ -23,12 +23,12 @@ public class VideoFrameImageChangeObserverTest extends AssertTestCase {
 	}
 
 	@Test
-	public void testNotifyFrameHasBeenSet() throws Exception {
-		final MockPanelViewController panelViewController = new MockPanelViewController();
-		final VideoFrameImageChangeObserver observer = new VideoFrameImageChangeObserver(
-				panelViewController);
-		assertFalse(panelViewController.wasUpdateImageCalled());
-		observer.notifyFrameHasBeenSet();
-		assertTrue(panelViewController.wasUpdateImageCalled());
-	}
+		public void testNotifyVideoFrameHasBeenSet() throws Exception {
+			final MockPanelViewController panelViewController = new MockPanelViewController();
+			final VideoFrameImageChangeObserver observer = new VideoFrameImageChangeObserver(
+					panelViewController);
+			assertFalse(panelViewController.wasUpdateImageCalled());
+			observer.notifyVideoFrameHasBeenSet();
+			assertTrue(panelViewController.wasUpdateImageCalled());
+		}
 }

@@ -6,7 +6,7 @@ NematodeVideoFrameObserverInterface {
 	private boolean notifyFrameHasBeenSetWasCalled = false;
 
 	@Override
-	public void notifyFrameHasBeenSet() {
+	public void notifyVideoFrameHasBeenSet() {
 		this.notifyFrameHasBeenSetWasCalled = true;
 	}
 

@@ -61,8 +61,7 @@ public class NematodeVideoPanelViewControllerTest extends AssertTestCase {
 	@Test
 	public void testConstructorAddsObserverToVideoFrameWithCorrectViewController()
 			throws Exception {
-		final NematodeVideoFrame nematodeVideoFrame = new NematodeVideoFrame(
-				new MockVideoFrameImage());
+		final NematodeVideoFrame nematodeVideoFrame = new NematodeVideoFrame();
 		final NematodeVideoPanelViewController viewController = new NematodeVideoPanelViewController(
 				nematodeVideoFrame);
 		assertEquals(1, nematodeVideoFrame.getListOfObservers().size());

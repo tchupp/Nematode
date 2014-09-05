@@ -2,8 +2,9 @@ package com.nematode.model;
 
 import org.junit.Test;
 
+import com.nematode.imaging.MockDisplayFrameImage;
 import com.nematode.imaging.MockVideoFrameImage;
-import com.nematode.nullmodel.NullVideoFrameImage;
+import com.nematode.nullmodel.NullFrameImage;
 import com.nematode.unittesting.AssertTestCase;
 
 public class NematodeVideoFrameTest extends AssertTestCase {
@@ -15,22 +16,22 @@ public class NematodeVideoFrameTest extends AssertTestCase {
 	}
 
 	@Test
-	public void testGetsVideoFrameImagePassedIn() throws Exception {
-		final MockVideoFrameImage mockVideoFrameImage = new MockVideoFrameImage();
-		final NematodeVideoFrame nematodeVideoFrame = new NematodeVideoFrame(
-				mockVideoFrameImage);
+	public void testGetsNullFrameImageAtConstruction() throws Exception {
+		final NematodeVideoFrame nematodeVideoFrame = new NematodeVideoFrame();
 
-		assertSame(mockVideoFrameImage, nematodeVideoFrame.getVideoFrameImage());
+		assertIsOfTypeAndGet(NullFrameImage.class,
+				nematodeVideoFrame.getVideoFrameImage());
+
+		assertIsOfTypeAndGet(NullFrameImage.class,
+				nematodeVideoFrame.getDisplayFrameImage());
 	}
 
 	@Test
 	public void testGetsVideoFrameImageSet() throws Exception {
 		final MockVideoFrameImage mockVideoFrameImage = new MockVideoFrameImage();
-		final NematodeVideoFrame nematodeVideoFrame = new NematodeVideoFrame(
-				NullVideoFrameImage.NULL);
+		final NematodeVideoFrame nematodeVideoFrame = new NematodeVideoFrame();
 
-		assertSame(NullVideoFrameImage.NULL,
-				nematodeVideoFrame.getVideoFrameImage());
+		assertSame(NullFrameImage.NULL, nematodeVideoFrame.getVideoFrameImage());
 
 		nematodeVideoFrame.setVideoFrameImage(mockVideoFrameImage);
 
@@ -38,12 +39,26 @@ public class NematodeVideoFrameTest extends AssertTestCase {
 	}
 
 	@Test
+	public void testGetsDisplayFrameImageSet() throws Exception {
+		final MockDisplayFrameImage mockDisplayFrameImage = new MockDisplayFrameImage();
+
+		final NematodeVideoFrame nematodeVideoFrame = new NematodeVideoFrame();
+
+		assertSame(NullFrameImage.NULL,
+				nematodeVideoFrame.getDisplayFrameImage());
+
+		nematodeVideoFrame.setDisplayFrameImage(mockDisplayFrameImage);
+
+		assertSame(mockDisplayFrameImage,
+				nematodeVideoFrame.getDisplayFrameImage());
+	}
+
+	@Test
 	public void testAddObservers() throws Exception {
 		final MockVideoFrameObserver mockVideoFrameObserver1 = new MockVideoFrameObserver();
 		final MockVideoFrameObserver mockVideoFrameObserver2 = new MockVideoFrameObserver();
 
-		final NematodeVideoFrame nematodeVideoFrame = new NematodeVideoFrame(
-				new MockVideoFrameImage());
+		final NematodeVideoFrame nematodeVideoFrame = new NematodeVideoFrame();
 		assertEquals(0, nematodeVideoFrame.getListOfObservers().size());
 		nematodeVideoFrame.addObserver(mockVideoFrameObserver1);
 		nematodeVideoFrame.addObserver(mockVideoFrameObserver2);
@@ -56,8 +71,7 @@ public class NematodeVideoFrameTest extends AssertTestCase {
 		final MockVideoFrameObserver mockVideoFrameObserver1 = new MockVideoFrameObserver();
 		final MockVideoFrameObserver mockVideoFrameObserver2 = new MockVideoFrameObserver();
 
-		final NematodeVideoFrame nematodeVideoFrame = new NematodeVideoFrame(
-				new MockVideoFrameImage());
+		final NematodeVideoFrame nematodeVideoFrame = new NematodeVideoFrame();
 		nematodeVideoFrame.addObserver(mockVideoFrameObserver1);
 		nematodeVideoFrame.addObserver(mockVideoFrameObserver2);
 		assertEquals(2, nematodeVideoFrame.getListOfObservers().size());
@@ -71,8 +85,7 @@ public class NematodeVideoFrameTest extends AssertTestCase {
 		final MockVideoFrameObserver mockVideoFrameObserver1 = new MockVideoFrameObserver();
 		final MockVideoFrameObserver mockVideoFrameObserver2 = new MockVideoFrameObserver();
 
-		final NematodeVideoFrame nematodeVideoFrame = new NematodeVideoFrame(
-				new MockVideoFrameImage());
+		final NematodeVideoFrame nematodeVideoFrame = new NematodeVideoFrame();
 
 		nematodeVideoFrame.addObserver(mockVideoFrameObserver1);
 		nematodeVideoFrame.addObserver(mockVideoFrameObserver2);
@@ -85,8 +98,7 @@ public class NematodeVideoFrameTest extends AssertTestCase {
 	public void testObserverIsNotifiedWhenImageIsSet() throws Exception {
 		final MockVideoFrameObserver mockVideoFrameObserver = new MockVideoFrameObserver();
 
-		final NematodeVideoFrame nematodeVideoFrame = new NematodeVideoFrame(
-				new MockVideoFrameImage());
+		final NematodeVideoFrame nematodeVideoFrame = new NematodeVideoFrame();
 		nematodeVideoFrame.addObserver(mockVideoFrameObserver);
 		assertFalse(mockVideoFrameObserver.wasNotifyFrameHasBeenSetCalled());
 		nematodeVideoFrame.setVideoFrameImage(new MockVideoFrameImage());

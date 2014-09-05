@@ -2,7 +2,7 @@ package com.nematode.imaging;
 
 import com.nematode.fileIO.ValidatedImageFileInterface;
 import com.nematode.model.NematodeVideoFrameInterface;
-import com.nematode.nullmodel.NullVideoFrameImage;
+import com.nematode.nullmodel.NullFrameImage;
 
 public class VideoFrameBuilder implements VideoFrameBuilderInterface {
 
@@ -23,7 +23,7 @@ public class VideoFrameBuilder implements VideoFrameBuilderInterface {
 			this.nematodeVideoFrame.setVideoFrameImage(videoFrameImage);
 		} else {
 			this.nematodeVideoFrame
-			.setVideoFrameImage(NullVideoFrameImage.NULL);
+			.setVideoFrameImage(NullFrameImage.NULL);
 		}
 	}
 

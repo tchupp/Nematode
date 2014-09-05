@@ -13,7 +13,7 @@ NematodeVideoFrameObserverInterface {
 	}
 
 	@Override
-	public void notifyFrameHasBeenSet() {
+	public void notifyVideoFrameHasBeenSet() {
 		this.panelViewController.updateImage();
 	}
 

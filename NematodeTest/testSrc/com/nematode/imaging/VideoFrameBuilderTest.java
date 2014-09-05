@@ -7,7 +7,7 @@ import org.junit.Test;
 import com.nematode.fileIO.MockValidatedImageFile;
 import com.nematode.gui.MockNematodeVideoFrame;
 import com.nematode.model.NematodeVideoFrameInterface;
-import com.nematode.nullmodel.NullVideoFrameImage;
+import com.nematode.nullmodel.NullFrameImage;
 import com.nematode.unittesting.AssertTestCase;
 
 public class VideoFrameBuilderTest extends AssertTestCase {
@@ -47,8 +47,8 @@ public class VideoFrameBuilderTest extends AssertTestCase {
 		final VideoFrameImage frameImage = assertIsOfTypeAndGet(
 				VideoFrameImage.class, videoFrame.getVideoFrameImage());
 
-		final BufferedImage actualBufferedImage = frameImage.getBufferedImage();
-		assertSame(expectedBufferedImage, actualBufferedImage);
+		final BufferedImage actualImage = frameImage.getImage();
+		assertSame(expectedBufferedImage, actualImage);
 	}
 
 	@Test
@@ -63,7 +63,7 @@ public class VideoFrameBuilderTest extends AssertTestCase {
 
 		videoFrameBuilder.buildVideoFrameImage(mockValidatedImageFile);
 
-		assertIsOfTypeAndGet(NullVideoFrameImage.class,
+		assertIsOfTypeAndGet(NullFrameImage.class,
 				videoFrame.getVideoFrameImage());
 	}
 }

@@ -21,6 +21,6 @@ public class VideoFrameImageTest extends AssertTestCase {
 		final VideoFrameImage videoFrameImage = new VideoFrameImage(
 				bufferedImage);
 
-		assertSame(bufferedImage, videoFrameImage.getBufferedImage());
+		assertSame(bufferedImage, videoFrameImage.getImage());
 	}
 }

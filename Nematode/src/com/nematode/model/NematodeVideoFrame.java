@@ -3,15 +3,19 @@ package com.nematode.model;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.nematode.imaging.DisplayFrameImageInterface;
 import com.nematode.imaging.VideoFrameImageInterface;
+import com.nematode.nullmodel.NullFrameImage;
 
 public class NematodeVideoFrame implements NematodeVideoFrameInterface {
 
 	private VideoFrameImageInterface videoFrameImage;
+	private DisplayFrameImageInterface displayFrameImage;
 	private final List<NematodeVideoFrameObserverInterface> videoFrameObservers;
 
-	public NematodeVideoFrame(final VideoFrameImageInterface videoFrameImage) {
-		this.videoFrameImage = videoFrameImage;
+	public NematodeVideoFrame() {
+		this.videoFrameImage = NullFrameImage.NULL;
+		this.setDisplayFrameImage(NullFrameImage.NULL);
 		this.videoFrameObservers = new ArrayList<NematodeVideoFrameObserverInterface>();
 	}
 
@@ -29,7 +33,16 @@ public class NematodeVideoFrame implements NematodeVideoFrameInterface {
 	public void setVideoFrameImage(
 			final VideoFrameImageInterface videoFrameImage) {
 		this.videoFrameImage = videoFrameImage;
-		notifyFrameHasBeenSet();
+		notifyVideoFrameHasBeenSet();
+	}
+
+	public DisplayFrameImageInterface getDisplayFrameImage() {
+		return this.displayFrameImage;
+	}
+
+	public void setDisplayFrameImage(
+			final DisplayFrameImageInterface displayFrameImage) {
+		this.displayFrameImage = displayFrameImage;
 	}
 
 	@Override
@@ -49,9 +62,10 @@ public class NematodeVideoFrame implements NematodeVideoFrameInterface {
 		return this.videoFrameObservers;
 	}
 
-	private void notifyFrameHasBeenSet() {
+	private void notifyVideoFrameHasBeenSet() {
 		for (final NematodeVideoFrameObserverInterface observer : this.videoFrameObservers) {
-			observer.notifyFrameHasBeenSet();
+			observer.notifyVideoFrameHasBeenSet();
 		}
 	}
+
 }

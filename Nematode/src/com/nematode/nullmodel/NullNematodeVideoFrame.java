@@ -3,6 +3,7 @@ package com.nematode.nullmodel;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.nematode.imaging.DisplayFrameImageInterface;
 import com.nematode.imaging.VideoFrameImageInterface;
 import com.nematode.model.NematodeVideoFrameInterface;
 import com.nematode.model.NematodeVideoFrameObserverInterface;
@@ -16,12 +17,23 @@ public class NullNematodeVideoFrame implements NematodeVideoFrameInterface {
 
 	@Override
 	public VideoFrameImageInterface getVideoFrameImage() {
-		return NullVideoFrameImage.NULL;
+		return NullFrameImage.NULL;
 	}
 
 	@Override
 	public void setVideoFrameImage(
 			final VideoFrameImageInterface videoFrameImage) {
+	}
+
+	@Override
+	public DisplayFrameImageInterface getDisplayFrameImage() {
+		return NullFrameImage.NULL;
+	}
+
+	@Override
+	public void setDisplayFrameImage(
+			final DisplayFrameImageInterface displayFrameImage) {
+
 	}
 
 	@Override

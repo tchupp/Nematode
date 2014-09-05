@@ -6,7 +6,6 @@ import java.awt.Container;
 import com.nematode.imaging.VideoFrameBuilder;
 import com.nematode.imaging.VideoFrameBuilderInterface;
 import com.nematode.model.NematodeVideoFrame;
-import com.nematode.nullmodel.NullVideoFrameImage;
 
 public class NematodeMainViewController {
 
@@ -19,8 +18,7 @@ public class NematodeMainViewController {
 	public NematodeMainViewController() {
 		this.nematodeMainView = new NematodeMainView();
 
-		final NematodeVideoFrame nematodeVideoFrame = new NematodeVideoFrame(
-				NullVideoFrameImage.NULL);
+		final NematodeVideoFrame nematodeVideoFrame = new NematodeVideoFrame();
 		this.videoFrameBuilder = new VideoFrameBuilder(nematodeVideoFrame);
 
 		this.nematodeProjectPanelViewController = new NematodeProjectPanelViewController(
