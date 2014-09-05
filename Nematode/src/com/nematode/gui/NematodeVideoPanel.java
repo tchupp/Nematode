@@ -14,6 +14,9 @@ import com.nematode.nullmodel.NullBufferedImage;
 
 public class NematodeVideoPanel extends NematodePanel {
 
+	public static final int ICON_WIDTH = 1200;
+	public static final int ICON_HEIGHT = 900;
+
 	private static final long serialVersionUID = 1L;
 	private JLabel imageLabel;
 
@@ -26,7 +29,7 @@ public class NematodeVideoPanel extends NematodePanel {
 	private void addImageLabel() {
 		this.imageLabel = new JLabel(new ImageIcon(new NullBufferedImage()));
 		this.imageLabel.setName("imageLabel");
-		this.imageLabel.setSize(1200, 900);
+		this.imageLabel.setSize(ICON_WIDTH, ICON_HEIGHT);
 
 		final GridBagConstraints imageLabelConstraints = new GridBagConstraints();
 		imageLabelConstraints.gridy = 0;

@@ -9,7 +9,7 @@ import javax.swing.JLabel;
 
 import org.junit.Test;
 
-import com.nematode.imaging.MockVideoFrameImage;
+import com.nematode.imaging.MockDisplayFrameImage;
 import com.nematode.model.NematodeVideoFrame;
 import com.nematode.model.VideoFrameImageChangeObserver;
 import com.nematode.nullmodel.NullBufferedImage;
@@ -81,9 +81,9 @@ public class NematodeVideoPanelViewControllerTest extends AssertTestCase {
 	@Test
 	public void testUpdateImagePlacesCorrectImageOnPanel() throws Exception {
 		final MockNematodeVideoFrame videoFrame = new MockNematodeVideoFrame();
-		final MockVideoFrameImage videoFrameImage = new MockVideoFrameImage();
-		videoFrameImage.setBufferedImage(this.bufferedTestImage);
-		videoFrame.setVideoFrameImage(videoFrameImage);
+		final MockDisplayFrameImage displayFrameImage = new MockDisplayFrameImage();
+		displayFrameImage.setBufferedImage(this.bufferedTestImage);
+		videoFrame.setDisplayFrameImage(displayFrameImage);
 		final NematodeVideoPanelViewController viewController = new NematodeVideoPanelViewController(
 				videoFrame);
 		final NematodeVideoPanel videoPanel = assertIsOfTypeAndGet(

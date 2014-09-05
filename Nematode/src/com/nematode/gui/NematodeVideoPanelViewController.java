@@ -41,7 +41,7 @@ public class NematodeVideoPanelViewController implements
 	@Override
 	public void updateImage() {
 		final BufferedImage newImageForPanel = this.nematodeVideoFrame
-				.getVideoFrameImage().getImage();
+				.getDisplayFrameImage().getImage();
 
 		final JLabel imageLabel = this.nematodeVideoPanel.getImageLabel();
 		final ImageIcon imageIcon = new ImageIcon();

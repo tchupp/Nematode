@@ -6,6 +6,7 @@ import org.junit.Test;
 
 import com.nematode.fileIO.MockValidatedImageFile;
 import com.nematode.gui.MockNematodeVideoFrame;
+import com.nematode.gui.NematodeVideoPanel;
 import com.nematode.model.NematodeVideoFrameInterface;
 import com.nematode.nullmodel.NullFrameImage;
 import com.nematode.unittesting.AssertTestCase;
@@ -52,7 +53,7 @@ public class VideoFrameBuilderTest extends AssertTestCase {
 	}
 
 	@Test
-	public void testBuildVideoFrameImageSetsNullVideoFrame_InvalidFile()
+	public void testBuildVideoFrameImageSetsNullFrameImage_InvalidFile()
 			throws Exception {
 		final MockNematodeVideoFrame videoFrame = new MockNematodeVideoFrame();
 		final VideoFrameBuilder videoFrameBuilder = new VideoFrameBuilder(
@@ -65,5 +66,42 @@ public class VideoFrameBuilderTest extends AssertTestCase {
 
 		assertIsOfTypeAndGet(NullFrameImage.class,
 				videoFrame.getVideoFrameImage());
+	}
+
+	@Test
+	public void testBuildDisplayFrameImageSetsRealDisplayImage_ValidFile()
+			throws Exception {
+		final MockNematodeVideoFrame videoFrame = new MockNematodeVideoFrame();
+		final VideoFrameBuilder videoFrameBuilder = new VideoFrameBuilder(
+				videoFrame);
+
+		final MockValidatedImageFile mockValidatedImageFile = new MockValidatedImageFile();
+		mockValidatedImageFile.setIsFileValid(true);
+
+		videoFrameBuilder.buildVideoFrameImage(mockValidatedImageFile);
+
+		final DisplayFrameImage frameImage = assertIsOfTypeAndGet(
+				DisplayFrameImage.class, videoFrame.getDisplayFrameImage());
+
+		final BufferedImage actualImage = frameImage.getImage();
+		assertEquals(NematodeVideoPanel.ICON_HEIGHT, actualImage.getHeight());
+		assertEquals(NematodeVideoPanel.ICON_WIDTH, actualImage.getWidth());
+
+	}
+
+	@Test
+	public void testBuildDisplayFrameImageSetsNullFrameImage_InvalidFile()
+			throws Exception {
+		final MockNematodeVideoFrame videoFrame = new MockNematodeVideoFrame();
+		final VideoFrameBuilder videoFrameBuilder = new VideoFrameBuilder(
+				videoFrame);
+
+		final MockValidatedImageFile mockValidatedImageFile = new MockValidatedImageFile();
+		mockValidatedImageFile.setIsFileValid(false);
+
+		videoFrameBuilder.buildVideoFrameImage(mockValidatedImageFile);
+
+		assertIsOfTypeAndGet(NullFrameImage.class,
+				videoFrame.getDisplayFrameImage());
 	}
 }

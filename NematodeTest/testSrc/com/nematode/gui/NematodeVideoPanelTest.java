@@ -37,7 +37,9 @@ public class NematodeVideoPanelTest extends AssertTestCase {
 		final JLabel imageLabel = assertIsOfTypeAndGet(JLabel.class,
 				videoPanel.getComponent(0));
 		assertEquals("imageLabel", imageLabel.getName());
-		assertEquals(new Dimension(1200, 900), imageLabel.getSize());
+		final Dimension expectedDimentions = new Dimension(
+				NematodeVideoPanel.ICON_WIDTH, NematodeVideoPanel.ICON_HEIGHT);
+		assertEquals(expectedDimentions, imageLabel.getSize());
 		final ImageIcon imageIcon = assertIsOfTypeAndGet(ImageIcon.class,
 				imageLabel.getIcon());
 		assertIsOfTypeAndGet(NullBufferedImage.class, imageIcon.getImage());
@@ -61,5 +63,11 @@ public class NematodeVideoPanelTest extends AssertTestCase {
 		final JLabel actualImageLabel = videoPanel.getImageLabel();
 
 		assertSame(expectedImageLabel, actualImageLabel);
+	}
+
+	@Test
+	public void testIconWidthAndHeight() throws Exception {
+		assertEquals(900, NematodeVideoPanel.ICON_HEIGHT);
+		assertEquals(1200, NematodeVideoPanel.ICON_WIDTH);
 	}
 }

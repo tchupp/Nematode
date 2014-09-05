@@ -15,7 +15,7 @@ public class NematodeVideoFrame implements NematodeVideoFrameInterface {
 
 	public NematodeVideoFrame() {
 		this.videoFrameImage = NullFrameImage.NULL;
-		this.setDisplayFrameImage(NullFrameImage.NULL);
+		this.displayFrameImage = NullFrameImage.NULL;
 		this.videoFrameObservers = new ArrayList<NematodeVideoFrameObserverInterface>();
 	}
 
@@ -34,12 +34,15 @@ public class NematodeVideoFrame implements NematodeVideoFrameInterface {
 			final VideoFrameImageInterface videoFrameImage) {
 		this.videoFrameImage = videoFrameImage;
 		notifyVideoFrameHasBeenSet();
+		System.out.println();
 	}
 
+	@Override
 	public DisplayFrameImageInterface getDisplayFrameImage() {
 		return this.displayFrameImage;
 	}
 
+	@Override
 	public void setDisplayFrameImage(
 			final DisplayFrameImageInterface displayFrameImage) {
 		this.displayFrameImage = displayFrameImage;

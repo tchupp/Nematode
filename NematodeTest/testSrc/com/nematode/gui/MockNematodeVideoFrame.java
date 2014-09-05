@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.nematode.imaging.DisplayFrameImageInterface;
+import com.nematode.imaging.MockDisplayFrameImage;
 import com.nematode.imaging.MockVideoFrameImage;
 import com.nematode.imaging.VideoFrameImageInterface;
 import com.nematode.model.NematodeVideoFrameInterface;
@@ -13,7 +14,7 @@ public class MockNematodeVideoFrame implements NematodeVideoFrameInterface {
 
 	private VideoFrameImageInterface videoFrameImage = new MockVideoFrameImage();
 	private int numberOfObservers = 0;
-	private DisplayFrameImageInterface displayFrameImage;
+	private DisplayFrameImageInterface displayFrameImage = new MockDisplayFrameImage();
 
 	@Override
 	public VideoFrameImageInterface getVideoFrameImage() {
