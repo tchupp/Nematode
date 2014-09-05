@@ -1,7 +1,7 @@
 package com.nematode.gui;
 
 public class NematodeTrackingPanelViewController implements
-		NematodePanelViewControllerInterface {
+NematodePanelViewControllerInterface {
 
 	private final NematodeTrackingPanel nematodeTrackingPanel;
 
@@ -12,5 +12,9 @@ public class NematodeTrackingPanelViewController implements
 	@Override
 	public NematodePanel getNematodePanel() {
 		return this.nematodeTrackingPanel;
+	}
+
+	@Override
+	public void updateImage() {
 	}
 }

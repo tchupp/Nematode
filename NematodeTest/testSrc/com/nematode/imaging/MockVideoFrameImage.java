@@ -2,13 +2,18 @@ package com.nematode.imaging;
 
 import java.awt.image.BufferedImage;
 
-import com.nematode.imaging.VideoFrameImageInterface;
+import com.nematode.nullmodel.NullBufferedImage;
 
 public class MockVideoFrameImage implements VideoFrameImageInterface {
 
+	private BufferedImage bufferedImage = new NullBufferedImage();
+
 	@Override
 	public BufferedImage getBufferedImage() {
-		return new BufferedImage(0, 0, BufferedImage.TYPE_INT_ARGB);
+		return this.bufferedImage;
 	}
 
+	public void setBufferedImage(final BufferedImage bufferedImage) {
+		this.bufferedImage = bufferedImage;
+	}
 }

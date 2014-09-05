@@ -1,12 +1,17 @@
 package com.nematode.gui;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import com.nematode.imaging.MockVideoFrameImage;
 import com.nematode.imaging.VideoFrameImageInterface;
 import com.nematode.model.NematodeVideoFrameInterface;
+import com.nematode.model.NematodeVideoFrameObserverInterface;
 
 public class MockNematodeVideoFrame implements NematodeVideoFrameInterface {
 
 	private VideoFrameImageInterface videoFrameImage = new MockVideoFrameImage();
+	private int numberOfObservers = 0;
 
 	@Override
 	public VideoFrameImageInterface getVideoFrameImage() {
@@ -17,7 +22,33 @@ public class MockNematodeVideoFrame implements NematodeVideoFrameInterface {
 	public void setVideoFrameImage(
 			final VideoFrameImageInterface videoFrameImage) {
 		this.videoFrameImage = videoFrameImage;
+	}
 
+	@Override
+	public void addObserver(
+			final NematodeVideoFrameObserverInterface nematodeVideoFrameObserver) {
+		this.numberOfObservers++;
+	}
+
+	@Override
+	public void removeObserver(
+			final NematodeVideoFrameObserverInterface nematodeVideoFrameObserver) {
+		if (this.numberOfObservers > 0) {
+			this.numberOfObservers--;
+		}
+	}
+
+	@Override
+	public List<NematodeVideoFrameObserverInterface> getListOfObservers() {
+		return new ArrayList<NematodeVideoFrameObserverInterface>();
+	}
+
+	public int getNumberOfObservers() {
+		return this.numberOfObservers;
+	}
+
+	@Override
+	public void dispose() {
 	}
 
 }

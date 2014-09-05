@@ -21,6 +21,7 @@ public class OpenImageButtonActionListener implements ActionListener {
 	@Override
 	public void actionPerformed(final ActionEvent e) {
 		final int dialogResult = this.fileChooser.showDialog(null, null);
+
 		if (dialogResult == JFileChooser.APPROVE_OPTION) {
 			final ValidatedImageFile validatedImageFile = new ValidatedImageFile(
 					this.fileChooser.getSelectedFile());

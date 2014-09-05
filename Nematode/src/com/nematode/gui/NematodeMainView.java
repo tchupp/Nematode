@@ -15,6 +15,6 @@ public class NematodeMainView extends JFrame {
 		final Container contentPane = this.getContentPane();
 		contentPane.setLayout(new BorderLayout());
 
-		this.setSize(800, 800);
+		this.setSize(1500, 1000);
 	}
 }

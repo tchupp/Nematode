@@ -7,7 +7,7 @@ import com.nematode.fileIO.OpenImageButtonActionListener;
 import com.nematode.imaging.VideoFrameBuilderInterface;
 
 public class NematodeProjectPanelViewController implements
-		NematodePanelViewControllerInterface {
+NematodePanelViewControllerInterface {
 
 	private final NematodeProjectPanel nematodeProjectPanel = new NematodeProjectPanel();
 	private final VideoFrameBuilderInterface videoFrameBuilder;
@@ -33,6 +33,10 @@ public class NematodeProjectPanelViewController implements
 
 	public VideoFrameBuilderInterface getVideoFrameBuilder() {
 		return this.videoFrameBuilder;
+	}
+
+	@Override
+	public void updateImage() {
 	}
 
 }

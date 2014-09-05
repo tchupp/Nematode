@@ -4,6 +4,7 @@ import java.awt.BorderLayout;
 import java.awt.Container;
 
 import com.nematode.imaging.VideoFrameBuilder;
+import com.nematode.imaging.VideoFrameBuilderInterface;
 import com.nematode.model.NematodeVideoFrame;
 import com.nematode.nullmodel.NullVideoFrameImage;
 
@@ -13,17 +14,20 @@ public class NematodeMainViewController {
 	private final NematodePanelViewControllerInterface nematodeProjectPanelViewController;
 	private final NematodePanelViewControllerInterface nematodeVideoPanelViewController;
 	private final NematodePanelViewControllerInterface nematodeTrackingPanelViewController;
+	private final VideoFrameBuilder videoFrameBuilder;
 
 	public NematodeMainViewController() {
 		this.nematodeMainView = new NematodeMainView();
 
-		NematodeVideoFrame nematodeVideoFrame = new NematodeVideoFrame(
+		final NematodeVideoFrame nematodeVideoFrame = new NematodeVideoFrame(
 				NullVideoFrameImage.NULL);
-		this.nematodeProjectPanelViewController = new NematodeProjectPanelViewController(
-				new VideoFrameBuilder(nematodeVideoFrame));
-		this.nematodeVideoPanelViewController = new NematodeVideoPanelViewController();
-		this.nematodeTrackingPanelViewController = new NematodeTrackingPanelViewController();
+		this.videoFrameBuilder = new VideoFrameBuilder(nematodeVideoFrame);
 
+		this.nematodeProjectPanelViewController = new NematodeProjectPanelViewController(
+				this.videoFrameBuilder);
+		this.nematodeVideoPanelViewController = new NematodeVideoPanelViewController(
+				nematodeVideoFrame);
+		this.nematodeTrackingPanelViewController = new NematodeTrackingPanelViewController();
 		addPanelsToFrame();
 	}
 
@@ -57,4 +61,7 @@ public class NematodeMainViewController {
 		return this.nematodeVideoPanelViewController;
 	}
 
+	public VideoFrameBuilderInterface getVideoFrameBuilder() {
+		return this.videoFrameBuilder;
+	}
 }

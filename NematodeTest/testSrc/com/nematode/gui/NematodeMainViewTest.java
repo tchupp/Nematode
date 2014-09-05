@@ -27,8 +27,8 @@ public class NematodeMainViewTest extends AssertTestCase {
 
 		final Container contentPane = nematodeMainView.getContentPane();
 		assertIsOfTypeAndGet(BorderLayout.class, contentPane.getLayout());
-		assertEquals(800, nematodeMainView.getHeight());
-		assertEquals(800, nematodeMainView.getWidth());
+		assertEquals(1000, nematodeMainView.getHeight());
+		assertEquals(1500, nematodeMainView.getWidth());
 		assertTrue(nematodeMainView.isResizable());
 	}
 }
