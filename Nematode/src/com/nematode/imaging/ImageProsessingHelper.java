@@ -30,17 +30,13 @@ public class ImageProsessingHelper {
 		final int[] outputImageRGB = new int[width * height];
 
 		inputImage.getRGB(0, 0, width, height, inputImageRGB, 0, width);
-		for (int i = 0; i < inputImageRGB.length; i++) {
 
-			final int element = inputImageRGB[i];
-			final Color rgbColor = new Color(element);
-			final float[] rgbToHSB = new float[3];
-			Color.RGBtoHSB(rgbColor.getRed(), rgbColor.getGreen(),
-					rgbColor.getBlue(), rgbToHSB);
-			if (rgbToHSB[2] > toleranceSeperator) {
-				outputImageRGB[i] = Color.white.getRGB();
+		for (int i = 0; i < inputImageRGB.length; i++) {
+			final HSBColor hsbColor = new HSBColor(inputImageRGB[i]);
+			if (hsbColor.getBrightness() > toleranceSeperator) {
+				outputImageRGB[i] = Color.WHITE.getRGB();
 			} else {
-				outputImageRGB[i] = Color.black.getRGB();
+				outputImageRGB[i] = Color.BLACK.getRGB();
 			}
 		}
 

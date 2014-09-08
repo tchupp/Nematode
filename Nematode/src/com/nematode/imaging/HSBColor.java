@@ -9,13 +9,14 @@ public class HSBColor extends Color {
 	private float saturation;
 	private float brightness;
 
+	public HSBColor(final int RGB) {
+		super(RGB);
+		calculateHSB(this.getRed(), this.getGreen(), this.getBlue());
+	}
+
 	public HSBColor(final Color color) {
 		super(color.getRGB());
-
-		final int r = color.getRed();
-		final int g = color.getGreen();
-		final int b = color.getBlue();
-		calculateHSB(r, g, b);
+		calculateHSB(this.getRed(), this.getGreen(), this.getBlue());
 	}
 
 	public HSBColor(final int red, final int green, final int blue) {

@@ -46,4 +46,15 @@ public class HSBColorTest extends AssertTestCase {
 		assertEquals(0.796, hsbCustomPeach.getSaturation(), 0.001);
 		assertEquals(1.0, hsbCustomPeach.getBrightness(), 0.001);
 	}
+
+	@Test
+	public void testCorrectlyCalculatesHueSaturationAndValueFromIntArgument()
+			throws Exception {
+		final HSBColor hsbColor = new HSBColor(-65536);
+		assertEquals(Color.RED.getRGB(), hsbColor.getRGB());
+
+		assertEquals(0.0, hsbColor.getHue(), 0.001);
+		assertEquals(1.0, hsbColor.getSaturation(), 0.001);
+		assertEquals(1.0, hsbColor.getBrightness(), 0.001);
+	}
 }

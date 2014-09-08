@@ -36,6 +36,14 @@ public class ImageProsessingHelperTest extends AssertTestCase {
 				.read(shadesOfBlackAndWhite);
 	}
 
+	@Override
+	protected void tearDown() throws Exception {
+		this.bufferedShadesOfBlue.flush();
+		this.bufferedShadesOfGrey.flush();
+		this.bufferedShadesOfBlackAndWhite.flush();
+		super.tearDown();
+	}
+
 	@Test
 	public void testNoPublicConstructor() throws Exception {
 		final Constructor<?>[] constructors = ImageProsessingHelper.class
