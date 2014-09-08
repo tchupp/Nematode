@@ -4,6 +4,6 @@ import com.nematode.fileIO.ValidatedImageFileInterface;
 
 public interface VideoFrameBuilderInterface {
 
-	void buildVideoFrameImage(ValidatedImageFileInterface validatedImageFile);
+	void buildNewFrameImageFromFile(ValidatedImageFileInterface validatedImageFile);
 
 }

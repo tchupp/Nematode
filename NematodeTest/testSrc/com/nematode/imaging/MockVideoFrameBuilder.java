@@ -8,7 +8,7 @@ public class MockVideoFrameBuilder implements VideoFrameBuilderInterface {
 	private boolean buildVideoFrameWasCalled = false;
 
 	@Override
-	public void buildVideoFrameImage(final ValidatedImageFileInterface imageFile) {
+	public void buildNewFrameImageFromFile(final ValidatedImageFileInterface imageFile) {
 		this.validatedImageFile = imageFile;
 		this.buildVideoFrameWasCalled = true;
 	}

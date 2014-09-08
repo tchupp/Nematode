@@ -1,7 +1,7 @@
 package com.nematode.gui;
 
 public class NematodeTrackingPanelViewController implements
-NematodePanelViewControllerInterface {
+		NematodePanelViewControllerInterface {
 
 	private final NematodeTrackingPanel nematodeTrackingPanel;
 

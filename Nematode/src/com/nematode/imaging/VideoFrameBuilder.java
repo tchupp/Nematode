@@ -18,7 +18,7 @@ public class VideoFrameBuilder implements VideoFrameBuilderInterface {
 	}
 
 	@Override
-	public void buildVideoFrameImage(
+	public void buildNewFrameImageFromFile(
 			final ValidatedImageFileInterface validatedImageFile) {
 
 		if (validatedImageFile.isFileValid()) {

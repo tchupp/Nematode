@@ -7,6 +7,7 @@ import java.awt.Insets;
 
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
+import javax.swing.JPanel;
 import javax.swing.border.CompoundBorder;
 
 import org.junit.Test;
@@ -17,7 +18,7 @@ import com.nematode.unittesting.AssertTestCase;
 public class NematodeVideoPanelTest extends AssertTestCase {
 
 	@Test
-	public void testExtendsJFrame() throws Exception {
+	public void testExtendsNematodePanel() throws Exception {
 		assertExtends(NematodePanel.class, NematodeVideoPanel.class);
 	}
 
@@ -25,28 +26,53 @@ public class NematodeVideoPanelTest extends AssertTestCase {
 	public void testConstructorCorrectlySetsUpPanel() throws Exception {
 		final NematodeVideoPanel videoPanel = new NematodeVideoPanel();
 
+		assertEquals(2, videoPanel.getComponentCount());
+
 		assertIsOfTypeAndGet(CompoundBorder.class, videoPanel.getBorder());
 
-		assertIsOfTypeAndGet(GridBagLayout.class, videoPanel.getLayout());
+		final GridBagLayout videoPanelLayout = assertIsOfTypeAndGet(
+				GridBagLayout.class, videoPanel.getLayout());
+
+		final JPanel imagePanel = assertIsOfTypeAndGet(JPanel.class,
+				videoPanel.getComponent(0));
+		assertEquals("imagePanel", imagePanel.getName());
+		final GridBagConstraints imagePanelConstraints = videoPanelLayout
+				.getConstraints(imagePanel);
+		assertEquals(0, imagePanelConstraints.gridy);
+		assertEquals(new Insets(5, 5, 5, 5), imagePanelConstraints.insets);
+
+		final JPanel controlPanel = assertIsOfTypeAndGet(JPanel.class,
+				videoPanel.getComponent(1));
+		assertEquals("controlPanel", controlPanel.getName());
+		final GridBagConstraints controlPanelConstraints = videoPanelLayout
+				.getConstraints(controlPanel);
+		assertEquals(1, controlPanelConstraints.gridy);
+		assertEquals(new Insets(5, 5, 5, 5), controlPanelConstraints.insets);
 	}
 
 	@Test
-	public void testImageLabelIsCorrectlyOnPanel() throws Exception {
+	public void testImagePanelAndImageLabel() throws Exception {
 		final NematodeVideoPanel videoPanel = new NematodeVideoPanel();
-		assertEquals(1, videoPanel.getComponentCount());
-		final JLabel imageLabel = assertIsOfTypeAndGet(JLabel.class,
+		final JPanel imagePanel = assertIsOfTypeAndGet(JPanel.class,
 				videoPanel.getComponent(0));
+		assertEquals("imagePanel", imagePanel.getName());
+
+		assertEquals(1, imagePanel.getComponentCount());
+		final JLabel imageLabel = assertIsOfTypeAndGet(JLabel.class,
+				imagePanel.getComponent(0));
 		assertEquals("imageLabel", imageLabel.getName());
 		final Dimension expectedDimentions = new Dimension(
 				NematodeVideoPanel.ICON_WIDTH, NematodeVideoPanel.ICON_HEIGHT);
 		assertEquals(expectedDimentions, imageLabel.getSize());
+
 		final ImageIcon imageIcon = assertIsOfTypeAndGet(ImageIcon.class,
 				imageLabel.getIcon());
 		assertIsOfTypeAndGet(NullBufferedImage.class, imageIcon.getImage());
 
-		final GridBagLayout gridBagLayout = assertIsOfTypeAndGet(
-				GridBagLayout.class, videoPanel.getLayout());
-		final GridBagConstraints constraints = gridBagLayout
+		final GridBagLayout layout = assertIsOfTypeAndGet(GridBagLayout.class,
+				imagePanel.getLayout());
+
+		final GridBagConstraints constraints = layout
 				.getConstraints(imageLabel);
 		assertEquals(0, constraints.gridy);
 		assertEquals(new Insets(5, 5, 5, 5), constraints.insets);
@@ -56,9 +82,12 @@ public class NematodeVideoPanelTest extends AssertTestCase {
 	public void testGetImageLabel() throws Exception {
 		final NematodeVideoPanel videoPanel = new NematodeVideoPanel();
 
-		assertEquals(1, videoPanel.getComponentCount());
-		final JLabel expectedImageLabel = assertIsOfTypeAndGet(JLabel.class,
+		assertEquals(2, videoPanel.getComponentCount());
+		final JPanel imagePanel = assertIsOfTypeAndGet(JPanel.class,
 				videoPanel.getComponent(0));
+
+		final JLabel expectedImageLabel = assertIsOfTypeAndGet(JLabel.class,
+				imagePanel.getComponent(0));
 
 		final JLabel actualImageLabel = videoPanel.getImageLabel();
 
@@ -67,7 +96,7 @@ public class NematodeVideoPanelTest extends AssertTestCase {
 
 	@Test
 	public void testIconWidthAndHeightConstants() throws Exception {
+		assertEquals(1500, NematodeVideoPanel.ICON_WIDTH);
 		assertEquals(900, NematodeVideoPanel.ICON_HEIGHT);
-		assertEquals(1200, NematodeVideoPanel.ICON_WIDTH);
 	}
 }

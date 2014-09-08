@@ -10,7 +10,7 @@ import com.nematode.unittesting.AssertTestCase;
 public class NematodeProjectPanelTest extends AssertTestCase {
 
 	@Test
-	public void testExtendsJPanel() throws Exception {
+	public void testExtendsNematodePanel() throws Exception {
 		assertExtends(NematodePanel.class, NematodeProjectPanel.class);
 	}
 
