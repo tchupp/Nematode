@@ -7,6 +7,9 @@ import javax.swing.JFrame;
 
 public class NematodeMainView extends JFrame {
 
+	public static final int FRAME_WIDTH = 1920;
+	public static final int FRAME_HEIGHT = 1080;
+
 	private static final long serialVersionUID = 1L;
 
 	public NematodeMainView() {
@@ -15,6 +18,6 @@ public class NematodeMainView extends JFrame {
 		final Container contentPane = this.getContentPane();
 		contentPane.setLayout(new BorderLayout());
 
-		this.setSize(1500, 1000);
+		this.setSize(FRAME_WIDTH, FRAME_HEIGHT);
 	}
 }

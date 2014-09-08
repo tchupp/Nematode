@@ -3,7 +3,7 @@ package com.nematode.model;
 import com.nematode.gui.NematodePanelViewControllerInterface;
 
 public class VideoFrameImageChangeObserver implements
-NematodeVideoFrameObserverInterface {
+		NematodeVideoFrameObserverInterface {
 
 	private final NematodePanelViewControllerInterface panelViewController;
 
@@ -14,6 +14,11 @@ NematodeVideoFrameObserverInterface {
 
 	@Override
 	public void notifyVideoFrameHasBeenSet() {
+
+	}
+
+	@Override
+	public void notifyDisplayFrameHasBeenSet() {
 		this.panelViewController.updateImage();
 	}
 

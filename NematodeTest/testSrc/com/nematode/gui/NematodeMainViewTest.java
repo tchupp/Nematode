@@ -27,8 +27,15 @@ public class NematodeMainViewTest extends AssertTestCase {
 
 		final Container contentPane = nematodeMainView.getContentPane();
 		assertIsOfTypeAndGet(BorderLayout.class, contentPane.getLayout());
-		assertEquals(1000, nematodeMainView.getHeight());
-		assertEquals(1500, nematodeMainView.getWidth());
+		assertEquals(NematodeMainView.FRAME_HEIGHT,
+				nematodeMainView.getHeight());
+		assertEquals(NematodeMainView.FRAME_WIDTH, nematodeMainView.getWidth());
 		assertTrue(nematodeMainView.isResizable());
+	}
+
+	@Test
+	public void testFrameWidthAndHeightConstants() throws Exception {
+		assertEquals(1920, NematodeMainView.FRAME_WIDTH);
+		assertEquals(1080, NematodeMainView.FRAME_HEIGHT);
 	}
 }

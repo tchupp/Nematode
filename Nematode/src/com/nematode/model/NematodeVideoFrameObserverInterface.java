@@ -4,4 +4,6 @@ public interface NematodeVideoFrameObserverInterface {
 
 	void notifyVideoFrameHasBeenSet();
 
+	void notifyDisplayFrameHasBeenSet();
+
 }

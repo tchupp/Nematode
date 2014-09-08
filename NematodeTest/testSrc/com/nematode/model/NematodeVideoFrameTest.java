@@ -100,9 +100,11 @@ public class NematodeVideoFrameTest extends AssertTestCase {
 
 		final NematodeVideoFrame nematodeVideoFrame = new NematodeVideoFrame();
 		nematodeVideoFrame.addObserver(mockVideoFrameObserver);
-		assertFalse(mockVideoFrameObserver.wasNotifyFrameHasBeenSetCalled());
-		nematodeVideoFrame.setVideoFrameImage(new MockVideoFrameImage());
-		assertTrue(mockVideoFrameObserver.wasNotifyFrameHasBeenSetCalled());
+		assertFalse(mockVideoFrameObserver
+				.wasNotifyDisplayFrameHasBeenSetCalled());
+		nematodeVideoFrame.setDisplayFrameImage(new MockDisplayFrameImage());
+		assertTrue(mockVideoFrameObserver
+				.wasNotifyDisplayFrameHasBeenSetCalled());
 
 	}
 }

@@ -33,8 +33,6 @@ public class NematodeVideoFrame implements NematodeVideoFrameInterface {
 	public void setVideoFrameImage(
 			final VideoFrameImageInterface videoFrameImage) {
 		this.videoFrameImage = videoFrameImage;
-		notifyVideoFrameHasBeenSet();
-		System.out.println();
 	}
 
 	@Override
@@ -46,6 +44,7 @@ public class NematodeVideoFrame implements NematodeVideoFrameInterface {
 	public void setDisplayFrameImage(
 			final DisplayFrameImageInterface displayFrameImage) {
 		this.displayFrameImage = displayFrameImage;
+		notifyDisplayFrameHasBeenSet();
 	}
 
 	@Override
@@ -65,9 +64,9 @@ public class NematodeVideoFrame implements NematodeVideoFrameInterface {
 		return this.videoFrameObservers;
 	}
 
-	private void notifyVideoFrameHasBeenSet() {
+	private void notifyDisplayFrameHasBeenSet() {
 		for (final NematodeVideoFrameObserverInterface observer : this.videoFrameObservers) {
-			observer.notifyVideoFrameHasBeenSet();
+			observer.notifyDisplayFrameHasBeenSet();
 		}
 	}
 

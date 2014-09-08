@@ -66,7 +66,7 @@ public class NematodeVideoPanelTest extends AssertTestCase {
 	}
 
 	@Test
-	public void testIconWidthAndHeight() throws Exception {
+	public void testIconWidthAndHeightConstants() throws Exception {
 		assertEquals(900, NematodeVideoPanel.ICON_HEIGHT);
 		assertEquals(1200, NematodeVideoPanel.ICON_WIDTH);
 	}

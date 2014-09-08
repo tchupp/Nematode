@@ -1,16 +1,27 @@
 package com.nematode.model;
 
 public class MockVideoFrameObserver implements
-NematodeVideoFrameObserverInterface {
+		NematodeVideoFrameObserverInterface {
 
-	private boolean notifyFrameHasBeenSetWasCalled = false;
+	private boolean notifyVideoFrameHasBeenSetWasCalled = false;
+	private boolean notifyDisplayFrameHasBeenSetWasCalled = false;
 
 	@Override
 	public void notifyVideoFrameHasBeenSet() {
-		this.notifyFrameHasBeenSetWasCalled = true;
+		this.notifyVideoFrameHasBeenSetWasCalled = true;
 	}
 
-	public boolean wasNotifyFrameHasBeenSetCalled() {
-		return this.notifyFrameHasBeenSetWasCalled;
+	public boolean wasNotifyVideoFrameHasBeenSetCalled() {
+		return this.notifyVideoFrameHasBeenSetWasCalled;
 	}
+
+	@Override
+	public void notifyDisplayFrameHasBeenSet() {
+		this.notifyDisplayFrameHasBeenSetWasCalled = true;
+	}
+
+	public boolean wasNotifyDisplayFrameHasBeenSetCalled() {
+		return this.notifyDisplayFrameHasBeenSetWasCalled;
+	}
+
 }
