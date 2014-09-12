@@ -39,6 +39,8 @@ public class NematodeVideoPanelTest extends AssertTestCase {
 		final GridBagConstraints imagePanelConstraints = videoPanelLayout
 				.getConstraints(imagePanel);
 		assertEquals(0, imagePanelConstraints.gridy);
+		assertEquals(1d, imagePanelConstraints.weighty);
+		assertEquals(GridBagConstraints.NORTH, imagePanelConstraints.anchor);
 		assertEquals(new Insets(5, 5, 5, 5), imagePanelConstraints.insets);
 
 		final JPanel controlPanel = assertIsOfTypeAndGet(JPanel.class,
@@ -47,6 +49,7 @@ public class NematodeVideoPanelTest extends AssertTestCase {
 		final GridBagConstraints controlPanelConstraints = videoPanelLayout
 				.getConstraints(controlPanel);
 		assertEquals(1, controlPanelConstraints.gridy);
+		assertEquals(GridBagConstraints.SOUTH, controlPanelConstraints.anchor);
 		assertEquals(new Insets(5, 5, 5, 5), controlPanelConstraints.insets);
 	}
 

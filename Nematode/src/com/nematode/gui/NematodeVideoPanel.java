@@ -23,19 +23,21 @@ public class NematodeVideoPanel extends NematodePanel {
 
 	public NematodeVideoPanel() {
 		this.setLayout(new GridBagLayout());
-		addImagePanel();
+		addImagePanelAndImageIcon();
 		addControlPanel();
 
 		addBorder();
 	}
 
-	private void addImagePanel() {
+	private void addImagePanelAndImageIcon() {
 		final JPanel imagePanel = new JPanel();
 		imagePanel.setName("imagePanel");
 		imagePanel.setLayout(new GridBagLayout());
 
 		final GridBagConstraints imagePanelConstraints = new GridBagConstraints();
 		imagePanelConstraints.gridy = 0;
+		imagePanelConstraints.weighty = 1;
+		imagePanelConstraints.anchor = GridBagConstraints.NORTH;
 		imagePanelConstraints.insets = new Insets(5, 5, 5, 5);
 
 		this.add(imagePanel, imagePanelConstraints);
@@ -57,6 +59,7 @@ public class NematodeVideoPanel extends NematodePanel {
 
 		final GridBagConstraints controlPanelConstraints = new GridBagConstraints();
 		controlPanelConstraints.gridy = 1;
+		controlPanelConstraints.anchor = GridBagConstraints.SOUTH;
 		controlPanelConstraints.insets = new Insets(5, 5, 5, 5);
 
 		this.add(controlPanel, controlPanelConstraints);
