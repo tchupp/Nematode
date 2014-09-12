@@ -3,6 +3,7 @@ package com.nematode.model;
 import org.junit.Test;
 
 import com.nematode.imaging.MockDisplayFrameImage;
+import com.nematode.imaging.MockScannedFrameImage;
 import com.nematode.imaging.MockVideoFrameImage;
 import com.nematode.nullmodel.NullFrameImage;
 import com.nematode.unittesting.AssertTestCase;
@@ -24,6 +25,9 @@ public class NematodeVideoFrameTest extends AssertTestCase {
 
 		assertIsOfTypeAndGet(NullFrameImage.class,
 				nematodeVideoFrame.getDisplayFrameImage());
+
+		assertIsOfTypeAndGet(NullFrameImage.class,
+				nematodeVideoFrame.getScannedFrameImage());
 	}
 
 	@Test
@@ -51,6 +55,21 @@ public class NematodeVideoFrameTest extends AssertTestCase {
 
 		assertSame(mockDisplayFrameImage,
 				nematodeVideoFrame.getDisplayFrameImage());
+	}
+
+	@Test
+	public void testGetsScannedFrameImageSet() throws Exception {
+		final MockScannedFrameImage mockScannedFrameImage = new MockScannedFrameImage();
+
+		final NematodeVideoFrame nematodeVideoFrame = new NematodeVideoFrame();
+
+		assertSame(NullFrameImage.NULL,
+				nematodeVideoFrame.getScannedFrameImage());
+
+		nematodeVideoFrame.setScannedFrameImage(mockScannedFrameImage);
+
+		assertSame(mockScannedFrameImage,
+				nematodeVideoFrame.getScannedFrameImage());
 	}
 
 	@Test

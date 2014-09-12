@@ -5,18 +5,18 @@ import org.junit.Test;
 import com.nematode.gui.MockPanelViewController;
 import com.nematode.unittesting.AssertTestCase;
 
-public class VideoFrameImageChangeObserverTest extends AssertTestCase {
+public class DisplayFrameImageChangeObserverTest extends AssertTestCase {
 
 	@Test
 	public void testImplementsInterface() throws Exception {
 		assertImplementsInterface(NematodeVideoFrameObserverInterface.class,
-				VideoFrameImageChangeObserver.class);
+				DisplayFrameImageChangeObserver.class);
 	}
 
 	@Test
 	public void testGetViewController() throws Exception {
 		final MockPanelViewController panelViewController = new MockPanelViewController();
-		final VideoFrameImageChangeObserver imageChangeObserver = new VideoFrameImageChangeObserver(
+		final DisplayFrameImageChangeObserver imageChangeObserver = new DisplayFrameImageChangeObserver(
 				panelViewController);
 		assertSame(panelViewController,
 				imageChangeObserver.getPanelViewController());
@@ -25,7 +25,7 @@ public class VideoFrameImageChangeObserverTest extends AssertTestCase {
 	@Test
 	public void testNotifyDisplayFrameHasBeenSet() throws Exception {
 		final MockPanelViewController panelViewController = new MockPanelViewController();
-		final VideoFrameImageChangeObserver observer = new VideoFrameImageChangeObserver(
+		final DisplayFrameImageChangeObserver observer = new DisplayFrameImageChangeObserver(
 				panelViewController);
 		assertFalse(panelViewController.wasUpdateImageCalled());
 		observer.notifyDisplayFrameHasBeenSet();

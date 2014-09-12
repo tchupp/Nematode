@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.nematode.imaging.DisplayFrameImageInterface;
+import com.nematode.imaging.ScannedFrameImageInterface;
 import com.nematode.imaging.VideoFrameImageInterface;
 import com.nematode.model.NematodeVideoFrameInterface;
 import com.nematode.model.NematodeVideoFrameObserverInterface;
@@ -34,6 +35,16 @@ public class NullNematodeVideoFrame implements NematodeVideoFrameInterface {
 	public void setDisplayFrameImage(
 			final DisplayFrameImageInterface displayFrameImage) {
 
+	}
+
+	@Override
+	public ScannedFrameImageInterface getScannedFrameImage() {
+		return NullFrameImage.NULL;
+	}
+
+	@Override
+	public void setScannedFrameImage(
+			final ScannedFrameImageInterface scannedFrameImage) {
 	}
 
 	@Override

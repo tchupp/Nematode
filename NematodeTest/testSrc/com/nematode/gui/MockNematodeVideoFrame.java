@@ -5,7 +5,9 @@ import java.util.List;
 
 import com.nematode.imaging.DisplayFrameImageInterface;
 import com.nematode.imaging.MockDisplayFrameImage;
+import com.nematode.imaging.MockScannedFrameImage;
 import com.nematode.imaging.MockVideoFrameImage;
+import com.nematode.imaging.ScannedFrameImageInterface;
 import com.nematode.imaging.VideoFrameImageInterface;
 import com.nematode.model.NematodeVideoFrameInterface;
 import com.nematode.model.NematodeVideoFrameObserverInterface;
@@ -13,8 +15,9 @@ import com.nematode.model.NematodeVideoFrameObserverInterface;
 public class MockNematodeVideoFrame implements NematodeVideoFrameInterface {
 
 	private VideoFrameImageInterface videoFrameImage = new MockVideoFrameImage();
-	private int numberOfObservers = 0;
 	private DisplayFrameImageInterface displayFrameImage = new MockDisplayFrameImage();
+	private ScannedFrameImageInterface scannedFrameImage = new MockScannedFrameImage();
+	private int numberOfObservers = 0;
 
 	@Override
 	public VideoFrameImageInterface getVideoFrameImage() {
@@ -36,7 +39,17 @@ public class MockNematodeVideoFrame implements NematodeVideoFrameInterface {
 	public void setDisplayFrameImage(
 			final DisplayFrameImageInterface displayFrameImage) {
 		this.displayFrameImage = displayFrameImage;
+	}
 
+	@Override
+	public ScannedFrameImageInterface getScannedFrameImage() {
+		return this.scannedFrameImage;
+	}
+
+	@Override
+	public void setScannedFrameImage(
+			final ScannedFrameImageInterface scannedFrameImage) {
+		this.scannedFrameImage = scannedFrameImage;
 	}
 
 	@Override

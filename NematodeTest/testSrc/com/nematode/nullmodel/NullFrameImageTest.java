@@ -6,6 +6,7 @@ import java.lang.reflect.Modifier;
 import org.junit.Test;
 
 import com.nematode.imaging.DisplayFrameImageInterface;
+import com.nematode.imaging.ScannedFrameImageInterface;
 import com.nematode.imaging.VideoFrameImageInterface;
 import com.nematode.unittesting.AssertTestCase;
 
@@ -15,7 +16,8 @@ public class NullFrameImageTest extends AssertTestCase {
 	public void testImplementsInterfaces() throws Exception {
 		assertImplementsInterfaces(NullFrameImage.class,
 				DisplayFrameImageInterface.class,
-				VideoFrameImageInterface.class);
+				VideoFrameImageInterface.class,
+				ScannedFrameImageInterface.class);
 	}
 
 	@Test

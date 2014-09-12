@@ -11,7 +11,7 @@ import org.junit.Test;
 
 import com.nematode.imaging.MockDisplayFrameImage;
 import com.nematode.model.NematodeVideoFrame;
-import com.nematode.model.VideoFrameImageChangeObserver;
+import com.nematode.model.DisplayFrameImageChangeObserver;
 import com.nematode.nullmodel.NullBufferedImage;
 import com.nematode.unittesting.AssertTestCase;
 
@@ -54,7 +54,7 @@ public class NematodeVideoPanelViewControllerTest extends AssertTestCase {
 	public void testGetsFrameObserver() throws Exception {
 		final NematodeVideoPanelViewController nematodeVideoPanelViewController = new NematodeVideoPanelViewController(
 				new MockNematodeVideoFrame());
-		assertIsOfTypeAndGet(VideoFrameImageChangeObserver.class,
+		assertIsOfTypeAndGet(DisplayFrameImageChangeObserver.class,
 				nematodeVideoPanelViewController.getFrameObserver());
 	}
 
@@ -66,8 +66,8 @@ public class NematodeVideoPanelViewControllerTest extends AssertTestCase {
 				nematodeVideoFrame);
 		assertEquals(1, nematodeVideoFrame.getListOfObservers().size());
 
-		final VideoFrameImageChangeObserver observer = assertIsOfTypeAndGet(
-				VideoFrameImageChangeObserver.class,
+		final DisplayFrameImageChangeObserver observer = assertIsOfTypeAndGet(
+				DisplayFrameImageChangeObserver.class,
 				viewController.getFrameObserver());
 
 		final NematodePanelViewControllerInterface actualViewController = observer

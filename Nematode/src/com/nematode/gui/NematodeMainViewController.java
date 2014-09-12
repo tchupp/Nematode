@@ -25,7 +25,8 @@ public class NematodeMainViewController {
 				this.videoFrameBuilder);
 		this.nematodeVideoPanelViewController = new NematodeVideoPanelViewController(
 				nematodeVideoFrame);
-		this.nematodeTrackingPanelViewController = new NematodeTrackingPanelViewController();
+		this.nematodeTrackingPanelViewController = new NematodeTrackingPanelViewController(
+				nematodeVideoFrame);
 		addPanelsToFrame();
 	}
 

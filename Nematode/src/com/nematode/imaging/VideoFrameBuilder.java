@@ -24,10 +24,10 @@ public class VideoFrameBuilder implements VideoFrameBuilderInterface {
 		if (validatedImageFile.isFileValid()) {
 			final BufferedImage fileImage = validatedImageFile.getFileImage();
 
-			final VideoFrameImage videoFrameImage = createVideoFrameImage(fileImage);
+			final VideoFrameImageInterface videoFrameImage = createVideoFrameImage(fileImage);
 			this.nematodeVideoFrame.setVideoFrameImage(videoFrameImage);
 
-			final DisplayFrameImage displayFrameImage = createDisplayFrameImage(fileImage);
+			final DisplayFrameImageInterface displayFrameImage = createDisplayFrameImage(fileImage);
 			this.nematodeVideoFrame.setDisplayFrameImage(displayFrameImage);
 
 		} else {
@@ -36,7 +36,7 @@ public class VideoFrameBuilder implements VideoFrameBuilderInterface {
 		}
 	}
 
-	private DisplayFrameImage createDisplayFrameImage(
+	public DisplayFrameImageInterface createDisplayFrameImage(
 			final BufferedImage fileImage) {
 
 		final BufferedImage displayImage = new BufferedImage(
@@ -56,7 +56,8 @@ public class VideoFrameBuilder implements VideoFrameBuilderInterface {
 		return new DisplayFrameImage(displayImage);
 	}
 
-	private VideoFrameImage createVideoFrameImage(final BufferedImage fileImage) {
+	public VideoFrameImageInterface createVideoFrameImage(
+			final BufferedImage fileImage) {
 		final VideoFrameImage videoFrameImage = new VideoFrameImage(fileImage);
 		return videoFrameImage;
 	}

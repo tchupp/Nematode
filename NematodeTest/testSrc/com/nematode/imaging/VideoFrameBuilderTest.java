@@ -8,6 +8,7 @@ import com.nematode.fileIO.MockValidatedImageFile;
 import com.nematode.gui.MockNematodeVideoFrame;
 import com.nematode.gui.NematodeVideoPanel;
 import com.nematode.model.NematodeVideoFrameInterface;
+import com.nematode.nullmodel.NullBufferedImage;
 import com.nematode.nullmodel.NullFrameImage;
 import com.nematode.unittesting.AssertTestCase;
 
@@ -86,7 +87,6 @@ public class VideoFrameBuilderTest extends AssertTestCase {
 		final BufferedImage actualImage = frameImage.getImage();
 		assertEquals(NematodeVideoPanel.ICON_HEIGHT, actualImage.getHeight());
 		assertEquals(NematodeVideoPanel.ICON_WIDTH, actualImage.getWidth());
-
 	}
 
 	@Test
@@ -103,5 +103,39 @@ public class VideoFrameBuilderTest extends AssertTestCase {
 
 		assertIsOfTypeAndGet(NullFrameImage.class,
 				videoFrame.getDisplayFrameImage());
+	}
+
+	@Test
+	public void testCreateDisplayFrameImageHasCorrectDimentions()
+			throws Exception {
+		final MockNematodeVideoFrame videoFrame = new MockNematodeVideoFrame();
+		final VideoFrameBuilder videoFrameBuilder = new VideoFrameBuilder(
+				videoFrame);
+
+		final DisplayFrameImageInterface displayFrameImage = videoFrameBuilder
+				.createDisplayFrameImage(new NullBufferedImage());
+
+		assertEquals(NematodeVideoPanel.ICON_WIDTH, displayFrameImage
+				.getImage().getWidth());
+		assertEquals(NematodeVideoPanel.ICON_HEIGHT, displayFrameImage
+				.getImage().getHeight());
+	}
+
+	@Test
+	public void testCreateVideoFrameImageRetainsImageSize() throws Exception {
+		final int expectedWidth = 56;
+		final int expectedHeight = 56;
+		final MockNematodeVideoFrame videoFrame = new MockNematodeVideoFrame();
+		final VideoFrameBuilder videoFrameBuilder = new VideoFrameBuilder(
+				videoFrame);
+
+		final BufferedImage bufferedImage = new BufferedImage(expectedWidth,
+				expectedHeight, BufferedImage.TYPE_INT_RGB);
+
+		final VideoFrameImageInterface videoFrameImage = videoFrameBuilder
+				.createVideoFrameImage(bufferedImage);
+
+		assertEquals(expectedWidth, videoFrameImage.getImage().getWidth());
+		assertEquals(expectedHeight, videoFrameImage.getImage().getHeight());
 	}
 }

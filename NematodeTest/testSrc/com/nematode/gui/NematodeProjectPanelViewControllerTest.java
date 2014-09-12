@@ -35,7 +35,6 @@ public class NematodeProjectPanelViewControllerTest extends AssertTestCase {
 		final VideoFrameBuilderInterface actualVideoFrameBuilder = nematodeProjectPanelViewController
 				.getVideoFrameBuilder();
 		assertSame(expectedVideoFrameBuilder, actualVideoFrameBuilder);
-
 	}
 
 	@Test
