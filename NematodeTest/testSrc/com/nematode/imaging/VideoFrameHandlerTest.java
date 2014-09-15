@@ -40,6 +40,17 @@ public class VideoFrameHandlerTest extends AssertTestCase {
 	}
 
 	@Test
+	public void testGetsImageProcessingRunner() throws Exception {
+		final MockImageProcessingRunner expectedImageProcessingRunner = new MockImageProcessingRunner();
+		final VideoFrameHandler videoFrameHandler = new VideoFrameHandler(
+				new MockNematodeVideoFrame(), new MockFrameImageAssembler(),
+				expectedImageProcessingRunner);
+
+		assertSame(expectedImageProcessingRunner,
+				videoFrameHandler.getImageProcessingRunner());
+	}
+
+	@Test
 	public void testBuildNewFrameImage_WithValidImage_CallsCreateFromFrameAssembler()
 			throws Exception {
 		final MockNematodeVideoFrame videoFrame = new MockNematodeVideoFrame();

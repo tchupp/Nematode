@@ -4,13 +4,14 @@ import java.awt.BorderLayout;
 import java.awt.Container;
 
 import com.nematode.imaging.FrameImageAssembler;
+import com.nematode.imaging.ImageProcessingRunner;
 import com.nematode.imaging.VideoFrameHandler;
 import com.nematode.imaging.VideoFrameHandlerInterface;
 import com.nematode.model.NematodeVideoFrame;
 
-public class NematodeMainViewController {
+public class NematodeMainViewController implements MainViewControllerInterface {
 
-	private final NematodeMainView nematodeMainView;
+	private final NematodeFrame nematodeMainView;
 	private final NematodePanelViewControllerInterface nematodeProjectPanelViewController;
 	private final NematodePanelViewControllerInterface nematodeVideoPanelViewController;
 	private final NematodePanelViewControllerInterface nematodeTrackingPanelViewController;
@@ -21,8 +22,7 @@ public class NematodeMainViewController {
 
 		final NematodeVideoFrame nematodeVideoFrame = new NematodeVideoFrame();
 		this.videoFrameHandler = new VideoFrameHandler(nematodeVideoFrame,
-				new FrameImageAssembler(), null);// new
-													// ImageProcessingRunner());
+				new FrameImageAssembler(), new ImageProcessingRunner());
 
 		this.nematodeProjectPanelViewController = new NematodeProjectPanelViewController(
 				this.videoFrameHandler);
@@ -30,6 +30,7 @@ public class NematodeMainViewController {
 				nematodeVideoFrame);
 		this.nematodeTrackingPanelViewController = new NematodeTrackingPanelViewController(
 				this.videoFrameHandler);
+
 		addPanelsToFrame();
 	}
 
@@ -47,7 +48,8 @@ public class NematodeMainViewController {
 				BorderLayout.EAST);
 	}
 
-	public NematodeMainView getNematodeMainView() {
+	@Override
+	public NematodeFrame getNematodeMainView() {
 		return this.nematodeMainView;
 	}
 

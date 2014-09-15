@@ -55,4 +55,8 @@ public class VideoFrameHandler implements VideoFrameHandlerInterface {
 		return this.frameImageAssembler;
 	}
 
+	public ImageProcessingRunnerInterface getImageProcessingRunner() {
+		return this.imageProcessingRunner;
+	}
+
 }

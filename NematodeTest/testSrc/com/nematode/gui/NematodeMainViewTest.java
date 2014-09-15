@@ -3,7 +3,6 @@ package com.nematode.gui;
 import java.awt.BorderLayout;
 import java.awt.Container;
 
-import javax.swing.JFrame;
 import javax.swing.WindowConstants;
 
 import org.junit.Test;
@@ -15,7 +14,9 @@ public class NematodeMainViewTest extends AssertTestCase {
 	@Test
 	public void testExtendsJFrame() throws Exception {
 		final NematodeMainView nematodeMainView = new NematodeMainView();
-		assertExtends(JFrame.class, nematodeMainView.getClass());
+		assertExtends(NematodeFrame.class, nematodeMainView.getClass());
+
+		nematodeMainView.dispose();
 	}
 
 	@Test
@@ -31,6 +32,8 @@ public class NematodeMainViewTest extends AssertTestCase {
 				nematodeMainView.getHeight());
 		assertEquals(NematodeMainView.FRAME_WIDTH, nematodeMainView.getWidth());
 		assertTrue(nematodeMainView.isResizable());
+
+		nematodeMainView.dispose();
 	}
 
 	@Test

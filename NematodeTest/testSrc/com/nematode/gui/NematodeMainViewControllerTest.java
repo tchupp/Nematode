@@ -6,6 +6,7 @@ import java.awt.Container;
 import org.junit.Test;
 
 import com.nematode.imaging.FrameImageAssembler;
+import com.nematode.imaging.ImageProcessingRunner;
 import com.nematode.imaging.VideoFrameHandler;
 import com.nematode.imaging.VideoFrameHandlerInterface;
 import com.nematode.model.NematodeVideoFrame;
@@ -15,9 +16,15 @@ import com.nematode.unittesting.AssertTestCase;
 public class NematodeMainViewControllerTest extends AssertTestCase {
 
 	@Test
+	public void testImplementsInterface() throws Exception {
+		assertImplementsInterface(MainViewControllerInterface.class,
+				NematodeMainViewController.class);
+	}
+
+	@Test
 	public void testConstructionAddsPanelsToViewCorrectly() throws Exception {
 		final NematodeMainViewController nematodeMainViewController = new NematodeMainViewController();
-		final NematodeMainView nematodeMainView = nematodeMainViewController
+		final NematodeFrame nematodeMainView = nematodeMainViewController
 				.getNematodeMainView();
 
 		final Container contentPane = nematodeMainView.getContentPane();
@@ -40,6 +47,8 @@ public class NematodeMainViewControllerTest extends AssertTestCase {
 				videoFrameHandler.getNematodeVideoFrame());
 		assertIsOfTypeAndGet(FrameImageAssembler.class,
 				videoFrameHandler.getFrameImageAssembler());
+		assertIsOfTypeAndGet(ImageProcessingRunner.class,
+				videoFrameHandler.getImageProcessingRunner());
 	}
 
 	@Test
