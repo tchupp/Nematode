@@ -2,13 +2,15 @@ package com.nematode.imaging;
 
 import com.nematode.fileIO.ValidatedImageFileInterface;
 
-public class MockVideoFrameBuilder implements VideoFrameBuilderInterface {
+public class MockVideoFrameHandler implements VideoFrameHandlerInterface {
 
 	private ValidatedImageFileInterface validatedImageFile;
 	private boolean buildVideoFrameWasCalled = false;
+	private boolean scanImageWasCalled = false;
 
 	@Override
-	public void buildNewFrameImageFromFile(final ValidatedImageFileInterface imageFile) {
+	public void buildNewFrameImageFromFile(
+			final ValidatedImageFileInterface imageFile) {
 		this.validatedImageFile = imageFile;
 		this.buildVideoFrameWasCalled = true;
 	}
@@ -19,6 +21,15 @@ public class MockVideoFrameBuilder implements VideoFrameBuilderInterface {
 
 	public ValidatedImageFileInterface getValidatedImageFile() {
 		return this.validatedImageFile;
+	}
+
+	@Override
+	public void scanImage() {
+		this.scanImageWasCalled = true;
+	}
+
+	public boolean wasScanImageCalled() {
+		return this.scanImageWasCalled;
 	}
 
 }

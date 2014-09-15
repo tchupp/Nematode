@@ -4,6 +4,6 @@ import java.awt.image.BufferedImage;
 
 public interface DisplayFrameImageInterface {
 
-	BufferedImage getImage();
+	public BufferedImage getImage();
 
 }

@@ -2,17 +2,17 @@ package com.nematode.gui;
 
 import javax.swing.JButton;
 
-import com.nematode.model.NematodeVideoFrameInterface;
+import com.nematode.imaging.VideoFrameHandlerInterface;
 
 public class NematodeTrackingPanelViewController implements
-NematodePanelViewControllerInterface {
+		NematodePanelViewControllerInterface {
 
 	private final NematodeTrackingPanel nematodeTrackingPanel;
-	private final NematodeVideoFrameInterface nematodeVideoFrame;
+	private final VideoFrameHandlerInterface videoFrameHandler;
 
 	public NematodeTrackingPanelViewController(
-			final NematodeVideoFrameInterface nematodeVideoFrame) {
-		this.nematodeVideoFrame = nematodeVideoFrame;
+			final VideoFrameHandlerInterface videoFrameHandler) {
+		this.videoFrameHandler = videoFrameHandler;
 		this.nematodeTrackingPanel = new NematodeTrackingPanel();
 
 		addListenerToScanButton();
@@ -32,9 +32,11 @@ NematodePanelViewControllerInterface {
 
 	@Override
 	public void updateImage() {
+		this.videoFrameHandler.scanImage();
 	}
 
-	public NematodeVideoFrameInterface getNematodeVideoFrame() {
-		return this.nematodeVideoFrame;
+	@Override
+	public VideoFrameHandlerInterface getVideoFrameHandler() {
+		return this.videoFrameHandler;
 	}
 }

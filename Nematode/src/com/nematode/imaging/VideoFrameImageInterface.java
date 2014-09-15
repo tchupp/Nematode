@@ -4,6 +4,6 @@ import java.awt.image.BufferedImage;
 
 public interface VideoFrameImageInterface {
 
-	BufferedImage getImage();
+	public BufferedImage getImage();
 
 }

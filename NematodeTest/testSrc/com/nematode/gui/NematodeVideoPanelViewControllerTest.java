@@ -10,8 +10,8 @@ import javax.swing.JLabel;
 import org.junit.Test;
 
 import com.nematode.imaging.MockDisplayFrameImage;
-import com.nematode.model.NematodeVideoFrame;
 import com.nematode.model.DisplayFrameImageChangeObserver;
+import com.nematode.model.NematodeVideoFrame;
 import com.nematode.nullmodel.NullBufferedImage;
 import com.nematode.unittesting.AssertTestCase;
 

@@ -12,7 +12,7 @@ import org.junit.Test;
 
 import com.nematode.unittesting.AssertTestCase;
 
-public class ImageProsessingHelperTest extends AssertTestCase {
+public class ImageProcessingHelperTest extends AssertTestCase {
 
 	private BufferedImage bufferedShadesOfBlue;
 	private BufferedImage bufferedShadesOfGrey;
@@ -46,7 +46,7 @@ public class ImageProsessingHelperTest extends AssertTestCase {
 
 	@Test
 	public void testNoPublicConstructor() throws Exception {
-		final Constructor<?>[] constructors = ImageProsessingHelper.class
+		final Constructor<?>[] constructors = ImageProcessingHelper.class
 				.getDeclaredConstructors();
 		assertEquals(1, constructors.length);
 		assertTrue(Modifier.isPrivate(constructors[0].getModifiers()));
@@ -54,7 +54,7 @@ public class ImageProsessingHelperTest extends AssertTestCase {
 
 	@Test
 	public void testConvertsImageToGreyScale() throws Exception {
-		final BufferedImage convertedImage = ImageProsessingHelper
+		final BufferedImage convertedImage = ImageProcessingHelper
 				.convertImageToGreyScale(this.bufferedShadesOfBlue);
 
 		assertImagesAreIdentical(this.bufferedShadesOfGrey, convertedImage);
@@ -62,7 +62,7 @@ public class ImageProsessingHelperTest extends AssertTestCase {
 
 	@Test
 	public void testConvertImageToBlackAndWhite() throws Exception {
-		final BufferedImage convertedImage = ImageProsessingHelper
+		final BufferedImage convertedImage = ImageProcessingHelper
 				.convertImageToBlackAndWhite(this.bufferedShadesOfGrey, 0.5f);
 
 		assertImagesAreIdentical(this.bufferedShadesOfBlackAndWhite,
@@ -73,7 +73,7 @@ public class ImageProsessingHelperTest extends AssertTestCase {
 	public void testSubtractImageConvertsEqualImagesToAllBlack()
 			throws Exception {
 
-		final BufferedImage subtractedImages = ImageProsessingHelper
+		final BufferedImage subtractedImages = ImageProcessingHelper
 				.markDifferencesInImagesInWhite(this.bufferedShadesOfGrey,
 						this.bufferedShadesOfGrey);
 

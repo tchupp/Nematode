@@ -5,12 +5,13 @@ import java.awt.image.BufferedImage;
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 
+import com.nematode.imaging.VideoFrameHandlerInterface;
 import com.nematode.model.DisplayFrameImageChangeObserver;
 import com.nematode.model.NematodeVideoFrameInterface;
 import com.nematode.model.NematodeVideoFrameObserverInterface;
 
 public class NematodeVideoPanelViewController implements
-		NematodePanelViewControllerInterface {
+NematodePanelViewControllerInterface {
 
 	private final NematodeVideoPanel nematodeVideoPanel;
 	private final NematodeVideoFrameInterface nematodeVideoFrame;
@@ -45,6 +46,11 @@ public class NematodeVideoPanelViewController implements
 
 	public NematodeVideoFrameObserverInterface getFrameObserver() {
 		return this.frameObserver;
+	}
+
+	@Override
+	public VideoFrameHandlerInterface getVideoFrameHandler() {
+		return null;
 	}
 
 }

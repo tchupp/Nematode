@@ -1,9 +1,12 @@
 package com.nematode.gui;
 
+import com.nematode.imaging.VideoFrameHandlerInterface;
+
 public class MockPanelViewController implements
-NematodePanelViewControllerInterface {
+		NematodePanelViewControllerInterface {
 
 	private boolean updateImageWasCalled = false;
+	private VideoFrameHandlerInterface videoFrameHandler;
 
 	@Override
 	public NematodePanel getNematodePanel() {
@@ -17,6 +20,16 @@ NematodePanelViewControllerInterface {
 
 	public boolean wasUpdateImageCalled() {
 		return this.updateImageWasCalled;
+	}
+
+	@Override
+	public VideoFrameHandlerInterface getVideoFrameHandler() {
+		return this.videoFrameHandler;
+	}
+
+	public void setVideoFrameHandler(
+			final VideoFrameHandlerInterface videoFrameHandler) {
+		this.videoFrameHandler = videoFrameHandler;
 	}
 
 }

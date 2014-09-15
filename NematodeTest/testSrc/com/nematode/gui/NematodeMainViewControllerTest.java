@@ -5,8 +5,10 @@ import java.awt.Container;
 
 import org.junit.Test;
 
-import com.nematode.imaging.VideoFrameBuilder;
-import com.nematode.imaging.VideoFrameBuilderInterface;
+import com.nematode.imaging.FrameImageAssembler;
+import com.nematode.imaging.VideoFrameHandler;
+import com.nematode.imaging.VideoFrameHandlerInterface;
+import com.nematode.model.NematodeVideoFrame;
 import com.nematode.model.NematodeVideoFrameInterface;
 import com.nematode.unittesting.AssertTestCase;
 
@@ -28,10 +30,16 @@ public class NematodeMainViewControllerTest extends AssertTestCase {
 	}
 
 	@Test
-	public void testGetVideoFrameBuilder() throws Exception {
+	public void testGetVideoFrameHandler() throws Exception {
 		final NematodeMainViewController nematodeMainViewController = new NematodeMainViewController();
-		assertIsOfTypeAndGet(VideoFrameBuilder.class,
-				nematodeMainViewController.getVideoFrameBuilder());
+		final VideoFrameHandler videoFrameHandler = assertIsOfTypeAndGet(
+				VideoFrameHandler.class,
+				nematodeMainViewController.getVideoFrameHandler());
+
+		assertIsOfTypeAndGet(NematodeVideoFrame.class,
+				videoFrameHandler.getNematodeVideoFrame());
+		assertIsOfTypeAndGet(FrameImageAssembler.class,
+				videoFrameHandler.getFrameImageAssembler());
 	}
 
 	@Test
@@ -56,18 +64,18 @@ public class NematodeMainViewControllerTest extends AssertTestCase {
 	}
 
 	@Test
-	public void testProjectPanelViewControllerIsCreatedWithCorrectVideoFrameBuilder()
+	public void testProjectPanelViewControllerIsCreatedWithCorrectVideoFrameHandler()
 			throws Exception {
 		final NematodeMainViewController viewController = new NematodeMainViewController();
 		final NematodeProjectPanelViewController projectPanelViewController = assertIsOfTypeAndGet(
 				NematodeProjectPanelViewController.class,
 				viewController.getNematodeProjectPanelViewController());
 
-		final VideoFrameBuilderInterface actualVideoFrameBuilder = projectPanelViewController
-				.getVideoFrameBuilder();
+		final VideoFrameHandlerInterface actualVideoFrameHandler = projectPanelViewController
+				.getVideoFrameHandler();
 
-		assertSame(viewController.getVideoFrameBuilder(),
-				actualVideoFrameBuilder);
+		assertSame(viewController.getVideoFrameHandler(),
+				actualVideoFrameHandler);
 	}
 
 	@Test
@@ -79,9 +87,9 @@ public class NematodeMainViewControllerTest extends AssertTestCase {
 				NematodeVideoPanelViewController.class,
 				viewController.getNematodeVideoPanelViewController());
 
-		final VideoFrameBuilder videoFrameBuilder = assertIsOfTypeAndGet(
-				VideoFrameBuilder.class, viewController.getVideoFrameBuilder());
-		final NematodeVideoFrameInterface expectedNematodeVideoFrame = videoFrameBuilder
+		final VideoFrameHandler videoFrameHandler = assertIsOfTypeAndGet(
+				VideoFrameHandler.class, viewController.getVideoFrameHandler());
+		final NematodeVideoFrameInterface expectedNematodeVideoFrame = videoFrameHandler
 				.getNematodeVideoFrame();
 		final NematodeVideoFrameInterface actualNematodeVideoFrame = videoPanelViewController
 				.getNematodeVideoFrame();
@@ -90,20 +98,18 @@ public class NematodeMainViewControllerTest extends AssertTestCase {
 	}
 
 	@Test
-	public void testTrackingPanelControllerIsCreadtedWithCorrectVideioFrameModel()
+	public void testTrackingPanelControllerIsCreadtedWithCorrectVideoFrameHandler()
 			throws Exception {
 		final NematodeMainViewController viewController = new NematodeMainViewController();
 		final NematodeTrackingPanelViewController trackingPanelViewController = assertIsOfTypeAndGet(
 				NematodeTrackingPanelViewController.class,
 				viewController.getNematodeTrackingPanelViewController());
 
-		final VideoFrameBuilder videoFrameBuilder = assertIsOfTypeAndGet(
-				VideoFrameBuilder.class, viewController.getVideoFrameBuilder());
-		final NematodeVideoFrameInterface expectedNematodeVideoFrame = videoFrameBuilder
-				.getNematodeVideoFrame();
-		final NematodeVideoFrameInterface actualNematodeVideoFrame = trackingPanelViewController
-				.getNematodeVideoFrame();
+		final VideoFrameHandler expectedFrameHandler = assertIsOfTypeAndGet(
+				VideoFrameHandler.class, viewController.getVideoFrameHandler());
+		final VideoFrameHandlerInterface actualFrameHandler = trackingPanelViewController
+				.getVideoFrameHandler();
 
-		assertSame(expectedNematodeVideoFrame, actualNematodeVideoFrame);
+		assertSame(expectedFrameHandler, actualFrameHandler);
 	}
 }

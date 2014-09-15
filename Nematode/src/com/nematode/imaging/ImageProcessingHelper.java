@@ -4,9 +4,9 @@ import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.image.BufferedImage;
 
-public class ImageProsessingHelper {
+public class ImageProcessingHelper {
 
-	private ImageProsessingHelper() {
+	private ImageProcessingHelper() {
 	}
 
 	public static BufferedImage convertImageToGreyScale(

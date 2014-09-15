@@ -18,6 +18,8 @@ public class MockNematodeVideoFrame implements NematodeVideoFrameInterface {
 	private DisplayFrameImageInterface displayFrameImage = new MockDisplayFrameImage();
 	private ScannedFrameImageInterface scannedFrameImage = new MockScannedFrameImage();
 	private int numberOfObservers = 0;
+	private boolean setVideoFrameImageWasCalled = false;
+	private boolean setDisplayFrameImageWasCalled;
 
 	@Override
 	public VideoFrameImageInterface getVideoFrameImage() {
@@ -28,6 +30,11 @@ public class MockNematodeVideoFrame implements NematodeVideoFrameInterface {
 	public void setVideoFrameImage(
 			final VideoFrameImageInterface videoFrameImage) {
 		this.videoFrameImage = videoFrameImage;
+		this.setVideoFrameImageWasCalled = true;
+	}
+
+	public boolean wasSetVideoFrameImageCalled() {
+		return this.setVideoFrameImageWasCalled;
 	}
 
 	@Override
@@ -39,6 +46,11 @@ public class MockNematodeVideoFrame implements NematodeVideoFrameInterface {
 	public void setDisplayFrameImage(
 			final DisplayFrameImageInterface displayFrameImage) {
 		this.displayFrameImage = displayFrameImage;
+		this.setDisplayFrameImageWasCalled = true;
+	}
+
+	public boolean wasSetDisplayFrameImageCalled() {
+		return this.setDisplayFrameImageWasCalled;
 	}
 
 	@Override

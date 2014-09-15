@@ -7,7 +7,7 @@ import javax.swing.JFileChooser;
 
 import org.junit.Test;
 
-import com.nematode.imaging.MockVideoFrameBuilder;
+import com.nematode.imaging.MockVideoFrameHandler;
 import com.nematode.unittesting.AssertTestCase;
 
 public class OpenImageButtonActionListenerTest extends AssertTestCase {
@@ -22,31 +22,31 @@ public class OpenImageButtonActionListenerTest extends AssertTestCase {
 	public void testGetImageFileChooser() throws Exception {
 		final MockFileChooser fileChooser = new MockFileChooser();
 		final OpenImageButtonActionListener openImageButtonListener = new OpenImageButtonActionListener(
-				fileChooser, new MockVideoFrameBuilder());
+				fileChooser, new MockVideoFrameHandler());
 		assertSame(fileChooser, openImageButtonListener.getFileChooser());
 	}
 
 	@Test
-	public void testGetsVideoFrameBuilder() throws Exception {
-		final MockVideoFrameBuilder videoFrameBuilder = new MockVideoFrameBuilder();
+	public void testGetsVideoFrameHandler() throws Exception {
+		final MockVideoFrameHandler videoFrameHandler = new MockVideoFrameHandler();
 		final OpenImageButtonActionListener openImageButtonListener = new OpenImageButtonActionListener(
-				new MockFileChooser(), videoFrameBuilder);
-		assertSame(videoFrameBuilder,
-				openImageButtonListener.getVideoFrameBuilder());
+				new MockFileChooser(), videoFrameHandler);
+		assertSame(videoFrameHandler,
+				openImageButtonListener.getVideoFrameHandler());
 	}
 
 	@Test
 	public void testActionPerformedCallsShowDialog() throws Exception {
 		final MockFileChooser mockFileChooser = new MockFileChooser();
 		final OpenImageButtonActionListener openImageButtonListener = new OpenImageButtonActionListener(
-				mockFileChooser, new MockVideoFrameBuilder());
+				mockFileChooser, new MockVideoFrameHandler());
 		assertFalse(mockFileChooser.wasShowDialogCalled());
 		openImageButtonListener.actionPerformed(null);
 		assertTrue(mockFileChooser.wasShowDialogCalled());
 	}
 
 	@Test
-	public void testOpeningAFile_CallsBuildOnTheVideoFrameBuilder()
+	public void testOpeningAFile_CallsBuildOnTheVideoFrameHandler()
 			throws Exception {
 		final MockFileChooser mockFileChooser = new MockFileChooser();
 		mockFileChooser.setShowDialogValueToReturn(JFileChooser.APPROVE_OPTION);
@@ -54,13 +54,13 @@ public class OpenImageButtonActionListenerTest extends AssertTestCase {
 		final File expectedSelectedFile = new File("");
 		mockFileChooser.setSelectedFile(expectedSelectedFile);
 
-		final MockVideoFrameBuilder mockVideoFrameBuilder = new MockVideoFrameBuilder();
+		final MockVideoFrameHandler mockVideoFrameHandler = new MockVideoFrameHandler();
 
 		final OpenImageButtonActionListener openImageButtonListener = new OpenImageButtonActionListener(
-				mockFileChooser, mockVideoFrameBuilder);
+				mockFileChooser, mockVideoFrameHandler);
 
-		assertFalse(mockVideoFrameBuilder.wasBuildVideoFrameCalled());
+		assertFalse(mockVideoFrameHandler.wasBuildVideoFrameCalled());
 		openImageButtonListener.actionPerformed(null);
-		assertTrue(mockVideoFrameBuilder.wasBuildVideoFrameCalled());
+		assertTrue(mockVideoFrameHandler.wasBuildVideoFrameCalled());
 	}
 }

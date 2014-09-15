@@ -4,6 +4,7 @@ import javax.swing.JButton;
 
 import org.junit.Test;
 
+import com.nematode.imaging.MockVideoFrameHandler;
 import com.nematode.unittesting.AssertTestCase;
 
 public class NematodeTrackingPanelViewControllerTest extends AssertTestCase {
@@ -17,7 +18,7 @@ public class NematodeTrackingPanelViewControllerTest extends AssertTestCase {
 	@Test
 	public void testGetsNematodeTrackingPanel() throws Exception {
 		final NematodeTrackingPanelViewController nematodeTrackingPanelViewController = new NematodeTrackingPanelViewController(
-				new MockNematodeVideoFrame());
+				new MockVideoFrameHandler());
 
 		assertIsOfTypeAndGet(NematodeTrackingPanel.class,
 				nematodeTrackingPanelViewController.getNematodePanel());
@@ -25,17 +26,17 @@ public class NematodeTrackingPanelViewControllerTest extends AssertTestCase {
 
 	@Test
 	public void testGetsNematodeVideoFrame() throws Exception {
-		final MockNematodeVideoFrame expectedVideoFrame = new MockNematodeVideoFrame();
+		final MockVideoFrameHandler expectedFrameHandler = new MockVideoFrameHandler();
 		final NematodeTrackingPanelViewController viewController = new NematodeTrackingPanelViewController(
-				expectedVideoFrame);
-		assertSame(expectedVideoFrame, viewController.getNematodeVideoFrame());
+				expectedFrameHandler);
+		assertSame(expectedFrameHandler, viewController.getVideoFrameHandler());
 	}
 
 	@Test
 	public void testConstructorAddsListener_ScanImageButtonOnPanel()
 			throws Exception {
 		final NematodeTrackingPanelViewController viewController = new NematodeTrackingPanelViewController(
-				new MockNematodeVideoFrame());
+				new MockVideoFrameHandler());
 		final NematodeTrackingPanel trackingPanel = assertIsOfTypeAndGet(
 				NematodeTrackingPanel.class, viewController.getNematodePanel());
 		final JButton scanButton = trackingPanel.getScanButton();
@@ -49,8 +50,14 @@ public class NematodeTrackingPanelViewControllerTest extends AssertTestCase {
 	}
 
 	@Test
-	public void testUpdateImageSetsNewDisplayImageOnNematodeVideoFrame()
-			throws Exception {
-		fail("unimplemented");
+	public void testUpdateImageCallsScanOnFrameHandler() throws Exception {
+		final MockVideoFrameHandler mockHandler = new MockVideoFrameHandler();
+		final NematodeTrackingPanelViewController viewController = new NematodeTrackingPanelViewController(
+				mockHandler);
+
+		assertFalse(mockHandler.wasScanImageCalled());
+		viewController.updateImage();
+		assertTrue(mockHandler.wasScanImageCalled());
+
 	}
 }

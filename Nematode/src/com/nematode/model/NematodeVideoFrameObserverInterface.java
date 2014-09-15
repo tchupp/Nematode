@@ -2,8 +2,8 @@ package com.nematode.model;
 
 public interface NematodeVideoFrameObserverInterface {
 
-	void notifyVideoFrameHasBeenSet();
+	public void notifyVideoFrameHasBeenSet();
 
-	void notifyDisplayFrameHasBeenSet();
+	public void notifyDisplayFrameHasBeenSet();
 
 }

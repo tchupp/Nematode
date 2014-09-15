@@ -4,8 +4,8 @@ import java.awt.image.BufferedImage;
 
 public interface ValidatedImageFileInterface {
 
-	boolean isFileValid();
+	public boolean isFileValid();
 
-	BufferedImage getFileImage();
+	public BufferedImage getFileImage();
 
 }

@@ -5,8 +5,8 @@ import javax.swing.JButton;
 import org.junit.Test;
 
 import com.nematode.fileIO.OpenImageButtonActionListener;
-import com.nematode.imaging.MockVideoFrameBuilder;
-import com.nematode.imaging.VideoFrameBuilderInterface;
+import com.nematode.imaging.MockVideoFrameHandler;
+import com.nematode.imaging.VideoFrameHandlerInterface;
 import com.nematode.unittesting.AssertTestCase;
 
 public class NematodeProjectPanelViewControllerTest extends AssertTestCase {
@@ -20,29 +20,29 @@ public class NematodeProjectPanelViewControllerTest extends AssertTestCase {
 	@Test
 	public void testGetsNematodeProjectPanel() throws Exception {
 		final NematodeProjectPanelViewController nematodeProjectViewController = new NematodeProjectPanelViewController(
-				new MockVideoFrameBuilder());
+				new MockVideoFrameHandler());
 
 		assertIsOfTypeAndGet(NematodeProjectPanel.class,
 				nematodeProjectViewController.getNematodePanel());
 	}
 
 	@Test
-	public void testGetsVideoFrameBuilder() throws Exception {
-		final MockVideoFrameBuilder expectedVideoFrameBuilder = new MockVideoFrameBuilder();
+	public void testGetsVideoFrameHandler() throws Exception {
+		final MockVideoFrameHandler expectedVideoFrameHandler = new MockVideoFrameHandler();
 		final NematodeProjectPanelViewController nematodeProjectPanelViewController = new NematodeProjectPanelViewController(
-				expectedVideoFrameBuilder);
+				expectedVideoFrameHandler);
 
-		final VideoFrameBuilderInterface actualVideoFrameBuilder = nematodeProjectPanelViewController
-				.getVideoFrameBuilder();
-		assertSame(expectedVideoFrameBuilder, actualVideoFrameBuilder);
+		final VideoFrameHandlerInterface actualVideoFrameHandler = nematodeProjectPanelViewController
+				.getVideoFrameHandler();
+		assertSame(expectedVideoFrameHandler, actualVideoFrameHandler);
 	}
 
 	@Test
 	public void testConstructionAddsListener_OpenImageButtonOnPanel()
 			throws Exception {
-		final MockVideoFrameBuilder expectedVideoFrameBuilder = new MockVideoFrameBuilder();
+		final MockVideoFrameHandler expectedVideoFrameHandler = new MockVideoFrameHandler();
 		final NematodeProjectPanelViewController nematodeProjectPanelViewController = new NematodeProjectPanelViewController(
-				expectedVideoFrameBuilder);
+				expectedVideoFrameHandler);
 
 		final NematodeProjectPanel nematodeProjectPanel = assertIsOfTypeAndGet(
 				NematodeProjectPanel.class,
@@ -56,8 +56,8 @@ public class NematodeProjectPanelViewControllerTest extends AssertTestCase {
 				OpenImageButtonActionListener.class,
 				openImageButton.getActionListeners()[0]);
 
-		final VideoFrameBuilderInterface actualVideoFrameBuilder = imageButtonActionListener
-				.getVideoFrameBuilder();
-		assertSame(expectedVideoFrameBuilder, actualVideoFrameBuilder);
+		final VideoFrameHandlerInterface actualVideoFrameHandler = imageButtonActionListener
+				.getVideoFrameHandler();
+		assertSame(expectedVideoFrameHandler, actualVideoFrameHandler);
 	}
 }
