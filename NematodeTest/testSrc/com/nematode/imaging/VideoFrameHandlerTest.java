@@ -118,8 +118,24 @@ public class VideoFrameHandlerTest extends AssertTestCase {
 	public void testScanImageCallsImageProcessingRunnerWithVideoFrame()
 			throws Exception {
 
+		final MockImageProcessingRunner mockImageProcessingRunner = new MockImageProcessingRunner() {
+
+			@Override
+			public void preprocessImageForScanning(
+					final NematodeVideoFrameInterface videoFrame) {
+				assertFalse(wasScanVideoFrameCalled());
+				super.preprocessImageForScanning(videoFrame);
+			}
+
+			@Override
+			public void scanVideoFrame(
+					final NematodeVideoFrameInterface videoFrame) {
+				assertTrue(wasPreprocessImageForScanningCalled());
+				super.scanVideoFrame(videoFrame);
+			}
+		};
+
 		final MockNematodeVideoFrame mockVideoFrame = new MockNematodeVideoFrame();
-		final MockImageProcessingRunner mockImageProcessingRunner = new MockImageProcessingRunner();
 		final VideoFrameHandler videoFrameHandler = new VideoFrameHandler(
 				mockVideoFrame, new MockFrameImageAssembler(),
 				mockImageProcessingRunner);

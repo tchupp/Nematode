@@ -4,7 +4,7 @@ import com.nematode.model.NematodeVideoFrameInterface;
 
 public interface ImageProcessingRunnerInterface {
 
-	public void preprocessImageForScanning();
+	public void preprocessImageForScanning(NematodeVideoFrameInterface videoFrame);
 
 	public void scanVideoFrame(NematodeVideoFrameInterface videoFrame);
 

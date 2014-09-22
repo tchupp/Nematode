@@ -11,7 +11,7 @@ public class MockImageProcessingRunner implements
 	private ImageProcessingHelperInterface imageProcessingHelper = new MockImageProcessingHelper();
 
 	@Override
-	public void preprocessImageForScanning() {
+	public void preprocessImageForScanning(NematodeVideoFrameInterface videoFrame) {
 		this.preprocessImageForScanningWasCalled = true;
 	}
 

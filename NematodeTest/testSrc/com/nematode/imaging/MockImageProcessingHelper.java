@@ -10,6 +10,9 @@ ImageProcessingHelperInterface {
 	private boolean convertImageToGreyScaleWasCalled = false;
 	private boolean convertImageToBlackAndWhiteWasCalled = false;
 	private boolean markDifferencesInImagesInWhiteWasCalled = false;
+	private boolean overlayImageWasCalled = false;
+	private BufferedImage baseImageToOverlay;
+	private BufferedImage topImageToOverlay;
 
 	@Override
 	public GreyScaleImage convertImageToGreyScale(final BufferedImage inputImage) {
@@ -44,4 +47,24 @@ ImageProcessingHelperInterface {
 		return this.markDifferencesInImagesInWhiteWasCalled;
 	}
 
+	@Override
+	public BufferedImage overlayImage(final BufferedImage baseImage,
+			final BufferedImage topImage) {
+		this.baseImageToOverlay = baseImage;
+		this.topImageToOverlay = topImage;
+		this.overlayImageWasCalled = true;
+		return new NullBufferedImage();
+	}
+
+	public boolean wasOverlayImageCalled() {
+		return this.overlayImageWasCalled;
+	}
+
+	public BufferedImage getBaseImageToOverlay() {
+		return this.baseImageToOverlay;
+	}
+
+	public BufferedImage getTopImageToOverlay() {
+		return this.topImageToOverlay;
+	}
 }

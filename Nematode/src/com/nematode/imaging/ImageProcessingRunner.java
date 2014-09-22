@@ -14,12 +14,8 @@ public class ImageProcessingRunner implements ImageProcessingRunnerInterface {
 	}
 
 	@Override
-	public void preprocessImageForScanning() {
-
-	}
-
-	@Override
-	public void scanVideoFrame(final NematodeVideoFrameInterface videoFrame) {
+	public void preprocessImageForScanning(
+			final NematodeVideoFrameInterface videoFrame) {
 		final BufferedImage preprocessedImage = videoFrame.getVideoFrameImage()
 				.getImage();
 
@@ -30,6 +26,19 @@ public class ImageProcessingRunner implements ImageProcessingRunnerInterface {
 
 		videoFrame.setScannedFrameImage(new ScannedFrameImage(
 				blackAndWhiteImage));
+	}
+
+	@Override
+	public void scanVideoFrame(final NematodeVideoFrameInterface videoFrame) {
+		final BufferedImage baseImage = videoFrame.getVideoFrameImage()
+				.getImage();
+		final BufferedImage topImage = videoFrame.getScannedFrameImage()
+				.getImage();
+
+		final BufferedImage overlayImage = this.imageProcessingHelper
+				.overlayImage(baseImage, topImage);
+
+		videoFrame.setScannedFrameImage(new ScannedFrameImage(overlayImage));
 	}
 
 	@Override

@@ -46,6 +46,35 @@ public class ImageProcessingHelper implements ImageProcessingHelperInterface {
 	}
 
 	@Override
+	public BufferedImage overlayImage(final BufferedImage baseImage,
+			final BufferedImage topImage) {
+		final int width = baseImage.getWidth();
+		final int height = baseImage.getHeight();
+
+		final int[] baseImageRGB = new int[width * height];
+		final int[] topImageRGB = new int[width * height];
+		final int[] outputImageRGB = new int[width * height];
+
+		baseImage.getRGB(0, 0, width, height, baseImageRGB, 0, width);
+		topImage.getRGB(0, 0, width, height, topImageRGB, 0, width);
+
+		for (int i = 0; i < topImageRGB.length; i++) {
+			if (topImageRGB[i] == Color.BLACK.getRGB()) {
+				outputImageRGB[i] = Color.CYAN.getRGB();
+			} else {
+				outputImageRGB[i] = baseImageRGB[i];
+			}
+		}
+
+		final BufferedImage outputImage = new BufferedImage(width, height,
+				baseImage.getType());
+
+		outputImage.setRGB(0, 0, width, height, outputImageRGB, 0, width);
+
+		return outputImage;
+	}
+
+	@Override
 	public BufferedImage markDifferencesInImagesInWhite(
 			final BufferedImage originalImage, final BufferedImage updatedImage) {
 		final int width = originalImage.getWidth();
@@ -60,14 +89,14 @@ public class ImageProcessingHelper implements ImageProcessingHelperInterface {
 
 		for (int i = 0; i < updatedImageRGB.length; i++) {
 			if (originalImageRGB[i] == updatedImageRGB[i]) {
-				binaryOutputImageRGB[i] = Color.black.getRGB();
+				binaryOutputImageRGB[i] = Color.BLACK.getRGB();
 			} else {
-				binaryOutputImageRGB[i] = Color.white.getRGB();
+				binaryOutputImageRGB[i] = Color.WHITE.getRGB();
 			}
 		}
 
-		final BufferedImage binaryOutputImage = new BufferedImage(width,
-				height, BufferedImage.TYPE_BYTE_BINARY);
+		final BufferedImage binaryOutputImage = new BlackAndWhiteImage(width,
+				height);
 
 		binaryOutputImage.setRGB(0, 0, width, height, binaryOutputImageRGB, 0,
 				width);

@@ -15,6 +15,9 @@ public class ImageProcessingHelperTest extends AssertTestCase {
 	private BufferedImage bufferedShadesOfBlue;
 	private BufferedImage bufferedShadesOfGrey;
 	private BufferedImage bufferedShadesOfBlackAndWhite;
+	private BufferedImage bufferedShadesOfColor;
+	private BufferedImage bufferedShadesToOverlay;
+	private BufferedImage bufferedShadesFromOverlay;
 
 	@Override
 	protected void setUp() throws Exception {
@@ -29,9 +32,21 @@ public class ImageProcessingHelperTest extends AssertTestCase {
 		this.bufferedShadesOfGrey = ImageIO.read(shadesOfGrey);
 
 		final File shadesOfBlackAndWhite = new File(
-				"testResources/Images/expectedBitmapOfShadesOfBlackAndWhite.png");
+				"testResources/Images/expectedShadesOfBlackAndWhite.png");
 		this.bufferedShadesOfBlackAndWhite = ImageIO
 				.read(shadesOfBlackAndWhite);
+
+		final File shadesOfColor = new File(
+				"testResources/Images/pngColorfulImageToBlur.png");
+		this.bufferedShadesOfColor = ImageIO.read(shadesOfColor);
+
+		final File shadesToOverlay = new File(
+				"testResources/Images/pngColorfulToBW.png");
+		this.bufferedShadesToOverlay = ImageIO.read(shadesToOverlay);
+
+		final File shadesFromOverlay = new File(
+				"testResources/Images/expectedShadesFromOverlay.png");
+		this.bufferedShadesFromOverlay = ImageIO.read(shadesFromOverlay);
 	}
 
 	@Override
@@ -39,6 +54,9 @@ public class ImageProcessingHelperTest extends AssertTestCase {
 		this.bufferedShadesOfBlue.flush();
 		this.bufferedShadesOfGrey.flush();
 		this.bufferedShadesOfBlackAndWhite.flush();
+		this.bufferedShadesOfColor.flush();
+		this.bufferedShadesToOverlay.flush();
+		this.bufferedShadesFromOverlay.flush();
 		super.tearDown();
 	}
 
@@ -78,6 +96,17 @@ public class ImageProcessingHelperTest extends AssertTestCase {
 						this.bufferedShadesOfGrey);
 
 		assertImageIsAllSpecifiedColor(subtractedImages, Color.black);
+	}
+
+	@Test
+	public void testOverlayImageColorsTheCorrectPartsOfTheImage()
+			throws Exception {
+		final ImageProcessingHelper imageProcessingHelper = new ImageProcessingHelper();
+
+		final BufferedImage overlayImage = imageProcessingHelper.overlayImage(
+				this.bufferedShadesOfColor, this.bufferedShadesToOverlay);
+
+		assertImagesAreIdentical(this.bufferedShadesFromOverlay, overlayImage);
 	}
 
 	private void assertImageIsAllSpecifiedColor(final BufferedImage inputImage,

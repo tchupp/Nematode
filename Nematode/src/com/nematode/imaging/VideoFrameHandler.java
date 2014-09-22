@@ -55,6 +55,8 @@ public class VideoFrameHandler implements VideoFrameHandlerInterface {
 
 	@Override
 	public void scanImage() {
+		this.imageProcessingRunner
+				.preprocessImageForScanning(this.nematodeVideoFrame);
 		this.imageProcessingRunner.scanVideoFrame(this.nematodeVideoFrame);
 	}
 
