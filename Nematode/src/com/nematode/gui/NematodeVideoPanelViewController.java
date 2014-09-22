@@ -48,10 +48,6 @@ NematodePanelViewControllerInterface {
 		return this.videoFrameHandler;
 	}
 
-	public NematodeVideoFrameInterface getNematodeVideoFrame() {
-		return this.nematodeVideoFrame;
-	}
-
 	public NematodeVideoFrameObserverInterface getFrameObserver() {
 		return this.frameObserver;
 	}

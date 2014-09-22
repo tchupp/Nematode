@@ -50,14 +50,31 @@ public class NematodeTrackingPanelViewControllerTest extends AssertTestCase {
 	}
 
 	@Test
-	public void testUpdateImageCallsScanOnFrameHandler() throws Exception {
-		final MockVideoFrameHandler mockHandler = new MockVideoFrameHandler();
+	public void testUpdateImageCallsScan_AndUpdateDisplayImage_OnFrameHandler()
+			throws Exception {
+
+		final MockVideoFrameHandler mockHandler = new MockVideoFrameHandler() {
+			@Override
+			public void scanImage() {
+				assertFalse(wasBuildVideoFrameCalled());
+				super.scanImage();
+			}
+
+			@Override
+			public void updateDisplayImageFromScannedImage() {
+				assertTrue(wasScanImageCalled());
+				super.updateDisplayImageFromScannedImage();
+			};
+		};
+
 		final NematodeTrackingPanelViewController viewController = new NematodeTrackingPanelViewController(
 				mockHandler);
 
 		assertFalse(mockHandler.wasScanImageCalled());
+		assertFalse(mockHandler.wasUpdateDisplayImageFromScannedImageCalled());
 		viewController.updateImage();
 		assertTrue(mockHandler.wasScanImageCalled());
+		assertTrue(mockHandler.wasUpdateDisplayImageFromScannedImageCalled());
 
 	}
 }

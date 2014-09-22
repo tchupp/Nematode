@@ -10,6 +10,7 @@ public class MockVideoFrameHandler implements VideoFrameHandlerInterface {
 	private NematodeVideoFrameInterface nematodeVideoFrame = new MockNematodeVideoFrame();
 	private boolean buildVideoFrameWasCalled = false;
 	private boolean scanImageWasCalled = false;
+	private boolean updateDisplayImageFromScannedImageWasCalled = false;
 
 	@Override
 	public void buildNewFrameImageFromFile(
@@ -46,6 +47,11 @@ public class MockVideoFrameHandler implements VideoFrameHandlerInterface {
 	}
 
 	@Override
-	public void updateDisplayImage() {
+	public void updateDisplayImageFromScannedImage() {
+		this.updateDisplayImageFromScannedImageWasCalled = true;
+	}
+
+	public boolean wasUpdateDisplayImageFromScannedImageCalled() {
+		return this.updateDisplayImageFromScannedImageWasCalled;
 	}
 }

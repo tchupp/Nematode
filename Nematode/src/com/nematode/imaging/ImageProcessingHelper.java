@@ -7,10 +7,9 @@ import java.awt.image.BufferedImage;
 public class ImageProcessingHelper implements ImageProcessingHelperInterface {
 
 	@Override
-	public BufferedImage convertImageToGreyScale(final BufferedImage inputImage) {
-		final BufferedImage greyScaleImage = new BufferedImage(
-				inputImage.getWidth(), inputImage.getHeight(),
-				BufferedImage.TYPE_BYTE_GRAY);
+	public GreyScaleImage convertImageToGreyScale(final BufferedImage inputImage) {
+		final GreyScaleImage greyScaleImage = new GreyScaleImage(
+				inputImage.getWidth(), inputImage.getHeight());
 
 		final Graphics graphics = greyScaleImage.getGraphics();
 		graphics.drawImage(inputImage, 0, 0, null);
@@ -20,8 +19,8 @@ public class ImageProcessingHelper implements ImageProcessingHelperInterface {
 	}
 
 	@Override
-	public BufferedImage convertImageToBlackAndWhite(
-			final BufferedImage inputImage, final double toleranceSeperator) {
+	public BlackAndWhiteImage convertImageToBlackAndWhite(
+			final GreyScaleImage inputImage, final double toleranceSeperator) {
 		final int width = inputImage.getWidth();
 		final int height = inputImage.getHeight();
 		final int[] inputImageRGB = new int[width * height];
@@ -38,8 +37,8 @@ public class ImageProcessingHelper implements ImageProcessingHelperInterface {
 			}
 		}
 
-		final BufferedImage outputImage = new BufferedImage(width, height,
-				BufferedImage.TYPE_BYTE_BINARY);
+		final BlackAndWhiteImage outputImage = new BlackAndWhiteImage(width,
+				height);
 
 		outputImage.setRGB(0, 0, width, height, outputImageRGB, 0, width);
 

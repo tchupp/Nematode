@@ -23,10 +23,10 @@ public class ImageProcessingRunner implements ImageProcessingRunnerInterface {
 		final BufferedImage preprocessedImage = videoFrame.getVideoFrameImage()
 				.getImage();
 
-		final BufferedImage greyScaleImage = this.imageProcessingHelper
+		final GreyScaleImage greyScaleImage = this.imageProcessingHelper
 				.convertImageToGreyScale(preprocessedImage);
-		final BufferedImage blackAndWhiteImage = this.imageProcessingHelper
-				.convertImageToBlackAndWhite(greyScaleImage, 0.5);
+		final BlackAndWhiteImage blackAndWhiteImage = this.imageProcessingHelper
+				.convertImageToBlackAndWhite(greyScaleImage, 0.9f);
 
 		videoFrame.setScannedFrameImage(new ScannedFrameImage(
 				blackAndWhiteImage));

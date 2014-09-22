@@ -43,7 +43,7 @@ public class VideoFrameHandler implements VideoFrameHandlerInterface {
 	}
 
 	@Override
-	public void updateDisplayImage() {
+	public void updateDisplayImageFromScannedImage() {
 		final BufferedImage scannedImage = this.nematodeVideoFrame
 				.getScannedFrameImage().getImage();
 

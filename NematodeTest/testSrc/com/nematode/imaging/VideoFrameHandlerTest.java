@@ -51,7 +51,7 @@ public class VideoFrameHandlerTest extends AssertTestCase {
 	}
 
 	@Test
-	public void testUpdateDisplayImageSetsNewDisplayImageOnFrame()
+	public void testUpdateDisplayImageFromScannedImageSetsNewDisplayImageOnFrame()
 			throws Exception {
 		final MockNematodeVideoFrame videoFrame = new MockNematodeVideoFrame();
 		final MockFrameImageAssembler mockAssembler = new MockFrameImageAssembler();
@@ -60,7 +60,7 @@ public class VideoFrameHandlerTest extends AssertTestCase {
 
 		assertFalse(mockAssembler.wasCreateDisplayFrameImageCalled());
 		assertFalse(videoFrame.wasSetDisplayFrameImageCalled());
-		videoFrameHandler.updateDisplayImage();
+		videoFrameHandler.updateDisplayImageFromScannedImage();
 		assertTrue(mockAssembler.wasCreateDisplayFrameImageCalled());
 		assertTrue(videoFrame.wasSetDisplayFrameImageCalled());
 	}

@@ -12,9 +12,9 @@ ImageProcessingHelperInterface {
 	private boolean markDifferencesInImagesInWhiteWasCalled = false;
 
 	@Override
-	public BufferedImage convertImageToGreyScale(final BufferedImage inputImage) {
+	public GreyScaleImage convertImageToGreyScale(final BufferedImage inputImage) {
 		this.convertImageToGreyScaleWasCalled = true;
-		return new NullBufferedImage();
+		return new GreyScaleImage(new NullBufferedImage());
 	}
 
 	public boolean wasConvertImageToGreyScaleCalled() {
@@ -22,10 +22,11 @@ ImageProcessingHelperInterface {
 	}
 
 	@Override
-	public BufferedImage convertImageToBlackAndWhite(
-			final BufferedImage inputImage, final double toleranceSeperator) {
+	public BlackAndWhiteImage convertImageToBlackAndWhite(
+			final GreyScaleImage inputImage, final double toleranceSeperator) {
 		this.convertImageToBlackAndWhiteWasCalled = true;
-		return new NullBufferedImage();
+
+		return new BlackAndWhiteImage(new NullBufferedImage());
 	}
 
 	public boolean wasConvertImageToBlackAndWhiteCalled() {

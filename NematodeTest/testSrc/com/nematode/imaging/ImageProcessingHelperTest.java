@@ -51,7 +51,7 @@ public class ImageProcessingHelperTest extends AssertTestCase {
 	@Test
 	public void testConvertsImageToGreyScale() throws Exception {
 		final ImageProcessingHelper imageProcessingHelper = new ImageProcessingHelper();
-		final BufferedImage convertedImage = imageProcessingHelper
+		final GreyScaleImage convertedImage = imageProcessingHelper
 				.convertImageToGreyScale(this.bufferedShadesOfBlue);
 
 		assertImagesAreIdentical(this.bufferedShadesOfGrey, convertedImage);
@@ -60,8 +60,10 @@ public class ImageProcessingHelperTest extends AssertTestCase {
 	@Test
 	public void testConvertImageToBlackAndWhite() throws Exception {
 		final ImageProcessingHelper imageProcessingHelper = new ImageProcessingHelper();
-		final BufferedImage convertedImage = imageProcessingHelper
-				.convertImageToBlackAndWhite(this.bufferedShadesOfGrey, 0.5f);
+		final GreyScaleImage greyScaleImage = new GreyScaleImage(
+				this.bufferedShadesOfGrey);
+		final BlackAndWhiteImage convertedImage = imageProcessingHelper
+				.convertImageToBlackAndWhite(greyScaleImage, 0.5f);
 
 		assertImagesAreIdentical(this.bufferedShadesOfBlackAndWhite,
 				convertedImage);

@@ -4,10 +4,10 @@ import java.awt.image.BufferedImage;
 
 public interface ImageProcessingHelperInterface {
 
-	public BufferedImage convertImageToGreyScale(BufferedImage inputImage);
+	public GreyScaleImage convertImageToGreyScale(BufferedImage inputImage);
 
-	public BufferedImage convertImageToBlackAndWhite(BufferedImage inputImage,
-			double toleranceSeperator);
+	public BlackAndWhiteImage convertImageToBlackAndWhite(
+			GreyScaleImage inputImage, double toleranceSeperator);
 
 	public BufferedImage markDifferencesInImagesInWhite(
 			BufferedImage originalImage, BufferedImage updatedImage);
