@@ -29,7 +29,7 @@ public class HSBColor extends Color {
 		Color.RGBtoHSB(r, g, b, hsbValues);
 		this.hue = hsbValues[0];
 		this.saturation = hsbValues[1];
-		this.brightness = hsbValues[2];
+		this.brightness = hsbValues[2] * 255f;
 	}
 
 	public float getHue() {

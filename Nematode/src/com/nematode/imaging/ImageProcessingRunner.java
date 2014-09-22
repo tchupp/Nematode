@@ -22,7 +22,7 @@ public class ImageProcessingRunner implements ImageProcessingRunnerInterface {
 		final GreyScaleImage greyScaleImage = this.imageProcessingHelper
 				.convertImageToGreyScale(preprocessedImage);
 		final BlackAndWhiteImage blackAndWhiteImage = this.imageProcessingHelper
-				.convertImageToBlackAndWhite(greyScaleImage, 0.9f);
+				.convertImageToBlackAndWhite(greyScaleImage, 230f);
 
 		videoFrame.setScannedFrameImage(new ScannedFrameImage(
 				blackAndWhiteImage));

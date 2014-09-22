@@ -81,7 +81,7 @@ public class ImageProcessingHelperTest extends AssertTestCase {
 		final GreyScaleImage greyScaleImage = new GreyScaleImage(
 				this.bufferedShadesOfGrey);
 		final BlackAndWhiteImage convertedImage = imageProcessingHelper
-				.convertImageToBlackAndWhite(greyScaleImage, 0.5f);
+				.convertImageToBlackAndWhite(greyScaleImage, 128f);
 
 		assertImagesAreIdentical(this.bufferedShadesOfBlackAndWhite,
 				convertedImage);

@@ -22,15 +22,15 @@ public class HSBColorTest extends AssertTestCase {
 
 		assertEquals(0.0, hsbRed.getHue(), 0.001);
 		assertEquals(1.0, hsbRed.getSaturation(), 0.001);
-		assertEquals(1.0, hsbRed.getBrightness(), 0.001);
+		assertEquals(255.0, hsbRed.getBrightness(), 0.001);
 
 		assertEquals(0.666, hsbBlue.getHue(), 0.001);
 		assertEquals(1.0, hsbBlue.getSaturation(), 0.001);
-		assertEquals(1.0, hsbBlue.getBrightness(), 0.001);
+		assertEquals(255.0, hsbBlue.getBrightness(), 0.001);
 
 		assertEquals(0.333, hsbGreen.getHue(), 0.001);
 		assertEquals(1.0, hsbGreen.getSaturation(), 0.001);
-		assertEquals(1.0, hsbGreen.getBrightness(), 0.001);
+		assertEquals(255.0, hsbGreen.getBrightness(), 0.001);
 	}
 
 	@Test
@@ -39,12 +39,12 @@ public class HSBColorTest extends AssertTestCase {
 		final HSBColor hsbCustomMagenta = new HSBColor(127, 63, 255);
 		assertEquals(0.722, hsbCustomMagenta.getHue(), 0.001);
 		assertEquals(0.753, hsbCustomMagenta.getSaturation(), 0.001);
-		assertEquals(1.0, hsbCustomMagenta.getBrightness(), 0.001);
+		assertEquals(255.0, hsbCustomMagenta.getBrightness(), 0.001);
 
 		final HSBColor hsbCustomPeach = new HSBColor(255, 127, 52);
 		assertEquals(.062, hsbCustomPeach.getHue(), 0.001);
 		assertEquals(0.796, hsbCustomPeach.getSaturation(), 0.001);
-		assertEquals(1.0, hsbCustomPeach.getBrightness(), 0.001);
+		assertEquals(255.0, hsbCustomPeach.getBrightness(), 0.001);
 	}
 
 	@Test
@@ -55,6 +55,6 @@ public class HSBColorTest extends AssertTestCase {
 
 		assertEquals(0.0, hsbColor.getHue(), 0.001);
 		assertEquals(1.0, hsbColor.getSaturation(), 0.001);
-		assertEquals(1.0, hsbColor.getBrightness(), 0.001);
+		assertEquals(255.0, hsbColor.getBrightness(), 0.001);
 	}
 }
