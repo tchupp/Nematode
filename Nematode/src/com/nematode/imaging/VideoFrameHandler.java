@@ -43,10 +43,22 @@ public class VideoFrameHandler implements VideoFrameHandlerInterface {
 	}
 
 	@Override
-	public void scanImage() {
-		this.imageProcessingRunner.scanVideoFrame();
+	public void updateDisplayImage() {
+		final BufferedImage scannedImage = this.nematodeVideoFrame
+				.getScannedFrameImage().getImage();
+
+		final DisplayFrameImageInterface displayFrameImage = this.frameImageAssembler
+				.createDisplayFrameImage(scannedImage);
+
+		this.nematodeVideoFrame.setDisplayFrameImage(displayFrameImage);
 	}
 
+	@Override
+	public void scanImage() {
+		this.imageProcessingRunner.scanVideoFrame(this.nematodeVideoFrame);
+	}
+
+	@Override
 	public NematodeVideoFrameInterface getNematodeVideoFrame() {
 		return this.nematodeVideoFrame;
 	}

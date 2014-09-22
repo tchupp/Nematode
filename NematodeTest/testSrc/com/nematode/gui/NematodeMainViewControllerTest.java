@@ -10,7 +10,6 @@ import com.nematode.imaging.ImageProcessingRunner;
 import com.nematode.imaging.VideoFrameHandler;
 import com.nematode.imaging.VideoFrameHandlerInterface;
 import com.nematode.model.NematodeVideoFrame;
-import com.nematode.model.NematodeVideoFrameInterface;
 import com.nematode.unittesting.AssertTestCase;
 
 public class NematodeMainViewControllerTest extends AssertTestCase {
@@ -96,14 +95,12 @@ public class NematodeMainViewControllerTest extends AssertTestCase {
 				NematodeVideoPanelViewController.class,
 				viewController.getNematodeVideoPanelViewController());
 
-		final VideoFrameHandler videoFrameHandler = assertIsOfTypeAndGet(
+		final VideoFrameHandler expectedFrameHandler = assertIsOfTypeAndGet(
 				VideoFrameHandler.class, viewController.getVideoFrameHandler());
-		final NematodeVideoFrameInterface expectedNematodeVideoFrame = videoFrameHandler
-				.getNematodeVideoFrame();
-		final NematodeVideoFrameInterface actualNematodeVideoFrame = videoPanelViewController
-				.getNematodeVideoFrame();
+		final VideoFrameHandlerInterface actualFrameHandler = videoPanelViewController
+				.getVideoFrameHandler();
 
-		assertSame(expectedNematodeVideoFrame, actualNematodeVideoFrame);
+		assertSame(expectedFrameHandler, actualFrameHandler);
 	}
 
 	@Test

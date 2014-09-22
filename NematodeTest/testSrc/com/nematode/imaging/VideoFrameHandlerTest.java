@@ -51,6 +51,21 @@ public class VideoFrameHandlerTest extends AssertTestCase {
 	}
 
 	@Test
+	public void testUpdateDisplayImageSetsNewDisplayImageOnFrame()
+			throws Exception {
+		final MockNematodeVideoFrame videoFrame = new MockNematodeVideoFrame();
+		final MockFrameImageAssembler mockAssembler = new MockFrameImageAssembler();
+		final VideoFrameHandler videoFrameHandler = new VideoFrameHandler(
+				videoFrame, mockAssembler, new MockImageProcessingRunner());
+
+		assertFalse(mockAssembler.wasCreateDisplayFrameImageCalled());
+		assertFalse(videoFrame.wasSetDisplayFrameImageCalled());
+		videoFrameHandler.updateDisplayImage();
+		assertTrue(mockAssembler.wasCreateDisplayFrameImageCalled());
+		assertTrue(videoFrame.wasSetDisplayFrameImageCalled());
+	}
+
+	@Test
 	public void testBuildNewFrameImage_WithValidImage_CallsCreateFromFrameAssembler()
 			throws Exception {
 		final MockNematodeVideoFrame videoFrame = new MockNematodeVideoFrame();
@@ -100,7 +115,8 @@ public class VideoFrameHandlerTest extends AssertTestCase {
 	}
 
 	@Test
-	public void testScanImageCallsImageProcessingRunner() throws Exception {
+	public void testScanImageCallsImageProcessingRunnerWithVideoFrame()
+			throws Exception {
 
 		final MockNematodeVideoFrame mockVideoFrame = new MockNematodeVideoFrame();
 		final MockImageProcessingRunner mockImageProcessingRunner = new MockImageProcessingRunner();
@@ -111,6 +127,8 @@ public class VideoFrameHandlerTest extends AssertTestCase {
 		assertFalse(mockImageProcessingRunner.wasScanVideoFrameCalled());
 		videoFrameHandler.scanImage();
 		assertTrue(mockImageProcessingRunner.wasScanVideoFrameCalled());
-	}
 
+		assertSame(mockVideoFrame,
+				mockImageProcessingRunner.getVideoFrameFromScan());
+	}
 }

@@ -16,10 +16,13 @@ NematodePanelViewControllerInterface {
 	private final NematodeVideoPanel nematodeVideoPanel;
 	private final NematodeVideoFrameInterface nematodeVideoFrame;
 	private final DisplayFrameImageChangeObserver frameObserver;
+	private final VideoFrameHandlerInterface videoFrameHandler;
 
 	public NematodeVideoPanelViewController(
-			final NematodeVideoFrameInterface nematodeVideoFrame) {
-		this.nematodeVideoFrame = nematodeVideoFrame;
+			final VideoFrameHandlerInterface videoFrameHandler) {
+		this.videoFrameHandler = videoFrameHandler;
+		this.nematodeVideoFrame = this.videoFrameHandler
+				.getNematodeVideoFrame();
 		this.frameObserver = new DisplayFrameImageChangeObserver(this);
 		this.nematodeVideoFrame.addObserver(this.frameObserver);
 
@@ -40,17 +43,17 @@ NematodePanelViewControllerInterface {
 		imageLabel.setIcon(new ImageIcon(newImageForPanel));
 	}
 
+	@Override
+	public VideoFrameHandlerInterface getVideoFrameHandler() {
+		return this.videoFrameHandler;
+	}
+
 	public NematodeVideoFrameInterface getNematodeVideoFrame() {
 		return this.nematodeVideoFrame;
 	}
 
 	public NematodeVideoFrameObserverInterface getFrameObserver() {
 		return this.frameObserver;
-	}
-
-	@Override
-	public VideoFrameHandlerInterface getVideoFrameHandler() {
-		return null;
 	}
 
 }

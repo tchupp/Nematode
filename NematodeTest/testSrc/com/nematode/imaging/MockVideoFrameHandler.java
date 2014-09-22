@@ -1,10 +1,13 @@
 package com.nematode.imaging;
 
 import com.nematode.fileIO.ValidatedImageFileInterface;
+import com.nematode.gui.MockNematodeVideoFrame;
+import com.nematode.model.NematodeVideoFrameInterface;
 
 public class MockVideoFrameHandler implements VideoFrameHandlerInterface {
 
 	private ValidatedImageFileInterface validatedImageFile;
+	private NematodeVideoFrameInterface nematodeVideoFrame = new MockNematodeVideoFrame();
 	private boolean buildVideoFrameWasCalled = false;
 	private boolean scanImageWasCalled = false;
 
@@ -32,4 +35,17 @@ public class MockVideoFrameHandler implements VideoFrameHandlerInterface {
 		return this.scanImageWasCalled;
 	}
 
+	@Override
+	public NematodeVideoFrameInterface getNematodeVideoFrame() {
+		return this.nematodeVideoFrame;
+	}
+
+	public void setNematodeVideoFrame(
+			final NematodeVideoFrameInterface nematodeVideoFrame) {
+		this.nematodeVideoFrame = nematodeVideoFrame;
+	}
+
+	@Override
+	public void updateDisplayImage() {
+	}
 }

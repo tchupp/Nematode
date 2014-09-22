@@ -3,8 +3,6 @@ package com.nematode.imaging;
 import java.awt.Color;
 import java.awt.image.BufferedImage;
 import java.io.File;
-import java.lang.reflect.Constructor;
-import java.lang.reflect.Modifier;
 
 import javax.imageio.ImageIO;
 
@@ -45,16 +43,15 @@ public class ImageProcessingHelperTest extends AssertTestCase {
 	}
 
 	@Test
-	public void testNoPublicConstructor() throws Exception {
-		final Constructor<?>[] constructors = ImageProcessingHelper.class
-				.getDeclaredConstructors();
-		assertEquals(1, constructors.length);
-		assertTrue(Modifier.isPrivate(constructors[0].getModifiers()));
+	public void testImplementsInterface() throws Exception {
+		assertImplementsInterface(ImageProcessingHelperInterface.class,
+				ImageProcessingHelper.class);
 	}
 
 	@Test
 	public void testConvertsImageToGreyScale() throws Exception {
-		final BufferedImage convertedImage = ImageProcessingHelper
+		final ImageProcessingHelper imageProcessingHelper = new ImageProcessingHelper();
+		final BufferedImage convertedImage = imageProcessingHelper
 				.convertImageToGreyScale(this.bufferedShadesOfBlue);
 
 		assertImagesAreIdentical(this.bufferedShadesOfGrey, convertedImage);
@@ -62,7 +59,8 @@ public class ImageProcessingHelperTest extends AssertTestCase {
 
 	@Test
 	public void testConvertImageToBlackAndWhite() throws Exception {
-		final BufferedImage convertedImage = ImageProcessingHelper
+		final ImageProcessingHelper imageProcessingHelper = new ImageProcessingHelper();
+		final BufferedImage convertedImage = imageProcessingHelper
 				.convertImageToBlackAndWhite(this.bufferedShadesOfGrey, 0.5f);
 
 		assertImagesAreIdentical(this.bufferedShadesOfBlackAndWhite,
@@ -72,8 +70,8 @@ public class ImageProcessingHelperTest extends AssertTestCase {
 	@Test
 	public void testSubtractImageConvertsEqualImagesToAllBlack()
 			throws Exception {
-
-		final BufferedImage subtractedImages = ImageProcessingHelper
+		final ImageProcessingHelper imageProcessingHelper = new ImageProcessingHelper();
+		final BufferedImage subtractedImages = imageProcessingHelper
 				.markDifferencesInImagesInWhite(this.bufferedShadesOfGrey,
 						this.bufferedShadesOfGrey);
 

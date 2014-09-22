@@ -10,6 +10,7 @@ public class ScannedFrameImage implements ScannedFrameImageInterface {
 		this.bufferedImage = bufferedImage;
 	}
 
+	@Override
 	public BufferedImage getImage() {
 		return this.bufferedImage;
 	}

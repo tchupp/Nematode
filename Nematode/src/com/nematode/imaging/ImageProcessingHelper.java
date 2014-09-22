@@ -4,13 +4,10 @@ import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.image.BufferedImage;
 
-public class ImageProcessingHelper {
+public class ImageProcessingHelper implements ImageProcessingHelperInterface {
 
-	private ImageProcessingHelper() {
-	}
-
-	public static BufferedImage convertImageToGreyScale(
-			final BufferedImage inputImage) {
+	@Override
+	public BufferedImage convertImageToGreyScale(final BufferedImage inputImage) {
 		final BufferedImage greyScaleImage = new BufferedImage(
 				inputImage.getWidth(), inputImage.getHeight(),
 				BufferedImage.TYPE_BYTE_GRAY);
@@ -22,8 +19,9 @@ public class ImageProcessingHelper {
 		return greyScaleImage;
 	}
 
-	public static BufferedImage convertImageToBlackAndWhite(
-			final BufferedImage inputImage, final float toleranceSeperator) {
+	@Override
+	public BufferedImage convertImageToBlackAndWhite(
+			final BufferedImage inputImage, final double toleranceSeperator) {
 		final int width = inputImage.getWidth();
 		final int height = inputImage.getHeight();
 		final int[] inputImageRGB = new int[width * height];
@@ -48,7 +46,8 @@ public class ImageProcessingHelper {
 		return outputImage;
 	}
 
-	public static BufferedImage markDifferencesInImagesInWhite(
+	@Override
+	public BufferedImage markDifferencesInImagesInWhite(
 			final BufferedImage originalImage, final BufferedImage updatedImage) {
 		final int width = originalImage.getWidth();
 		final int height = originalImage.getHeight();

@@ -10,6 +10,7 @@ import javax.swing.JLabel;
 import org.junit.Test;
 
 import com.nematode.imaging.MockDisplayFrameImage;
+import com.nematode.imaging.MockVideoFrameHandler;
 import com.nematode.model.DisplayFrameImageChangeObserver;
 import com.nematode.model.NematodeVideoFrame;
 import com.nematode.nullmodel.NullBufferedImage;
@@ -35,25 +36,25 @@ public class NematodeVideoPanelViewControllerTest extends AssertTestCase {
 	@Test
 	public void testGetsNematodeVideoPanel() throws Exception {
 		final NematodeVideoPanelViewController nematodeVideoPanelViewController = new NematodeVideoPanelViewController(
-				new MockNematodeVideoFrame());
+				new MockVideoFrameHandler());
 
 		assertIsOfTypeAndGet(NematodeVideoPanel.class,
 				nematodeVideoPanelViewController.getNematodePanel());
 	}
 
 	@Test
-	public void testGetVideoFrame() throws Exception {
-		final MockNematodeVideoFrame expectedNematodeVideoFrame = new MockNematodeVideoFrame();
+	public void testGetVideoFrameHandler() throws Exception {
+		final MockVideoFrameHandler expectedFrameHandler = new MockVideoFrameHandler();
 		final NematodeVideoPanelViewController nematodeVideoPanelViewController = new NematodeVideoPanelViewController(
-				expectedNematodeVideoFrame);
-		assertSame(expectedNematodeVideoFrame,
-				nematodeVideoPanelViewController.getNematodeVideoFrame());
+				expectedFrameHandler);
+		assertSame(expectedFrameHandler,
+				nematodeVideoPanelViewController.getVideoFrameHandler());
 	}
 
 	@Test
 	public void testGetsFrameObserver() throws Exception {
 		final NematodeVideoPanelViewController nematodeVideoPanelViewController = new NematodeVideoPanelViewController(
-				new MockNematodeVideoFrame());
+				new MockVideoFrameHandler());
 		assertIsOfTypeAndGet(DisplayFrameImageChangeObserver.class,
 				nematodeVideoPanelViewController.getFrameObserver());
 	}
@@ -62,8 +63,11 @@ public class NematodeVideoPanelViewControllerTest extends AssertTestCase {
 	public void testConstructorAddsObserverToVideoFrameWithCorrectViewController()
 			throws Exception {
 		final NematodeVideoFrame nematodeVideoFrame = new NematodeVideoFrame();
+		final MockVideoFrameHandler mockFrameHandler = new MockVideoFrameHandler();
+		mockFrameHandler.setNematodeVideoFrame(nematodeVideoFrame);
+
 		final NematodeVideoPanelViewController viewController = new NematodeVideoPanelViewController(
-				nematodeVideoFrame);
+				mockFrameHandler);
 		assertEquals(1, nematodeVideoFrame.getListOfObservers().size());
 
 		final DisplayFrameImageChangeObserver observer = assertIsOfTypeAndGet(
@@ -80,17 +84,23 @@ public class NematodeVideoPanelViewControllerTest extends AssertTestCase {
 
 	@Test
 	public void testUpdateImagePlacesCorrectImageOnPanel() throws Exception {
+
 		final MockNematodeVideoFrame videoFrame = new MockNematodeVideoFrame();
 		final MockDisplayFrameImage displayFrameImage = new MockDisplayFrameImage();
 		displayFrameImage.setBufferedImage(this.bufferedTestImage);
 		videoFrame.setDisplayFrameImage(displayFrameImage);
+
+		final MockVideoFrameHandler mockFrameHandler = new MockVideoFrameHandler();
+		mockFrameHandler.setNematodeVideoFrame(videoFrame);
+
 		final NematodeVideoPanelViewController viewController = new NematodeVideoPanelViewController(
-				videoFrame);
+				mockFrameHandler);
 		final NematodeVideoPanel videoPanel = assertIsOfTypeAndGet(
 				NematodeVideoPanel.class, viewController.getNematodePanel());
 		final JLabel imageLabel = videoPanel.getImageLabel();
 		final ImageIcon imageLabelIconBefore = assertIsOfTypeAndGet(
 				ImageIcon.class, imageLabel.getIcon());
+
 		assertIsOfTypeAndGet(NullBufferedImage.class,
 				imageLabelIconBefore.getImage());
 
