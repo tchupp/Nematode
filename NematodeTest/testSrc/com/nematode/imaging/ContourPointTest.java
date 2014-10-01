@@ -9,6 +9,12 @@ import com.nematode.unittesting.AssertTestCase;
 public class ContourPointTest extends AssertTestCase {
 
 	@Test
+	public void testImplementsInterface() throws Exception {
+		assertImplementsInterface(ContourPointInterface.class,
+				ContourPoint.class);
+	}
+
+	@Test
 	public void testDirectionReturnsCorrectInt() throws Exception {
 		assertEquals(0, ContourPoint.DIR_NORTH);
 		assertEquals(1, ContourPoint.DIR_EAST);

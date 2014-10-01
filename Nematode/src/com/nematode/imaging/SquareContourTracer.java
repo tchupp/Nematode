@@ -1,23 +1,26 @@
 package com.nematode.imaging;
 
 import java.awt.Color;
+import java.awt.image.BufferedImage;
 import java.util.ArrayList;
-import java.util.List;
 
-public class SquareContourTracer {
+public class SquareContourTracer implements SquareContourTracerInterface {
 
 	public static final int BLACK = Color.BLACK.getRGB();
 	public static final int WHITE = Color.WHITE.getRGB();
 
-	public List<ContourPoint> getContourPoints(final int[][] imageMatrix) {
-		final ArrayList<ContourPoint> points = new ArrayList<ContourPoint>();
+	@Override
+	public ContourPoints getContourPoints(final BufferedImage image) {
+		final int[][] imageMatrix = convertImageToMatrix(image);
+
 		final int[][] matrix = clearBoarder(imageMatrix);
 
 		final ContourPoint startingPoint = getStartingPoint(matrix);
 		final ContourPoint currentPoint = startingPoint.clone();
 
+		final ArrayList<ContourPoint> points = new ArrayList<ContourPoint>();
 		do {
-			if (matrix[currentPoint.getY()][currentPoint.getX()] == 1) {
+			if (matrix[currentPoint.getY()][currentPoint.getX()] == BLACK) {
 				if (!points.contains(currentPoint)) {
 					points.add(currentPoint.clone());
 				}
@@ -28,7 +31,26 @@ public class SquareContourTracer {
 
 		} while (!startingPoint.equals(currentPoint) && startingPoint.isValid());
 
-		return points;
+		return new ContourPoints(points);
+	}
+
+	private int[][] convertImageToMatrix(final BufferedImage image) {
+		final int width = image.getWidth();
+		final int height = image.getHeight();
+
+		final int[] inputArray = new int[width * height];
+		image.getRGB(0, 0, width, height, inputArray, 0, width);
+
+		final int[][] outputMatrix = new int[height][width];
+
+		for (int y = 0; y < height; y++) {
+			for (int x = 0; x < width; x++) {
+				final int arrayIndex = y * width + x;
+				outputMatrix[y][x] = inputArray[arrayIndex];
+			}
+		}
+
+		return outputMatrix;
 	}
 
 	private ContourPoint getStartingPoint(final int[][] imageMatrix) {
@@ -36,7 +58,7 @@ public class SquareContourTracer {
 
 			for (int x = imageMatrix[y].length - 1; x >= 0; x--) {
 
-				if (imageMatrix[y][x] == 1) {
+				if (imageMatrix[y][x] == BLACK) {
 					return new ContourPoint(x, y);
 				}
 
@@ -51,7 +73,7 @@ public class SquareContourTracer {
 			for (int x = 0; x < imageMatrix[y].length; x++) {
 				if (y == 0 || x == 0 || y == imageMatrix.length - 1
 						|| x == imageMatrix[y].length - 1) {
-					imageMatrix[y][x] = 0;
+					imageMatrix[y][x] = WHITE;
 				}
 			}
 		}

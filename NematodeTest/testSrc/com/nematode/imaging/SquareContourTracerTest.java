@@ -11,6 +11,12 @@ import com.nematode.unittesting.AssertTestCase;
 public class SquareContourTracerTest extends AssertTestCase {
 
 	@Test
+	public void testImplementsInterface() throws Exception {
+		assertImplementsInterface(SquareContourTracerInterface.class,
+				SquareContourTracer.class);
+	}
+
+	@Test
 	public void testStaticBlackAndWhiteColorValuesAreCorrect() throws Exception {
 		assertEquals(Color.WHITE.getRGB(), SquareContourTracer.WHITE);
 		assertEquals(Color.BLACK.getRGB(), SquareContourTracer.BLACK);
@@ -18,16 +24,16 @@ public class SquareContourTracerTest extends AssertTestCase {
 
 	@Test
 	public void testFindContourLines() throws Exception {
+		final int w = SquareContourTracer.WHITE;
+		final int b = SquareContourTracer.BLACK;
 
-		final int[][] inputMatrix = new int[][] {
-				{ 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 },
-				{ 0, 0, 0, 1, 1, 1, 0, 0, 0, 0 },
-				{ 0, 0, 1, 1, 1, 1, 1, 0, 0, 0 },
-				{ 0, 0, 1, 1, 0, 1, 1, 0, 0, 0 },
-				{ 0, 0, 0, 1, 1, 0, 1, 1, 0, 0 },
-				{ 0, 0, 0, 0, 1, 0, 1, 1, 0, 0 },
-				{ 0, 0, 0, 0, 1, 1, 1, 0, 0, 0 },
-				{ 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 } };
+		final int[] inputMatrix = new int[] { w, w, w, w, w, w, w, w, w, w, w,
+				w, w, b, b, b, w, w, w, w, w, w, b, b, b, b, b, w, w, w, w, w,
+				b, b, w, b, b, w, w, w, w, w, w, b, b, w, b, b, w, w, w, w, w,
+				w, b, w, b, b, w, w, w, w, w, w, b, b, b, w, w, w, w, w, w, w,
+				w, w, w, w, w, w };
+		final BlackAndWhiteImage inputImage = new BlackAndWhiteImage(10, 8);
+		inputImage.setRGB(0, 0, 10, 8, inputMatrix, 0, 10);
 
 		final ArrayList<ContourPoint> expectedContourPoints = new ArrayList<ContourPoint>();
 		expectedContourPoints.add(new ContourPoint(6, 6));
@@ -52,7 +58,7 @@ public class SquareContourTracerTest extends AssertTestCase {
 
 		final SquareContourTracer squareContourTracer = new SquareContourTracer();
 		final List<ContourPoint> actualContourPoints = squareContourTracer
-				.getContourPoints(inputMatrix);
+				.getContourPoints(inputImage).getListOfContourPoints();
 
 		assertEqualListContents(expectedContourPoints, actualContourPoints);
 	}

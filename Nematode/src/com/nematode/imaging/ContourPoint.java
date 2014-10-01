@@ -1,6 +1,6 @@
 package com.nematode.imaging;
 
-public class ContourPoint {
+public class ContourPoint implements ContourPointInterface {
 
 	public static final int DIR_NORTH = 0;
 	public static final int DIR_EAST = 1;
