@@ -25,4 +25,5 @@ public class EdgeDetectionRunnerTest extends AssertTestCase {
 		assertSame(mockWormBuilder,
 				edgeDetectionRunner.getNematodeWormBuilder());
 	}
+
 }

@@ -14,7 +14,7 @@ public class EdgeDetectionRunner {
 		this.nematodeWormBuilder = nematodeWormBuilder;
 	}
 
-	public void findAllObjectInImage() {
+	public void findAllObjectsInImage() {
 
 	}
 

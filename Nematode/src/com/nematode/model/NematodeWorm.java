@@ -1,18 +1,18 @@
 package com.nematode.model;
 
-import com.nematode.imaging.ContourPointsInterface;
+import com.nematode.imaging.ContourLinesInterface;
 
 public class NematodeWorm implements NematodeWormInterface {
 
-	private final ContourPointsInterface contourPoints;
+	private final ContourLinesInterface contourLines;
 
-	public NematodeWorm(final ContourPointsInterface contourPoints) {
-		this.contourPoints = contourPoints;
+	public NematodeWorm(final ContourLinesInterface contourLines) {
+		this.contourLines = contourLines;
 	}
 
 	@Override
-	public ContourPointsInterface getContourPoints() {
-		return this.contourPoints;
+	public ContourLinesInterface getContourLines() {
+		return this.contourLines;
 	}
 
 }

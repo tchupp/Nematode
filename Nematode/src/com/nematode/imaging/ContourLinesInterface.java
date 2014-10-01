@@ -2,7 +2,7 @@ package com.nematode.imaging;
 
 import java.util.List;
 
-public interface ContourPointsInterface {
+public interface ContourLinesInterface {
 
 	public List<? extends ContourPointInterface> getListOfContourPoints();
 

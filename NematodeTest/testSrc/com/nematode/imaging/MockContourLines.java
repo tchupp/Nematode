@@ -3,7 +3,7 @@ package com.nematode.imaging;
 import java.util.ArrayList;
 import java.util.List;
 
-public class MockContourPoints implements ContourPointsInterface {
+public class MockContourLines implements ContourLinesInterface {
 
 	private List<MockContourPoint> listOfContourPoints = new ArrayList<MockContourPoint>();
 	private ArrayList<MockContourPoint> pointsAtY;

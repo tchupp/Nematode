@@ -7,20 +7,20 @@ import org.junit.Test;
 
 import com.nematode.unittesting.AssertTestCase;
 
-public class ContourPointsTest extends AssertTestCase {
+public class ContourLinesTest extends AssertTestCase {
 
 	@Test
 	public void testImplementsInterface() throws Exception {
-		assertImplementsInterface(ContourPointsInterface.class,
-				ContourPoints.class);
+		assertImplementsInterface(ContourLinesInterface.class,
+				ContourLines.class);
 	}
 
 	@Test
 	public void testGetsListOfContourPoints() throws Exception {
 		final ArrayList<ContourPoint> expectedList = new ArrayList<ContourPoint>();
 
-		final ContourPoints contourPoints = new ContourPoints(expectedList);
-		assertSame(expectedList, contourPoints.getListOfContourPoints());
+		final ContourLines contourLines = new ContourLines(expectedList);
+		assertSame(expectedList, contourLines.getListOfContourPoints());
 	}
 
 	@Test
@@ -40,7 +40,7 @@ public class ContourPointsTest extends AssertTestCase {
 		inputPoints.add(contourPoint4);
 		inputPoints.add(contourPoint5);
 
-		final ContourPoints contourPoints = new ContourPoints(inputPoints);
+		final ContourLines contourLines = new ContourLines(inputPoints);
 
 		final ArrayList<ContourPoint> expectedPoints1 = new ArrayList<ContourPoint>();
 		expectedPoints1.add(contourPoint1);
@@ -51,10 +51,10 @@ public class ContourPointsTest extends AssertTestCase {
 		expectedPoints2.add(contourPoint4);
 		expectedPoints2.add(contourPoint5);
 
-		final List<ContourPoint> pointsAtX_2 = contourPoints.getPointsAtX(2);
+		final List<ContourPoint> pointsAtX_2 = contourLines.getPointsAtX(2);
 		assertEqualListContents(expectedPoints1, pointsAtX_2);
 
-		final List<ContourPoint> pointsAtX_3 = contourPoints.getPointsAtX(3);
+		final List<ContourPoint> pointsAtX_3 = contourLines.getPointsAtX(3);
 		assertEqualListContents(expectedPoints2, pointsAtX_3);
 	}
 
@@ -65,9 +65,9 @@ public class ContourPointsTest extends AssertTestCase {
 		final ArrayList<ContourPoint> inputPoints = new ArrayList<ContourPoint>();
 		inputPoints.add(contourPoint);
 
-		final ContourPoints contourPoints = new ContourPoints(inputPoints);
+		final ContourLines contourLines = new ContourLines(inputPoints);
 
-		final List<ContourPoint> pointsAtX = contourPoints.getPointsAtX(2);
+		final List<ContourPoint> pointsAtX = contourLines.getPointsAtX(2);
 
 		assertEquals(0, pointsAtX.size());
 	}
@@ -88,7 +88,7 @@ public class ContourPointsTest extends AssertTestCase {
 		inputPoints.add(contourPoint4);
 		inputPoints.add(contourPoint5);
 
-		final ContourPoints contourPoints = new ContourPoints(inputPoints);
+		final ContourLines contourLines = new ContourLines(inputPoints);
 
 		final ArrayList<ContourPoint> expectedPoints1 = new ArrayList<ContourPoint>();
 		expectedPoints1.add(contourPoint1);
@@ -99,10 +99,10 @@ public class ContourPointsTest extends AssertTestCase {
 		expectedPoints2.add(contourPoint4);
 		expectedPoints2.add(contourPoint5);
 
-		final List<ContourPoint> pointsAtY_3 = contourPoints.getPointsAtY(3);
+		final List<ContourPoint> pointsAtY_3 = contourLines.getPointsAtY(3);
 		assertEqualListContents(expectedPoints1, pointsAtY_3);
 
-		final List<ContourPoint> pointsAtY_4 = contourPoints.getPointsAtY(4);
+		final List<ContourPoint> pointsAtY_4 = contourLines.getPointsAtY(4);
 		assertEqualListContents(expectedPoints2, pointsAtY_4);
 	}
 
@@ -113,9 +113,9 @@ public class ContourPointsTest extends AssertTestCase {
 		final ArrayList<ContourPoint> inputPoints = new ArrayList<ContourPoint>();
 		inputPoints.add(contourPoint);
 
-		final ContourPoints contourPoints = new ContourPoints(inputPoints);
+		final ContourLines contourLines = new ContourLines(inputPoints);
 
-		final List<ContourPoint> pointsAtY = contourPoints.getPointsAtY(2);
+		final List<ContourPoint> pointsAtY = contourLines.getPointsAtY(2);
 
 		assertEquals(0, pointsAtY.size());
 	}

@@ -1,9 +1,9 @@
 package com.nematode.model;
 
-import com.nematode.imaging.ContourPointsInterface;
+import com.nematode.imaging.ContourLinesInterface;
 
 public interface NematodeWormInterface {
 
-	public ContourPointsInterface getContourPoints();
+	public ContourLinesInterface getContourLines();
 
 }

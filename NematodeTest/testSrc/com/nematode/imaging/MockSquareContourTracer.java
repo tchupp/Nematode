@@ -5,14 +5,14 @@ import java.util.ArrayList;
 
 public class MockSquareContourTracer implements SquareContourTracerInterface {
 
-	ContourPoints points = new ContourPoints(new ArrayList<ContourPoint>());
+	ContourLines points = new ContourLines(new ArrayList<ContourPoint>());
 
 	@Override
-	public ContourPoints getContourPoints(final BufferedImage image) {
+	public ContourLines getContourLines(final BufferedImage image) {
 		return this.points;
 	}
 
-	public void setContourPointsToReturn(final ContourPoints points) {
+	public void setContourLinesToReturn(final ContourLines points) {
 		this.points = points;
 	}
 

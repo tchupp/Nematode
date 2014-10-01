@@ -2,7 +2,7 @@ package com.nematode.model;
 
 import org.junit.Test;
 
-import com.nematode.imaging.MockContourPoints;
+import com.nematode.imaging.MockContourLines;
 import com.nematode.unittesting.AssertTestCase;
 
 public class NematodeWormTest extends AssertTestCase {
@@ -14,10 +14,9 @@ public class NematodeWormTest extends AssertTestCase {
 	}
 
 	@Test
-	public void testGetsContourPoints() throws Exception {
-		final MockContourPoints expectedContourPoints = new MockContourPoints();
-		final NematodeWorm nematodeWorm = new NematodeWorm(
-				expectedContourPoints);
-		assertSame(expectedContourPoints, nematodeWorm.getContourPoints());
+	public void testGetsContourLines() throws Exception {
+		final MockContourLines expectedContourLines = new MockContourLines();
+		final NematodeWorm nematodeWorm = new NematodeWorm(expectedContourLines);
+		assertSame(expectedContourLines, nematodeWorm.getContourLines());
 	}
 }

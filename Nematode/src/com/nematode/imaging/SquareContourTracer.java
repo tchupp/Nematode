@@ -10,7 +10,7 @@ public class SquareContourTracer implements SquareContourTracerInterface {
 	public static final int WHITE = Color.WHITE.getRGB();
 
 	@Override
-	public ContourPoints getContourPoints(final BufferedImage image) {
+	public ContourLines getContourLines(final BufferedImage image) {
 		final int[][] imageMatrix = convertImageToMatrix(image);
 
 		final int[][] matrix = clearBoarder(imageMatrix);
@@ -31,7 +31,7 @@ public class SquareContourTracer implements SquareContourTracerInterface {
 
 		} while (!startingPoint.equals(currentPoint) && startingPoint.isValid());
 
-		return new ContourPoints(points);
+		return new ContourLines(points);
 	}
 
 	private int[][] convertImageToMatrix(final BufferedImage image) {

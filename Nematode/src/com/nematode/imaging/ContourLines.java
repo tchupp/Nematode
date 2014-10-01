@@ -3,11 +3,11 @@ package com.nematode.imaging;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ContourPoints implements ContourPointsInterface {
+public class ContourLines implements ContourLinesInterface {
 
 	private final List<ContourPoint> listOfContourPoints;
 
-	public ContourPoints(final List<ContourPoint> listOfContourPoints) {
+	public ContourLines(final List<ContourPoint> listOfContourPoints) {
 		this.listOfContourPoints = listOfContourPoints;
 	}
 
