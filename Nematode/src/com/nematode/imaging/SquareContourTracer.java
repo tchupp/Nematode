@@ -3,6 +3,7 @@ package com.nematode.imaging;
 import java.awt.Color;
 import java.awt.image.BufferedImage;
 import java.util.ArrayList;
+import java.util.List;
 
 public class SquareContourTracer implements SquareContourTracerInterface {
 
@@ -10,7 +11,7 @@ public class SquareContourTracer implements SquareContourTracerInterface {
 	public static final int WHITE = Color.WHITE.getRGB();
 
 	@Override
-	public ContourLines getContourLines(final BufferedImage image) {
+	public ContourLines getFirstContourLines(final BufferedImage image) {
 		final int[][] imageMatrix = convertImageToMatrix(image);
 
 		final int[][] matrix = clearBoarder(imageMatrix);
@@ -18,7 +19,8 @@ public class SquareContourTracer implements SquareContourTracerInterface {
 		final ContourPoint startingPoint = getStartingPoint(matrix);
 		final ContourPoint currentPoint = startingPoint.clone();
 
-		final ArrayList<ContourPoint> points = new ArrayList<ContourPoint>();
+		final List<ContourPointInterface> points = new ArrayList<ContourPointInterface>();
+
 		do {
 			if (matrix[currentPoint.getY()][currentPoint.getX()] == BLACK) {
 				if (!points.contains(currentPoint)) {

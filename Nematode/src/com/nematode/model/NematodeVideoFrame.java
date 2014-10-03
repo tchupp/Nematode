@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.nematode.imaging.DisplayFrameImageInterface;
-import com.nematode.imaging.ScannedFrameImageInterface;
+import com.nematode.imaging.ProcessedFrameImageInterface;
 import com.nematode.imaging.VideoFrameImageInterface;
 import com.nematode.nullmodel.NullFrameImage;
 
@@ -12,13 +12,13 @@ public class NematodeVideoFrame implements NematodeVideoFrameInterface {
 
 	private VideoFrameImageInterface videoFrameImage;
 	private DisplayFrameImageInterface displayFrameImage;
-	private ScannedFrameImageInterface scannedFrameImage;
+	private ProcessedFrameImageInterface processedFrameImage;
 	private final List<NematodeVideoFrameObserverInterface> videoFrameObservers;
 
 	public NematodeVideoFrame() {
 		this.videoFrameImage = NullFrameImage.NULL;
 		this.displayFrameImage = NullFrameImage.NULL;
-		this.scannedFrameImage = NullFrameImage.NULL;
+		this.processedFrameImage = NullFrameImage.NULL;
 		this.videoFrameObservers = new ArrayList<NematodeVideoFrameObserverInterface>();
 	}
 
@@ -51,14 +51,14 @@ public class NematodeVideoFrame implements NematodeVideoFrameInterface {
 	}
 
 	@Override
-	public ScannedFrameImageInterface getScannedFrameImage() {
-		return this.scannedFrameImage;
+	public ProcessedFrameImageInterface getProcessedFrameImage() {
+		return this.processedFrameImage;
 	}
 
 	@Override
-	public void setScannedFrameImage(
-			final ScannedFrameImageInterface scannedFrameImage) {
-		this.scannedFrameImage = scannedFrameImage;
+	public void setProcessedFrameImage(
+			final ProcessedFrameImageInterface processedFrameImage) {
+		this.processedFrameImage = processedFrameImage;
 	}
 
 	@Override

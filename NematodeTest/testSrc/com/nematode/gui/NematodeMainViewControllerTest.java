@@ -5,11 +5,15 @@ import java.awt.Container;
 
 import org.junit.Test;
 
+import com.nematode.imaging.EdgeDetectionRunner;
 import com.nematode.imaging.FrameImageAssembler;
+import com.nematode.imaging.ImageProcessingHelper;
 import com.nematode.imaging.ImageProcessingRunner;
+import com.nematode.imaging.SquareContourTracer;
 import com.nematode.imaging.VideoFrameHandler;
 import com.nematode.imaging.VideoFrameHandlerInterface;
 import com.nematode.model.NematodeVideoFrame;
+import com.nematode.model.NematodeWormBuilder;
 import com.nematode.unittesting.AssertTestCase;
 
 public class NematodeMainViewControllerTest extends AssertTestCase {
@@ -46,8 +50,22 @@ public class NematodeMainViewControllerTest extends AssertTestCase {
 				videoFrameHandler.getNematodeVideoFrame());
 		assertIsOfTypeAndGet(FrameImageAssembler.class,
 				videoFrameHandler.getFrameImageAssembler());
-		assertIsOfTypeAndGet(ImageProcessingRunner.class,
+
+		final ImageProcessingRunner imageProcessingRunner = assertIsOfTypeAndGet(
+				ImageProcessingRunner.class,
 				videoFrameHandler.getImageProcessingRunner());
+		assertIsOfTypeAndGet(ImageProcessingHelper.class,
+				imageProcessingRunner.getImageProcessingHelper());
+
+		final EdgeDetectionRunner edgeDetectionRunner = assertIsOfTypeAndGet(
+				EdgeDetectionRunner.class,
+				videoFrameHandler.getEdgeDetectionRunner());
+		assertIsOfTypeAndGet(SquareContourTracer.class,
+				edgeDetectionRunner.getContourTracer());
+		assertIsOfTypeAndGet(NematodeWormBuilder.class,
+				edgeDetectionRunner.getNematodeWormBuilder());
+		assertIsOfTypeAndGet(ImageProcessingHelper.class,
+				edgeDetectionRunner.getImageProcessingHelper());
 	}
 
 	@Test

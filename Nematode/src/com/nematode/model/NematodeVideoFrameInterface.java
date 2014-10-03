@@ -3,7 +3,7 @@ package com.nematode.model;
 import java.util.List;
 
 import com.nematode.imaging.DisplayFrameImageInterface;
-import com.nematode.imaging.ScannedFrameImageInterface;
+import com.nematode.imaging.ProcessedFrameImageInterface;
 import com.nematode.imaging.VideoFrameImageInterface;
 
 public interface NematodeVideoFrameInterface {
@@ -16,9 +16,9 @@ public interface NematodeVideoFrameInterface {
 
 	void setDisplayFrameImage(DisplayFrameImageInterface displayFrameImage);
 
-	ScannedFrameImageInterface getScannedFrameImage();
+	ProcessedFrameImageInterface getProcessedFrameImage();
 
-	void setScannedFrameImage(ScannedFrameImageInterface scannedFrameImage);
+	void setProcessedFrameImage(ProcessedFrameImageInterface processedFrameImage);
 
 	void addObserver(
 			NematodeVideoFrameObserverInterface nematodeVideoFrameObserver);

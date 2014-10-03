@@ -3,12 +3,15 @@ package com.nematode.gui;
 import java.awt.BorderLayout;
 import java.awt.Container;
 
+import com.nematode.imaging.EdgeDetectionRunner;
 import com.nematode.imaging.FrameImageAssembler;
 import com.nematode.imaging.ImageProcessingHelper;
 import com.nematode.imaging.ImageProcessingRunner;
+import com.nematode.imaging.SquareContourTracer;
 import com.nematode.imaging.VideoFrameHandler;
 import com.nematode.imaging.VideoFrameHandlerInterface;
 import com.nematode.model.NematodeVideoFrame;
+import com.nematode.model.NematodeWormBuilder;
 
 public class NematodeMainViewController implements MainViewControllerInterface {
 
@@ -37,9 +40,13 @@ public class NematodeMainViewController implements MainViewControllerInterface {
 		final NematodeVideoFrame nematodeVideoFrame = new NematodeVideoFrame();
 		final ImageProcessingRunner imageProcessingRunner = new ImageProcessingRunner(
 				new ImageProcessingHelper());
+		final EdgeDetectionRunner edgeDetectionRunner = new EdgeDetectionRunner(
+				new SquareContourTracer(), new NematodeWormBuilder(),
+				new ImageProcessingHelper());
 
 		this.videoFrameHandler = new VideoFrameHandler(nematodeVideoFrame,
-				new FrameImageAssembler(), imageProcessingRunner);
+				new FrameImageAssembler(), imageProcessingRunner,
+				edgeDetectionRunner);
 	}
 
 	private void addPanelsToFrame() {

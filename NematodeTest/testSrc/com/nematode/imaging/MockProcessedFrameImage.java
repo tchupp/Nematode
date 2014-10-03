@@ -4,7 +4,7 @@ import java.awt.image.BufferedImage;
 
 import com.nematode.nullmodel.NullBufferedImage;
 
-public class MockScannedFrameImage implements ScannedFrameImageInterface {
+public class MockProcessedFrameImage implements ProcessedFrameImageInterface {
 
 	private BufferedImage bufferedImage = new NullBufferedImage();
 

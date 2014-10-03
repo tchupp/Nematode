@@ -21,7 +21,7 @@ public class VideoFrameHandlerTest extends AssertTestCase {
 		final MockNematodeVideoFrame expectedNematodeVideoFrame = new MockNematodeVideoFrame();
 		final VideoFrameHandler videoFrameHandler = new VideoFrameHandler(
 				expectedNematodeVideoFrame, new MockFrameImageAssembler(),
-				new MockImageProcessingRunner());
+				new MockImageProcessingRunner(), new MockEdgeDetectionRunner());
 
 		final NematodeVideoFrameInterface actualNematodeVideoFrame = videoFrameHandler
 				.getNematodeVideoFrame();
@@ -33,7 +33,7 @@ public class VideoFrameHandlerTest extends AssertTestCase {
 		final MockFrameImageAssembler expectedFrameImageAssembler = new MockFrameImageAssembler();
 		final VideoFrameHandler videoFrameHandler = new VideoFrameHandler(
 				new MockNematodeVideoFrame(), expectedFrameImageAssembler,
-				new MockImageProcessingRunner());
+				new MockImageProcessingRunner(), new MockEdgeDetectionRunner());
 
 		assertSame(expectedFrameImageAssembler,
 				videoFrameHandler.getFrameImageAssembler());
@@ -44,10 +44,21 @@ public class VideoFrameHandlerTest extends AssertTestCase {
 		final MockImageProcessingRunner expectedImageProcessingRunner = new MockImageProcessingRunner();
 		final VideoFrameHandler videoFrameHandler = new VideoFrameHandler(
 				new MockNematodeVideoFrame(), new MockFrameImageAssembler(),
-				expectedImageProcessingRunner);
+				expectedImageProcessingRunner, new MockEdgeDetectionRunner());
 
 		assertSame(expectedImageProcessingRunner,
 				videoFrameHandler.getImageProcessingRunner());
+	}
+
+	@Test
+	public void testGetsEdgeDetectionRunner() throws Exception {
+		final MockEdgeDetectionRunner edgeDetectionRunner = new MockEdgeDetectionRunner();
+		final VideoFrameHandler videoFrameHandler = new VideoFrameHandler(
+				new MockNematodeVideoFrame(), new MockFrameImageAssembler(),
+				new MockImageProcessingRunner(), edgeDetectionRunner);
+
+		assertSame(edgeDetectionRunner,
+				videoFrameHandler.getEdgeDetectionRunner());
 	}
 
 	@Test
@@ -56,7 +67,8 @@ public class VideoFrameHandlerTest extends AssertTestCase {
 		final MockNematodeVideoFrame videoFrame = new MockNematodeVideoFrame();
 		final MockFrameImageAssembler mockAssembler = new MockFrameImageAssembler();
 		final VideoFrameHandler videoFrameHandler = new VideoFrameHandler(
-				videoFrame, mockAssembler, new MockImageProcessingRunner());
+				videoFrame, mockAssembler, new MockImageProcessingRunner(),
+				new MockEdgeDetectionRunner());
 
 		assertFalse(mockAssembler.wasCreateDisplayFrameImageCalled());
 		assertFalse(videoFrame.wasSetDisplayFrameImageCalled());
@@ -71,7 +83,8 @@ public class VideoFrameHandlerTest extends AssertTestCase {
 		final MockNematodeVideoFrame videoFrame = new MockNematodeVideoFrame();
 		final MockFrameImageAssembler mockAssembler = new MockFrameImageAssembler();
 		final VideoFrameHandler videoFrameHandler = new VideoFrameHandler(
-				videoFrame, mockAssembler, new MockImageProcessingRunner());
+				videoFrame, mockAssembler, new MockImageProcessingRunner(),
+				new MockEdgeDetectionRunner());
 
 		final MockValidatedImageFile mockValidatedImageFile = new MockValidatedImageFile();
 		mockValidatedImageFile.setIsFileValid(true);
@@ -89,7 +102,8 @@ public class VideoFrameHandlerTest extends AssertTestCase {
 		final MockNematodeVideoFrame videoFrame = new MockNematodeVideoFrame();
 		final MockFrameImageAssembler mockAssembler = new MockFrameImageAssembler();
 		final VideoFrameHandler videoFrameHandler = new VideoFrameHandler(
-				videoFrame, mockAssembler, new MockImageProcessingRunner());
+				videoFrame, mockAssembler, new MockImageProcessingRunner(),
+				new MockEdgeDetectionRunner());
 
 		final MockValidatedImageFile mockValidatedImageFile = new MockValidatedImageFile();
 		mockValidatedImageFile.setIsFileValid(false);
@@ -115,36 +129,29 @@ public class VideoFrameHandlerTest extends AssertTestCase {
 	}
 
 	@Test
-	public void testScanImageCallsImageProcessingRunnerWithVideoFrame()
+	public void testScanImageCallsImageProcessingRunnerWithVideoFrame_CorrectOrder()
 			throws Exception {
+		final MockImageProcessingRunner imageProcessingRunner = new MockImageProcessingRunner();
+		final MockEdgeDetectionRunner edgeDetectionRunner = new MockEdgeDetectionRunner();
 
-		final MockImageProcessingRunner mockImageProcessingRunner = new MockImageProcessingRunner() {
-
-			@Override
-			public void preprocessImageForScanning(
-					final NematodeVideoFrameInterface videoFrame) {
-				assertFalse(wasScanVideoFrameCalled());
-				super.preprocessImageForScanning(videoFrame);
-			}
-
-			@Override
-			public void scanVideoFrame(
-					final NematodeVideoFrameInterface videoFrame) {
-				assertTrue(wasPreprocessImageForScanningCalled());
-				super.scanVideoFrame(videoFrame);
-			}
-		};
-
-		final MockNematodeVideoFrame mockVideoFrame = new MockNematodeVideoFrame();
+		final MockNematodeVideoFrame nematodeVideoFrame = new MockNematodeVideoFrame();
 		final VideoFrameHandler videoFrameHandler = new VideoFrameHandler(
-				mockVideoFrame, new MockFrameImageAssembler(),
-				mockImageProcessingRunner);
+				nematodeVideoFrame, new MockFrameImageAssembler(),
+				imageProcessingRunner, edgeDetectionRunner);
 
-		assertFalse(mockImageProcessingRunner.wasScanVideoFrameCalled());
+		assertFalse(imageProcessingRunner.wasPreprocessImageForScanningCalled());
+		assertFalse(edgeDetectionRunner.wasFindAllObjectsInImageCalled());
+
 		videoFrameHandler.scanImage();
-		assertTrue(mockImageProcessingRunner.wasScanVideoFrameCalled());
 
-		assertSame(mockVideoFrame,
-				mockImageProcessingRunner.getVideoFrameFromScan());
+		assertTrue(imageProcessingRunner.wasPreprocessImageForScanningCalled());
+		assertSame(nematodeVideoFrame,
+				imageProcessingRunner.getUnprocessedVideoFrame());
+
+		assertTrue(edgeDetectionRunner.wasFindAllObjectsInImageCalled());
+		assertSame(nematodeVideoFrame.getProcessedFrameImage(),
+				edgeDetectionRunner.getProcessedFrameImageToScan());
+
+		fail("test order of operations");
 	}
 }

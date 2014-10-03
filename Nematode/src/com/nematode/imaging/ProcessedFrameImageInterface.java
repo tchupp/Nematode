@@ -2,7 +2,7 @@ package com.nematode.imaging;
 
 import java.awt.image.BufferedImage;
 
-public interface ScannedFrameImageInterface {
+public interface ProcessedFrameImageInterface {
 
 	public BufferedImage getImage();
 

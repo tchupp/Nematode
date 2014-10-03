@@ -10,4 +10,6 @@ public interface ContourLinesInterface {
 
 	public List<? extends ContourPointInterface> getPointsAtY(int y);
 
+	public boolean isEmpty();
+
 }

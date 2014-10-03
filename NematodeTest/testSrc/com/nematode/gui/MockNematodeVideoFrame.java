@@ -5,26 +5,36 @@ import java.util.List;
 
 import com.nematode.imaging.DisplayFrameImageInterface;
 import com.nematode.imaging.MockDisplayFrameImage;
-import com.nematode.imaging.MockScannedFrameImage;
+import com.nematode.imaging.MockProcessedFrameImage;
 import com.nematode.imaging.MockVideoFrameImage;
-import com.nematode.imaging.ScannedFrameImageInterface;
+import com.nematode.imaging.ProcessedFrameImageInterface;
 import com.nematode.imaging.VideoFrameImageInterface;
 import com.nematode.model.NematodeVideoFrameInterface;
 import com.nematode.model.NematodeVideoFrameObserverInterface;
 
 public class MockNematodeVideoFrame implements NematodeVideoFrameInterface {
 
+	private int numberOfObservers = 0;
+
 	private VideoFrameImageInterface videoFrameImage = new MockVideoFrameImage();
 	private DisplayFrameImageInterface displayFrameImage = new MockDisplayFrameImage();
-	private ScannedFrameImageInterface scannedFrameImage = new MockScannedFrameImage();
-	private int numberOfObservers = 0;
+	private ProcessedFrameImageInterface processedFrameImage = new MockProcessedFrameImage();
+
 	private boolean setVideoFrameImageWasCalled = false;
+	private boolean getVideoFrameImageWasCalled = false;
 	private boolean setDisplayFrameImageWasCalled = false;
-	private boolean setScannedFrameImageWasCalled = false;
+	private boolean getDisplayFrameImageWasCalled = false;
+	private boolean setProcessedFrameImageWasCalled = false;
+	private boolean getProcessedFrameImageWasCalled = false;
 
 	@Override
 	public VideoFrameImageInterface getVideoFrameImage() {
+		this.getVideoFrameImageWasCalled = true;
 		return this.videoFrameImage;
+	}
+
+	public boolean wasGetVideoFrameImageCalled() {
+		return this.getVideoFrameImageWasCalled;
 	}
 
 	@Override
@@ -40,7 +50,12 @@ public class MockNematodeVideoFrame implements NematodeVideoFrameInterface {
 
 	@Override
 	public DisplayFrameImageInterface getDisplayFrameImage() {
+		this.getDisplayFrameImageWasCalled = true;
 		return this.displayFrameImage;
+	}
+
+	public boolean wasGetDisplayFrameImageCalled() {
+		return this.getDisplayFrameImageWasCalled;
 	}
 
 	@Override
@@ -55,19 +70,24 @@ public class MockNematodeVideoFrame implements NematodeVideoFrameInterface {
 	}
 
 	@Override
-	public ScannedFrameImageInterface getScannedFrameImage() {
-		return this.scannedFrameImage;
+	public ProcessedFrameImageInterface getProcessedFrameImage() {
+		this.getProcessedFrameImageWasCalled = true;
+		return this.processedFrameImage;
+	}
+
+	public boolean wasGetProcessedFrameImageCalled() {
+		return this.getProcessedFrameImageWasCalled;
 	}
 
 	@Override
-	public void setScannedFrameImage(
-			final ScannedFrameImageInterface scannedFrameImage) {
-		this.setScannedFrameImageWasCalled = true;
-		this.scannedFrameImage = scannedFrameImage;
+	public void setProcessedFrameImage(
+			final ProcessedFrameImageInterface processedFrameImage) {
+		this.setProcessedFrameImageWasCalled = true;
+		this.processedFrameImage = processedFrameImage;
 	}
 
-	public boolean wasSetScannedFrameImageCalled() {
-		return this.setScannedFrameImageWasCalled;
+	public boolean wasSetProcessedFrameImageCalled() {
+		return this.setProcessedFrameImageWasCalled;
 	}
 
 	@Override

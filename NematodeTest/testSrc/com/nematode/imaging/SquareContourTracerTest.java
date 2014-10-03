@@ -57,8 +57,8 @@ public class SquareContourTracerTest extends AssertTestCase {
 		expectedContourPoints.add(new ContourPoint(6, 5));
 
 		final SquareContourTracer squareContourTracer = new SquareContourTracer();
-		final List<ContourPoint> actualContourPoints = squareContourTracer
-				.getContourLines(inputImage).getListOfContourPoints();
+		final List<ContourPointInterface> actualContourPoints = squareContourTracer
+				.getFirstContourLines(inputImage).getListOfContourPoints();
 
 		assertEqualListContents(expectedContourPoints, actualContourPoints);
 	}

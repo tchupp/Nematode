@@ -109,6 +109,12 @@ public class ImageProcessingHelperTest extends AssertTestCase {
 		assertImagesAreIdentical(this.bufferedShadesFromOverlay, overlayImage);
 	}
 
+	@Test
+	public void testRemoveObjectsFromImageReturnsImageWithoutObject()
+			throws Exception {
+		fail("unimplemented");
+	}
+
 	private void assertImageIsAllSpecifiedColor(final BufferedImage inputImage,
 			final Color specifiedColor) {
 

@@ -3,11 +3,11 @@ package com.nematode.nullmodel;
 import java.awt.image.BufferedImage;
 
 import com.nematode.imaging.DisplayFrameImageInterface;
-import com.nematode.imaging.ScannedFrameImageInterface;
+import com.nematode.imaging.ProcessedFrameImageInterface;
 import com.nematode.imaging.VideoFrameImageInterface;
 
 public class NullFrameImage implements VideoFrameImageInterface,
-		DisplayFrameImageInterface, ScannedFrameImageInterface {
+		DisplayFrameImageInterface, ProcessedFrameImageInterface {
 
 	public static NullFrameImage NULL = new NullFrameImage();
 

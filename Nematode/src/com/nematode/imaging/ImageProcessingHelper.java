@@ -75,7 +75,7 @@ public class ImageProcessingHelper implements ImageProcessingHelperInterface {
 	}
 
 	@Override
-	public BufferedImage markDifferencesInImagesInWhite(
+	public BlackAndWhiteImage markDifferencesInImagesInWhite(
 			final BufferedImage originalImage, final BufferedImage updatedImage) {
 		final int width = originalImage.getWidth();
 		final int height = originalImage.getHeight();
@@ -95,12 +95,13 @@ public class ImageProcessingHelper implements ImageProcessingHelperInterface {
 			}
 		}
 
-		final BufferedImage binaryOutputImage = new BlackAndWhiteImage(width,
-				height);
+		final BlackAndWhiteImage binaryOutputImage = new BlackAndWhiteImage(
+				width, height);
 
 		binaryOutputImage.setRGB(0, 0, width, height, binaryOutputImageRGB, 0,
 				width);
 
 		return binaryOutputImage;
 	}
+
 }

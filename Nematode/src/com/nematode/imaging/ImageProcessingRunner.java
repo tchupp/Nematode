@@ -24,24 +24,10 @@ public class ImageProcessingRunner implements ImageProcessingRunnerInterface {
 		final BlackAndWhiteImage blackAndWhiteImage = this.imageProcessingHelper
 				.convertImageToBlackAndWhite(greyScaleImage, 230f);
 
-		videoFrame.setScannedFrameImage(new ScannedFrameImage(
+		videoFrame.setProcessedFrameImage(new ProcessedFrameImage(
 				blackAndWhiteImage));
 	}
 
-	@Override
-	public void scanVideoFrame(final NematodeVideoFrameInterface videoFrame) {
-		final BufferedImage baseImage = videoFrame.getVideoFrameImage()
-				.getImage();
-		final BufferedImage topImage = videoFrame.getScannedFrameImage()
-				.getImage();
-
-		final BufferedImage overlayImage = this.imageProcessingHelper
-				.overlayImage(baseImage, topImage);
-
-		videoFrame.setScannedFrameImage(new ScannedFrameImage(overlayImage));
-	}
-
-	@Override
 	public ImageProcessingHelperInterface getImageProcessingHelper() {
 		return this.imageProcessingHelper;
 	}

@@ -6,12 +6,12 @@ public class MockImageProcessingRunner implements
 		ImageProcessingRunnerInterface {
 
 	private boolean preprocessImageForScanningWasCalled = false;
-	private boolean scanVideoFrameWasCalled = false;
-	private NematodeVideoFrameInterface videoFrameFromScan;
-	private ImageProcessingHelperInterface imageProcessingHelper = new MockImageProcessingHelper();
+	private NematodeVideoFrameInterface unprocessedVideoFrame;
 
 	@Override
-	public void preprocessImageForScanning(NematodeVideoFrameInterface videoFrame) {
+	public void preprocessImageForScanning(
+			final NematodeVideoFrameInterface videoFrame) {
+		this.unprocessedVideoFrame = videoFrame;
 		this.preprocessImageForScanningWasCalled = true;
 	}
 
@@ -19,27 +19,7 @@ public class MockImageProcessingRunner implements
 		return this.preprocessImageForScanningWasCalled;
 	}
 
-	@Override
-	public void scanVideoFrame(final NematodeVideoFrameInterface videoFrame) {
-		this.videoFrameFromScan = videoFrame;
-		this.scanVideoFrameWasCalled = true;
-	}
-
-	public NematodeVideoFrameInterface getVideoFrameFromScan() {
-		return this.videoFrameFromScan;
-	}
-
-	public boolean wasScanVideoFrameCalled() {
-		return this.scanVideoFrameWasCalled;
-	}
-
-	@Override
-	public ImageProcessingHelperInterface getImageProcessingHelper() {
-		return this.imageProcessingHelper;
-	}
-
-	public void setImageProcessingHelper(
-			final ImageProcessingHelperInterface imageProcessingHelper) {
-		this.imageProcessingHelper = imageProcessingHelper;
+	public NematodeVideoFrameInterface getUnprocessedVideoFrame() {
+		return this.unprocessedVideoFrame;
 	}
 }

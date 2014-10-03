@@ -11,14 +11,17 @@ public class VideoFrameHandler implements VideoFrameHandlerInterface {
 	private final NematodeVideoFrameInterface nematodeVideoFrame;
 	private final FrameImageAssemblerInterface frameImageAssembler;
 	private final ImageProcessingRunnerInterface imageProcessingRunner;
+	private final EdgeDetectionRunnerInterface edgeDetectionRunner;
 
 	public VideoFrameHandler(
 			final NematodeVideoFrameInterface nematodeVideoFrame,
 			final FrameImageAssemblerInterface frameImageAssembler,
-			final ImageProcessingRunnerInterface imageProcessingRunner) {
+			final ImageProcessingRunnerInterface imageProcessingRunner,
+			final EdgeDetectionRunnerInterface edgeDetectionRunner) {
 		this.nematodeVideoFrame = nematodeVideoFrame;
 		this.frameImageAssembler = frameImageAssembler;
 		this.imageProcessingRunner = imageProcessingRunner;
+		this.edgeDetectionRunner = edgeDetectionRunner;
 	}
 
 	@Override
@@ -44,11 +47,11 @@ public class VideoFrameHandler implements VideoFrameHandlerInterface {
 
 	@Override
 	public void updateDisplayImageFromScannedImage() {
-		final BufferedImage scannedImage = this.nematodeVideoFrame
-				.getScannedFrameImage().getImage();
+		final BufferedImage processedImage = this.nematodeVideoFrame
+				.getProcessedFrameImage().getImage();
 
 		final DisplayFrameImageInterface displayFrameImage = this.frameImageAssembler
-				.createDisplayFrameImage(scannedImage);
+				.createDisplayFrameImage(processedImage);
 
 		this.nematodeVideoFrame.setDisplayFrameImage(displayFrameImage);
 	}
@@ -57,7 +60,8 @@ public class VideoFrameHandler implements VideoFrameHandlerInterface {
 	public void scanImage() {
 		this.imageProcessingRunner
 				.preprocessImageForScanning(this.nematodeVideoFrame);
-		this.imageProcessingRunner.scanVideoFrame(this.nematodeVideoFrame);
+		this.edgeDetectionRunner.findAllObjectsInImage(this.nematodeVideoFrame
+				.getProcessedFrameImage());
 	}
 
 	@Override
@@ -71,6 +75,10 @@ public class VideoFrameHandler implements VideoFrameHandlerInterface {
 
 	public ImageProcessingRunnerInterface getImageProcessingRunner() {
 		return this.imageProcessingRunner;
+	}
+
+	public EdgeDetectionRunnerInterface getEdgeDetectionRunner() {
+		return this.edgeDetectionRunner;
 	}
 
 }

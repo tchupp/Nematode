@@ -2,11 +2,11 @@ package com.nematode.imaging;
 
 import java.awt.image.BufferedImage;
 
-public class ScannedFrameImage implements ScannedFrameImageInterface {
+public class ProcessedFrameImage implements ProcessedFrameImageInterface {
 
 	private final BufferedImage bufferedImage;
 
-	public ScannedFrameImage(final BufferedImage bufferedImage) {
+	public ProcessedFrameImage(final BufferedImage bufferedImage) {
 		this.bufferedImage = bufferedImage;
 	}
 

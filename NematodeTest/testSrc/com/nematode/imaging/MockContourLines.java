@@ -6,6 +6,7 @@ import java.util.List;
 public class MockContourLines implements ContourLinesInterface {
 
 	private List<MockContourPoint> listOfContourPoints = new ArrayList<MockContourPoint>();
+	private boolean empty = true;
 	private ArrayList<MockContourPoint> pointsAtY;
 	private ArrayList<MockContourPoint> pointsAtX;
 
@@ -41,6 +42,15 @@ public class MockContourLines implements ContourLinesInterface {
 	public List<? extends ContourPointInterface> getPointsAtY(final int y) {
 		this.pointsAtY = new ArrayList<MockContourPoint>();
 		return this.pointsAtY;
+	}
+
+	@Override
+	public boolean isEmpty() {
+		return this.empty;
+	}
+
+	public void setEmpty(final boolean empty) {
+		this.empty = empty;
 	}
 
 }

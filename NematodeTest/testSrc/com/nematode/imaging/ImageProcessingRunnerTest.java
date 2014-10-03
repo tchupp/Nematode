@@ -1,7 +1,5 @@
 package com.nematode.imaging;
 
-import java.awt.image.BufferedImage;
-
 import org.junit.Test;
 
 import com.nematode.gui.MockNematodeVideoFrame;
@@ -16,31 +14,13 @@ public class ImageProcessingRunnerTest extends AssertTestCase {
 	}
 
 	@Test
-	public void testScanVideoFrameOverlaysScannedImageOnVideoFrame()
-			throws Exception {
-
+	public void testGetsImageProcessingHelper() throws Exception {
 		final MockImageProcessingHelper mockImageProcessingHelper = new MockImageProcessingHelper();
-		final MockNematodeVideoFrame videoFrame = new MockNematodeVideoFrame();
-
-		final BufferedImage expectedBaseImage = videoFrame.getVideoFrameImage()
-				.getImage();
-		final BufferedImage expectedTopImage = videoFrame
-				.getScannedFrameImage().getImage();
-
 		final ImageProcessingRunner imageProcessingRunner = new ImageProcessingRunner(
 				mockImageProcessingHelper);
 
-		assertFalse(mockImageProcessingHelper.wasOverlayImageCalled());
-		assertFalse(videoFrame.wasSetScannedFrameImageCalled());
-		imageProcessingRunner.scanVideoFrame(videoFrame);
-		assertTrue(mockImageProcessingHelper.wasOverlayImageCalled());
-		assertTrue(videoFrame.wasSetScannedFrameImageCalled());
-
-		assertSame(expectedBaseImage,
-				mockImageProcessingHelper.getBaseImageToOverlay());
-		assertSame(expectedTopImage,
-				mockImageProcessingHelper.getTopImageToOverlay());
-
+		assertSame(mockImageProcessingHelper,
+				imageProcessingRunner.getImageProcessingHelper());
 	}
 
 	@Test
@@ -52,7 +32,7 @@ public class ImageProcessingRunnerTest extends AssertTestCase {
 		final ImageProcessingRunner imageProcessingRunner = new ImageProcessingRunner(
 				mockImageProcessingHelper);
 
-		assertFalse(videoFrame.wasSetScannedFrameImageCalled());
+		assertFalse(videoFrame.wasSetProcessedFrameImageCalled());
 
 		assertFalse(mockImageProcessingHelper
 				.wasConvertImageToGreyScaleCalled());
@@ -61,7 +41,7 @@ public class ImageProcessingRunnerTest extends AssertTestCase {
 
 		imageProcessingRunner.preprocessImageForScanning(videoFrame);
 
-		assertTrue(videoFrame.wasSetScannedFrameImageCalled());
+		assertTrue(videoFrame.wasSetProcessedFrameImageCalled());
 
 		assertTrue(mockImageProcessingHelper.wasConvertImageToGreyScaleCalled());
 		assertTrue(mockImageProcessingHelper
