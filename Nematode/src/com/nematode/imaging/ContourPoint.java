@@ -67,10 +67,12 @@ public class ContourPoint implements ContourPointInterface {
 		goForward();
 	}
 
+	@Override
 	public int getX() {
 		return this.x;
 	}
 
+	@Override
 	public int getY() {
 		return this.y;
 	}

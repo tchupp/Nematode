@@ -5,6 +5,7 @@ import java.awt.Container;
 
 import org.junit.Test;
 
+import com.nematode.imaging.ContourAreaCalculator;
 import com.nematode.imaging.EdgeDetectionRunner;
 import com.nematode.imaging.FrameImageAssembler;
 import com.nematode.imaging.ImageProcessingHelper;
@@ -62,10 +63,14 @@ public class NematodeMainViewControllerTest extends AssertTestCase {
 				videoFrameHandler.getEdgeDetectionRunner());
 		assertIsOfTypeAndGet(SquareContourTracer.class,
 				edgeDetectionRunner.getContourTracer());
-		assertIsOfTypeAndGet(NematodeWormBuilder.class,
+		final NematodeWormBuilder nematodeWormBuilder = assertIsOfTypeAndGet(
+				NematodeWormBuilder.class,
 				edgeDetectionRunner.getNematodeWormBuilder());
 		assertIsOfTypeAndGet(ImageProcessingHelper.class,
 				edgeDetectionRunner.getImageProcessingHelper());
+
+		assertIsOfTypeAndGet(ContourAreaCalculator.class,
+				nematodeWormBuilder.getContourAreaCalculator());
 	}
 
 	@Test

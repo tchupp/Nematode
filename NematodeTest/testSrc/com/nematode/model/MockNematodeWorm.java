@@ -1,6 +1,8 @@
 package com.nematode.model;
 
+import com.nematode.imaging.ContourAreaInterface;
 import com.nematode.imaging.ContourLinesInterface;
+import com.nematode.imaging.MockContourArea;
 import com.nematode.imaging.MockContourLines;
 import com.nematode.imaging.MockContourPoint;
 
@@ -47,6 +49,7 @@ public class MockNematodeWorm implements NematodeWormInterface {
 	}
 
 	private ContourLinesInterface contourLines = new MockContourLines();
+	private ContourAreaInterface contourArea = new MockContourArea();
 
 	@Override
 	public ContourLinesInterface getContourLines() {
@@ -55,6 +58,15 @@ public class MockNematodeWorm implements NematodeWormInterface {
 
 	public void setContourLines(final ContourLinesInterface contourLines) {
 		this.contourLines = contourLines;
+	}
+
+	@Override
+	public ContourAreaInterface getContourArea() {
+		return this.contourArea;
+	}
+
+	public void setContourArea(final ContourAreaInterface contourArea) {
+		this.contourArea = contourArea;
 	}
 
 }

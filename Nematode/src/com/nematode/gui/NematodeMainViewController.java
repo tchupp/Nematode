@@ -3,6 +3,7 @@ package com.nematode.gui;
 import java.awt.BorderLayout;
 import java.awt.Container;
 
+import com.nematode.imaging.ContourAreaCalculator;
 import com.nematode.imaging.EdgeDetectionRunner;
 import com.nematode.imaging.FrameImageAssembler;
 import com.nematode.imaging.ImageProcessingHelper;
@@ -38,10 +39,13 @@ public class NematodeMainViewController implements MainViewControllerInterface {
 
 	private void setUpVideoFrameHandler() {
 		final NematodeVideoFrame nematodeVideoFrame = new NematodeVideoFrame();
+
 		final ImageProcessingRunner imageProcessingRunner = new ImageProcessingRunner(
 				new ImageProcessingHelper());
+		NematodeWormBuilder nematodeWormBuilder = new NematodeWormBuilder(
+				new ContourAreaCalculator());
 		final EdgeDetectionRunner edgeDetectionRunner = new EdgeDetectionRunner(
-				new SquareContourTracer(), new NematodeWormBuilder(),
+				new SquareContourTracer(), nematodeWormBuilder,
 				new ImageProcessingHelper());
 
 		this.videoFrameHandler = new VideoFrameHandler(nematodeVideoFrame,
