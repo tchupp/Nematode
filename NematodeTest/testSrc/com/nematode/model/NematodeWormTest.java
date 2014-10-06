@@ -19,4 +19,9 @@ public class NematodeWormTest extends AssertTestCase {
 		final NematodeWorm nematodeWorm = new NematodeWorm(expectedContourLines);
 		assertSame(expectedContourLines, nematodeWorm.getContourLines());
 	}
+
+	@Test
+	public void testGetAreaReturnsContourArea() throws Exception {
+		fail("unimplemented");
+	}
 }

@@ -4,6 +4,8 @@ import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.image.BufferedImage;
 
+import com.nematode.model.NematodeWormInterface;
+
 public class ImageProcessingHelper implements ImageProcessingHelperInterface {
 
 	@Override
@@ -102,6 +104,29 @@ public class ImageProcessingHelper implements ImageProcessingHelperInterface {
 				width);
 
 		return binaryOutputImage;
+	}
+
+	public BlackAndWhiteImage removeObjectFromImage(
+			final BufferedImage originalImage, final NematodeWormInterface worm) {
+		final int width = originalImage.getWidth();
+		final int height = originalImage.getHeight();
+
+		final int[] originalImageRGB = new int[width * height];
+
+		originalImage.getRGB(0, 0, width, height, originalImageRGB, 0, width);
+
+		for (final ContourPointInterface point : worm.getContourLines()
+				.getListOfContourPoints()) {
+			final int index = height * point.getY() + point.getX();
+			originalImageRGB[index] = Color.WHITE.getRGB();
+		}
+
+		final BlackAndWhiteImage outputImage = new BlackAndWhiteImage(width,
+				height);
+
+		outputImage.setRGB(0, 0, width, height, originalImageRGB, 0, width);
+
+		return outputImage;
 	}
 
 }

@@ -8,6 +8,7 @@ import javax.imageio.ImageIO;
 
 import org.junit.Test;
 
+import com.nematode.model.MockNematodeWorm;
 import com.nematode.unittesting.AssertTestCase;
 
 public class ImageProcessingHelperTest extends AssertTestCase {
@@ -18,6 +19,8 @@ public class ImageProcessingHelperTest extends AssertTestCase {
 	private BufferedImage bufferedShadesOfColor;
 	private BufferedImage bufferedShadesToOverlay;
 	private BufferedImage bufferedShadesFromOverlay;
+	private BufferedImage bufferedShadesAfterRemove;
+	private BufferedImage bufferedShadesBeforeRemove;
 
 	@Override
 	protected void setUp() throws Exception {
@@ -47,6 +50,14 @@ public class ImageProcessingHelperTest extends AssertTestCase {
 		final File shadesFromOverlay = new File(
 				"testResources/Images/expectedShadesFromOverlay.png");
 		this.bufferedShadesFromOverlay = ImageIO.read(shadesFromOverlay);
+
+		final File shadesBeforeRemove = new File(
+				"testResources/Images/twoObjects.png");
+		this.bufferedShadesBeforeRemove = ImageIO.read(shadesBeforeRemove);
+
+		final File shadesAfterRemove = new File(
+				"testResources/Images/oneObject.png");
+		this.bufferedShadesAfterRemove = ImageIO.read(shadesAfterRemove);
 	}
 
 	@Override
@@ -57,6 +68,9 @@ public class ImageProcessingHelperTest extends AssertTestCase {
 		this.bufferedShadesOfColor.flush();
 		this.bufferedShadesToOverlay.flush();
 		this.bufferedShadesFromOverlay.flush();
+		this.bufferedShadesAfterRemove.flush();
+		this.bufferedShadesBeforeRemove.flush();
+
 		super.tearDown();
 	}
 
@@ -112,7 +126,17 @@ public class ImageProcessingHelperTest extends AssertTestCase {
 	@Test
 	public void testRemoveObjectsFromImageReturnsImageWithoutObject()
 			throws Exception {
-		fail("unimplemented");
+
+		final ImageProcessingHelper imageProcessingHelper = new ImageProcessingHelper();
+
+		final MockNematodeWorm mockWorm = MockNematodeWorm
+				.makeMockWormForImageTesting();
+		final BlackAndWhiteImage updatedImage = imageProcessingHelper
+				.removeObjectFromImage(this.bufferedShadesBeforeRemove,
+						mockWorm);
+
+		fail("need to calculate inner points!!");
+		assertImagesAreIdentical(updatedImage, this.bufferedShadesAfterRemove);
 	}
 
 	private void assertImageIsAllSpecifiedColor(final BufferedImage inputImage,

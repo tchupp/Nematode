@@ -5,42 +5,40 @@ import java.util.List;
 
 public class MockContourLines implements ContourLinesInterface {
 
-	private List<MockContourPoint> listOfContourPoints = new ArrayList<MockContourPoint>();
 	private boolean empty = true;
-	private ArrayList<MockContourPoint> pointsAtY;
-	private ArrayList<MockContourPoint> pointsAtX;
+	private List<ContourPointInterface> listOfContourPoints = new ArrayList<ContourPointInterface>();
+	private List<ContourPointInterface> pointsAtX = new ArrayList<ContourPointInterface>();
+	private List<ContourPointInterface> pointsAtY = new ArrayList<ContourPointInterface>();
 
 	public void addContourPoint(final MockContourPoint contourPoint) {
 		this.listOfContourPoints.add(contourPoint);
 	}
 
 	public void setListOfContourPoints(
-			final List<MockContourPoint> listOfContourPoints) {
-		this.listOfContourPoints = listOfContourPoints;
+			final ArrayList<ContourPointInterface> listOfPoints) {
+		this.listOfContourPoints = listOfPoints;
 	}
 
 	@Override
-	public List<MockContourPoint> getListOfContourPoints() {
+	public List<ContourPointInterface> getListOfContourPoints() {
 		return this.listOfContourPoints;
 	}
 
-	public void setPointsAtX(final ArrayList<MockContourPoint> pointsAtX) {
+	public void setPointsAtX(final ArrayList<ContourPointInterface> pointsAtX) {
 		this.pointsAtX = pointsAtX;
 	}
 
 	@Override
 	public List<? extends ContourPointInterface> getPointsAtX(final int x) {
-		this.pointsAtX = new ArrayList<MockContourPoint>();
 		return this.pointsAtX;
 	}
 
-	public void setPointsAtY(final ArrayList<MockContourPoint> pointsAtY) {
+	public void setPointsAtY(final ArrayList<ContourPointInterface> pointsAtY) {
 		this.pointsAtY = pointsAtY;
 	}
 
 	@Override
 	public List<? extends ContourPointInterface> getPointsAtY(final int y) {
-		this.pointsAtY = new ArrayList<MockContourPoint>();
 		return this.pointsAtY;
 	}
 

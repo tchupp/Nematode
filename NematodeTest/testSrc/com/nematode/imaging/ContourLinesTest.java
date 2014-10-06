@@ -139,9 +139,4 @@ public class ContourLinesTest extends AssertTestCase {
 				listOfContourPoints);
 		assertFalse(nonEmptyContourLines.isEmpty());
 	}
-
-	@Test
-	public void testGetAreaReturnsListOfInnerPoints() throws Exception {
-		fail("unimplemented");
-	}
 }
