@@ -9,6 +9,7 @@ import javax.imageio.ImageIO;
 import org.junit.Test;
 
 import com.nematode.model.MockNematodeWorm;
+import com.nematode.model.NematodeWormInterface;
 import com.nematode.unittesting.AssertTestCase;
 
 public class ImageProcessingHelperTest extends AssertTestCase {
@@ -129,13 +130,12 @@ public class ImageProcessingHelperTest extends AssertTestCase {
 
 		final ImageProcessingHelper imageProcessingHelper = new ImageProcessingHelper();
 
-		final MockNematodeWorm mockWorm = MockNematodeWorm
+		final NematodeWormInterface testingWorm = MockNematodeWorm
 				.makeMockWormForImageTesting();
 		final BlackAndWhiteImage updatedImage = imageProcessingHelper
 				.removeObjectFromImage(this.bufferedShadesBeforeRemove,
-						mockWorm);
+						testingWorm);
 
-		fail("need to calculate inner points!!");
 		assertImagesAreIdentical(updatedImage, this.bufferedShadesAfterRemove);
 	}
 

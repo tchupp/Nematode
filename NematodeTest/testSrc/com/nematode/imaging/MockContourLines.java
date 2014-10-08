@@ -29,7 +29,7 @@ public class MockContourLines implements ContourLinesInterface {
 	}
 
 	@Override
-	public List<? extends ContourPointInterface> getPointsAtX(final int x) {
+	public List<ContourPointInterface> getPointsAtX(final int x) {
 		return this.pointsAtX;
 	}
 
@@ -38,7 +38,7 @@ public class MockContourLines implements ContourLinesInterface {
 	}
 
 	@Override
-	public List<? extends ContourPointInterface> getPointsAtY(final int y) {
+	public List<ContourPointInterface> getPointsAtY(final int y) {
 		return this.pointsAtY;
 	}
 

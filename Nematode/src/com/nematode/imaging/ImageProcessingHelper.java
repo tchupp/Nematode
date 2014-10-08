@@ -115,9 +115,16 @@ public class ImageProcessingHelper implements ImageProcessingHelperInterface {
 
 		originalImage.getRGB(0, 0, width, height, originalImageRGB, 0, width);
 
-		for (final ContourPointInterface point : worm.getContourLines()
+		for (final ContourPointInterface contourPoint : worm.getContourLines()
 				.getListOfContourPoints()) {
-			final int index = height * point.getY() + point.getX();
+			final int index = height * contourPoint.getY()
+					+ contourPoint.getX();
+			originalImageRGB[index] = Color.WHITE.getRGB();
+		}
+
+		for (final InnerPointInterface innerPoint : worm.getContourArea()
+				.getListOfInnerPoints()) {
+			final int index = height * innerPoint.getY() + innerPoint.getX();
 			originalImageRGB[index] = Color.WHITE.getRGB();
 		}
 

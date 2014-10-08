@@ -12,7 +12,7 @@ public interface ImageProcessingHelperInterface {
 	public BufferedImage markDifferencesInImagesInWhite(
 			BufferedImage originalImage, BufferedImage updatedImage);
 
-	BufferedImage overlayImage(BufferedImage baseImage,
+	public BufferedImage overlayImage(BufferedImage baseImage,
 			BufferedImage topImage);
 
 }
