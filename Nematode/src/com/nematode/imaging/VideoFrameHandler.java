@@ -1,9 +1,11 @@
 package com.nematode.imaging;
 
 import java.awt.image.BufferedImage;
+import java.util.List;
 
 import com.nematode.fileIO.ValidatedImageFileInterface;
 import com.nematode.model.NematodeVideoFrameInterface;
+import com.nematode.model.NematodeWormInterface;
 import com.nematode.nullmodel.NullFrameImage;
 
 public class VideoFrameHandler implements VideoFrameHandlerInterface {
@@ -58,7 +60,10 @@ public class VideoFrameHandler implements VideoFrameHandlerInterface {
 	public void scanImage() {
 		final ProcessedFrameImageInterface processedImageForScanning = this.imageProcessingRunner
 				.preprocessImageForScanning(this.nematodeVideoFrame);
-		this.edgeDetectionRunner.findAllObjectsInImage(processedImageForScanning);
+		final List<NematodeWormInterface> objectsInImageList = this.edgeDetectionRunner
+				.findAllObjectsInImage(processedImageForScanning);
+
+		this.nematodeVideoFrame.setObjectsOnImage(objectsInImageList);
 	}
 
 	@Override

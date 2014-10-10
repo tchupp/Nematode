@@ -1,10 +1,13 @@
 package com.nematode.imaging;
 
+import java.util.ArrayList;
+
 import org.junit.Test;
 
 import com.nematode.fileIO.MockValidatedImageFile;
 import com.nematode.gui.MockNematodeVideoFrame;
 import com.nematode.model.NematodeVideoFrameInterface;
+import com.nematode.model.NematodeWormInterface;
 import com.nematode.nullmodel.NullBufferedImage;
 import com.nematode.nullmodel.NullFrameImage;
 import com.nematode.unittesting.AssertTestCase;
@@ -157,5 +160,22 @@ public class VideoFrameHandlerTest extends AssertTestCase {
 		assertSame(nematodeVideoFrame, imageProcessingRunner.getUnprocessedVideoFrame());
 
 		assertTrue(edgeDetectionRunner.wasFindAllObjectsInImageCalled());
+	}
+
+	@Test
+	public void testScanImageSetsListOfObjectsOnVideoFrame() throws Exception {
+		final MockNematodeVideoFrame nematodeVideoFrame = new MockNematodeVideoFrame();
+		final MockEdgeDetectionRunner edgeDetectionRunner = new MockEdgeDetectionRunner();
+		final ArrayList<NematodeWormInterface> expectedObjectsInImageList = new ArrayList<NematodeWormInterface>();
+		edgeDetectionRunner.setObjectsInImageList(expectedObjectsInImageList);
+		final VideoFrameHandler videoFrameHandler = new VideoFrameHandler(nematodeVideoFrame,
+				new MockFrameImageAssembler(), new MockImageProcessingRunner(), edgeDetectionRunner);
+
+		assertFalse(nematodeVideoFrame.wasSetObjectsOnImageCalled());
+
+		videoFrameHandler.scanImage();
+
+		assertTrue(nematodeVideoFrame.wasSetObjectsOnImageCalled());
+		assertSame(expectedObjectsInImageList, nematodeVideoFrame.getObjectsOnImage());
 	}
 }
