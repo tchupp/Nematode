@@ -47,7 +47,7 @@ public class MockVideoFrameHandler implements VideoFrameHandlerInterface {
 	}
 
 	@Override
-	public void updateDisplayImageFromScannedImage() {
+	public void updateDisplayImageFromScannedObjects() {
 		this.updateDisplayImageFromScannedImageWasCalled = true;
 	}
 

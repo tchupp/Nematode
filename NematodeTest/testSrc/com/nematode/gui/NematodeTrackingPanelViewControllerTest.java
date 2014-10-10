@@ -61,9 +61,9 @@ public class NematodeTrackingPanelViewControllerTest extends AssertTestCase {
 			}
 
 			@Override
-			public void updateDisplayImageFromScannedImage() {
+			public void updateDisplayImageFromScannedObjects() {
 				assertTrue(wasScanImageCalled());
-				super.updateDisplayImageFromScannedImage();
+				super.updateDisplayImageFromScannedObjects();
 			};
 		};
 

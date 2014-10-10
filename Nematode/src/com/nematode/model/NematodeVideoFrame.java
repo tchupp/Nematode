@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.nematode.imaging.DisplayFrameImageInterface;
-import com.nematode.imaging.ProcessedFrameImageInterface;
 import com.nematode.imaging.VideoFrameImageInterface;
 import com.nematode.nullmodel.NullFrameImage;
 
@@ -12,13 +11,13 @@ public class NematodeVideoFrame implements NematodeVideoFrameInterface {
 
 	private VideoFrameImageInterface videoFrameImage;
 	private DisplayFrameImageInterface displayFrameImage;
-	private ProcessedFrameImageInterface processedFrameImage;
+	private List<NematodeWormInterface> objectsOnImage;
 	private final List<NematodeVideoFrameObserverInterface> videoFrameObservers;
 
 	public NematodeVideoFrame() {
 		this.videoFrameImage = NullFrameImage.NULL;
 		this.displayFrameImage = NullFrameImage.NULL;
-		this.processedFrameImage = NullFrameImage.NULL;
+		this.setObjectsOnImage(new ArrayList<NematodeWormInterface>());
 		this.videoFrameObservers = new ArrayList<NematodeVideoFrameObserverInterface>();
 	}
 
@@ -51,14 +50,14 @@ public class NematodeVideoFrame implements NematodeVideoFrameInterface {
 	}
 
 	@Override
-	public ProcessedFrameImageInterface getProcessedFrameImage() {
-		return this.processedFrameImage;
+	public List<NematodeWormInterface> getObjectsOnImage() {
+		return this.objectsOnImage;
 	}
 
 	@Override
-	public void setProcessedFrameImage(
-			final ProcessedFrameImageInterface processedFrameImage) {
-		this.processedFrameImage = processedFrameImage;
+	public void setObjectsOnImage(
+			final List<NematodeWormInterface> objectsOnImage) {
+		this.objectsOnImage = objectsOnImage;
 	}
 
 	@Override

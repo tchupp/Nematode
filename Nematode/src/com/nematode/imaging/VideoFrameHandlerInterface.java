@@ -12,6 +12,6 @@ public interface VideoFrameHandlerInterface {
 
 	public NematodeVideoFrameInterface getNematodeVideoFrame();
 
-	public void updateDisplayImageFromScannedImage();
+	public void updateDisplayImageFromScannedObjects();
 
 }

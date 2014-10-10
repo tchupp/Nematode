@@ -33,7 +33,7 @@ public class NematodeTrackingPanelViewController implements
 	@Override
 	public void updateImage() {
 		this.videoFrameHandler.scanImage();
-		this.videoFrameHandler.updateDisplayImageFromScannedImage();
+		this.videoFrameHandler.updateDisplayImageFromScannedObjects();
 	}
 
 	@Override

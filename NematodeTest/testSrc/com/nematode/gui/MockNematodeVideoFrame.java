@@ -5,12 +5,11 @@ import java.util.List;
 
 import com.nematode.imaging.DisplayFrameImageInterface;
 import com.nematode.imaging.MockDisplayFrameImage;
-import com.nematode.imaging.MockProcessedFrameImage;
 import com.nematode.imaging.MockVideoFrameImage;
-import com.nematode.imaging.ProcessedFrameImageInterface;
 import com.nematode.imaging.VideoFrameImageInterface;
 import com.nematode.model.NematodeVideoFrameInterface;
 import com.nematode.model.NematodeVideoFrameObserverInterface;
+import com.nematode.model.NematodeWormInterface;
 
 public class MockNematodeVideoFrame implements NematodeVideoFrameInterface {
 
@@ -18,14 +17,13 @@ public class MockNematodeVideoFrame implements NematodeVideoFrameInterface {
 
 	private VideoFrameImageInterface videoFrameImage = new MockVideoFrameImage();
 	private DisplayFrameImageInterface displayFrameImage = new MockDisplayFrameImage();
-	private ProcessedFrameImageInterface processedFrameImage = new MockProcessedFrameImage();
+	private List<NematodeWormInterface> objectsOnImage = new ArrayList<NematodeWormInterface>();
 
 	private boolean setVideoFrameImageWasCalled = false;
 	private boolean getVideoFrameImageWasCalled = false;
 	private boolean setDisplayFrameImageWasCalled = false;
 	private boolean getDisplayFrameImageWasCalled = false;
-	private boolean setProcessedFrameImageWasCalled = false;
-	private boolean getProcessedFrameImageWasCalled = false;
+	private boolean setObjectsOnImageWasCalled = false;
 
 	@Override
 	public VideoFrameImageInterface getVideoFrameImage() {
@@ -70,24 +68,19 @@ public class MockNematodeVideoFrame implements NematodeVideoFrameInterface {
 	}
 
 	@Override
-	public ProcessedFrameImageInterface getProcessedFrameImage() {
-		this.getProcessedFrameImageWasCalled = true;
-		return this.processedFrameImage;
-	}
-
-	public boolean wasGetProcessedFrameImageCalled() {
-		return this.getProcessedFrameImageWasCalled;
+	public List<NematodeWormInterface> getObjectsOnImage() {
+		return this.objectsOnImage;
 	}
 
 	@Override
-	public void setProcessedFrameImage(
-			final ProcessedFrameImageInterface processedFrameImage) {
-		this.setProcessedFrameImageWasCalled = true;
-		this.processedFrameImage = processedFrameImage;
+	public void setObjectsOnImage(
+			final List<NematodeWormInterface> objectsOnImage) {
+		this.objectsOnImage = objectsOnImage;
+		this.setObjectsOnImageWasCalled = true;
 	}
 
-	public boolean wasSetProcessedFrameImageCalled() {
-		return this.setProcessedFrameImageWasCalled;
+	public boolean wasSetObjectsOnImageCalled() {
+		return this.setObjectsOnImageWasCalled;
 	}
 
 	@Override
@@ -116,5 +109,4 @@ public class MockNematodeVideoFrame implements NematodeVideoFrameInterface {
 	@Override
 	public void dispose() {
 	}
-
 }

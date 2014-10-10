@@ -32,19 +32,38 @@ public class ImageProcessingRunnerTest extends AssertTestCase {
 		final ImageProcessingRunner imageProcessingRunner = new ImageProcessingRunner(
 				mockImageProcessingHelper);
 
-		assertFalse(videoFrame.wasSetProcessedFrameImageCalled());
-
 		assertFalse(mockImageProcessingHelper
 				.wasConvertImageToGreyScaleCalled());
 		assertFalse(mockImageProcessingHelper
 				.wasConvertImageToBlackAndWhiteCalled());
 
-		imageProcessingRunner.preprocessImageForScanning(videoFrame);
-
-		assertTrue(videoFrame.wasSetProcessedFrameImageCalled());
+		assertIsOfTypeAndGet(ProcessedFrameImage.class,
+				imageProcessingRunner.preprocessImageForScanning(videoFrame));
 
 		assertTrue(mockImageProcessingHelper.wasConvertImageToGreyScaleCalled());
 		assertTrue(mockImageProcessingHelper
 				.wasConvertImageToBlackAndWhiteCalled());
+	}
+
+	@Test
+	public void testCreateImageWithObjectsCallsDrawObjectsOnImageProcessingHelper()
+			throws Exception {
+		final MockNematodeVideoFrame nematodeVideoFrame = new MockNematodeVideoFrame();
+
+		final MockImageProcessingHelper imageProcessingHelper = new MockImageProcessingHelper();
+		final ImageProcessingRunner imageProcessingRunner = new ImageProcessingRunner(
+				imageProcessingHelper);
+
+		assertFalse(imageProcessingHelper.wasDrawObjectsOnNewImageCalled());
+
+		imageProcessingRunner
+		.createImageWithIdentifiedObjects(nematodeVideoFrame);
+
+		assertTrue(imageProcessingHelper.wasDrawObjectsOnNewImageCalled());
+		assertSame(nematodeVideoFrame.getVideoFrameImage().getImage(),
+				imageProcessingHelper.getBaseImageToDraw());
+		assertSame(nematodeVideoFrame.getObjectsOnImage(),
+				imageProcessingHelper.getObjectsToDraw());
+
 	}
 }

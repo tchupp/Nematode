@@ -3,31 +3,31 @@ package com.nematode.model;
 import java.util.List;
 
 import com.nematode.imaging.DisplayFrameImageInterface;
-import com.nematode.imaging.ProcessedFrameImageInterface;
 import com.nematode.imaging.VideoFrameImageInterface;
 
 public interface NematodeVideoFrameInterface {
 
-	VideoFrameImageInterface getVideoFrameImage();
+	public VideoFrameImageInterface getVideoFrameImage();
 
-	void setVideoFrameImage(VideoFrameImageInterface videoFrameImage);
+	public void setVideoFrameImage(VideoFrameImageInterface videoFrameImage);
 
-	DisplayFrameImageInterface getDisplayFrameImage();
+	public DisplayFrameImageInterface getDisplayFrameImage();
 
-	void setDisplayFrameImage(DisplayFrameImageInterface displayFrameImage);
+	public void setDisplayFrameImage(
+			DisplayFrameImageInterface displayFrameImage);
 
-	ProcessedFrameImageInterface getProcessedFrameImage();
-
-	void setProcessedFrameImage(ProcessedFrameImageInterface processedFrameImage);
-
-	void addObserver(
+	public void addObserver(
 			NematodeVideoFrameObserverInterface nematodeVideoFrameObserver);
 
-	void removeObserver(
+	public void removeObserver(
 			NematodeVideoFrameObserverInterface nematodeVideoFrameObserver);
 
-	List<NematodeVideoFrameObserverInterface> getListOfObservers();
+	public List<NematodeVideoFrameObserverInterface> getListOfObservers();
 
-	void dispose();
+	public void dispose();
+
+	public List<NematodeWormInterface> getObjectsOnImage();
+
+	public void setObjectsOnImage(List<NematodeWormInterface> objectsOnImage);
 
 }

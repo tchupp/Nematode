@@ -3,6 +3,7 @@ package com.nematode.imaging;
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.image.BufferedImage;
+import java.util.List;
 
 import com.nematode.model.NematodeWormInterface;
 
@@ -106,6 +107,33 @@ public class ImageProcessingHelper implements ImageProcessingHelperInterface {
 		return binaryOutputImage;
 	}
 
+	@Override
+	public BlackAndWhiteImage drawObjectsOnNewImage(
+			final BufferedImage baseImage,
+			final List<NematodeWormInterface> objects) {
+		final int width = baseImage.getWidth();
+		final int height = baseImage.getHeight();
+
+		final BlackAndWhiteImage outputImage = new BlackAndWhiteImage(width,
+				height);
+
+		for (final NematodeWormInterface worm : objects) {
+			for (final ContourPointInterface point : worm.getContourLines()
+					.getListOfContourPoints()) {
+				outputImage.setRGB(point.getX(), point.getY(),
+						Color.BLACK.getRGB());
+			}
+			for (final InnerPointInterface point : worm.getContourArea()
+					.getListOfInnerPoints()) {
+				outputImage.setRGB(point.getX(), point.getY(),
+						Color.BLACK.getRGB());
+			}
+		}
+
+		return outputImage;
+	}
+
+	@Override
 	public BlackAndWhiteImage removeObjectFromImage(
 			final BufferedImage originalImage, final NematodeWormInterface worm) {
 		final int width = originalImage.getWidth();

@@ -8,13 +8,23 @@ public class MockFrameImageAssembler implements FrameImageAssemblerInterface {
 
 	private boolean createDisplayFrameImageWasCalled;
 	private boolean createVideoFrameImageWasCalled;
+	private BufferedImage displayImageToCreate;
+	private DisplayFrameImageInterface displayImageToReturn;
 
 	@Override
-	public DisplayFrameImageInterface createDisplayFrameImage(
-			final BufferedImage image) {
+	public DisplayFrameImageInterface createDisplayFrameImage(final BufferedImage image) {
+		this.displayImageToCreate = image;
 		this.createDisplayFrameImageWasCalled = true;
 
-		return NullFrameImage.NULL;
+		return this.displayImageToReturn;
+	}
+
+	public BufferedImage getDisplayImageToCreate() {
+		return this.displayImageToCreate;
+	}
+
+	public void setDisplayImageToReturn(final DisplayFrameImageInterface displayImageToReturn) {
+		this.displayImageToReturn = displayImageToReturn;
 	}
 
 	public boolean wasCreateDisplayFrameImageCalled() {
@@ -22,8 +32,7 @@ public class MockFrameImageAssembler implements FrameImageAssemblerInterface {
 	}
 
 	@Override
-	public VideoFrameImageInterface createVideoFrameImage(
-			final BufferedImage image) {
+	public VideoFrameImageInterface createVideoFrameImage(final BufferedImage image) {
 		this.createVideoFrameImageWasCalled = true;
 		return NullFrameImage.NULL;
 	}

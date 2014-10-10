@@ -3,6 +3,7 @@ package com.nematode.imaging;
 import java.awt.Color;
 import java.awt.image.BufferedImage;
 import java.io.File;
+import java.util.ArrayList;
 
 import javax.imageio.ImageIO;
 
@@ -22,6 +23,7 @@ public class ImageProcessingHelperTest extends AssertTestCase {
 	private BufferedImage bufferedShadesFromOverlay;
 	private BufferedImage bufferedShadesAfterRemove;
 	private BufferedImage bufferedShadesBeforeRemove;
+	private BufferedImage bufferedShadesAfterDraw;
 
 	@Override
 	protected void setUp() throws Exception {
@@ -57,8 +59,12 @@ public class ImageProcessingHelperTest extends AssertTestCase {
 		this.bufferedShadesBeforeRemove = ImageIO.read(shadesBeforeRemove);
 
 		final File shadesAfterRemove = new File(
-				"testResources/Images/oneObject.png");
+				"testResources/Images/oneObjectRemoved.png");
 		this.bufferedShadesAfterRemove = ImageIO.read(shadesAfterRemove);
+
+		final File shadesAfterDraw = new File(
+				"testResources/Images/oneObjectDrawn.png");
+		this.bufferedShadesAfterDraw = ImageIO.read(shadesAfterDraw);
 	}
 
 	@Override
@@ -71,6 +77,7 @@ public class ImageProcessingHelperTest extends AssertTestCase {
 		this.bufferedShadesFromOverlay.flush();
 		this.bufferedShadesAfterRemove.flush();
 		this.bufferedShadesBeforeRemove.flush();
+		this.bufferedShadesAfterDraw.flush();
 
 		super.tearDown();
 	}
@@ -122,6 +129,23 @@ public class ImageProcessingHelperTest extends AssertTestCase {
 				this.bufferedShadesOfColor, this.bufferedShadesToOverlay);
 
 		assertImagesAreIdentical(this.bufferedShadesFromOverlay, overlayImage);
+	}
+
+	@Test
+	public void testDrawObjectsOnNewImageReturnsObjectsOnImage()
+			throws Exception {
+		final ImageProcessingHelper imageProcessingHelper = new ImageProcessingHelper();
+
+		final NematodeWormInterface testingWorm = MockNematodeWorm
+				.makeMockWormForImageTesting();
+		final ArrayList<NematodeWormInterface> listOfObjectsToDraw = new ArrayList<NematodeWormInterface>();
+		listOfObjectsToDraw.add(testingWorm);
+
+		final BufferedImage drawnObjects = imageProcessingHelper
+				.drawObjectsOnNewImage(this.bufferedShadesBeforeRemove,
+						listOfObjectsToDraw);
+
+		assertImagesAreIdentical(this.bufferedShadesAfterDraw, drawnObjects);
 	}
 
 	@Test

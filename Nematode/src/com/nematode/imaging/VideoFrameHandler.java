@@ -13,8 +13,7 @@ public class VideoFrameHandler implements VideoFrameHandlerInterface {
 	private final ImageProcessingRunnerInterface imageProcessingRunner;
 	private final EdgeDetectionRunnerInterface edgeDetectionRunner;
 
-	public VideoFrameHandler(
-			final NematodeVideoFrameInterface nematodeVideoFrame,
+	public VideoFrameHandler(final NematodeVideoFrameInterface nematodeVideoFrame,
 			final FrameImageAssemblerInterface frameImageAssembler,
 			final ImageProcessingRunnerInterface imageProcessingRunner,
 			final EdgeDetectionRunnerInterface edgeDetectionRunner) {
@@ -25,8 +24,7 @@ public class VideoFrameHandler implements VideoFrameHandlerInterface {
 	}
 
 	@Override
-	public void buildNewFrameImageFromFile(
-			final ValidatedImageFileInterface validatedImageFile) {
+	public void buildNewFrameImageFromFile(final ValidatedImageFileInterface validatedImageFile) {
 
 		if (validatedImageFile.isFileValid()) {
 			final BufferedImage fileImage = validatedImageFile.getFileImage();
@@ -46,22 +44,21 @@ public class VideoFrameHandler implements VideoFrameHandlerInterface {
 	}
 
 	@Override
-	public void updateDisplayImageFromScannedImage() {
-		final BufferedImage processedImage = this.nematodeVideoFrame
-				.getProcessedFrameImage().getImage();
+	public void updateDisplayImageFromScannedObjects() {
+		final BlackAndWhiteImage imageWithDrawnObjects = this.imageProcessingRunner
+				.createImageWithIdentifiedObjects(this.nematodeVideoFrame);
 
 		final DisplayFrameImageInterface displayFrameImage = this.frameImageAssembler
-				.createDisplayFrameImage(processedImage);
+				.createDisplayFrameImage(imageWithDrawnObjects);
 
 		this.nematodeVideoFrame.setDisplayFrameImage(displayFrameImage);
 	}
 
 	@Override
 	public void scanImage() {
-		this.imageProcessingRunner
-		.preprocessImageForScanning(this.nematodeVideoFrame);
-		this.edgeDetectionRunner.findAllObjectsInImage(this.nematodeVideoFrame
-				.getProcessedFrameImage());
+		final ProcessedFrameImageInterface processedImageForScanning = this.imageProcessingRunner
+				.preprocessImageForScanning(this.nematodeVideoFrame);
+		this.edgeDetectionRunner.findAllObjectsInImage(processedImageForScanning);
 	}
 
 	@Override
