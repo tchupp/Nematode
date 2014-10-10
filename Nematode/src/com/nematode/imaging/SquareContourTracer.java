@@ -21,6 +21,10 @@ public class SquareContourTracer implements SquareContourTracerInterface {
 
 		final List<ContourPointInterface> points = new ArrayList<ContourPointInterface>();
 
+		if (!startingPoint.isValid()) {
+			return new ContourLines(points);
+		}
+
 		do {
 			if (matrix[currentPoint.getY()][currentPoint.getX()] == BLACK) {
 				if (!points.contains(currentPoint)) {
@@ -31,7 +35,7 @@ public class SquareContourTracer implements SquareContourTracerInterface {
 				currentPoint.advanceRight();
 			}
 
-		} while (!startingPoint.equals(currentPoint) && startingPoint.isValid());
+		} while (!startingPoint.equals(currentPoint));
 
 		return new ContourLines(points);
 	}

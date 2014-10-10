@@ -62,4 +62,26 @@ public class SquareContourTracerTest extends AssertTestCase {
 
 		assertEqualListContents(expectedContourPoints, actualContourPoints);
 	}
+
+	@Test
+	public void testEmptyImageReturnsEmptyContourLines() throws Exception {
+
+		final int w = SquareContourTracer.WHITE;
+
+		final int[] inputMatrix = new int[] { w, w, w, w, w, w, w, w, w, w, w,
+				w, w, w, w, w, w, w, w, w, w, w, w, w, w, w, w, w, w, w, w, w,
+				w, w, w, w, w, w, w, w, w, w, w, w, w, w, w, w, w, w, w, w, w,
+				w, w, w, w, w, w, w, w, w, w, w, w, w, w, w, w, w, w, w, w, w,
+				w, w, w, w, w, w };
+
+		final BlackAndWhiteImage inputImage = new BlackAndWhiteImage(10, 8);
+		inputImage.setRGB(0, 0, 10, 8, inputMatrix, 0, 10);
+
+		final SquareContourTracer squareContourTracer = new SquareContourTracer();
+		final ContourLinesInterface firstContourLines = squareContourTracer
+				.getFirstContourLines(inputImage);
+
+		assertTrue(firstContourLines.isEmpty());
+
+	}
 }
