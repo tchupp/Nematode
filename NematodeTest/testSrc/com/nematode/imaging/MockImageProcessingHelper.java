@@ -2,6 +2,7 @@ package com.nematode.imaging;
 
 import java.awt.image.BufferedImage;
 
+import com.nematode.model.NematodeWormInterface;
 import com.nematode.nullmodel.NullBufferedImage;
 
 public class MockImageProcessingHelper implements
@@ -11,8 +12,11 @@ ImageProcessingHelperInterface {
 	private boolean convertImageToBlackAndWhiteWasCalled = false;
 	private boolean markDifferencesInImagesInWhiteWasCalled = false;
 	private boolean overlayImageWasCalled = false;
+	private boolean removeObjectFromImageWasCalled = false;
 	private BufferedImage baseImageToOverlay;
 	private BufferedImage topImageToOverlay;
+	private BufferedImage originalRemovalImage;
+	private NematodeWormInterface wormToRemove;
 
 	@Override
 	public GreyScaleImage convertImageToGreyScale(final BufferedImage inputImage) {
@@ -67,4 +71,26 @@ ImageProcessingHelperInterface {
 	public BufferedImage getTopImageToOverlay() {
 		return this.topImageToOverlay;
 	}
+
+	@Override
+	public BlackAndWhiteImage removeObjectFromImage(
+			final BufferedImage originalImage, final NematodeWormInterface worm) {
+		this.originalRemovalImage = originalImage;
+		this.wormToRemove = worm;
+		this.removeObjectFromImageWasCalled = true;
+		return null;
+	}
+
+	public boolean wasRemoveObjectFromImageCalled() {
+		return this.removeObjectFromImageWasCalled;
+	}
+
+	public BufferedImage getOriginalRemovalImage() {
+		return this.originalRemovalImage;
+	}
+
+	public NematodeWormInterface getWormToRemove() {
+		return this.wormToRemove;
+	}
+
 }

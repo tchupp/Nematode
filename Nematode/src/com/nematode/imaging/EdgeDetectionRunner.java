@@ -1,6 +1,5 @@
 package com.nematode.imaging;
 
-import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -23,19 +22,28 @@ public class EdgeDetectionRunner implements EdgeDetectionRunnerInterface {
 	}
 
 	@Override
-	public void findAllObjectsInImage(
+	public List<NematodeWormInterface> findAllObjectsInImage(
 			final ProcessedFrameImageInterface processedFrameImage) {
 
 		final List<NematodeWormInterface> listOfObjects = new ArrayList<NematodeWormInterface>();
-		final BufferedImage processedImage = processedFrameImage.getImage();
 
-		final ContourLines contourLines = this.contourTracer
-				.getFirstContourLines(processedImage);
+		ContourLinesInterface contourLines = this.contourTracer
+				.getFirstContourLines(processedFrameImage.getImage());
 
 		while (!contourLines.isEmpty()) {
-			listOfObjects.add(this.nematodeWormBuilder.buildWorm(contourLines));
+			final NematodeWormInterface builtWorm = this.nematodeWormBuilder
+					.buildWorm(contourLines);
+			listOfObjects.add(builtWorm);
 
+			final BlackAndWhiteImage imageWithoutNewestWorm = this.imageProcessingHelper
+					.removeObjectFromImage(processedFrameImage.getImage(),
+							builtWorm);
+
+			contourLines = this.contourTracer
+					.getFirstContourLines(imageWithoutNewestWorm);
 		}
+
+		return listOfObjects;
 	}
 
 	public SquareContourTracerInterface getContourTracer() {

@@ -4,6 +4,6 @@ import java.awt.image.BufferedImage;
 
 public interface SquareContourTracerInterface {
 
-	public ContourLines getFirstContourLines(BufferedImage image);
+	public ContourLinesInterface getFirstContourLines(BufferedImage image);
 
 }

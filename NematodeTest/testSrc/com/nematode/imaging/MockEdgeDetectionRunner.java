@@ -1,15 +1,28 @@
 package com.nematode.imaging;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import com.nematode.model.NematodeWormInterface;
+
 public class MockEdgeDetectionRunner implements EdgeDetectionRunnerInterface {
 
 	private boolean findAllObjectsInImageWasCalled = false;
 	private ProcessedFrameImageInterface processedFrameImageToScan;
+	private ArrayList<NematodeWormInterface> objectsInImageList = new ArrayList<NematodeWormInterface>();
 
 	@Override
-	public void findAllObjectsInImage(
+	public List<NematodeWormInterface> findAllObjectsInImage(
 			final ProcessedFrameImageInterface processedFrameImage) {
 		this.processedFrameImageToScan = processedFrameImage;
 		this.findAllObjectsInImageWasCalled = true;
+
+		return this.objectsInImageList;
+	}
+
+	public void setObjectsInImageList(
+			final ArrayList<NematodeWormInterface> objectsInImageList) {
+		this.objectsInImageList = objectsInImageList;
 	}
 
 	public boolean wasFindAllObjectsInImageCalled() {

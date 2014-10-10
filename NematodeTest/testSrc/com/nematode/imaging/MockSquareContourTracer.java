@@ -2,25 +2,38 @@ package com.nematode.imaging;
 
 import java.awt.image.BufferedImage;
 import java.util.ArrayList;
+import java.util.List;
 
 public class MockSquareContourTracer implements SquareContourTracerInterface {
 
-	ContourLines points = new ContourLines(
-			new ArrayList<ContourPointInterface>());
 	private boolean getFirstContourLinesWasCalled = false;
 
+	private List<ContourLinesInterface> listOfLinesToReturn = new ArrayList<ContourLinesInterface>();
+
+	private BufferedImage scannedImage;
+
 	@Override
-	public ContourLines getFirstContourLines(final BufferedImage image) {
+	public ContourLinesInterface getFirstContourLines(final BufferedImage image) {
+		this.scannedImage = image;
 		this.getFirstContourLinesWasCalled = true;
-		return this.points;
+
+		final ContourLinesInterface contourLineToReturn = this.listOfLinesToReturn
+				.get(0);
+		this.listOfLinesToReturn.remove(0);
+
+		return contourLineToReturn;
 	}
 
 	public boolean wasGetFirstContourLinesCalled() {
 		return this.getFirstContourLinesWasCalled;
 	}
 
-	public void setContourLinesToReturn(final ContourLines points) {
-		this.points = points;
+	public void setListOfLinesToReturn(
+			final List<ContourLinesInterface> listOfLinesToReturn) {
+		this.listOfLinesToReturn = listOfLinesToReturn;
 	}
 
+	public BufferedImage getScannedImage() {
+		return this.scannedImage;
+	}
 }

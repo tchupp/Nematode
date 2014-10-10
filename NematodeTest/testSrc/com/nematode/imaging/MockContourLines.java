@@ -5,7 +5,7 @@ import java.util.List;
 
 public class MockContourLines implements ContourLinesInterface {
 
-	private boolean empty = true;
+	private boolean empty = false;
 	private List<ContourPointInterface> listOfContourPoints = new ArrayList<ContourPointInterface>();
 	private List<ContourPointInterface> pointsAtX = new ArrayList<ContourPointInterface>();
 	private List<ContourPointInterface> pointsAtY = new ArrayList<ContourPointInterface>();

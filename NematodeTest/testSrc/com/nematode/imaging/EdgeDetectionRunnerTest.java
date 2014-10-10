@@ -1,8 +1,12 @@
 package com.nematode.imaging;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.junit.Test;
 
 import com.nematode.model.MockNematodeWormBuilder;
+import com.nematode.model.NematodeWormInterface;
 import com.nematode.unittesting.AssertTestCase;
 
 public class EdgeDetectionRunnerTest extends AssertTestCase {
@@ -48,23 +52,44 @@ public class EdgeDetectionRunnerTest extends AssertTestCase {
 	@Test
 	public void testFindAllObjectsInImageReturnsListOfWormsOfCorrectSize()
 			throws Exception {
+		final ArrayList<ContourLinesInterface> contourLinesList = new ArrayList<ContourLinesInterface>();
+		final MockContourLines mockContourLines = new MockContourLines();
+		final MockContourLines emptyContourLines = new MockContourLines();
+		emptyContourLines.setEmpty(true);
+		contourLinesList.add(mockContourLines);
+		contourLinesList.add(emptyContourLines);
+
+		final MockSquareContourTracer contourTracer = new MockSquareContourTracer();
+		contourTracer.setListOfLinesToReturn(contourLinesList);
+
+		final MockNematodeWormBuilder nematodeWormBuilder = new MockNematodeWormBuilder();
+		final MockImageProcessingHelper imageProcessingHelper = new MockImageProcessingHelper();
+
+		final EdgeDetectionRunner edgeDetectionRunner = new EdgeDetectionRunner(
+				contourTracer, nematodeWormBuilder, imageProcessingHelper);
 
 		final MockProcessedFrameImage processedFrameImage = new MockProcessedFrameImage();
 
-		final MockSquareContourTracer contourTracer = new MockSquareContourTracer();
-		final MockNematodeWormBuilder nematodeWormBuilder = new MockNematodeWormBuilder();
-		final EdgeDetectionRunner edgeDetectionRunner = new EdgeDetectionRunner(
-				contourTracer, nematodeWormBuilder,
-				new MockImageProcessingHelper());
-
 		assertFalse(contourTracer.wasGetFirstContourLinesCalled());
+		assertFalse(imageProcessingHelper.wasRemoveObjectFromImageCalled());
 		assertFalse(nematodeWormBuilder.wasBuildWormCalled());
 
-		edgeDetectionRunner.findAllObjectsInImage(processedFrameImage);
+		final List<NematodeWormInterface> objectsFromImage = edgeDetectionRunner
+				.findAllObjectsInImage(processedFrameImage);
+		assertEquals(1, objectsFromImage.size());
 
 		assertTrue(contourTracer.wasGetFirstContourLinesCalled());
-		assertTrue(nematodeWormBuilder.wasBuildWormCalled());
+		assertNotSame(processedFrameImage.getImage(),
+				contourTracer.getScannedImage());
 
-		fail("unimplemented");
+		assertTrue(imageProcessingHelper.wasRemoveObjectFromImageCalled());
+		assertSame(imageProcessingHelper.getOriginalRemovalImage(),
+				processedFrameImage.getImage());
+		assertSame(objectsFromImage.get(0),
+				imageProcessingHelper.getWormToRemove());
+
+		assertTrue(nematodeWormBuilder.wasBuildWormCalled());
+		assertSame(mockContourLines,
+				nematodeWormBuilder.getContourLinesBuiltWith());
 	}
 }

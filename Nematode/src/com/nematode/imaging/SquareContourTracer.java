@@ -11,7 +11,7 @@ public class SquareContourTracer implements SquareContourTracerInterface {
 	public static final int WHITE = Color.WHITE.getRGB();
 
 	@Override
-	public ContourLines getFirstContourLines(final BufferedImage image) {
+	public ContourLinesInterface getFirstContourLines(final BufferedImage image) {
 		final int[][] imageMatrix = convertImageToMatrix(image);
 
 		final int[][] matrix = clearBoarder(imageMatrix);

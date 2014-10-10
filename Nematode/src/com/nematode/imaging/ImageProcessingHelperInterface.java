@@ -2,6 +2,8 @@ package com.nematode.imaging;
 
 import java.awt.image.BufferedImage;
 
+import com.nematode.model.NematodeWormInterface;
+
 public interface ImageProcessingHelperInterface {
 
 	public GreyScaleImage convertImageToGreyScale(BufferedImage inputImage);
@@ -14,5 +16,8 @@ public interface ImageProcessingHelperInterface {
 
 	public BufferedImage overlayImage(BufferedImage baseImage,
 			BufferedImage topImage);
+
+	public BlackAndWhiteImage removeObjectFromImage(
+			BufferedImage originalImage, NematodeWormInterface worm);
 
 }
