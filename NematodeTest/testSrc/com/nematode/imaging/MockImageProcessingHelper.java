@@ -6,8 +6,7 @@ import java.util.List;
 import com.nematode.model.NematodeWormInterface;
 import com.nematode.nullmodel.NullBufferedImage;
 
-public class MockImageProcessingHelper implements
-ImageProcessingHelperInterface {
+public class MockImageProcessingHelper implements ImageProcessingHelperInterface {
 
 	private boolean convertImageToGreyScaleWasCalled = false;
 	private boolean convertImageToBlackAndWhiteWasCalled = false;
@@ -21,6 +20,7 @@ ImageProcessingHelperInterface {
 	private NematodeWormInterface wormToRemove;
 	private BufferedImage baseImageToDraw;
 	private List<NematodeWormInterface> objectsToDraw;
+	private BlackAndWhiteImage removeObjectImageToReturn;
 
 	@Override
 	public GreyScaleImage convertImageToGreyScale(final BufferedImage inputImage) {
@@ -33,8 +33,8 @@ ImageProcessingHelperInterface {
 	}
 
 	@Override
-	public BlackAndWhiteImage convertImageToBlackAndWhite(
-			final GreyScaleImage inputImage, final double toleranceSeperator) {
+	public BlackAndWhiteImage convertImageToBlackAndWhite(final GreyScaleImage inputImage,
+			final double toleranceSeperator) {
 		this.convertImageToBlackAndWhiteWasCalled = true;
 
 		return new BlackAndWhiteImage(new NullBufferedImage());
@@ -45,8 +45,8 @@ ImageProcessingHelperInterface {
 	}
 
 	@Override
-	public BufferedImage markDifferencesInImagesInWhite(
-			final BufferedImage originalImage, final BufferedImage updatedImage) {
+	public BufferedImage markDifferencesInImagesInWhite(final BufferedImage originalImage,
+			final BufferedImage updatedImage) {
 		this.markDifferencesInImagesInWhiteWasCalled = true;
 		return new NullBufferedImage();
 	}
@@ -56,8 +56,7 @@ ImageProcessingHelperInterface {
 	}
 
 	@Override
-	public BufferedImage overlayImage(final BufferedImage baseImage,
-			final BufferedImage topImage) {
+	public BufferedImage overlayImage(final BufferedImage baseImage, final BufferedImage topImage) {
 		this.baseImageToOverlay = baseImage;
 		this.topImageToOverlay = topImage;
 		this.overlayImageWasCalled = true;
@@ -77,12 +76,16 @@ ImageProcessingHelperInterface {
 	}
 
 	@Override
-	public BlackAndWhiteImage removeObjectFromImage(
-			final BufferedImage originalImage, final NematodeWormInterface worm) {
+	public BlackAndWhiteImage removeObjectFromImage(final BufferedImage originalImage,
+			final NematodeWormInterface worm) {
 		this.originalRemovalImage = originalImage;
 		this.wormToRemove = worm;
 		this.removeObjectFromImageWasCalled = true;
-		return new BlackAndWhiteImage(new NullBufferedImage());
+		return this.removeObjectImageToReturn;
+	}
+
+	public void setRemoveObjectImageToReturn(final BlackAndWhiteImage removeObjectImageToReturn) {
+		this.removeObjectImageToReturn = removeObjectImageToReturn;
 	}
 
 	public boolean wasRemoveObjectFromImageCalled() {
@@ -98,8 +101,7 @@ ImageProcessingHelperInterface {
 	}
 
 	@Override
-	public BlackAndWhiteImage drawObjectsOnNewImage(
-			final BufferedImage baseImage,
+	public BlackAndWhiteImage drawObjectsOnNewImage(final BufferedImage baseImage,
 			final List<NematodeWormInterface> objects) {
 		this.baseImageToDraw = baseImage;
 		this.objectsToDraw = objects;

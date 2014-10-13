@@ -7,22 +7,21 @@ import org.junit.Test;
 
 import com.nematode.model.MockNematodeWormBuilder;
 import com.nematode.model.NematodeWormInterface;
+import com.nematode.nullmodel.NullBufferedImage;
 import com.nematode.unittesting.AssertTestCase;
 
 public class EdgeDetectionRunnerTest extends AssertTestCase {
 
 	@Test
 	public void testImplementsInterface() throws Exception {
-		assertImplementsInterface(EdgeDetectionRunnerInterface.class,
-				EdgeDetectionRunner.class);
+		assertImplementsInterface(EdgeDetectionRunnerInterface.class, EdgeDetectionRunner.class);
 	}
 
 	@Test
 	public void testGetsSquareContourTracer() throws Exception {
 		final MockSquareContourTracer contourTracer = new MockSquareContourTracer();
-		final EdgeDetectionRunner edgeDetectionRunner = new EdgeDetectionRunner(
-				contourTracer, new MockNematodeWormBuilder(),
-				new MockImageProcessingHelper());
+		final EdgeDetectionRunner edgeDetectionRunner = new EdgeDetectionRunner(contourTracer,
+				new MockNematodeWormBuilder(), new MockImageProcessingHelper());
 
 		assertSame(contourTracer, edgeDetectionRunner.getContourTracer());
 	}
@@ -31,27 +30,22 @@ public class EdgeDetectionRunnerTest extends AssertTestCase {
 	public void testGetsNematodeWormBuilder() throws Exception {
 		final MockNematodeWormBuilder mockWormBuilder = new MockNematodeWormBuilder();
 		final EdgeDetectionRunner edgeDetectionRunner = new EdgeDetectionRunner(
-				new MockSquareContourTracer(), mockWormBuilder,
-				new MockImageProcessingHelper());
+				new MockSquareContourTracer(), mockWormBuilder, new MockImageProcessingHelper());
 
-		assertSame(mockWormBuilder,
-				edgeDetectionRunner.getNematodeWormBuilder());
+		assertSame(mockWormBuilder, edgeDetectionRunner.getNematodeWormBuilder());
 	}
 
 	@Test
 	public void testGetsImageProcessingHelper() throws Exception {
 		final MockImageProcessingHelper imageProcessingHelper = new MockImageProcessingHelper();
 		final EdgeDetectionRunner edgeDetectionRunner = new EdgeDetectionRunner(
-				new MockSquareContourTracer(), new MockNematodeWormBuilder(),
-				imageProcessingHelper);
+				new MockSquareContourTracer(), new MockNematodeWormBuilder(), imageProcessingHelper);
 
-		assertSame(imageProcessingHelper,
-				edgeDetectionRunner.getImageProcessingHelper());
+		assertSame(imageProcessingHelper, edgeDetectionRunner.getImageProcessingHelper());
 	}
 
 	@Test
-	public void testFindAllObjectsInImageReturnsListOfWormsOfCorrectSize()
-			throws Exception {
+	public void testFindAllObjectsInImageReturnsListOfWormsOfCorrectSize() throws Exception {
 		final ArrayList<ContourLinesInterface> contourLinesList = new ArrayList<ContourLinesInterface>();
 		final MockContourLines mockContourLines = new MockContourLines();
 		final MockContourLines emptyContourLines = new MockContourLines();
@@ -64,9 +58,12 @@ public class EdgeDetectionRunnerTest extends AssertTestCase {
 
 		final MockNematodeWormBuilder nematodeWormBuilder = new MockNematodeWormBuilder();
 		final MockImageProcessingHelper imageProcessingHelper = new MockImageProcessingHelper();
+		final BlackAndWhiteImage expectedImageWithRemovedObject = new BlackAndWhiteImage(
+				new NullBufferedImage());
+		imageProcessingHelper.setRemoveObjectImageToReturn(expectedImageWithRemovedObject);
 
-		final EdgeDetectionRunner edgeDetectionRunner = new EdgeDetectionRunner(
-				contourTracer, nematodeWormBuilder, imageProcessingHelper);
+		final EdgeDetectionRunner edgeDetectionRunner = new EdgeDetectionRunner(contourTracer,
+				nematodeWormBuilder, imageProcessingHelper);
 
 		final MockProcessedFrameImage processedFrameImage = new MockProcessedFrameImage();
 
@@ -79,17 +76,13 @@ public class EdgeDetectionRunnerTest extends AssertTestCase {
 		assertEquals(1, objectsFromImage.size());
 
 		assertTrue(contourTracer.wasGetFirstContourLinesCalled());
-		assertNotSame(processedFrameImage.getImage(),
-				contourTracer.getScannedImage());
+		assertSame(expectedImageWithRemovedObject, contourTracer.getScannedImage());
 
 		assertTrue(imageProcessingHelper.wasRemoveObjectFromImageCalled());
-		assertSame(imageProcessingHelper.getOriginalRemovalImage(),
-				processedFrameImage.getImage());
-		assertSame(objectsFromImage.get(0),
-				imageProcessingHelper.getWormToRemove());
+		assertSame(imageProcessingHelper.getOriginalRemovalImage(), processedFrameImage.getImage());
+		assertSame(objectsFromImage.get(0), imageProcessingHelper.getWormToRemove());
 
 		assertTrue(nematodeWormBuilder.wasBuildWormCalled());
-		assertSame(mockContourLines,
-				nematodeWormBuilder.getContourLinesBuiltWith());
+		assertSame(mockContourLines, nematodeWormBuilder.getContourLinesBuiltWith());
 	}
 }
