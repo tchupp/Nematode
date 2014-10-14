@@ -19,7 +19,7 @@ public class ContourAreaCalculator implements ContourAreaCalculatorInterface {
 
 		final List<ContourPointInterface> outerPoints = new ArrayList<ContourPointInterface>(
 				lines.getListOfContourPoints());
-		
+
 		outerFloodFill(this.northBound, this.westBound, outerPoints);
 		return new ContourArea(reverseArea(outerPoints));
 	}
