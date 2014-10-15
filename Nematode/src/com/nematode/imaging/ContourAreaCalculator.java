@@ -17,31 +17,80 @@ public class ContourAreaCalculator implements ContourAreaCalculatorInterface {
 		this.southBound = findSouthBound(lines) + 1;
 		this.westBound = findWestBound(lines) - 1;
 
-		final List<ContourPointInterface> outerPoints = new ArrayList<ContourPointInterface>(
+		final List<ContourPointInterface> innerBounds = new ArrayList<ContourPointInterface>(
 				lines.getListOfContourPoints());
 
-		outerFloodFill(this.northBound, this.westBound, outerPoints);
+		final List<ContourPointInterface> outerPoints = outerFloodFill(innerBounds);
+		outerPoints.addAll(innerBounds);
 		return new ContourArea(reverseArea(outerPoints));
 	}
 
-	private void outerFloodFill(final int x, final int y, final List<ContourPointInterface> bounds) {
-		if (bounds.contains(new ContourPoint(x, y))) {
-			return;
-		} else {
-			bounds.add(new ContourPoint(x, y));
+	private List<ContourPointInterface> outerFloodFill(final List<ContourPointInterface> innerBounds) {
+		final List<ContourPointInterface> queue = new ArrayList<ContourPointInterface>();
+		final List<ContourPointInterface> outerPoints = new ArrayList<ContourPointInterface>();
+		final int x = this.westBound, y = this.northBound;
+		queue.add(new ContourPoint(x, y));
+		while (!queue.isEmpty()) {
+			final ContourPointInterface point = queue.get(0);
+			queue.remove(point);
+			final int pointX = point.getX(), pointY = point.getY();
+
+			if (checkValidity(pointX + 1, pointY, innerBounds, outerPoints)) {
+				if (addOuterPoint(pointX + 1, pointY, outerPoints)) {
+					queue.add(new ContourPoint(pointX + 1, pointY));
+				}
+			}
+			if (checkValidity(pointX - 1, pointY, innerBounds, outerPoints)) {
+				if (addOuterPoint(pointX - 1, pointY, outerPoints)) {
+					queue.add(new ContourPoint(pointX - 1, pointY));
+				}
+			}
+			if (checkValidity(pointX, pointY + 1, innerBounds, outerPoints)) {
+				if (addOuterPoint(pointX, pointY + 1, outerPoints)) {
+					queue.add(new ContourPoint(pointX, pointY + 1));
+				}
+			}
+			if (checkValidity(pointX, pointY - 1, innerBounds, outerPoints)) {
+				if (addOuterPoint(pointX, pointY - 1, outerPoints)) {
+					queue.add(new ContourPoint(pointX, pointY - 1));
+				}
+			}
 		}
-		if (x > this.westBound) {
-			outerFloodFill(x - 1, y, bounds);
+		return outerPoints;
+	}
+
+	private boolean checkValidity(final int x, final int y,
+			final List<ContourPointInterface> innerBounds,
+			final List<ContourPointInterface> outerPoints) {
+		if (x < this.westBound) {
+			return false;
 		}
-		if (x < this.eastBound) {
-			outerFloodFill(x + 1, y, bounds);
+		if (x > this.eastBound) {
+			return false;
 		}
-		if (y > this.northBound) {
-			outerFloodFill(x, y - 1, bounds);
+		if (y < this.northBound) {
+			return false;
 		}
-		if (y < this.southBound) {
-			outerFloodFill(x, y + 1, bounds);
+		if (y > this.southBound) {
+			return false;
 		}
+		if (innerBounds.contains(new ContourPoint(x, y))) {
+			return false;
+		}
+		if (outerPoints.contains(new ContourPoint(x, y))) {
+			return false;
+		}
+		return true;
+	}
+
+	private boolean addOuterPoint(final int x, final int y,
+			final List<ContourPointInterface> outerPoints) {
+		final ContourPoint potentialPoint = new ContourPoint(x, y);
+		if (!outerPoints.contains(potentialPoint)) {
+			outerPoints.add(potentialPoint);
+			return true;
+		}
+		return false;
 	}
 
 	private List<InnerPointInterface> reverseArea(final List<ContourPointInterface> bounds) {
