@@ -1,7 +1,5 @@
 package com.nematode.imaging;
 
-import java.awt.image.BufferedImage;
-
 import org.junit.Test;
 
 import com.nematode.gui.NematodeVideoPanel;
@@ -12,39 +10,35 @@ public class FrameImageAssemblerTest extends AssertTestCase {
 
 	@Test
 	public void testImplementsInterface() throws Exception {
-		assertImplementsInterface(FrameImageAssemblerInterface.class,
-				FrameImageAssembler.class);
+		assertImplementsInterface(FrameImageAssemblerInterface.class, FrameImageAssembler.class);
 	}
 
 	@Test
-	public void testCreateDisplayImageReturnsCorrectlySizedFrame()
-			throws Exception {
+	public void testCreateDisplayImageReturnsCorrectlySizedFrame() throws Exception {
 		final FrameImageAssembler imageAssembler = new FrameImageAssembler();
 
 		final DisplayFrameImageInterface displayFrameImage = imageAssembler
 				.createDisplayFrameImage(new NullBufferedImage());
 
-		assertEquals(NematodeVideoPanel.ICON_WIDTH, displayFrameImage
-				.getImage().getWidth());
-		assertEquals(NematodeVideoPanel.ICON_HEIGHT, displayFrameImage
-				.getImage().getHeight());
+		assertEquals(NematodeVideoPanel.ICON_WIDTH, displayFrameImage.getImage().getWidth());
+		assertEquals(NematodeVideoPanel.ICON_HEIGHT, displayFrameImage.getImage().getHeight());
 	}
 
 	@Test
-	public void testCreateVideoFrameImageReturnsCorrectlySizedFrame()
-			throws Exception {
-
+	public void testCreateVideoFrameImageReturnsCorrectlySizedFrame() throws Exception {
 		final FrameImageAssembler imageAssembler = new FrameImageAssembler();
 
-		final int expectedWidth = 56;
-		final int expectedHeight = 56;
-		final BufferedImage expectedImage = new BufferedImage(expectedWidth,
-				expectedHeight, BufferedImage.TYPE_INT_RGB);
+		final VideoFrameImageInterface videoFrameImage = imageAssembler
+				.createVideoFrameImage(new NullBufferedImage());
 
-		final VideoFrameImageInterface frameImage = imageAssembler
-				.createVideoFrameImage(expectedImage);
+		assertEquals(FrameImageAssembler.VIDEO_WIDTH, videoFrameImage.getImage().getWidth());
+		assertEquals(FrameImageAssembler.VIDEO_HEIGHT, videoFrameImage.getImage().getHeight());
+	}
 
-		assertSame(expectedImage, frameImage.getImage());
+	@Test
+	public void testStaticVideoFrameHeightAndWidth() throws Exception {
+		assertEquals(1920, FrameImageAssembler.VIDEO_WIDTH);
+		assertEquals(1080, FrameImageAssembler.VIDEO_HEIGHT);
 	}
 
 }
