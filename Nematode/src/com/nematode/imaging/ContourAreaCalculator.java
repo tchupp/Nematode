@@ -1,6 +1,8 @@
 package com.nematode.imaging;
 
+import java.util.ArrayDeque;
 import java.util.ArrayList;
+import java.util.Deque;
 import java.util.List;
 
 public class ContourAreaCalculator implements ContourAreaCalculatorInterface {
@@ -26,33 +28,32 @@ public class ContourAreaCalculator implements ContourAreaCalculatorInterface {
 	}
 
 	private List<ContourPointInterface> outerFloodFill(final List<ContourPointInterface> innerBounds) {
-		final List<ContourPointInterface> queue = new ArrayList<ContourPointInterface>();
+		final Deque<ContourPointInterface> queue = new ArrayDeque<ContourPointInterface>();
 		final List<ContourPointInterface> outerPoints = new ArrayList<ContourPointInterface>();
 		final int x = this.westBound, y = this.northBound;
-		queue.add(new ContourPoint(x, y));
+		queue.addLast(new ContourPoint(x, y));
 		while (!queue.isEmpty()) {
-			final ContourPointInterface point = queue.get(0);
-			queue.remove(point);
+			final ContourPointInterface point = queue.removeFirst();
 			final int pointX = point.getX(), pointY = point.getY();
 
 			if (checkValidity(pointX + 1, pointY, innerBounds, outerPoints)) {
 				if (addOuterPoint(pointX + 1, pointY, outerPoints)) {
-					queue.add(new ContourPoint(pointX + 1, pointY));
+					queue.addLast(new ContourPoint(pointX + 1, pointY));
 				}
 			}
 			if (checkValidity(pointX - 1, pointY, innerBounds, outerPoints)) {
 				if (addOuterPoint(pointX - 1, pointY, outerPoints)) {
-					queue.add(new ContourPoint(pointX - 1, pointY));
+					queue.addLast(new ContourPoint(pointX - 1, pointY));
 				}
 			}
 			if (checkValidity(pointX, pointY + 1, innerBounds, outerPoints)) {
 				if (addOuterPoint(pointX, pointY + 1, outerPoints)) {
-					queue.add(new ContourPoint(pointX, pointY + 1));
+					queue.addLast(new ContourPoint(pointX, pointY + 1));
 				}
 			}
 			if (checkValidity(pointX, pointY - 1, innerBounds, outerPoints)) {
 				if (addOuterPoint(pointX, pointY - 1, outerPoints)) {
-					queue.add(new ContourPoint(pointX, pointY - 1));
+					queue.addLast(new ContourPoint(pointX, pointY - 1));
 				}
 			}
 		}
