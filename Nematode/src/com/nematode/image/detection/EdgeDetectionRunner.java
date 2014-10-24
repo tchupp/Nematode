@@ -33,11 +33,11 @@ public class EdgeDetectionRunner implements EdgeDetectionRunnerInterface {
 		ContourLinesInterface contourLines = this.contourTracer.getFirstContourLines(newestImage);
 
 		while (!contourLines.isEmpty()) {
-			final NematodeWormInterface builtWorm = this.nematodeWormBuilder
+			final NematodeWormInterface newWorm = this.nematodeWormBuilder
 					.buildWorm(contourLines);
-			listOfObjects.add(builtWorm);
+			listOfObjects.add(newWorm);
 
-			newestImage = this.imageProcessingHelper.removeObjectFromImage(newestImage, builtWorm);
+			newestImage = this.imageProcessingHelper.removeObjectFromImage(newestImage, newWorm);
 
 			contourLines = this.contourTracer.getFirstContourLines(newestImage);
 		}

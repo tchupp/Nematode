@@ -10,9 +10,9 @@ public class NematodeTrackingLauncher {
 	}
 
 	public void launchApplication() {
-		final ExtendableJFrame nematodeMainView = this.mainViewController
-				.getNematodeMainView();
-		nematodeMainView.setVisible(true);
+		final ExtendableJFrame mainView = this.mainViewController
+				.getMainView();
+		mainView.setVisible(true);
 	}
 
 	public MainViewControllerInterface getMainViewController() {
@@ -20,10 +20,10 @@ public class NematodeTrackingLauncher {
 	}
 
 	public static void main(final String[] args) {
-		final NematodeMainViewController nematodeMainViewController = new NematodeMainViewController();
+		final MainViewController mainViewController = new MainViewController();
 
 		final NematodeTrackingLauncher nematodeTrackingLauncher = new NematodeTrackingLauncher(
-				nematodeMainViewController);
+				mainViewController);
 
 		nematodeTrackingLauncher.launchApplication();
 	}

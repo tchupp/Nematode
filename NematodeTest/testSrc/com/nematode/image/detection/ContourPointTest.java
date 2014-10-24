@@ -4,16 +4,13 @@ import static org.junit.Assert.assertNotEquals;
 
 import org.junit.Test;
 
-import com.nematode.image.detection.ContourPoint;
-import com.nematode.image.detection.ContourPointInterface;
 import com.nematode.unittesting.AssertTestCase;
 
 public class ContourPointTest extends AssertTestCase {
 
 	@Test
 	public void testImplementsInterface() throws Exception {
-		assertImplementsInterface(ContourPointInterface.class,
-				ContourPoint.class);
+		assertImplementsInterface(ContourPointInterface.class, ContourPoint.class);
 	}
 
 	@Test
@@ -25,8 +22,7 @@ public class ContourPointTest extends AssertTestCase {
 	}
 
 	@Test
-	public void testDefaultConstructorPointsNorth_StartsAtTopLeft()
-			throws Exception {
+	public void testDefaultConstructorPointsNorth_StartsAtTopLeft() throws Exception {
 		final ContourPoint contourPoint = new ContourPoint();
 
 		assertEquals(0, contourPoint.getX());
@@ -49,8 +45,8 @@ public class ContourPointTest extends AssertTestCase {
 	public void testCopyConstructor() throws Exception {
 		final int expectedX = 6;
 		final int expectedY = 4;
-		final ContourPoint expectedPoint = new ContourPoint(expectedX,
-				expectedY, ContourPoint.DIR_SOUTH);
+		final ContourPoint expectedPoint = new ContourPoint(expectedX, expectedY,
+				ContourPoint.DIR_SOUTH);
 		final ContourPoint actualPoint = new ContourPoint(expectedPoint);
 
 		assertEquals(expectedPoint, actualPoint);
@@ -59,12 +55,9 @@ public class ContourPointTest extends AssertTestCase {
 
 	@Test
 	public void testOverrideEqualsDoesntCareAboutDirection() throws Exception {
-		final ContourPoint equalPointOne = new ContourPoint(4, 5,
-				ContourPoint.DIR_EAST);
-		final ContourPoint equalPointTwo = new ContourPoint(4, 5,
-				ContourPoint.DIR_SOUTH);
-		final ContourPoint nonequalPoint = new ContourPoint(6, 4,
-				ContourPoint.DIR_SOUTH);
+		final ContourPoint equalPointOne = new ContourPoint(4, 5, ContourPoint.DIR_EAST);
+		final ContourPoint equalPointTwo = new ContourPoint(4, 5, ContourPoint.DIR_SOUTH);
+		final ContourPoint nonequalPoint = new ContourPoint(6, 4, ContourPoint.DIR_SOUTH);
 
 		assertEquals(equalPointOne, equalPointTwo);
 		assertNotEquals(equalPointOne, nonequalPoint);
@@ -91,8 +84,7 @@ public class ContourPointTest extends AssertTestCase {
 	}
 
 	@Test
-	public void testInvalidFlagSetIfEitherOfThePositionArgumentsAreNegative()
-			throws Exception {
+	public void testInvalidFlagSetIfEitherOfThePositionArgumentsAreNegative() throws Exception {
 		final ContourPoint invalidPointOne = new ContourPoint(-1, 0);
 		final ContourPoint invalidPointTwo = new ContourPoint(7, -1);
 		final ContourPoint validPoint = new ContourPoint(4, 1);
@@ -107,20 +99,18 @@ public class ContourPointTest extends AssertTestCase {
 		final ContourPoint defaultContourPoint = new ContourPoint();
 		final ContourPoint nonDefaultContourPoint = new ContourPoint(5, 6);
 
-		assertEquals("com.nematode.imaging.ContourPoint [0, 0]",
+		assertEquals("com.nematode.image.detection.ContourPoint [0, 0]",
 				defaultContourPoint.toString());
-		assertEquals("com.nematode.imaging.ContourPoint [5, 6]",
+		assertEquals("com.nematode.image.detection.ContourPoint [5, 6]",
 				nonDefaultContourPoint.toString());
 	}
 
 	@Test
-	public void testCloneReturnsEqualObjectWithDifferentAddress()
-			throws Exception {
+	public void testCloneReturnsEqualObjectWithDifferentAddress() throws Exception {
 		final ContourPoint origanalContourPoint = new ContourPoint(2, 3);
 		final ContourPoint clonedContourPoint = origanalContourPoint.clone();
 		assertEquals(origanalContourPoint, clonedContourPoint);
-		assertEquals(origanalContourPoint.getDirection(),
-				clonedContourPoint.getDirection());
+		assertEquals(origanalContourPoint.getDirection(), clonedContourPoint.getDirection());
 		assertNotSame(origanalContourPoint, clonedContourPoint);
 	}
 }

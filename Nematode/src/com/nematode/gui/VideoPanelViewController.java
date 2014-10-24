@@ -6,41 +6,39 @@ import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 
 import com.nematode.model.DisplayFrameImageChangeObserver;
-import com.nematode.model.VideoFrameObserverInterface;
 import com.nematode.model.VideoFrameHandlerInterface;
 import com.nematode.model.VideoFrameInterface;
+import com.nematode.model.VideoFrameObserverInterface;
 
-public class NematodeVideoPanelViewController implements NematodePanelViewControllerInterface {
+public class VideoPanelViewController implements VideoPanelViewControllerInterface {
 
-	private final NematodeVideoPanel nematodeVideoPanel;
+	private final VideoPanel videoPanel;
 	private final VideoFrameInterface videoFrame;
 	private final DisplayFrameImageChangeObserver frameObserver;
 	private final VideoFrameHandlerInterface videoFrameHandler;
 
-	public NematodeVideoPanelViewController(final VideoFrameHandlerInterface videoFrameHandler) {
+	public VideoPanelViewController(final VideoFrameHandlerInterface videoFrameHandler) {
 		this.videoFrameHandler = videoFrameHandler;
 		this.videoFrame = this.videoFrameHandler.getVideoFrame();
 		this.frameObserver = new DisplayFrameImageChangeObserver(this);
 		this.videoFrame.addObserver(this.frameObserver);
 
-		this.nematodeVideoPanel = new NematodeVideoPanel();
+		this.videoPanel = new VideoPanel();
 	}
 
 	@Override
-	public ExtendableJPanel getNematodePanel() {
-		return this.nematodeVideoPanel;
+	public ExtendableJPanel getVideoPanel() {
+		return this.videoPanel;
 	}
 
 	@Override
 	public void updateImage() {
-		final BufferedImage newImageForPanel = this.videoFrame.getDisplayFrameImage()
-				.getImage();
+		final BufferedImage newImageForPanel = this.videoFrame.getDisplayFrameImage().getImage();
 
-		final JLabel imageLabel = this.nematodeVideoPanel.getImageLabel();
+		final JLabel imageLabel = this.videoPanel.getImageLabel();
 		imageLabel.setIcon(new ImageIcon(newImageForPanel));
 	}
 
-	@Override
 	public VideoFrameHandlerInterface getVideoFrameHandler() {
 		return this.videoFrameHandler;
 	}

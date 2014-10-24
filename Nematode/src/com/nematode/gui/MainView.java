@@ -3,14 +3,14 @@ package com.nematode.gui;
 import java.awt.BorderLayout;
 import java.awt.Container;
 
-public class NematodeMainView extends ExtendableJFrame {
+public class MainView extends ExtendableJFrame {
 
 	public static final int FRAME_WIDTH = 1920;
 	public static final int FRAME_HEIGHT = 1080;
 
 	private static final long serialVersionUID = 1L;
 
-	public NematodeMainView() {
+	public MainView() {
 		this.setDefaultCloseOperation(EXIT_ON_CLOSE);
 
 		final Container contentPane = this.getContentPane();

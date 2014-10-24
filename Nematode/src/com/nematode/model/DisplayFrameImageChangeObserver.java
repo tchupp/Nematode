@@ -1,14 +1,13 @@
 package com.nematode.model;
 
-import com.nematode.gui.NematodePanelViewControllerInterface;
+import com.nematode.gui.VideoPanelViewControllerInterface;
 
-public class DisplayFrameImageChangeObserver implements
-		VideoFrameObserverInterface {
+public class DisplayFrameImageChangeObserver implements VideoFrameObserverInterface {
 
-	private final NematodePanelViewControllerInterface panelViewController;
+	private final VideoPanelViewControllerInterface panelViewController;
 
 	public DisplayFrameImageChangeObserver(
-			final NematodePanelViewControllerInterface panelViewController) {
+			final VideoPanelViewControllerInterface panelViewController) {
 		this.panelViewController = panelViewController;
 	}
 
@@ -22,7 +21,7 @@ public class DisplayFrameImageChangeObserver implements
 		this.panelViewController.updateImage();
 	}
 
-	public NematodePanelViewControllerInterface getPanelViewController() {
+	public VideoPanelViewControllerInterface getPanelViewController() {
 		return this.panelViewController;
 	}
 

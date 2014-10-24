@@ -2,7 +2,7 @@ package com.nematode.model.factory;
 
 import org.junit.Test;
 
-import com.nematode.gui.NematodeVideoPanel;
+import com.nematode.gui.VideoPanel;
 import com.nematode.image.DisplayFrameImageInterface;
 import com.nematode.image.VideoFrameImageInterface;
 import com.nematode.model.factory.FrameImageAssembler;
@@ -24,8 +24,8 @@ public class FrameImageAssemblerTest extends AssertTestCase {
 		final DisplayFrameImageInterface displayFrameImage = imageAssembler
 				.createDisplayFrameImage(new NullBufferedImage());
 
-		assertEquals(NematodeVideoPanel.ICON_WIDTH, displayFrameImage.getImage().getWidth());
-		assertEquals(NematodeVideoPanel.ICON_HEIGHT, displayFrameImage.getImage().getHeight());
+		assertEquals(VideoPanel.ICON_WIDTH, displayFrameImage.getImage().getWidth());
+		assertEquals(VideoPanel.ICON_HEIGHT, displayFrameImage.getImage().getHeight());
 	}
 
 	@Test

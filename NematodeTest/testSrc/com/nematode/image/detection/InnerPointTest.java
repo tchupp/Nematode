@@ -2,8 +2,6 @@ package com.nematode.image.detection;
 
 import org.junit.Test;
 
-import com.nematode.image.detection.InnerPoint;
-import com.nematode.image.detection.InnerPointInterface;
 import com.nematode.unittesting.AssertTestCase;
 
 public class InnerPointTest extends AssertTestCase {
@@ -53,8 +51,7 @@ public class InnerPointTest extends AssertTestCase {
 	public void testToString() throws Exception {
 		final InnerPoint innerPoint = new InnerPoint(7, 8);
 
-		assertEquals("com.nematode.imaging.InnerPoint [7, 8]",
-				innerPoint.toString());
+		assertEquals("com.nematode.image.detection.InnerPoint [7, 8]", innerPoint.toString());
 	}
 
 }

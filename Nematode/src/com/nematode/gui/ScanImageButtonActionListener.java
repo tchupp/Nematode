@@ -5,10 +5,9 @@ import java.awt.event.ActionListener;
 
 public class ScanImageButtonActionListener implements ActionListener {
 
-	private final NematodePanelViewControllerInterface viewController;
+	private final TrackingPanelViewControllerInterface viewController;
 
-	public ScanImageButtonActionListener(
-			final NematodePanelViewControllerInterface viewController) {
+	public ScanImageButtonActionListener(final TrackingPanelViewControllerInterface viewController) {
 		this.viewController = viewController;
 	}
 
@@ -17,7 +16,7 @@ public class ScanImageButtonActionListener implements ActionListener {
 		this.viewController.updateImage();
 	}
 
-	public NematodePanelViewControllerInterface getPanelViewController() {
+	public TrackingPanelViewControllerInterface getPanelViewController() {
 		return this.viewController;
 	}
 

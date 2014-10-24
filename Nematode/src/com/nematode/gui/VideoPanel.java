@@ -13,7 +13,7 @@ import javax.swing.border.CompoundBorder;
 
 import com.nematode.nullmodel.NullBufferedImage;
 
-public class NematodeVideoPanel extends ExtendableJPanel {
+public class VideoPanel extends ExtendableJPanel {
 
 	public static final int ICON_WIDTH = 1500;
 	public static final int ICON_HEIGHT = 900;
@@ -21,7 +21,7 @@ public class NematodeVideoPanel extends ExtendableJPanel {
 	private static final long serialVersionUID = 1L;
 	private JLabel imageLabel;
 
-	public NematodeVideoPanel() {
+	public VideoPanel() {
 		this.setLayout(new GridBagLayout());
 		addImagePanelAndImageIcon();
 		addControlPanel();

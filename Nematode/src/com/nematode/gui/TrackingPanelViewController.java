@@ -4,16 +4,14 @@ import javax.swing.JButton;
 
 import com.nematode.model.VideoFrameHandlerInterface;
 
-public class NematodeTrackingPanelViewController implements
-		NematodePanelViewControllerInterface {
+public class TrackingPanelViewController implements TrackingPanelViewControllerInterface {
 
-	private final NematodeTrackingPanel nematodeTrackingPanel;
+	private final TrackingPanel trackingPanel;
 	private final VideoFrameHandlerInterface videoFrameHandler;
 
-	public NematodeTrackingPanelViewController(
-			final VideoFrameHandlerInterface videoFrameHandler) {
+	public TrackingPanelViewController(final VideoFrameHandlerInterface videoFrameHandler) {
 		this.videoFrameHandler = videoFrameHandler;
-		this.nematodeTrackingPanel = new NematodeTrackingPanel();
+		this.trackingPanel = new TrackingPanel();
 
 		addListenerToScanButton();
 	}
@@ -21,13 +19,13 @@ public class NematodeTrackingPanelViewController implements
 	private void addListenerToScanButton() {
 		final ScanImageButtonActionListener scanImageButtonActionListener = new ScanImageButtonActionListener(
 				this);
-		final JButton scanButton = this.nematodeTrackingPanel.getScanButton();
+		final JButton scanButton = this.trackingPanel.getScanButton();
 		scanButton.addActionListener(scanImageButtonActionListener);
 	}
 
 	@Override
-	public ExtendableJPanel getNematodePanel() {
-		return this.nematodeTrackingPanel;
+	public ExtendableJPanel getTrackingPanel() {
+		return this.trackingPanel;
 	}
 
 	@Override
@@ -36,7 +34,6 @@ public class NematodeTrackingPanelViewController implements
 		this.videoFrameHandler.updateDisplayImageFromScannedObjects();
 	}
 
-	@Override
 	public VideoFrameHandlerInterface getVideoFrameHandler() {
 		return this.videoFrameHandler;
 	}

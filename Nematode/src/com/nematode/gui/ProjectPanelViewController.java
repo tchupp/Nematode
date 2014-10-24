@@ -5,14 +5,12 @@ import javax.swing.JButton;
 import com.nematode.fileIO.ImageFileChooser;
 import com.nematode.model.VideoFrameHandlerInterface;
 
-public class NematodeProjectPanelViewController implements
-		NematodePanelViewControllerInterface {
+public class ProjectPanelViewController implements ProjectPanelViewControllerInterface {
 
-	private final NematodeProjectPanel nematodeProjectPanel = new NematodeProjectPanel();
+	private final ProjectPanel projectPanel = new ProjectPanel();
 	private final VideoFrameHandlerInterface videoFrameHandler;
 
-	public NematodeProjectPanelViewController(
-			final VideoFrameHandlerInterface videoFrameHandler) {
+	public ProjectPanelViewController(final VideoFrameHandlerInterface videoFrameHandler) {
 		this.videoFrameHandler = videoFrameHandler;
 		addListenerToOpenImageButton();
 	}
@@ -20,23 +18,16 @@ public class NematodeProjectPanelViewController implements
 	private void addListenerToOpenImageButton() {
 		final OpenImageButtonActionListener openImageButtonActionListener = new OpenImageButtonActionListener(
 				new ImageFileChooser(), this.videoFrameHandler);
-		final JButton openImageButton = this.nematodeProjectPanel
-				.getOpenImageButton();
+		final JButton openImageButton = this.projectPanel.getOpenImageButton();
 		openImageButton.addActionListener(openImageButtonActionListener);
 	}
 
 	@Override
-	public ExtendableJPanel getNematodePanel() {
-		return this.nematodeProjectPanel;
+	public ProjectPanel getProjectPanel() {
+		return this.projectPanel;
 	}
 
-	@Override
 	public VideoFrameHandlerInterface getVideoFrameHandler() {
 		return this.videoFrameHandler;
 	}
-
-	@Override
-	public void updateImage() {
-	}
-
 }

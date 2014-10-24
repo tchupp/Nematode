@@ -7,29 +7,29 @@ import org.junit.Test;
 
 import com.nematode.unittesting.AssertTestCase;
 
-public class NematodeTrackingPanelTest extends AssertTestCase {
+public class TrackingPanelTest extends AssertTestCase {
 
 	@Test
 	public void testExtendsJFrame() throws Exception {
-		assertExtends(ExtendableJPanel.class, NematodeTrackingPanel.class);
+		assertExtends(ExtendableJPanel.class, TrackingPanel.class);
 	}
 
 	@Test
 	public void testConstructorCorrectlySetsUpPanel() throws Exception {
-		final NematodeTrackingPanel nematodeTrackingPanel = new NematodeTrackingPanel();
+		final TrackingPanel trackingPanel = new TrackingPanel();
 
-		assertEquals(1, nematodeTrackingPanel.getComponentCount());
+		assertEquals(1, trackingPanel.getComponentCount());
 		assertIsOfTypeAndGet(CompoundBorder.class,
-				nematodeTrackingPanel.getBorder());
+				trackingPanel.getBorder());
 	}
 
 	@Test
 	public void testScanButton() throws Exception {
-		final NematodeTrackingPanel nematodeTrackingPanel = new NematodeTrackingPanel();
+		final TrackingPanel trackingPanel = new TrackingPanel();
 
 		final JButton scanButtonFromIOTAG = assertIsOfTypeAndGet(JButton.class,
-				nematodeTrackingPanel.getComponent(0));
-		final JButton scanButtonFromGetter = nematodeTrackingPanel
+				trackingPanel.getComponent(0));
+		final JButton scanButtonFromGetter = trackingPanel
 				.getScanButton();
 		assertSame(scanButtonFromGetter, scanButtonFromIOTAG);
 		assertEquals("scanButton", scanButtonFromIOTAG.getName());

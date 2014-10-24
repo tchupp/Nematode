@@ -5,21 +5,21 @@ import javax.swing.JButton;
 import javax.swing.border.Border;
 import javax.swing.border.CompoundBorder;
 
-public class NematodeProjectPanel extends ExtendableJPanel {
+public class TrackingPanel extends ExtendableJPanel {
 
 	private static final long serialVersionUID = 1L;
-	private JButton openImageButton;
+	private JButton scanButton;
 
-	public NematodeProjectPanel() {
+	public TrackingPanel() {
+		setupTrackingButton();
 		setupBorder();
-		setupOpenImageButton();
 	}
 
-	private void setupOpenImageButton() {
-		this.openImageButton = new JButton();
-		this.openImageButton.setName("openImageButton");
-		this.openImageButton.setText("Open Image");
-		this.add(this.openImageButton);
+	private void setupTrackingButton() {
+		this.scanButton = new JButton();
+		this.scanButton.setName("scanButton");
+		this.scanButton.setText("Scan Image");
+		this.add(this.scanButton);
 	}
 
 	private void setupBorder() {
@@ -30,10 +30,11 @@ public class NematodeProjectPanel extends ExtendableJPanel {
 		final CompoundBorder compoundBorder = BorderFactory
 				.createCompoundBorder(raisedBevelBorder, loweredBevelBorder);
 
-		setBorder(compoundBorder);
+		this.setBorder(compoundBorder);
 	}
 
-	public JButton getOpenImageButton() {
-		return this.openImageButton;
+	public JButton getScanButton() {
+		return this.scanButton;
 	}
+
 }

@@ -5,7 +5,7 @@ public class MockMainViewController implements MainViewControllerInterface {
 	private final MockNematodeFrame mockNematodeFrame = new MockNematodeFrame();
 
 	@Override
-	public ExtendableJFrame getNematodeMainView() {
+	public ExtendableJFrame getMainView() {
 		return this.mockNematodeFrame;
 	}
 

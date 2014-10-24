@@ -15,16 +15,16 @@ import org.junit.Test;
 import com.nematode.nullmodel.NullBufferedImage;
 import com.nematode.unittesting.AssertTestCase;
 
-public class NematodeVideoPanelTest extends AssertTestCase {
+public class VideoPanelTest extends AssertTestCase {
 
 	@Test
 	public void testExtendsNematodePanel() throws Exception {
-		assertExtends(ExtendableJPanel.class, NematodeVideoPanel.class);
+		assertExtends(ExtendableJPanel.class, VideoPanel.class);
 	}
 
 	@Test
 	public void testConstructorCorrectlySetsUpPanel() throws Exception {
-		final NematodeVideoPanel videoPanel = new NematodeVideoPanel();
+		final VideoPanel videoPanel = new VideoPanel();
 
 		assertEquals(2, videoPanel.getComponentCount());
 
@@ -55,7 +55,7 @@ public class NematodeVideoPanelTest extends AssertTestCase {
 
 	@Test
 	public void testImagePanelAndImageLabel() throws Exception {
-		final NematodeVideoPanel videoPanel = new NematodeVideoPanel();
+		final VideoPanel videoPanel = new VideoPanel();
 		final JPanel imagePanel = assertIsOfTypeAndGet(JPanel.class,
 				videoPanel.getComponent(0));
 		assertEquals("imagePanel", imagePanel.getName());
@@ -65,7 +65,7 @@ public class NematodeVideoPanelTest extends AssertTestCase {
 				imagePanel.getComponent(0));
 		assertEquals("imageLabel", imageLabel.getName());
 		final Dimension expectedDimentions = new Dimension(
-				NematodeVideoPanel.ICON_WIDTH, NematodeVideoPanel.ICON_HEIGHT);
+				VideoPanel.ICON_WIDTH, VideoPanel.ICON_HEIGHT);
 		assertEquals(expectedDimentions, imageLabel.getSize());
 
 		final ImageIcon imageIcon = assertIsOfTypeAndGet(ImageIcon.class,
@@ -83,7 +83,7 @@ public class NematodeVideoPanelTest extends AssertTestCase {
 
 	@Test
 	public void testGetImageLabel() throws Exception {
-		final NematodeVideoPanel videoPanel = new NematodeVideoPanel();
+		final VideoPanel videoPanel = new VideoPanel();
 
 		assertEquals(2, videoPanel.getComponentCount());
 		final JPanel imagePanel = assertIsOfTypeAndGet(JPanel.class,
@@ -99,7 +99,7 @@ public class NematodeVideoPanelTest extends AssertTestCase {
 
 	@Test
 	public void testIconWidthAndHeightConstants() throws Exception {
-		assertEquals(1500, NematodeVideoPanel.ICON_WIDTH);
-		assertEquals(900, NematodeVideoPanel.ICON_HEIGHT);
+		assertEquals(1500, VideoPanel.ICON_WIDTH);
+		assertEquals(900, VideoPanel.ICON_HEIGHT);
 	}
 }

@@ -7,29 +7,29 @@ import org.junit.Test;
 
 import com.nematode.unittesting.AssertTestCase;
 
-public class NematodeProjectPanelTest extends AssertTestCase {
+public class ProjectPanelTest extends AssertTestCase {
 
 	@Test
 	public void testExtendsNematodePanel() throws Exception {
-		assertExtends(ExtendableJPanel.class, NematodeProjectPanel.class);
+		assertExtends(ExtendableJPanel.class, ProjectPanel.class);
 	}
 
 	@Test
 	public void testConstructorCorrectlySetsUpPanel() throws Exception {
-		final NematodeProjectPanel nematodeProjectPanel = new NematodeProjectPanel();
+		final ProjectPanel projectPanel = new ProjectPanel();
 
-		assertEquals(1, nematodeProjectPanel.getComponents().length);
+		assertEquals(1, projectPanel.getComponents().length);
 		assertIsOfTypeAndGet(CompoundBorder.class,
-				nematodeProjectPanel.getBorder());
+				projectPanel.getBorder());
 	}
 
 	@Test
 	public void testGetOpenImageButton() throws Exception {
-		final NematodeProjectPanel nematodeProjectPanel = new NematodeProjectPanel();
+		final ProjectPanel projectPanel = new ProjectPanel();
 
 		final JButton openImageButtonFromIOTAG = assertIsOfTypeAndGet(
-				JButton.class, nematodeProjectPanel.getComponent(0));
-		final JButton openImageButtonFromGetter = nematodeProjectPanel
+				JButton.class, projectPanel.getComponent(0));
+		final JButton openImageButtonFromGetter = projectPanel
 				.getOpenImageButton();
 		assertSame(openImageButtonFromGetter, openImageButtonFromIOTAG);
 		assertEquals("openImageButton", openImageButtonFromIOTAG.getName());

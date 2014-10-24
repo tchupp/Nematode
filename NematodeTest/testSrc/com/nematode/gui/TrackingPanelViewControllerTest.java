@@ -7,42 +7,41 @@ import org.junit.Test;
 import com.nematode.image.MockVideoFrameHandler;
 import com.nematode.unittesting.AssertTestCase;
 
-public class NematodeTrackingPanelViewControllerTest extends AssertTestCase {
+public class TrackingPanelViewControllerTest extends AssertTestCase {
 
 	@Test
 	public void testImplementsInterface() throws Exception {
-		assertImplementsInterface(NematodePanelViewControllerInterface.class,
-				NematodeTrackingPanelViewController.class);
+		assertImplementsInterface(TrackingPanelViewControllerInterface.class,
+				TrackingPanelViewController.class);
 	}
 
 	@Test
 	public void testGetsNematodeTrackingPanel() throws Exception {
-		final NematodeTrackingPanelViewController nematodeTrackingPanelViewController = new NematodeTrackingPanelViewController(
+		final TrackingPanelViewController trackingPanelViewController = new TrackingPanelViewController(
 				new MockVideoFrameHandler());
 
-		assertIsOfTypeAndGet(NematodeTrackingPanel.class,
-				nematodeTrackingPanelViewController.getNematodePanel());
+		assertIsOfTypeAndGet(TrackingPanel.class, trackingPanelViewController.getTrackingPanel());
 	}
 
 	@Test
 	public void testGetsVideoFrame() throws Exception {
 		final MockVideoFrameHandler expectedFrameHandler = new MockVideoFrameHandler();
-		final NematodeTrackingPanelViewController viewController = new NematodeTrackingPanelViewController(
+		final TrackingPanelViewController viewController = new TrackingPanelViewController(
 				expectedFrameHandler);
 		assertSame(expectedFrameHandler, viewController.getVideoFrameHandler());
 	}
 
 	@Test
 	public void testConstructorAddsListener_ScanImageButtonOnPanel() throws Exception {
-		final NematodeTrackingPanelViewController viewController = new NematodeTrackingPanelViewController(
+		final TrackingPanelViewController viewController = new TrackingPanelViewController(
 				new MockVideoFrameHandler());
-		final NematodeTrackingPanel trackingPanel = assertIsOfTypeAndGet(
-				NematodeTrackingPanel.class, viewController.getNematodePanel());
+		final TrackingPanel trackingPanel = assertIsOfTypeAndGet(TrackingPanel.class,
+				viewController.getTrackingPanel());
 		final JButton scanButton = trackingPanel.getScanButton();
 		assertEquals(1, scanButton.getActionListeners().length);
 		final ScanImageButtonActionListener buttonActionListener = assertIsOfTypeAndGet(
 				ScanImageButtonActionListener.class, scanButton.getActionListeners()[0]);
-		final NematodePanelViewControllerInterface actualViewController = buttonActionListener
+		final TrackingPanelViewControllerInterface actualViewController = buttonActionListener
 				.getPanelViewController();
 		assertSame(viewController, actualViewController);
 	}
@@ -64,7 +63,7 @@ public class NematodeTrackingPanelViewControllerTest extends AssertTestCase {
 			};
 		};
 
-		final NematodeTrackingPanelViewController viewController = new NematodeTrackingPanelViewController(
+		final TrackingPanelViewController viewController = new TrackingPanelViewController(
 				mockHandler);
 
 		assertFalse(mockHandler.wasScanImageCalled());
