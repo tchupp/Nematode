@@ -13,7 +13,7 @@ import javax.swing.border.CompoundBorder;
 
 import com.nematode.nullmodel.NullBufferedImage;
 
-public class NematodeVideoPanel extends NematodePanel {
+public class NematodeVideoPanel extends ExtendableJPanel {
 
 	public static final int ICON_WIDTH = 1500;
 	public static final int ICON_HEIGHT = 900;

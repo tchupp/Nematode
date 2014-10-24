@@ -3,8 +3,7 @@ package com.nematode.gui;
 import javax.swing.JButton;
 
 import com.nematode.fileIO.ImageFileChooser;
-import com.nematode.fileIO.OpenImageButtonActionListener;
-import com.nematode.imaging.VideoFrameHandlerInterface;
+import com.nematode.model.VideoFrameHandlerInterface;
 
 public class NematodeProjectPanelViewController implements
 		NematodePanelViewControllerInterface {
@@ -27,7 +26,7 @@ public class NematodeProjectPanelViewController implements
 	}
 
 	@Override
-	public NematodePanel getNematodePanel() {
+	public ExtendableJPanel getNematodePanel() {
 		return this.nematodeProjectPanel;
 	}
 

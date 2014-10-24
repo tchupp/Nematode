@@ -14,7 +14,7 @@ public class NematodeMainViewTest extends AssertTestCase {
 	@Test
 	public void testExtendsJFrame() throws Exception {
 		final NematodeMainView nematodeMainView = new NematodeMainView();
-		assertExtends(NematodeFrame.class, nematodeMainView.getClass());
+		assertExtends(ExtendableJFrame.class, nematodeMainView.getClass());
 
 		nematodeMainView.dispose();
 	}

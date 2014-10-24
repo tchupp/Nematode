@@ -2,14 +2,15 @@ package com.nematode.model;
 
 import java.util.ArrayList;
 
-import com.nematode.imaging.ContourAreaCalculator;
-import com.nematode.imaging.ContourAreaInterface;
-import com.nematode.imaging.ContourLines;
-import com.nematode.imaging.ContourLinesInterface;
-import com.nematode.imaging.ContourPoint;
-import com.nematode.imaging.ContourPointInterface;
-import com.nematode.imaging.MockContourArea;
-import com.nematode.imaging.MockContourLines;
+import com.nematode.image.MockContourArea;
+import com.nematode.image.MockContourLines;
+import com.nematode.image.detection.ContourAreaCalculator;
+import com.nematode.image.detection.ContourAreaInterface;
+import com.nematode.image.detection.ContourLines;
+import com.nematode.image.detection.ContourLinesInterface;
+import com.nematode.image.detection.ContourPoint;
+import com.nematode.image.detection.ContourPointInterface;
+import com.nematode.model.factory.NematodeWormBuilder;
 
 public class MockNematodeWorm implements NematodeWormInterface {
 
@@ -49,8 +50,7 @@ public class MockNematodeWorm implements NematodeWormInterface {
 
 		final NematodeWormBuilder nematodeWormBuilder = new NematodeWormBuilder(
 				new ContourAreaCalculator());
-		final NematodeWormInterface worm = nematodeWormBuilder
-				.buildWorm(contourLinesForWorm);
+		final NematodeWormInterface worm = nematodeWormBuilder.buildWorm(contourLinesForWorm);
 
 		return worm;
 	}

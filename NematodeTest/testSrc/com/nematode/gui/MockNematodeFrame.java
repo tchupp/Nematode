@@ -1,6 +1,6 @@
 package com.nematode.gui;
 
-public class MockNematodeFrame extends NematodeFrame {
+public class MockNematodeFrame extends ExtendableJFrame {
 
 	private static final long serialVersionUID = 1L;
 	private boolean isVisible;

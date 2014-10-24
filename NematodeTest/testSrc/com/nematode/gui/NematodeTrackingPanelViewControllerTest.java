@@ -4,7 +4,7 @@ import javax.swing.JButton;
 
 import org.junit.Test;
 
-import com.nematode.imaging.MockVideoFrameHandler;
+import com.nematode.image.MockVideoFrameHandler;
 import com.nematode.unittesting.AssertTestCase;
 
 public class NematodeTrackingPanelViewControllerTest extends AssertTestCase {
@@ -25,7 +25,7 @@ public class NematodeTrackingPanelViewControllerTest extends AssertTestCase {
 	}
 
 	@Test
-	public void testGetsNematodeVideoFrame() throws Exception {
+	public void testGetsVideoFrame() throws Exception {
 		final MockVideoFrameHandler expectedFrameHandler = new MockVideoFrameHandler();
 		final NematodeTrackingPanelViewController viewController = new NematodeTrackingPanelViewController(
 				expectedFrameHandler);
@@ -33,8 +33,7 @@ public class NematodeTrackingPanelViewControllerTest extends AssertTestCase {
 	}
 
 	@Test
-	public void testConstructorAddsListener_ScanImageButtonOnPanel()
-			throws Exception {
+	public void testConstructorAddsListener_ScanImageButtonOnPanel() throws Exception {
 		final NematodeTrackingPanelViewController viewController = new NematodeTrackingPanelViewController(
 				new MockVideoFrameHandler());
 		final NematodeTrackingPanel trackingPanel = assertIsOfTypeAndGet(
@@ -42,16 +41,14 @@ public class NematodeTrackingPanelViewControllerTest extends AssertTestCase {
 		final JButton scanButton = trackingPanel.getScanButton();
 		assertEquals(1, scanButton.getActionListeners().length);
 		final ScanImageButtonActionListener buttonActionListener = assertIsOfTypeAndGet(
-				ScanImageButtonActionListener.class,
-				scanButton.getActionListeners()[0]);
+				ScanImageButtonActionListener.class, scanButton.getActionListeners()[0]);
 		final NematodePanelViewControllerInterface actualViewController = buttonActionListener
 				.getPanelViewController();
 		assertSame(viewController, actualViewController);
 	}
 
 	@Test
-	public void testUpdateImageCallsScan_AndUpdateDisplayImage_OnFrameHandler()
-			throws Exception {
+	public void testUpdateImageCallsScan_AndUpdateDisplayImage_OnFrameHandler() throws Exception {
 
 		final MockVideoFrameHandler mockHandler = new MockVideoFrameHandler() {
 			@Override

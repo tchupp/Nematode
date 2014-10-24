@@ -5,9 +5,9 @@ import java.lang.reflect.Modifier;
 
 import org.junit.Test;
 
-import com.nematode.imaging.DisplayFrameImageInterface;
-import com.nematode.imaging.ProcessedFrameImageInterface;
-import com.nematode.imaging.VideoFrameImageInterface;
+import com.nematode.image.DisplayFrameImageInterface;
+import com.nematode.image.ProcessedFrameImageInterface;
+import com.nematode.image.VideoFrameImageInterface;
 import com.nematode.unittesting.AssertTestCase;
 
 public class NullFrameImageTest extends AssertTestCase {

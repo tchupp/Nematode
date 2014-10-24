@@ -4,9 +4,8 @@ import javax.swing.JButton;
 
 import org.junit.Test;
 
-import com.nematode.fileIO.OpenImageButtonActionListener;
-import com.nematode.imaging.MockVideoFrameHandler;
-import com.nematode.imaging.VideoFrameHandlerInterface;
+import com.nematode.image.MockVideoFrameHandler;
+import com.nematode.model.VideoFrameHandlerInterface;
 import com.nematode.unittesting.AssertTestCase;
 
 public class NematodeProjectPanelViewControllerTest extends AssertTestCase {
@@ -38,23 +37,19 @@ public class NematodeProjectPanelViewControllerTest extends AssertTestCase {
 	}
 
 	@Test
-	public void testConstructionAddsListener_OpenImageButtonOnPanel()
-			throws Exception {
+	public void testConstructionAddsListener_OpenImageButtonOnPanel() throws Exception {
 		final MockVideoFrameHandler expectedVideoFrameHandler = new MockVideoFrameHandler();
 		final NematodeProjectPanelViewController nematodeProjectPanelViewController = new NematodeProjectPanelViewController(
 				expectedVideoFrameHandler);
 
 		final NematodeProjectPanel nematodeProjectPanel = assertIsOfTypeAndGet(
-				NematodeProjectPanel.class,
-				nematodeProjectPanelViewController.getNematodePanel());
+				NematodeProjectPanel.class, nematodeProjectPanelViewController.getNematodePanel());
 
-		final JButton openImageButton = nematodeProjectPanel
-				.getOpenImageButton();
+		final JButton openImageButton = nematodeProjectPanel.getOpenImageButton();
 		assertEquals(1, openImageButton.getActionListeners().length);
 
 		final OpenImageButtonActionListener imageButtonActionListener = assertIsOfTypeAndGet(
-				OpenImageButtonActionListener.class,
-				openImageButton.getActionListeners()[0]);
+				OpenImageButtonActionListener.class, openImageButton.getActionListeners()[0]);
 
 		final VideoFrameHandlerInterface actualVideoFrameHandler = imageButtonActionListener
 				.getVideoFrameHandler();

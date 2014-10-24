@@ -3,7 +3,7 @@ package com.nematode.model;
 import com.nematode.gui.NematodePanelViewControllerInterface;
 
 public class DisplayFrameImageChangeObserver implements
-		NematodeVideoFrameObserverInterface {
+		VideoFrameObserverInterface {
 
 	private final NematodePanelViewControllerInterface panelViewController;
 

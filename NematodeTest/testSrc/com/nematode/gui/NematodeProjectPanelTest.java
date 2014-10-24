@@ -11,7 +11,7 @@ public class NematodeProjectPanelTest extends AssertTestCase {
 
 	@Test
 	public void testExtendsNematodePanel() throws Exception {
-		assertExtends(NematodePanel.class, NematodeProjectPanel.class);
+		assertExtends(ExtendableJPanel.class, NematodeProjectPanel.class);
 	}
 
 	@Test

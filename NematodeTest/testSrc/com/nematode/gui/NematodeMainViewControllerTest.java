@@ -5,16 +5,16 @@ import java.awt.Container;
 
 import org.junit.Test;
 
-import com.nematode.imaging.ContourAreaCalculator;
-import com.nematode.imaging.EdgeDetectionRunner;
-import com.nematode.imaging.FrameImageAssembler;
-import com.nematode.imaging.ImageProcessingHelper;
-import com.nematode.imaging.ImageProcessingRunner;
-import com.nematode.imaging.SquareContourTracer;
-import com.nematode.imaging.VideoFrameHandler;
-import com.nematode.imaging.VideoFrameHandlerInterface;
-import com.nematode.model.NematodeVideoFrame;
-import com.nematode.model.NematodeWormBuilder;
+import com.nematode.image.detection.ContourAreaCalculator;
+import com.nematode.image.detection.EdgeDetectionRunner;
+import com.nematode.image.detection.SquareContourTracer;
+import com.nematode.image.processing.ImageProcessingHelper;
+import com.nematode.image.processing.ImageProcessingRunner;
+import com.nematode.model.VideoFrame;
+import com.nematode.model.VideoFrameHandler;
+import com.nematode.model.VideoFrameHandlerInterface;
+import com.nematode.model.factory.FrameImageAssembler;
+import com.nematode.model.factory.NematodeWormBuilder;
 import com.nematode.unittesting.AssertTestCase;
 
 public class NematodeMainViewControllerTest extends AssertTestCase {
@@ -28,7 +28,7 @@ public class NematodeMainViewControllerTest extends AssertTestCase {
 	@Test
 	public void testConstructionAddsPanelsToViewCorrectly() throws Exception {
 		final NematodeMainViewController nematodeMainViewController = new NematodeMainViewController();
-		final NematodeFrame nematodeMainView = nematodeMainViewController
+		final ExtendableJFrame nematodeMainView = nematodeMainViewController
 				.getNematodeMainView();
 
 		final Container contentPane = nematodeMainView.getContentPane();
@@ -47,8 +47,8 @@ public class NematodeMainViewControllerTest extends AssertTestCase {
 				VideoFrameHandler.class,
 				nematodeMainViewController.getVideoFrameHandler());
 
-		assertIsOfTypeAndGet(NematodeVideoFrame.class,
-				videoFrameHandler.getNematodeVideoFrame());
+		assertIsOfTypeAndGet(VideoFrame.class,
+				videoFrameHandler.getVideoFrame());
 		assertIsOfTypeAndGet(FrameImageAssembler.class,
 				videoFrameHandler.getFrameImageAssembler());
 

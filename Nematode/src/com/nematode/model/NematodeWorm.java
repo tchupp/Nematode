@@ -1,7 +1,8 @@
 package com.nematode.model;
 
-import com.nematode.imaging.ContourAreaInterface;
-import com.nematode.imaging.ContourLinesInterface;
+import com.nematode.image.detection.ContourAreaInterface;
+import com.nematode.image.detection.ContourLinesInterface;
+
 
 public class NematodeWorm implements NematodeWormInterface {
 

@@ -2,9 +2,9 @@ package com.nematode.nullmodel;
 
 import java.awt.image.BufferedImage;
 
-import com.nematode.imaging.DisplayFrameImageInterface;
-import com.nematode.imaging.ProcessedFrameImageInterface;
-import com.nematode.imaging.VideoFrameImageInterface;
+import com.nematode.image.DisplayFrameImageInterface;
+import com.nematode.image.ProcessedFrameImageInterface;
+import com.nematode.image.VideoFrameImageInterface;
 
 public class NullFrameImage implements VideoFrameImageInterface,
 		DisplayFrameImageInterface, ProcessedFrameImageInterface {

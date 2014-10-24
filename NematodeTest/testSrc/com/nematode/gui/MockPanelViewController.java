@@ -1,6 +1,6 @@
 package com.nematode.gui;
 
-import com.nematode.imaging.VideoFrameHandlerInterface;
+import com.nematode.model.VideoFrameHandlerInterface;
 
 public class MockPanelViewController implements
 		NematodePanelViewControllerInterface {
@@ -9,8 +9,8 @@ public class MockPanelViewController implements
 	private VideoFrameHandlerInterface videoFrameHandler;
 
 	@Override
-	public NematodePanel getNematodePanel() {
-		return new NematodePanel();
+	public ExtendableJPanel getNematodePanel() {
+		return new ExtendableJPanel();
 	}
 
 	@Override

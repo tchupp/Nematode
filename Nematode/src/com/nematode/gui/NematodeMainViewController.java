@@ -3,23 +3,23 @@ package com.nematode.gui;
 import java.awt.BorderLayout;
 import java.awt.Container;
 
-import com.nematode.imaging.ContourAreaCalculator;
-import com.nematode.imaging.EdgeDetectionRunner;
-import com.nematode.imaging.FrameImageAssembler;
-import com.nematode.imaging.ImageProcessingHelper;
-import com.nematode.imaging.ImageProcessingRunner;
-import com.nematode.imaging.SquareContourTracer;
-import com.nematode.imaging.VideoFrameHandler;
-import com.nematode.imaging.VideoFrameHandlerInterface;
-import com.nematode.model.NematodeVideoFrame;
-import com.nematode.model.NematodeWormBuilder;
+import com.nematode.image.detection.ContourAreaCalculator;
+import com.nematode.image.detection.EdgeDetectionRunner;
+import com.nematode.image.detection.SquareContourTracer;
+import com.nematode.image.processing.ImageProcessingHelper;
+import com.nematode.image.processing.ImageProcessingRunner;
+import com.nematode.model.VideoFrame;
+import com.nematode.model.VideoFrameHandler;
+import com.nematode.model.VideoFrameHandlerInterface;
+import com.nematode.model.factory.FrameImageAssembler;
+import com.nematode.model.factory.NematodeWormBuilder;
 
 public class NematodeMainViewController implements MainViewControllerInterface {
 
 	private final NematodePanelViewControllerInterface nematodeProjectPanelViewController;
 	private final NematodePanelViewControllerInterface nematodeVideoPanelViewController;
 	private final NematodePanelViewControllerInterface nematodeTrackingPanelViewController;
-	private final NematodeFrame nematodeMainView;
+	private final ExtendableJFrame nematodeMainView;
 	private VideoFrameHandlerInterface videoFrameHandler;
 
 	public NematodeMainViewController() {
@@ -38,7 +38,7 @@ public class NematodeMainViewController implements MainViewControllerInterface {
 	}
 
 	private void setUpVideoFrameHandler() {
-		final NematodeVideoFrame nematodeVideoFrame = new NematodeVideoFrame();
+		final VideoFrame videoFrame = new VideoFrame();
 
 		final ImageProcessingRunner imageProcessingRunner = new ImageProcessingRunner(
 				new ImageProcessingHelper());
@@ -48,7 +48,7 @@ public class NematodeMainViewController implements MainViewControllerInterface {
 				new SquareContourTracer(), nematodeWormBuilder,
 				new ImageProcessingHelper());
 
-		this.videoFrameHandler = new VideoFrameHandler(nematodeVideoFrame,
+		this.videoFrameHandler = new VideoFrameHandler(videoFrame,
 				new FrameImageAssembler(), imageProcessingRunner,
 				edgeDetectionRunner);
 	}
@@ -68,7 +68,7 @@ public class NematodeMainViewController implements MainViewControllerInterface {
 	}
 
 	@Override
-	public NematodeFrame getNematodeMainView() {
+	public ExtendableJFrame getNematodeMainView() {
 		return this.nematodeMainView;
 	}
 

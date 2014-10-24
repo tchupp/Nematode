@@ -5,7 +5,7 @@ import javax.swing.JButton;
 import javax.swing.border.Border;
 import javax.swing.border.CompoundBorder;
 
-public class NematodeTrackingPanel extends NematodePanel {
+public class NematodeTrackingPanel extends ExtendableJPanel {
 
 	private static final long serialVersionUID = 1L;
 	private JButton scanButton;

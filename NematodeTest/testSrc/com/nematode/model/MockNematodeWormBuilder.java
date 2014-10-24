@@ -1,6 +1,7 @@
 package com.nematode.model;
 
-import com.nematode.imaging.ContourLinesInterface;
+import com.nematode.image.detection.ContourLinesInterface;
+import com.nematode.model.factory.NematodeWormBuilderInterface;
 
 public class MockNematodeWormBuilder implements NematodeWormBuilderInterface {
 

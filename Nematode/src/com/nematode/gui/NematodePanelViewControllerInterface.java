@@ -1,10 +1,10 @@
 package com.nematode.gui;
 
-import com.nematode.imaging.VideoFrameHandlerInterface;
+import com.nematode.model.VideoFrameHandlerInterface;
 
 public interface NematodePanelViewControllerInterface {
 
-	public NematodePanel getNematodePanel();
+	public ExtendableJPanel getNematodePanel();
 
 	public void updateImage();
 

@@ -9,10 +9,10 @@ import javax.swing.JLabel;
 
 import org.junit.Test;
 
-import com.nematode.imaging.MockDisplayFrameImage;
-import com.nematode.imaging.MockVideoFrameHandler;
+import com.nematode.image.MockDisplayFrameImage;
+import com.nematode.image.MockVideoFrameHandler;
 import com.nematode.model.DisplayFrameImageChangeObserver;
-import com.nematode.model.NematodeVideoFrame;
+import com.nematode.model.VideoFrame;
 import com.nematode.nullmodel.NullBufferedImage;
 import com.nematode.unittesting.AssertTestCase;
 
@@ -47,8 +47,7 @@ public class NematodeVideoPanelViewControllerTest extends AssertTestCase {
 		final MockVideoFrameHandler expectedFrameHandler = new MockVideoFrameHandler();
 		final NematodeVideoPanelViewController nematodeVideoPanelViewController = new NematodeVideoPanelViewController(
 				expectedFrameHandler);
-		assertSame(expectedFrameHandler,
-				nematodeVideoPanelViewController.getVideoFrameHandler());
+		assertSame(expectedFrameHandler, nematodeVideoPanelViewController.getVideoFrameHandler());
 	}
 
 	@Test
@@ -60,56 +59,53 @@ public class NematodeVideoPanelViewControllerTest extends AssertTestCase {
 	}
 
 	@Test
-	public void testConstructorAddsObserverToVideoFrameWithCorrectViewController()
-			throws Exception {
-		final NematodeVideoFrame nematodeVideoFrame = new NematodeVideoFrame();
+	public void testConstructorAddsObserverToVideoFrameWithCorrectViewController() throws Exception {
+		final VideoFrame videoFrame = new VideoFrame();
 		final MockVideoFrameHandler mockFrameHandler = new MockVideoFrameHandler();
-		mockFrameHandler.setNematodeVideoFrame(nematodeVideoFrame);
+		mockFrameHandler.setVideoFrame(videoFrame);
 
 		final NematodeVideoPanelViewController viewController = new NematodeVideoPanelViewController(
 				mockFrameHandler);
-		assertEquals(1, nematodeVideoFrame.getListOfObservers().size());
+		assertEquals(1, videoFrame.getListOfObservers().size());
 
 		final DisplayFrameImageChangeObserver observer = assertIsOfTypeAndGet(
-				DisplayFrameImageChangeObserver.class,
-				viewController.getFrameObserver());
+				DisplayFrameImageChangeObserver.class, viewController.getFrameObserver());
 
 		final NematodePanelViewControllerInterface actualViewController = observer
 				.getPanelViewController();
 		assertSame(viewController, actualViewController);
 
-		nematodeVideoFrame.dispose();
-		assertEquals(0, nematodeVideoFrame.getListOfObservers().size());
+		videoFrame.dispose();
+		assertEquals(0, videoFrame.getListOfObservers().size());
 	}
 
 	@Test
 	public void testUpdateImagePlacesCorrectImageOnPanel() throws Exception {
 
-		final MockNematodeVideoFrame videoFrame = new MockNematodeVideoFrame();
+		final MockVideoFrame videoFrame = new MockVideoFrame();
 		final MockDisplayFrameImage displayFrameImage = new MockDisplayFrameImage();
 		displayFrameImage.setBufferedImage(this.bufferedTestImage);
 		videoFrame.setDisplayFrameImage(displayFrameImage);
 
 		final MockVideoFrameHandler mockFrameHandler = new MockVideoFrameHandler();
-		mockFrameHandler.setNematodeVideoFrame(videoFrame);
+		mockFrameHandler.setVideoFrame(videoFrame);
 
 		final NematodeVideoPanelViewController viewController = new NematodeVideoPanelViewController(
 				mockFrameHandler);
-		final NematodeVideoPanel videoPanel = assertIsOfTypeAndGet(
-				NematodeVideoPanel.class, viewController.getNematodePanel());
+		final NematodeVideoPanel videoPanel = assertIsOfTypeAndGet(NematodeVideoPanel.class,
+				viewController.getNematodePanel());
 		final JLabel imageLabel = videoPanel.getImageLabel();
-		final ImageIcon imageLabelIconBefore = assertIsOfTypeAndGet(
-				ImageIcon.class, imageLabel.getIcon());
+		final ImageIcon imageLabelIconBefore = assertIsOfTypeAndGet(ImageIcon.class,
+				imageLabel.getIcon());
 
-		assertIsOfTypeAndGet(NullBufferedImage.class,
-				imageLabelIconBefore.getImage());
+		assertIsOfTypeAndGet(NullBufferedImage.class, imageLabelIconBefore.getImage());
 
 		viewController.updateImage();
 
-		final ImageIcon imageLabelIconAfter = assertIsOfTypeAndGet(
-				ImageIcon.class, imageLabel.getIcon());
-		final BufferedImage actualImage = assertIsOfTypeAndGet(
-				BufferedImage.class, imageLabelIconAfter.getImage());
+		final ImageIcon imageLabelIconAfter = assertIsOfTypeAndGet(ImageIcon.class,
+				imageLabel.getIcon());
+		final BufferedImage actualImage = assertIsOfTypeAndGet(BufferedImage.class,
+				imageLabelIconAfter.getImage());
 		assertSame(this.bufferedTestImage, actualImage);
 	}
 }

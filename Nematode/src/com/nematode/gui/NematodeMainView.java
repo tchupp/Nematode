@@ -3,7 +3,7 @@ package com.nematode.gui;
 import java.awt.BorderLayout;
 import java.awt.Container;
 
-public class NematodeMainView extends NematodeFrame {
+public class NematodeMainView extends ExtendableJFrame {
 
 	public static final int FRAME_WIDTH = 1920;
 	public static final int FRAME_HEIGHT = 1080;

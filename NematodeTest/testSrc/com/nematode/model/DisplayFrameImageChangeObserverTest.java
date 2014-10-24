@@ -9,7 +9,7 @@ public class DisplayFrameImageChangeObserverTest extends AssertTestCase {
 
 	@Test
 	public void testImplementsInterface() throws Exception {
-		assertImplementsInterface(NematodeVideoFrameObserverInterface.class,
+		assertImplementsInterface(VideoFrameObserverInterface.class,
 				DisplayFrameImageChangeObserver.class);
 	}
 

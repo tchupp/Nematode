@@ -10,7 +10,7 @@ public class NematodeTrackingLauncher {
 	}
 
 	public void launchApplication() {
-		final NematodeFrame nematodeMainView = this.mainViewController
+		final ExtendableJFrame nematodeMainView = this.mainViewController
 				.getNematodeMainView();
 		nematodeMainView.setVisible(true);
 	}

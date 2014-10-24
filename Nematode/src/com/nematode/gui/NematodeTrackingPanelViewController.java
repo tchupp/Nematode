@@ -2,7 +2,7 @@ package com.nematode.gui;
 
 import javax.swing.JButton;
 
-import com.nematode.imaging.VideoFrameHandlerInterface;
+import com.nematode.model.VideoFrameHandlerInterface;
 
 public class NematodeTrackingPanelViewController implements
 		NematodePanelViewControllerInterface {
@@ -26,7 +26,7 @@ public class NematodeTrackingPanelViewController implements
 	}
 
 	@Override
-	public NematodePanel getNematodePanel() {
+	public ExtendableJPanel getNematodePanel() {
 		return this.nematodeTrackingPanel;
 	}
 
