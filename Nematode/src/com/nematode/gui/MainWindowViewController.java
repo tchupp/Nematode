@@ -14,16 +14,16 @@ import com.nematode.model.VideoFrameHandlerInterface;
 import com.nematode.model.factory.FrameImageAssembler;
 import com.nematode.model.factory.NematodeWormBuilder;
 
-public class MainViewController implements MainViewControllerInterface {
+public class MainWindowViewController implements MainWindowControllerInterface {
 
 	private final ProjectPanelViewControllerInterface projectPanelViewController;
 	private final VideoPanelViewControllerInterface videoPanelViewController;
 	private final TrackingPanelViewControllerInterface trackingPanelViewController;
-	private final ExtendableJFrame mainView;
+	private final ExtendableJFrame mainWindow;
 	private VideoFrameHandlerInterface videoFrameHandler;
 
-	public MainViewController() {
-		this.mainView = new MainView();
+	public MainWindowViewController() {
+		this.mainWindow = new MainWindow();
 
 		setUpVideoFrameHandler();
 
@@ -49,7 +49,7 @@ public class MainViewController implements MainViewControllerInterface {
 	}
 
 	private void addPanelsToFrame() {
-		final Container contentPane = this.mainView.getContentPane();
+		final Container contentPane = this.mainWindow.getContentPane();
 
 		contentPane.add(this.projectPanelViewController.getProjectPanel(), BorderLayout.WEST);
 		contentPane.add(this.videoPanelViewController.getVideoPanel(), BorderLayout.CENTER);
@@ -57,8 +57,8 @@ public class MainViewController implements MainViewControllerInterface {
 	}
 
 	@Override
-	public ExtendableJFrame getMainView() {
-		return this.mainView;
+	public ExtendableJFrame getMainWindow() {
+		return this.mainWindow;
 	}
 
 	public ProjectPanelViewControllerInterface getProjectPanelViewController() {

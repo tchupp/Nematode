@@ -1,11 +1,11 @@
 package com.nematode.gui;
 
-public class MockMainViewController implements MainViewControllerInterface {
+public class MockMainWindowViewController implements MainWindowControllerInterface {
 
 	private final MockNematodeFrame mockNematodeFrame = new MockNematodeFrame();
 
 	@Override
-	public ExtendableJFrame getMainView() {
+	public ExtendableJFrame getMainWindow() {
 		return this.mockNematodeFrame;
 	}
 

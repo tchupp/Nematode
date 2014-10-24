@@ -17,19 +17,19 @@ import com.nematode.model.factory.FrameImageAssembler;
 import com.nematode.model.factory.NematodeWormBuilder;
 import com.nematode.unittesting.AssertTestCase;
 
-public class MainViewControllerTest extends AssertTestCase {
+public class MainWindowViewControllerTest extends AssertTestCase {
 
 	@Test
 	public void testImplementsInterface() throws Exception {
-		assertImplementsInterface(MainViewControllerInterface.class, MainViewController.class);
+		assertImplementsInterface(MainWindowControllerInterface.class, MainWindowViewController.class);
 	}
 
 	@Test
 	public void testConstructionAddsPanelsToViewCorrectly() throws Exception {
-		final MainViewController mainViewController = new MainViewController();
-		final ExtendableJFrame mainView = mainViewController.getMainView();
+		final MainWindowViewController mainWindowViewController = new MainWindowViewController();
+		final ExtendableJFrame mainWindow = mainWindowViewController.getMainWindow();
 
-		final Container contentPane = mainView.getContentPane();
+		final Container contentPane = mainWindow.getContentPane();
 		final Component[] components = contentPane.getComponents();
 		assertEquals(3, components.length);
 
@@ -40,9 +40,9 @@ public class MainViewControllerTest extends AssertTestCase {
 
 	@Test
 	public void testGetVideoFrameHandler() throws Exception {
-		final MainViewController mainViewController = new MainViewController();
+		final MainWindowViewController mainWindowViewController = new MainWindowViewController();
 		final VideoFrameHandler videoFrameHandler = assertIsOfTypeAndGet(VideoFrameHandler.class,
-				mainViewController.getVideoFrameHandler());
+				mainWindowViewController.getVideoFrameHandler());
 
 		assertIsOfTypeAndGet(VideoFrame.class, videoFrameHandler.getVideoFrame());
 		assertIsOfTypeAndGet(FrameImageAssembler.class, videoFrameHandler.getFrameImageAssembler());
@@ -65,14 +65,14 @@ public class MainViewControllerTest extends AssertTestCase {
 	}
 
 	@Test
-	public void testGetsMainView() throws Exception {
-		final MainViewController mainViewController = new MainViewController();
-		assertIsOfTypeAndGet(MainView.class, mainViewController.getMainView());
+	public void testGetsMainWindow() throws Exception {
+		final MainWindowViewController mainWindowViewController = new MainWindowViewController();
+		assertIsOfTypeAndGet(MainWindow.class, mainWindowViewController.getMainWindow());
 	}
 
 	@Test
 	public void testGetPanelViewControllers() throws Exception {
-		final MainViewController viewController = new MainViewController();
+		final MainWindowViewController viewController = new MainWindowViewController();
 
 		assertIsOfTypeAndGet(ProjectPanelViewController.class,
 				viewController.getProjectPanelViewController());
@@ -87,7 +87,7 @@ public class MainViewControllerTest extends AssertTestCase {
 	@Test
 	public void testProjectPanelViewControllerIsCreatedWithCorrectVideoFrameHandler()
 			throws Exception {
-		final MainViewController viewController = new MainViewController();
+		final MainWindowViewController viewController = new MainWindowViewController();
 		final ProjectPanelViewController projectPanelViewController = assertIsOfTypeAndGet(
 				ProjectPanelViewController.class, viewController.getProjectPanelViewController());
 
@@ -100,7 +100,7 @@ public class MainViewControllerTest extends AssertTestCase {
 	@Test
 	public void testVideoPanelControllerIsCreatedWithCorrectVideoFrameModel() throws Exception {
 
-		final MainViewController viewController = new MainViewController();
+		final MainWindowViewController viewController = new MainWindowViewController();
 		final VideoPanelViewController videoPanelViewController = assertIsOfTypeAndGet(
 				VideoPanelViewController.class, viewController.getVideoPanelViewController());
 
@@ -115,7 +115,7 @@ public class MainViewControllerTest extends AssertTestCase {
 	@Test
 	public void testTrackingPanelControllerIsCreadtedWithCorrectVideoFrameHandler()
 			throws Exception {
-		final MainViewController viewController = new MainViewController();
+		final MainWindowViewController viewController = new MainWindowViewController();
 		final TrackingPanelViewController trackingPanelViewController = assertIsOfTypeAndGet(
 				TrackingPanelViewController.class, viewController.getTrackingPanelViewController());
 

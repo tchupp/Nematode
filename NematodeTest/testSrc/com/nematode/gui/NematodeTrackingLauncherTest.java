@@ -7,29 +7,27 @@ import com.nematode.unittesting.AssertTestCase;
 public class NematodeTrackingLauncherTest extends AssertTestCase {
 
 	@Test
-	public void testGetsMainViewController() throws Exception {
-		final MockMainViewController expectedMainViewController = new MockMainViewController();
+	public void testGetsMainWindowViewController() throws Exception {
+		final MockMainWindowViewController expectedViewController = new MockMainWindowViewController();
 		final NematodeTrackingLauncher nematodeTrackingLauncher = new NematodeTrackingLauncher(
-				expectedMainViewController);
+				expectedViewController);
 
-		assertSame(expectedMainViewController,
-				nematodeTrackingLauncher.getMainViewController());
+		assertSame(expectedViewController, nematodeTrackingLauncher.getMainWindowViewController());
 	}
 
 	@Test
 	public void testLaunchApplicationSetsFrameVisable() throws Exception {
-		final MockMainViewController mockMainViewController = new MockMainViewController();
+		final MockMainWindowViewController mockMainWindowViewController = new MockMainWindowViewController();
 		final NematodeTrackingLauncher nematodeTrackingLauncher = new NematodeTrackingLauncher(
-				mockMainViewController);
+				mockMainWindowViewController);
 
-		final MockNematodeFrame mainView = assertIsOfTypeAndGet(
-				MockNematodeFrame.class,
-				mockMainViewController.getMainView());
+		final MockNematodeFrame mainWindow = assertIsOfTypeAndGet(MockNematodeFrame.class,
+				mockMainWindowViewController.getMainWindow());
 
-		assertFalse(mainView.isVisible());
+		assertFalse(mainWindow.isVisible());
 		nematodeTrackingLauncher.launchApplication();
-		assertTrue(mainView.isVisible());
+		assertTrue(mainWindow.isVisible());
 
-		mainView.dispose();
+		mainWindow.dispose();
 	}
 }
