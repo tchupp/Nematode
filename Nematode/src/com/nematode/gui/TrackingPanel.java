@@ -11,6 +11,8 @@ public class TrackingPanel extends ExtendableJPanel {
 	private JButton scanButton;
 
 	public TrackingPanel() {
+		this.setName("trackingPanel");
+
 		setupTrackingButton();
 		setupBorder();
 	}
@@ -23,12 +25,10 @@ public class TrackingPanel extends ExtendableJPanel {
 	}
 
 	private void setupBorder() {
-		final Border raisedBevelBorder = BorderFactory
-				.createRaisedBevelBorder();
-		final Border loweredBevelBorder = BorderFactory
-				.createLoweredBevelBorder();
-		final CompoundBorder compoundBorder = BorderFactory
-				.createCompoundBorder(raisedBevelBorder, loweredBevelBorder);
+		final Border raisedBevelBorder = BorderFactory.createRaisedBevelBorder();
+		final Border loweredBevelBorder = BorderFactory.createLoweredBevelBorder();
+		final CompoundBorder compoundBorder = BorderFactory.createCompoundBorder(raisedBevelBorder,
+				loweredBevelBorder);
 
 		this.setBorder(compoundBorder);
 	}

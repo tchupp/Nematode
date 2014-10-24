@@ -1,6 +1,5 @@
 package com.nematode.gui;
 
-import java.awt.BorderLayout;
 import java.awt.Container;
 
 import com.nematode.image.detection.ContourAreaCalculator;
@@ -51,9 +50,9 @@ public class MainWindowViewController implements MainWindowControllerInterface {
 	private void addPanelsToFrame() {
 		final Container contentPane = this.mainWindow.getContentPane();
 
-		contentPane.add(this.projectPanelViewController.getProjectPanel(), BorderLayout.WEST);
-		contentPane.add(this.videoPanelViewController.getVideoPanel(), BorderLayout.CENTER);
-		contentPane.add(this.trackingPanelViewController.getTrackingPanel(), BorderLayout.EAST);
+		contentPane.add(this.projectPanelViewController.getProjectPanel());
+		contentPane.add(this.videoPanelViewController.getVideoPanel());
+		contentPane.add(this.trackingPanelViewController.getTrackingPanel());
 	}
 
 	@Override

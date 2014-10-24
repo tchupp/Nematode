@@ -1,7 +1,7 @@
 package com.nematode.gui;
 
-import java.awt.BorderLayout;
 import java.awt.Container;
+import java.awt.GridBagLayout;
 
 import javax.swing.WindowConstants;
 
@@ -23,13 +23,11 @@ public class MainWindowTest extends AssertTestCase {
 	public void testConstructorSetsUpPanelCorrectly() throws Exception {
 		final MainWindow mainWindow = new MainWindow();
 
-		assertEquals(WindowConstants.EXIT_ON_CLOSE,
-				mainWindow.getDefaultCloseOperation());
+		assertEquals(WindowConstants.EXIT_ON_CLOSE, mainWindow.getDefaultCloseOperation());
 
 		final Container contentPane = mainWindow.getContentPane();
-		assertIsOfTypeAndGet(BorderLayout.class, contentPane.getLayout());
-		assertEquals(MainWindow.FRAME_HEIGHT,
-				mainWindow.getHeight());
+		assertIsOfTypeAndGet(GridBagLayout.class, contentPane.getLayout());
+		assertEquals(MainWindow.FRAME_HEIGHT, mainWindow.getHeight());
 		assertEquals(MainWindow.FRAME_WIDTH, mainWindow.getWidth());
 		assertTrue(mainWindow.isResizable());
 

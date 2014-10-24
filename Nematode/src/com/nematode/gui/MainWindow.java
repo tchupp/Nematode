@@ -1,7 +1,7 @@
 package com.nematode.gui;
 
-import java.awt.BorderLayout;
 import java.awt.Container;
+import java.awt.GridBagLayout;
 
 public class MainWindow extends ExtendableJFrame {
 
@@ -14,7 +14,7 @@ public class MainWindow extends ExtendableJFrame {
 		this.setDefaultCloseOperation(EXIT_ON_CLOSE);
 
 		final Container contentPane = this.getContentPane();
-		contentPane.setLayout(new BorderLayout());
+		contentPane.setLayout(new GridBagLayout());
 
 		this.setSize(FRAME_WIDTH, FRAME_HEIGHT);
 	}

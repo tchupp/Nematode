@@ -26,7 +26,7 @@ public class VideoPanel extends ExtendableJPanel {
 		addImagePanelAndImageIcon();
 		addControlPanel();
 
-		addBorder();
+		addBoarder();
 	}
 
 	private void addImagePanelAndImageIcon() {
@@ -65,13 +65,11 @@ public class VideoPanel extends ExtendableJPanel {
 		this.add(controlPanel, controlPanelConstraints);
 	}
 
-	private void addBorder() {
-		final Border raisedBevelBorder = BorderFactory
-				.createRaisedBevelBorder();
-		final Border loweredBevelBorder = BorderFactory
-				.createLoweredBevelBorder();
-		final CompoundBorder compoundBorder = BorderFactory
-				.createCompoundBorder(raisedBevelBorder, loweredBevelBorder);
+	private void addBoarder() {
+		final Border raisedBevelBorder = BorderFactory.createRaisedBevelBorder();
+		final Border loweredBevelBorder = BorderFactory.createLoweredBevelBorder();
+		final CompoundBorder compoundBorder = BorderFactory.createCompoundBorder(raisedBevelBorder,
+				loweredBevelBorder);
 		this.setBorder(compoundBorder);
 	}
 
