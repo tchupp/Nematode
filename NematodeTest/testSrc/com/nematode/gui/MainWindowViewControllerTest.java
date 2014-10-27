@@ -32,12 +32,13 @@ public class MainWindowViewControllerTest extends AssertTestCase {
 
 		final Container contentPane = mainWindow.getContentPane();
 		final Component[] components = contentPane.getComponents();
-		assertEquals(4, components.length);
+		assertEquals(5, components.length);
 
 		assertIsOfTypeAndGet(ProjectPanel.class, components[0]);
 		assertIsOfTypeAndGet(VideoPanel.class, components[1]);
 		assertIsOfTypeAndGet(TrackingPanel.class, components[2]);
 		assertIsOfTypeAndGet(ToolbarPanel.class, components[3]);
+		assertIsOfTypeAndGet(StatusPanel.class, components[4]);
 	}
 
 	@Test
@@ -88,6 +89,9 @@ public class MainWindowViewControllerTest extends AssertTestCase {
 
 		assertIsOfTypeAndGet(ToolbarPanelViewController.class,
 				viewController.getToolbarPanelViewController());
+
+		assertIsOfTypeAndGet(StatusPanelViewController.class,
+				viewController.getStatusPanelViewController());
 	}
 
 	@Test
