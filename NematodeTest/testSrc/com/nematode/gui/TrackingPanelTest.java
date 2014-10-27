@@ -31,6 +31,7 @@ public class TrackingPanelTest extends AssertTestCase {
 		final JButton scanButtonFromIOTAG = assertIsOfTypeAndGet(JButton.class,
 				trackingPanel.getComponent(0));
 		final JButton scanButtonFromGetter = trackingPanel.getScanButton();
+
 		assertSame(scanButtonFromGetter, scanButtonFromIOTAG);
 		assertEquals("scanButton", scanButtonFromIOTAG.getName());
 		assertEquals("Scan Image", scanButtonFromIOTAG.getText());

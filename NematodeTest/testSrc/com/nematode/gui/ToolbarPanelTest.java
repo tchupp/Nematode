@@ -9,7 +9,7 @@ import com.nematode.unittesting.AssertTestCase;
 public class ToolbarPanelTest extends AssertTestCase {
 
 	@Test
-	public void testExtendableJFrame() throws Exception {
+	public void testExtendsJFrame() throws Exception {
 		assertExtends(ExtendableJPanel.class, ToolbarPanel.class);
 	}
 
