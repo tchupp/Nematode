@@ -15,18 +15,14 @@ import com.nematode.nullmodel.NullBufferedImage;
 
 public class VideoPanel extends ExtendableJPanel {
 
-	public static final int ICON_WIDTH = 1500;
-	public static final int ICON_HEIGHT = 900;
-
 	private static final long serialVersionUID = 1L;
 	private JLabel imageLabel;
 
 	public VideoPanel() {
 		this.setLayout(new GridBagLayout());
 		addImagePanelAndImageIcon();
-		addControlPanel();
 
-		addBoarder();
+		addBorder();
 	}
 
 	private void addImagePanelAndImageIcon() {
@@ -35,8 +31,6 @@ public class VideoPanel extends ExtendableJPanel {
 		imagePanel.setLayout(new GridBagLayout());
 
 		final GridBagConstraints imagePanelConstraints = new GridBagConstraints();
-		imagePanelConstraints.gridy = 0;
-		imagePanelConstraints.weighty = 1;
 		imagePanelConstraints.anchor = GridBagConstraints.NORTH;
 		imagePanelConstraints.insets = new Insets(5, 5, 5, 5);
 
@@ -44,7 +38,7 @@ public class VideoPanel extends ExtendableJPanel {
 
 		this.imageLabel = new JLabel(new ImageIcon(new NullBufferedImage()));
 		this.imageLabel.setName("imageLabel");
-		this.imageLabel.setSize(ICON_WIDTH, ICON_HEIGHT);
+		this.imageLabel.setSize(GuiConstants.DISPLAY_WIDTH, GuiConstants.DISPLAY_HEIGHT);
 
 		final GridBagConstraints imageLabelConstraints = new GridBagConstraints();
 		imageLabelConstraints.gridy = 0;
@@ -53,19 +47,7 @@ public class VideoPanel extends ExtendableJPanel {
 		imagePanel.add(this.imageLabel, imageLabelConstraints);
 	}
 
-	private void addControlPanel() {
-		final JPanel controlPanel = new JPanel();
-		controlPanel.setName("controlPanel");
-
-		final GridBagConstraints controlPanelConstraints = new GridBagConstraints();
-		controlPanelConstraints.gridy = 1;
-		controlPanelConstraints.anchor = GridBagConstraints.SOUTH;
-		controlPanelConstraints.insets = new Insets(5, 5, 5, 5);
-
-		this.add(controlPanel, controlPanelConstraints);
-	}
-
-	private void addBoarder() {
+	private void addBorder() {
 		final Border raisedBevelBorder = BorderFactory.createRaisedBevelBorder();
 		final Border loweredBevelBorder = BorderFactory.createLoweredBevelBorder();
 		final CompoundBorder compoundBorder = BorderFactory.createCompoundBorder(raisedBevelBorder,

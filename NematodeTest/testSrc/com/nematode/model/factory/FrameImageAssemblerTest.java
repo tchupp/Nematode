@@ -2,11 +2,9 @@ package com.nematode.model.factory;
 
 import org.junit.Test;
 
-import com.nematode.gui.VideoPanel;
+import com.nematode.gui.GuiConstants;
 import com.nematode.image.DisplayFrameImageInterface;
 import com.nematode.image.VideoFrameImageInterface;
-import com.nematode.model.factory.FrameImageAssembler;
-import com.nematode.model.factory.FrameImageAssemblerInterface;
 import com.nematode.nullmodel.NullBufferedImage;
 import com.nematode.unittesting.AssertTestCase;
 
@@ -24,8 +22,8 @@ public class FrameImageAssemblerTest extends AssertTestCase {
 		final DisplayFrameImageInterface displayFrameImage = imageAssembler
 				.createDisplayFrameImage(new NullBufferedImage());
 
-		assertEquals(VideoPanel.ICON_WIDTH, displayFrameImage.getImage().getWidth());
-		assertEquals(VideoPanel.ICON_HEIGHT, displayFrameImage.getImage().getHeight());
+		assertEquals(GuiConstants.DISPLAY_WIDTH, displayFrameImage.getImage().getWidth());
+		assertEquals(GuiConstants.DISPLAY_HEIGHT, displayFrameImage.getImage().getHeight());
 	}
 
 	@Test
@@ -35,14 +33,8 @@ public class FrameImageAssemblerTest extends AssertTestCase {
 		final VideoFrameImageInterface videoFrameImage = imageAssembler
 				.createVideoFrameImage(new NullBufferedImage());
 
-		assertEquals(FrameImageAssembler.VIDEO_WIDTH, videoFrameImage.getImage().getWidth());
-		assertEquals(FrameImageAssembler.VIDEO_HEIGHT, videoFrameImage.getImage().getHeight());
-	}
-
-	@Test
-	public void testStaticVideoFrameHeightAndWidth() throws Exception {
-		assertEquals(1920, FrameImageAssembler.VIDEO_WIDTH);
-		assertEquals(1080, FrameImageAssembler.VIDEO_HEIGHT);
+		assertEquals(GuiConstants.VIDEO_FRAME_WIDTH, videoFrameImage.getImage().getWidth());
+		assertEquals(GuiConstants.VIDEO_FRAME_HEIGHT, videoFrameImage.getImage().getHeight());
 	}
 
 }
