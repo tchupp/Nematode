@@ -18,6 +18,7 @@ public class MainWindowViewController implements MainWindowControllerInterface {
 	private final ProjectPanelViewControllerInterface projectPanelViewController;
 	private final VideoPanelViewControllerInterface videoPanelViewController;
 	private final TrackingPanelViewControllerInterface trackingPanelViewController;
+	private final ToolbarPanelViewControllerInterface toolbarPanelViewController;
 	private final ExtendableJFrame mainWindow;
 	private VideoFrameHandlerInterface videoFrameHandler;
 
@@ -29,6 +30,7 @@ public class MainWindowViewController implements MainWindowControllerInterface {
 		this.projectPanelViewController = new ProjectPanelViewController(this.videoFrameHandler);
 		this.videoPanelViewController = new VideoPanelViewController(this.videoFrameHandler);
 		this.trackingPanelViewController = new TrackingPanelViewController(this.videoFrameHandler);
+		this.toolbarPanelViewController = new ToolbarPanelViewController();
 
 		addPanelsToFrame();
 	}
@@ -53,6 +55,7 @@ public class MainWindowViewController implements MainWindowControllerInterface {
 		contentPane.add(this.projectPanelViewController.getProjectPanel());
 		contentPane.add(this.videoPanelViewController.getVideoPanel());
 		contentPane.add(this.trackingPanelViewController.getTrackingPanel());
+		contentPane.add(this.toolbarPanelViewController.getToolbarPanel());
 	}
 
 	@Override
@@ -70,6 +73,10 @@ public class MainWindowViewController implements MainWindowControllerInterface {
 
 	public VideoPanelViewControllerInterface getVideoPanelViewController() {
 		return this.videoPanelViewController;
+	}
+
+	public ToolbarPanelViewControllerInterface getToolbarPanelViewController() {
+		return this.toolbarPanelViewController;
 	}
 
 	public VideoFrameHandlerInterface getVideoFrameHandler() {

@@ -16,7 +16,9 @@ public class ToolbarPanelTest extends AssertTestCase {
 	@Test
 	public void testConstructorCorrectlySetsUpPanel() throws Exception {
 		final ToolbarPanel toolbarPanel = new ToolbarPanel();
+
 		assertEquals("toolbarPanel", toolbarPanel.getName());
+
 		assertEquals(0, toolbarPanel.getComponentCount());
 		assertIsOfTypeAndGet(CompoundBorder.class, toolbarPanel.getBorder());
 	}

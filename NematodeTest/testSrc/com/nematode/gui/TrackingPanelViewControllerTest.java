@@ -16,7 +16,7 @@ public class TrackingPanelViewControllerTest extends AssertTestCase {
 	}
 
 	@Test
-	public void testGetsNematodeTrackingPanel() throws Exception {
+	public void testGetsTrackingPanel() throws Exception {
 		final TrackingPanelViewController trackingPanelViewController = new TrackingPanelViewController(
 				new MockVideoFrameHandler());
 
@@ -38,6 +38,7 @@ public class TrackingPanelViewControllerTest extends AssertTestCase {
 		final TrackingPanel trackingPanel = assertIsOfTypeAndGet(TrackingPanel.class,
 				viewController.getTrackingPanel());
 		final JButton scanButton = trackingPanel.getScanButton();
+
 		assertEquals(1, scanButton.getActionListeners().length);
 		final ScanImageButtonActionListener buttonActionListener = assertIsOfTypeAndGet(
 				ScanImageButtonActionListener.class, scanButton.getActionListeners()[0]);

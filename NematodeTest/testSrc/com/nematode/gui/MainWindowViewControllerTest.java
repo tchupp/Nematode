@@ -21,7 +21,8 @@ public class MainWindowViewControllerTest extends AssertTestCase {
 
 	@Test
 	public void testImplementsInterface() throws Exception {
-		assertImplementsInterface(MainWindowControllerInterface.class, MainWindowViewController.class);
+		assertImplementsInterface(MainWindowControllerInterface.class,
+				MainWindowViewController.class);
 	}
 
 	@Test
@@ -31,16 +32,18 @@ public class MainWindowViewControllerTest extends AssertTestCase {
 
 		final Container contentPane = mainWindow.getContentPane();
 		final Component[] components = contentPane.getComponents();
-		assertEquals(3, components.length);
+		assertEquals(4, components.length);
 
 		assertIsOfTypeAndGet(ProjectPanel.class, components[0]);
 		assertIsOfTypeAndGet(VideoPanel.class, components[1]);
 		assertIsOfTypeAndGet(TrackingPanel.class, components[2]);
+		assertIsOfTypeAndGet(ToolbarPanel.class, components[3]);
 	}
 
 	@Test
 	public void testGetVideoFrameHandler() throws Exception {
 		final MainWindowViewController mainWindowViewController = new MainWindowViewController();
+
 		final VideoFrameHandler videoFrameHandler = assertIsOfTypeAndGet(VideoFrameHandler.class,
 				mainWindowViewController.getVideoFrameHandler());
 
@@ -82,6 +85,9 @@ public class MainWindowViewControllerTest extends AssertTestCase {
 
 		assertIsOfTypeAndGet(VideoPanelViewController.class,
 				viewController.getVideoPanelViewController());
+
+		assertIsOfTypeAndGet(ToolbarPanelViewController.class,
+				viewController.getToolbarPanelViewController());
 	}
 
 	@Test

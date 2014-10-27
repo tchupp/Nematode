@@ -6,9 +6,6 @@ import javax.swing.border.CompoundBorder;
 
 public class ToolbarPanel extends ExtendableJPanel {
 
-	/**
-	 *
-	 */
 	private static final long serialVersionUID = 1L;
 
 	public ToolbarPanel() {

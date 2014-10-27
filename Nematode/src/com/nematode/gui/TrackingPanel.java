@@ -36,5 +36,4 @@ public class TrackingPanel extends ExtendableJPanel {
 	public JButton getScanButton() {
 		return this.scanButton;
 	}
-
 }
