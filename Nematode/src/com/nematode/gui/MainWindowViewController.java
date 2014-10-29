@@ -1,6 +1,7 @@
 package com.nematode.gui;
 
 import java.awt.Container;
+import java.awt.GridBagConstraints;
 
 import com.nematode.image.detection.ContourAreaCalculator;
 import com.nematode.image.detection.EdgeDetectionRunner;
@@ -54,11 +55,30 @@ public class MainWindowViewController implements MainWindowControllerInterface {
 	private void addPanelsToFrame() {
 		final Container contentPane = this.mainWindow.getContentPane();
 
-		contentPane.add(this.projectPanelViewController.getProjectPanel());
+		addProjectPanel();
 		contentPane.add(this.videoPanelViewController.getVideoPanel());
-		contentPane.add(this.trackingPanelViewController.getTrackingPanel());
+		addTrackingPanel();
 		contentPane.add(this.toolbarPanelViewController.getToolbarPanel());
 		contentPane.add(this.statusPanelViewController.getStatusPanel());
+	}
+
+	private void addProjectPanel() {
+		final Container contentPane = this.mainWindow.getContentPane();
+
+		final GridBagConstraints projectPanelConstraints = new GridBagConstraints();
+		projectPanelConstraints.gridx = 0;
+		projectPanelConstraints.gridy = 0;
+		contentPane.add(this.projectPanelViewController.getProjectPanel(), projectPanelConstraints);
+	}
+
+	private void addTrackingPanel() {
+		final Container contentPane = this.mainWindow.getContentPane();
+
+		final GridBagConstraints trackingPanelConstraints = new GridBagConstraints();
+		trackingPanelConstraints.gridx = 0;
+		trackingPanelConstraints.gridy = 1;
+		contentPane.add(this.trackingPanelViewController.getTrackingPanel(),
+				trackingPanelConstraints);
 	}
 
 	@Override

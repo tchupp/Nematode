@@ -2,6 +2,8 @@ package com.nematode.gui;
 
 import java.awt.Component;
 import java.awt.Container;
+import java.awt.GridBagConstraints;
+import java.awt.GridBagLayout;
 
 import org.junit.Test;
 
@@ -26,19 +28,53 @@ public class MainWindowViewControllerTest extends AssertTestCase {
 	}
 
 	@Test
-	public void testConstructionAddsPanelsToViewCorrectly() throws Exception {
+	public void testConstructionAddsCorrectNumberOfPanelsToMainWindow() throws Exception {
 		final MainWindowViewController mainWindowViewController = new MainWindowViewController();
 		final ExtendableJFrame mainWindow = mainWindowViewController.getMainWindow();
 
 		final Container contentPane = mainWindow.getContentPane();
 		final Component[] components = contentPane.getComponents();
-		assertEquals(5, components.length);
+		assertEquals(5, contentPane.getComponentCount());
 
 		assertIsOfTypeAndGet(ProjectPanel.class, components[0]);
 		assertIsOfTypeAndGet(VideoPanel.class, components[1]);
-		assertIsOfTypeAndGet(TrackingPanel.class, components[2]);
 		assertIsOfTypeAndGet(ToolbarPanel.class, components[3]);
 		assertIsOfTypeAndGet(StatusPanel.class, components[4]);
+	}
+
+	@Test
+	public void testProjectPanelIsCorrectlyAddedToMainWindow() throws Exception {
+		final MainWindowViewController mainWindowViewController = new MainWindowViewController();
+		final ExtendableJFrame mainWindow = mainWindowViewController.getMainWindow();
+
+		final Container contentPane = mainWindow.getContentPane();
+		final Component[] components = contentPane.getComponents();
+
+		final GridBagLayout mainWindowLayout = assertIsOfTypeAndGet(GridBagLayout.class,
+				contentPane.getLayout());
+		final ProjectPanel trackingPanel = assertIsOfTypeAndGet(ProjectPanel.class, components[0]);
+		final GridBagConstraints trackingPanelConstraints = mainWindowLayout
+				.getConstraints(trackingPanel);
+		assertEquals(0, trackingPanelConstraints.gridx);
+		assertEquals(0, trackingPanelConstraints.gridy);
+	}
+
+	@Test
+	public void testTrackingPanelIsCorrectlyAddedToMainWindow() throws Exception {
+		final MainWindowViewController mainWindowViewController = new MainWindowViewController();
+		final ExtendableJFrame mainWindow = mainWindowViewController.getMainWindow();
+
+		final Container contentPane = mainWindow.getContentPane();
+		final Component[] components = contentPane.getComponents();
+
+		final GridBagLayout mainWindowLayout = assertIsOfTypeAndGet(GridBagLayout.class,
+				contentPane.getLayout());
+		final TrackingPanel trackingPanel = assertIsOfTypeAndGet(TrackingPanel.class, components[2]);
+		final GridBagConstraints trackingPanelConstraints = mainWindowLayout
+				.getConstraints(trackingPanel);
+		assertEquals(0, trackingPanelConstraints.gridx);
+		assertEquals(1, trackingPanelConstraints.gridy);
+
 	}
 
 	@Test
@@ -108,7 +144,7 @@ public class MainWindowViewControllerTest extends AssertTestCase {
 	}
 
 	@Test
-	public void testVideoPanelControllerIsCreatedWithCorrectVideoFrameModel() throws Exception {
+	public void testVideoPanelControllerIsCreatedWithCorrectVideoFrameHander() throws Exception {
 
 		final MainWindowViewController viewController = new MainWindowViewController();
 		final VideoPanelViewController videoPanelViewController = assertIsOfTypeAndGet(
