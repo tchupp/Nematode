@@ -1,6 +1,5 @@
 package com.nematode.gui;
 
-import java.awt.Color;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 
@@ -55,7 +54,6 @@ public class MainWindowViewController implements MainWindowControllerInterface {
 
 	private void addPanelsToFrame() {
 		final ExtendableJPanel controlPanel = new ExtendableJPanel();
-		controlPanel.setBackground(Color.CYAN);
 		controlPanel.setName("controlPanel");
 		controlPanel.setLayout(new GridBagLayout());
 
@@ -72,7 +70,6 @@ public class MainWindowViewController implements MainWindowControllerInterface {
 		this.mainWindow.add(controlPanel, controlPanelConstraints);
 
 		final ExtendableJPanel scanningPanel = new ExtendableJPanel();
-		scanningPanel.setBackground(Color.PINK);
 		scanningPanel.setName("scanningPanel");
 		scanningPanel.setLayout(new GridBagLayout());
 
@@ -96,11 +93,10 @@ public class MainWindowViewController implements MainWindowControllerInterface {
 		final GridBagConstraints projectPanelConstraints = new GridBagConstraints();
 		projectPanelConstraints.gridx = 0;
 		projectPanelConstraints.gridy = 0;
-		// projectPanelConstraints.gridheight = 3;
 		projectPanelConstraints.weighty = 0.5;
 		projectPanelConstraints.fill = GridBagConstraints.BOTH;
 		controlPanel
-				.add(this.projectPanelViewController.getProjectPanel(), projectPanelConstraints);
+		.add(this.projectPanelViewController.getProjectPanel(), projectPanelConstraints);
 	}
 
 	private void addTrackingPanel(final ExtendableJPanel controlPanel) {
@@ -108,7 +104,6 @@ public class MainWindowViewController implements MainWindowControllerInterface {
 		final GridBagConstraints trackingPanelConstraints = new GridBagConstraints();
 		trackingPanelConstraints.gridx = 0;
 		trackingPanelConstraints.gridy = 1;
-		// trackingPanelConstraints.gridheight = 3;
 		trackingPanelConstraints.weighty = 0.5;
 		trackingPanelConstraints.fill = GridBagConstraints.BOTH;
 		controlPanel.add(this.trackingPanelViewController.getTrackingPanel(),
