@@ -1,5 +1,7 @@
 package com.nematode.gui;
 
+import java.awt.image.BufferedImage;
+
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 
@@ -66,7 +68,7 @@ public class VideoPanelViewControllerTest extends AssertTestCase {
 	}
 
 	@Test
-	public void testUpdateImagePlacesCorrectImageOnPanel() throws Exception {
+	public void testUpdateVideoDisplayPlacesCorrectImageOnPanel() throws Exception {
 
 		final MockVideoFrame videoFrame = new MockVideoFrame();
 		final MockDisplayFrameImage displayFrameImage = new MockDisplayFrameImage();
@@ -86,11 +88,11 @@ public class VideoPanelViewControllerTest extends AssertTestCase {
 		final ImageIcon imageLabelIconBefore = assertIsOfTypeAndGet(ImageIcon.class,
 				imageLabel.getIcon());
 
-		final NullBufferedImage defaultImage = assertIsOfTypeAndGet(NullBufferedImage.class,
+		final BufferedImage defaultImage = assertIsOfTypeAndGet(BufferedImage.class,
 				imageLabelIconBefore.getImage());
 		assertNotSame(expectedImage, defaultImage);
 
-		viewController.updateImage();
+		viewController.updateVideoDisplay();
 
 		final ImageIcon imageLabelIconAfter = assertIsOfTypeAndGet(ImageIcon.class,
 				imageLabel.getIcon());

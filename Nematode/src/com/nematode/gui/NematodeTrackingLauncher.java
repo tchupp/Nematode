@@ -1,17 +1,16 @@
 package com.nematode.gui;
 
+
 public class NematodeTrackingLauncher {
 
 	private final MainWindowControllerInterface mainWindowViewController;
 
-	public NematodeTrackingLauncher(
-			final MainWindowControllerInterface mainWindowViewController) {
+	public NematodeTrackingLauncher(final MainWindowControllerInterface mainWindowViewController) {
 		this.mainWindowViewController = mainWindowViewController;
 	}
 
 	public void launchApplication() {
-		final ExtendableJFrame mainWindow = this.mainWindowViewController
-				.getMainWindow();
+		final ExtendableJFrame mainWindow = this.mainWindowViewController.getMainWindow();
 		mainWindow.setVisible(true);
 	}
 

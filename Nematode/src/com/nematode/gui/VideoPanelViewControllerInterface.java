@@ -4,6 +4,6 @@ public interface VideoPanelViewControllerInterface {
 
 	public ExtendableJPanel getVideoPanel();
 
-	public void updateImage();
+	public void updateVideoDisplay();
 
 }

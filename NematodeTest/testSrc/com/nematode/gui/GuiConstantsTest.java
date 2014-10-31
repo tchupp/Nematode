@@ -8,8 +8,8 @@ public class GuiConstantsTest extends AssertTestCase {
 
 	@Test
 	public void testDisplayHeightWidth() throws Exception {
-		assertEquals(1600, GuiConstants.DISPLAY_WIDTH);
-		assertEquals(900, GuiConstants.DISPLAY_HEIGHT);
+		assertEquals(1680, GuiConstants.DISPLAY_WIDTH);
+		assertEquals(945, GuiConstants.DISPLAY_HEIGHT);
 	}
 
 	@Test

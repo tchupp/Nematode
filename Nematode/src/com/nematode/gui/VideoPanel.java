@@ -3,15 +3,13 @@ package com.nematode.gui;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Insets;
+import java.awt.image.BufferedImage;
 
 import javax.swing.BorderFactory;
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
-import javax.swing.JPanel;
 import javax.swing.border.Border;
 import javax.swing.border.CompoundBorder;
-
-import com.nematode.nullmodel.NullBufferedImage;
 
 public class VideoPanel extends ExtendableJPanel {
 
@@ -20,31 +18,25 @@ public class VideoPanel extends ExtendableJPanel {
 
 	public VideoPanel() {
 		this.setLayout(new GridBagLayout());
-		addImagePanelAndImageIcon();
 
+		addImagePanelAndImageIcon();
 		addBorder();
 	}
 
 	private void addImagePanelAndImageIcon() {
-		final JPanel imagePanel = new JPanel();
-		imagePanel.setName("imagePanel");
-		imagePanel.setLayout(new GridBagLayout());
+		final ImageIcon defaultImageIcon = new ImageIcon(new BufferedImage(
+				GuiConstants.DISPLAY_WIDTH, GuiConstants.DISPLAY_HEIGHT,
+				BufferedImage.TYPE_INT_ARGB));
 
-		final GridBagConstraints imagePanelConstraints = new GridBagConstraints();
-		imagePanelConstraints.anchor = GridBagConstraints.NORTH;
-		imagePanelConstraints.insets = new Insets(5, 5, 5, 5);
-
-		this.add(imagePanel, imagePanelConstraints);
-
-		this.imageLabel = new JLabel(new ImageIcon(new NullBufferedImage()));
+		this.imageLabel = new JLabel(defaultImageIcon);
 		this.imageLabel.setName("imageLabel");
 		this.imageLabel.setSize(GuiConstants.DISPLAY_WIDTH, GuiConstants.DISPLAY_HEIGHT);
 
-		final GridBagConstraints imageLabelConstraints = new GridBagConstraints();
-		imageLabelConstraints.gridy = 0;
-		imageLabelConstraints.insets = new Insets(5, 5, 5, 5);
+		final GridBagConstraints constraints = new GridBagConstraints();
+		constraints.anchor = GridBagConstraints.CENTER;
+		constraints.insets = new Insets(1, 1, 1, 1);
 
-		imagePanel.add(this.imageLabel, imageLabelConstraints);
+		this.add(this.imageLabel, constraints);
 	}
 
 	private void addBorder() {

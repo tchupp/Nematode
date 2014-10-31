@@ -2,7 +2,7 @@ package com.nematode.gui;
 
 public class MockVideoPanelViewController implements VideoPanelViewControllerInterface {
 
-	private boolean updateImageWasCalled;
+	private boolean updateVideoDisplayWasCalled;
 
 	@Override
 	public ExtendableJPanel getVideoPanel() {
@@ -10,12 +10,12 @@ public class MockVideoPanelViewController implements VideoPanelViewControllerInt
 	}
 
 	@Override
-	public void updateImage() {
-		this.updateImageWasCalled = true;
+	public void updateVideoDisplay() {
+		this.updateVideoDisplayWasCalled = true;
 	}
 
-	public boolean wasUpdateImageCalled() {
-		return this.updateImageWasCalled;
+	public boolean wasUpdateVideoDisplayCalled() {
+		return this.updateVideoDisplayWasCalled;
 	}
 
 }

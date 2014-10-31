@@ -4,25 +4,24 @@ import com.nematode.gui.VideoPanelViewControllerInterface;
 
 public class DisplayFrameImageChangeObserver implements VideoFrameObserverInterface {
 
-	private final VideoPanelViewControllerInterface panelViewController;
+	private final VideoPanelViewControllerInterface videoPanelViewController;
 
 	public DisplayFrameImageChangeObserver(
-			final VideoPanelViewControllerInterface panelViewController) {
-		this.panelViewController = panelViewController;
+			final VideoPanelViewControllerInterface videoPanelViewController) {
+		this.videoPanelViewController = videoPanelViewController;
 	}
 
 	@Override
 	public void notifyVideoFrameHasBeenSet() {
-
 	}
 
 	@Override
 	public void notifyDisplayFrameHasBeenSet() {
-		this.panelViewController.updateImage();
+		this.videoPanelViewController.updateVideoDisplay();
 	}
 
 	public VideoPanelViewControllerInterface getPanelViewController() {
-		return this.panelViewController;
+		return this.videoPanelViewController;
 	}
 
 }

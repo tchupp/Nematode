@@ -11,7 +11,7 @@ public class MainWindow extends ExtendableJFrame {
 	private static final long serialVersionUID = 1L;
 
 	public MainWindow() {
-		this.setDefaultCloseOperation(EXIT_ON_CLOSE);
+		this.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
 
 		final Container contentPane = this.getContentPane();
 		contentPane.setLayout(new GridBagLayout());

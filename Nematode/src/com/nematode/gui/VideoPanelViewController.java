@@ -32,7 +32,7 @@ public class VideoPanelViewController implements VideoPanelViewControllerInterfa
 	}
 
 	@Override
-	public void updateImage() {
+	public void updateVideoDisplay() {
 		final BufferedImage newImageForPanel = this.videoFrame.getDisplayFrameImage().getImage();
 
 		final JLabel imageLabel = this.videoPanel.getImageLabel();
