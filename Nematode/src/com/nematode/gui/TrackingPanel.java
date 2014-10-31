@@ -1,5 +1,9 @@
 package com.nematode.gui;
 
+import java.awt.GridBagConstraints;
+import java.awt.GridBagLayout;
+import java.awt.Insets;
+
 import javax.swing.BorderFactory;
 import javax.swing.JButton;
 import javax.swing.border.Border;
@@ -12,6 +16,7 @@ public class TrackingPanel extends ExtendableJPanel {
 
 	public TrackingPanel() {
 		this.setName("trackingPanel");
+		this.setLayout(new GridBagLayout());
 
 		setupTrackingButton();
 		setupBorder();
@@ -21,7 +26,16 @@ public class TrackingPanel extends ExtendableJPanel {
 		this.scanButton = new JButton();
 		this.scanButton.setName("scanButton");
 		this.scanButton.setText("Scan Image");
-		this.add(this.scanButton);
+
+		final GridBagConstraints constraints = new GridBagConstraints();
+		constraints.gridx = 0;
+		constraints.gridy = 0;
+		constraints.weighty = 1.0;
+		constraints.fill = GridBagConstraints.HORIZONTAL;
+		constraints.anchor = GridBagConstraints.NORTH;
+		constraints.insets = new Insets(5, 5, 5, 5);
+
+		this.add(this.scanButton, constraints);
 	}
 
 	private void setupBorder() {

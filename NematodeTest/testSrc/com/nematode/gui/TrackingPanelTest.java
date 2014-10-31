@@ -1,5 +1,9 @@
 package com.nematode.gui;
 
+import java.awt.GridBagConstraints;
+import java.awt.GridBagLayout;
+import java.awt.Insets;
+
 import javax.swing.JButton;
 import javax.swing.border.CompoundBorder;
 
@@ -22,10 +26,34 @@ public class TrackingPanelTest extends AssertTestCase {
 
 		assertEquals(1, trackingPanel.getComponentCount());
 		assertIsOfTypeAndGet(CompoundBorder.class, trackingPanel.getBorder());
+
+		assertIsOfTypeAndGet(GridBagLayout.class, trackingPanel.getLayout());
 	}
 
 	@Test
-	public void testScanButton() throws Exception {
+	public void testScanButtonCorrectlySetUp() throws Exception {
+		final TrackingPanel trackingPanel = new TrackingPanel();
+
+		final GridBagLayout trackingPanelLayout = assertIsOfTypeAndGet(GridBagLayout.class,
+				trackingPanel.getLayout());
+
+		final JButton scanButton = assertIsOfTypeAndGet(JButton.class,
+				trackingPanel.getComponent(0));
+		assertEquals("scanButton", scanButton.getName());
+		assertEquals("Scan Image", scanButton.getText());
+
+		final GridBagConstraints scanButtonConstraints = trackingPanelLayout
+				.getConstraints(scanButton);
+		assertEquals(0, scanButtonConstraints.gridx);
+		assertEquals(0, scanButtonConstraints.gridy);
+		assertEquals(1.0, scanButtonConstraints.weighty);
+		assertEquals(GridBagConstraints.HORIZONTAL, scanButtonConstraints.fill);
+		assertEquals(GridBagConstraints.NORTH, scanButtonConstraints.anchor);
+		assertEquals(new Insets(5, 5, 5, 5), scanButtonConstraints.insets);
+	}
+
+	@Test
+	public void testGetScanButton() throws Exception {
 		final TrackingPanel trackingPanel = new TrackingPanel();
 
 		final JButton scanButtonFromIOTAG = assertIsOfTypeAndGet(JButton.class,
@@ -33,7 +61,5 @@ public class TrackingPanelTest extends AssertTestCase {
 		final JButton scanButtonFromGetter = trackingPanel.getScanButton();
 
 		assertSame(scanButtonFromGetter, scanButtonFromIOTAG);
-		assertEquals("scanButton", scanButtonFromIOTAG.getName());
-		assertEquals("Scan Image", scanButtonFromIOTAG.getText());
 	}
 }
