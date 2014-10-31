@@ -23,7 +23,7 @@ public class ProjectPanelViewController implements ProjectPanelViewControllerInt
 	}
 
 	@Override
-	public ProjectPanel getProjectPanel() {
+	public ExtendableJPanel getProjectPanel() {
 		return this.projectPanel;
 	}
 

@@ -27,8 +27,7 @@ public class OpenImageButtonActionListener implements ActionListener {
 		if (dialogResult == JFileChooser.APPROVE_OPTION) {
 			final ValidatedImageFile validatedImageFile = new ValidatedImageFile(
 					this.fileChooser.getSelectedFile());
-			this.videoFrameHandler
-			.buildNewFrameImageFromFile(validatedImageFile);
+			this.videoFrameHandler.buildNewFrameImageFromFile(validatedImageFile);
 		}
 	}
 
