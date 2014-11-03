@@ -12,20 +12,20 @@ import javax.swing.border.CompoundBorder;
 public class TrackingPanel extends ExtendableJPanel {
 
 	private static final long serialVersionUID = 1L;
-	private JButton scanButton;
+	private JButton beginScanButton;
 
 	public TrackingPanel() {
 		this.setName("trackingPanel");
 		this.setLayout(new GridBagLayout());
 
-		setupTrackingButton();
-		setupBorder();
+		addBeginScanButton();
+		addBorder();
 	}
 
-	private void setupTrackingButton() {
-		this.scanButton = new JButton();
-		this.scanButton.setName("beginScanButton");
-		this.scanButton.setText("Begin Scan");
+	private void addBeginScanButton() {
+		this.beginScanButton = new JButton();
+		this.beginScanButton.setName("beginScanButton");
+		this.beginScanButton.setText("Begin Scan");
 
 		final GridBagConstraints constraints = new GridBagConstraints();
 		constraints.gridx = 0;
@@ -35,10 +35,10 @@ public class TrackingPanel extends ExtendableJPanel {
 		constraints.anchor = GridBagConstraints.NORTH;
 		constraints.insets = new Insets(5, 5, 5, 5);
 
-		this.add(this.scanButton, constraints);
+		this.add(this.beginScanButton, constraints);
 	}
 
-	private void setupBorder() {
+	private void addBorder() {
 		final Border raisedBevelBorder = BorderFactory.createRaisedBevelBorder();
 		final Border loweredBevelBorder = BorderFactory.createLoweredBevelBorder();
 		final CompoundBorder compoundBorder = BorderFactory.createCompoundBorder(raisedBevelBorder,
@@ -47,7 +47,7 @@ public class TrackingPanel extends ExtendableJPanel {
 		this.setBorder(compoundBorder);
 	}
 
-	public JButton getScanButton() {
-		return this.scanButton;
+	public JButton getBeginScanButton() {
+		return this.beginScanButton;
 	}
 }

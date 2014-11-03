@@ -37,11 +37,11 @@ public class TrackingPanelViewControllerTest extends AssertTestCase {
 				new MockVideoFrameHandler());
 		final TrackingPanel trackingPanel = assertIsOfTypeAndGet(TrackingPanel.class,
 				viewController.getTrackingPanel());
-		final JButton scanButton = trackingPanel.getScanButton();
+		final JButton scanButton = trackingPanel.getBeginScanButton();
 
 		assertEquals(1, scanButton.getActionListeners().length);
-		final ScanImageButtonActionListener buttonActionListener = assertIsOfTypeAndGet(
-				ScanImageButtonActionListener.class, scanButton.getActionListeners()[0]);
+		final BeginScanButtonActionListener buttonActionListener = assertIsOfTypeAndGet(
+				BeginScanButtonActionListener.class, scanButton.getActionListeners()[0]);
 		final TrackingPanelViewControllerInterface actualViewController = buttonActionListener
 				.getPanelViewController();
 		assertSame(viewController, actualViewController);

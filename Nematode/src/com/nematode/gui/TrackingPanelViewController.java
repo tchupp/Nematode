@@ -13,14 +13,14 @@ public class TrackingPanelViewController implements TrackingPanelViewControllerI
 		this.videoFrameHandler = videoFrameHandler;
 		this.trackingPanel = new TrackingPanel();
 
-		addListenerToScanButton();
+		addListenerToBeginScanButton();
 	}
 
-	private void addListenerToScanButton() {
-		final ScanImageButtonActionListener scanImageButtonActionListener = new ScanImageButtonActionListener(
+	private void addListenerToBeginScanButton() {
+		final BeginScanButtonActionListener beginScanButtonActionListener = new BeginScanButtonActionListener(
 				this);
-		final JButton scanButton = this.trackingPanel.getScanButton();
-		scanButton.addActionListener(scanImageButtonActionListener);
+		final JButton beginScanButton = this.trackingPanel.getBeginScanButton();
+		beginScanButton.addActionListener(beginScanButtonActionListener);
 	}
 
 	@Override
