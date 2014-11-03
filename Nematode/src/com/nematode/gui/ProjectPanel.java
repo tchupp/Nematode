@@ -12,6 +12,7 @@ import javax.swing.border.CompoundBorder;
 public class ProjectPanel extends ExtendableJPanel {
 
 	private static final long serialVersionUID = 1L;
+
 	private JButton openImageButton;
 	private JButton openVideoButton;
 

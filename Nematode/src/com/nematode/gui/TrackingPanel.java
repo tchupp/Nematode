@@ -24,8 +24,8 @@ public class TrackingPanel extends ExtendableJPanel {
 
 	private void setupTrackingButton() {
 		this.scanButton = new JButton();
-		this.scanButton.setName("scanButton");
-		this.scanButton.setText("Scan Image");
+		this.scanButton.setName("beginScanButton");
+		this.scanButton.setText("Begin Scan");
 
 		final GridBagConstraints constraints = new GridBagConstraints();
 		constraints.gridx = 0;

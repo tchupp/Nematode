@@ -39,8 +39,8 @@ public class TrackingPanelTest extends AssertTestCase {
 
 		final JButton scanButton = assertIsOfTypeAndGet(JButton.class,
 				trackingPanel.getComponent(0));
-		assertEquals("scanButton", scanButton.getName());
-		assertEquals("Scan Image", scanButton.getText());
+		assertEquals("beginScanButton", scanButton.getName());
+		assertEquals("Begin Scan", scanButton.getText());
 
 		final GridBagConstraints scanButtonConstraints = trackingPanelLayout
 				.getConstraints(scanButton);

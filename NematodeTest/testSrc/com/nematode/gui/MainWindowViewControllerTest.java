@@ -156,7 +156,7 @@ public class MainWindowViewControllerTest extends AssertTestCase {
 		assertEquals(1, videoPanelConstraints.gridy);
 		assertEquals(4, videoPanelConstraints.gridheight);
 		assertEquals(1.0, videoPanelConstraints.weightx);
-		assertEquals(0.5, videoPanelConstraints.weighty);
+		assertEquals(0.1, videoPanelConstraints.weighty);
 		assertEquals(GridBagConstraints.BOTH, videoPanelConstraints.fill);
 	}
 
@@ -179,7 +179,7 @@ public class MainWindowViewControllerTest extends AssertTestCase {
 		assertEquals(1, toolbarPanelConstraints.gridx);
 		assertEquals(0, toolbarPanelConstraints.gridy);
 		assertEquals(1.0, toolbarPanelConstraints.weightx);
-		assertEquals(0.5, toolbarPanelConstraints.weighty);
+		assertEquals(0.1, toolbarPanelConstraints.weighty);
 		assertEquals(GridBagConstraints.PAGE_START, toolbarPanelConstraints.anchor);
 		assertEquals(GridBagConstraints.BOTH, toolbarPanelConstraints.fill);
 	}

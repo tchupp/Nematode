@@ -10,4 +10,6 @@ public class GuiConstants {
 
 	public static final int VIDEO_FRAME_HEIGHT = 1080;
 
+	public static final String CROP_AREA_BUTTON_IMAGE_PATH = "resources/gui/buttons/cropScanAreaButtonImage.png";
+
 }

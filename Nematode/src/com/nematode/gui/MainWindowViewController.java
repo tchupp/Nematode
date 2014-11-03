@@ -117,7 +117,7 @@ public class MainWindowViewController implements MainWindowControllerInterface {
 		videoPanelConstraints.gridy = 1;
 		videoPanelConstraints.gridheight = 4;
 		videoPanelConstraints.weightx = 1.0;
-		videoPanelConstraints.weighty = 0.5;
+		videoPanelConstraints.weighty = 0.1;
 		videoPanelConstraints.fill = GridBagConstraints.BOTH;
 		scanningPanel.add(this.videoPanelViewController.getVideoPanel(), videoPanelConstraints);
 	}
@@ -128,7 +128,7 @@ public class MainWindowViewController implements MainWindowControllerInterface {
 		toolbarPanelConstraints.gridx = 1;
 		toolbarPanelConstraints.gridy = 0;
 		toolbarPanelConstraints.weightx = 1.0;
-		toolbarPanelConstraints.weighty = 0.5;
+		toolbarPanelConstraints.weighty = 0.1;
 		toolbarPanelConstraints.anchor = GridBagConstraints.PAGE_START;
 		toolbarPanelConstraints.fill = GridBagConstraints.BOTH;
 		scanningPanel.add(this.toolbarPanelViewController.getToolbarPanel(),

@@ -18,4 +18,10 @@ public class GuiConstantsTest extends AssertTestCase {
 		assertEquals(1080, GuiConstants.VIDEO_FRAME_HEIGHT);
 	}
 
+	@Test
+	public void testImagePaths() throws Exception {
+		assertEquals("resources/gui/buttons/cropScanAreaButtonImage.png",
+				GuiConstants.CROP_AREA_BUTTON_IMAGE_PATH);
+	}
+
 }
