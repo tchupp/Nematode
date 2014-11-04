@@ -3,8 +3,6 @@ package com.nematode.gui;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-import javax.swing.SwingUtilities;
-
 public class BeginScanButtonActionListener implements ActionListener {
 
 	private final TrackingPanelViewControllerInterface viewController;
@@ -15,13 +13,14 @@ public class BeginScanButtonActionListener implements ActionListener {
 
 	@Override
 	public void actionPerformed(final ActionEvent arg0) {
-		SwingUtilities.invokeLater(new Runnable() {
-
+		final Thread thread = new Thread() {
 			@Override
 			public void run() {
 				BeginScanButtonActionListener.this.viewController.updateImage();
 			}
-		});
+		};
+
+		thread.start();
 	}
 
 	public TrackingPanelViewControllerInterface getPanelViewController() {
