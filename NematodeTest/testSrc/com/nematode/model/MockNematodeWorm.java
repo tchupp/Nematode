@@ -57,6 +57,7 @@ public class MockNematodeWorm implements NematodeWormInterface {
 
 	private ContourLinesInterface contourLines = new MockContourLines();
 	private ContourAreaInterface contourArea = new MockContourArea();
+	private boolean setContourAreaWasCalled = false;
 
 	@Override
 	public ContourLinesInterface getContourLines() {
@@ -74,7 +75,12 @@ public class MockNematodeWorm implements NematodeWormInterface {
 
 	@Override
 	public void setContourArea(final ContourAreaInterface contourArea) {
+		this.setContourAreaWasCalled = true;
 		this.contourArea = contourArea;
+	}
+
+	public boolean wasSetContourAreaCalled() {
+		return this.setContourAreaWasCalled;
 	}
 
 }
