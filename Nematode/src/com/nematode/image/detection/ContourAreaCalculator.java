@@ -5,6 +5,8 @@ import java.util.ArrayList;
 import java.util.Deque;
 import java.util.List;
 
+import com.nematode.model.NematodeWormInterface;
+
 public class ContourAreaCalculator implements ContourAreaCalculatorInterface {
 
 	private int northBound;
@@ -13,14 +15,15 @@ public class ContourAreaCalculator implements ContourAreaCalculatorInterface {
 	private int westBound;
 
 	@Override
-	public ContourAreaInterface getArea(final ContourLinesInterface lines) {
-		this.northBound = findNorthBound(lines) - 1;
-		this.eastBound = findEastBound(lines) + 1;
-		this.southBound = findSouthBound(lines) + 1;
-		this.westBound = findWestBound(lines) - 1;
+	public ContourAreaInterface getArea(final NematodeWormInterface worm) {
+		final ContourLinesInterface contourLines = worm.getContourLines();
+		this.northBound = findNorthBound(contourLines) - 1;
+		this.eastBound = findEastBound(contourLines) + 1;
+		this.southBound = findSouthBound(contourLines) + 1;
+		this.westBound = findWestBound(contourLines) - 1;
 
 		final List<ContourPointInterface> innerBounds = new ArrayList<ContourPointInterface>(
-				lines.getListOfContourPoints());
+				contourLines.getListOfContourPoints());
 
 		final List<ContourPointInterface> outerPoints = outerFloodFill(innerBounds);
 		outerPoints.addAll(innerBounds);

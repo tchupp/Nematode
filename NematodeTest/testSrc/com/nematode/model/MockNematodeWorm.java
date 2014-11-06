@@ -72,6 +72,7 @@ public class MockNematodeWorm implements NematodeWormInterface {
 		return this.contourArea;
 	}
 
+	@Override
 	public void setContourArea(final ContourAreaInterface contourArea) {
 		this.contourArea = contourArea;
 	}

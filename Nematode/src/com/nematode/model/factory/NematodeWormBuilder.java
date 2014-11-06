@@ -10,19 +10,18 @@ public class NematodeWormBuilder implements NematodeWormBuilderInterface {
 
 	private final ContourAreaCalculatorInterface contourAreaCalculator;
 
-	public NematodeWormBuilder(
-			final ContourAreaCalculatorInterface contourAreaCalculator) {
+	public NematodeWormBuilder(final ContourAreaCalculatorInterface contourAreaCalculator) {
 		this.contourAreaCalculator = contourAreaCalculator;
 	}
 
 	@Override
-	public NematodeWormInterface buildWorm(
-			final ContourLinesInterface contourLines) {
+	public NematodeWormInterface buildWorm(final ContourLinesInterface contourLines) {
+		final NematodeWorm nematodeWorm = new NematodeWorm(contourLines);
 
-		final ContourAreaInterface contourArea = this.contourAreaCalculator
-				.getArea(contourLines);
+		final ContourAreaInterface contourArea = this.contourAreaCalculator.getArea(nematodeWorm);
+		nematodeWorm.setContourArea(contourArea);
 
-		return new NematodeWorm(contourLines, contourArea);
+		return nematodeWorm;
 	}
 
 	public ContourAreaCalculatorInterface getContourAreaCalculator() {
