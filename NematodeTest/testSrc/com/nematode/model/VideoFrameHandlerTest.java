@@ -95,7 +95,7 @@ public class VideoFrameHandlerTest extends AssertTestCase {
 		assertSame(videoFrame, imageProcessingRunner.getVideoFrameDrawn());
 
 		assertTrue(mockAssembler.wasCreateDisplayFrameImageCalled());
-		assertSame(expectedImageWithObjects, mockAssembler.getDisplayImageToCreate());
+		assertSame(expectedImageWithObjects, mockAssembler.getDisplayImageToUse());
 
 		assertTrue(videoFrame.wasSetDisplayFrameImageCalled());
 		assertSame(expectedDisplayImage, videoFrame.getDisplayFrameImage());

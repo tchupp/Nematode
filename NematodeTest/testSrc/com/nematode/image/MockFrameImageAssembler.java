@@ -10,19 +10,19 @@ public class MockFrameImageAssembler implements FrameImageAssemblerInterface {
 
 	private boolean createDisplayFrameImageWasCalled;
 	private boolean createVideoFrameImageWasCalled;
-	private BufferedImage displayImageToCreate;
+	private BufferedImage displayImageToUse;
 	private DisplayFrameImageInterface displayImageToReturn;
 
 	@Override
 	public DisplayFrameImageInterface createDisplayFrameImage(final BufferedImage image) {
-		this.displayImageToCreate = image;
+		this.displayImageToUse = image;
 		this.createDisplayFrameImageWasCalled = true;
 
 		return this.displayImageToReturn;
 	}
 
-	public BufferedImage getDisplayImageToCreate() {
-		return this.displayImageToCreate;
+	public BufferedImage getDisplayImageToUse() {
+		return this.displayImageToUse;
 	}
 
 	public void setDisplayImageToReturn(final DisplayFrameImageInterface displayImageToReturn) {

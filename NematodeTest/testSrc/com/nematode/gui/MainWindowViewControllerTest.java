@@ -285,8 +285,10 @@ public class MainWindowViewControllerTest extends AssertTestCase {
 				VideoFrameHandler.class, viewController.getVideoFrameHandler());
 		final VideoFrameHandlerInterface actualFrameHandler = videoPanelViewController
 				.getVideoFrameHandler();
-
 		assertSame(expectedFrameHandler, actualFrameHandler);
+
+		assertIsOfTypeAndGet(FrameImageAssembler.class,
+				videoPanelViewController.getFrameImageAssembler());
 	}
 
 	@Test

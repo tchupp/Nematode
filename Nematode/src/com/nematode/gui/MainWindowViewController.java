@@ -30,7 +30,8 @@ public class MainWindowViewController implements MainWindowControllerInterface {
 		setUpVideoFrameHandler();
 
 		this.projectPanelViewController = new ProjectPanelViewController(this.videoFrameHandler);
-		this.videoPanelViewController = new VideoPanelViewController(this.videoFrameHandler);
+		this.videoPanelViewController = new VideoPanelViewController(this.videoFrameHandler,
+				new FrameImageAssembler());
 		this.trackingPanelViewController = new TrackingPanelViewController(this.videoFrameHandler);
 		this.toolbarPanelViewController = new ToolbarPanelViewController();
 		this.statusPanelViewController = new StatusPanelViewController();

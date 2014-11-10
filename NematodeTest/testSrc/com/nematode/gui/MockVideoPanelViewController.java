@@ -1,8 +1,11 @@
 package com.nematode.gui;
 
+import com.nematode.gui.backend.VideoFrameDisplayInformationInterface;
+import com.nematode.model.VideoFrameSequenceInterface;
+
 public class MockVideoPanelViewController implements VideoPanelViewControllerInterface {
 
-	private boolean updateVideoDisplayWasCalled;
+	private boolean updateVideoDisplayWasCalled = false;
 
 	@Override
 	public ExtendableJPanel getVideoPanel() {
@@ -16,6 +19,11 @@ public class MockVideoPanelViewController implements VideoPanelViewControllerInt
 
 	public boolean wasUpdateVideoDisplayCalled() {
 		return this.updateVideoDisplayWasCalled;
+	}
+
+	@Override
+	public void updateDisplay(final VideoFrameDisplayInformationInterface displayInfo,
+			final VideoFrameSequenceInterface videoSequence) {
 	}
 
 }

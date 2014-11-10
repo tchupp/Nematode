@@ -7,10 +7,14 @@ import javax.swing.JLabel;
 
 import org.junit.Test;
 
+import com.nematode.gui.backend.MockVideoFrameDisplayInformation;
 import com.nematode.image.MockDisplayFrameImage;
+import com.nematode.image.MockFrameImageAssembler;
 import com.nematode.image.MockVideoFrameHandler;
+import com.nematode.image.MockVideoFrameImage;
 import com.nematode.image.NullBufferedImage;
 import com.nematode.model.DisplayFrameImageChangeObserver;
+import com.nematode.model.MockVideoFrameSequence;
 import com.nematode.model.VideoFrame;
 import com.nematode.unittesting.AssertTestCase;
 
@@ -25,7 +29,7 @@ public class VideoPanelViewControllerTest extends AssertTestCase {
 	@Test
 	public void testGetsNematodeVideoPanel() throws Exception {
 		final VideoPanelViewController videoPanelViewController = new VideoPanelViewController(
-				new MockVideoFrameHandler());
+				new MockVideoFrameHandler(), new MockFrameImageAssembler());
 
 		assertIsOfTypeAndGet(VideoPanel.class, videoPanelViewController.getVideoPanel());
 	}
@@ -34,14 +38,22 @@ public class VideoPanelViewControllerTest extends AssertTestCase {
 	public void testGetVideoFrameHandler() throws Exception {
 		final MockVideoFrameHandler expectedFrameHandler = new MockVideoFrameHandler();
 		final VideoPanelViewController videoPanelViewController = new VideoPanelViewController(
-				expectedFrameHandler);
+				expectedFrameHandler, new MockFrameImageAssembler());
 		assertSame(expectedFrameHandler, videoPanelViewController.getVideoFrameHandler());
+	}
+
+	@Test
+	public void testGetsFrameImageAssembler() throws Exception {
+		final MockFrameImageAssembler frameImageAssembler = new MockFrameImageAssembler();
+		final VideoPanelViewController viewController = new VideoPanelViewController(
+				new MockVideoFrameHandler(), frameImageAssembler);
+		assertSame(frameImageAssembler, viewController.getFrameImageAssembler());
 	}
 
 	@Test
 	public void testGetsFrameObserver() throws Exception {
 		final VideoPanelViewController videoPanelViewController = new VideoPanelViewController(
-				new MockVideoFrameHandler());
+				new MockVideoFrameHandler(), new MockFrameImageAssembler());
 		assertIsOfTypeAndGet(DisplayFrameImageChangeObserver.class,
 				videoPanelViewController.getFrameObserver());
 	}
@@ -53,7 +65,7 @@ public class VideoPanelViewControllerTest extends AssertTestCase {
 		mockFrameHandler.setVideoFrame(videoFrame);
 
 		final VideoPanelViewController viewController = new VideoPanelViewController(
-				mockFrameHandler);
+				mockFrameHandler, new MockFrameImageAssembler());
 		assertEquals(1, videoFrame.getListOfObservers().size());
 
 		final DisplayFrameImageChangeObserver observer = assertIsOfTypeAndGet(
@@ -81,7 +93,7 @@ public class VideoPanelViewControllerTest extends AssertTestCase {
 		mockFrameHandler.setVideoFrame(videoFrame);
 
 		final VideoPanelViewController viewController = new VideoPanelViewController(
-				mockFrameHandler);
+				mockFrameHandler, new MockFrameImageAssembler());
 		final VideoPanel videoPanel = assertIsOfTypeAndGet(VideoPanel.class,
 				viewController.getVideoPanel());
 		final JLabel imageLabel = videoPanel.getImageLabel();
@@ -99,5 +111,59 @@ public class VideoPanelViewControllerTest extends AssertTestCase {
 		final NullBufferedImage actualImage = assertIsOfTypeAndGet(NullBufferedImage.class,
 				imageLabelIconAfter.getImage());
 		assertSame(expectedImage, actualImage);
+	}
+
+	@Test
+	public void testUpdateDisplayImagePlacesCorrectImageOnPanel() throws Exception {
+		final MockVideoFrameDisplayInformation mockDisplayInformation = new MockVideoFrameDisplayInformation();
+		final int expectedFrameNumber = 3;
+		mockDisplayInformation.setFrameNumber(expectedFrameNumber);
+
+		final NullBufferedImage expectedVideoImage = new NullBufferedImage();
+		final MockVideoFrameImage mockVideoFrameImage = new MockVideoFrameImage();
+		final MockVideoFrame mockVideoFrame = new MockVideoFrame();
+
+		mockVideoFrameImage.setBufferedImage(expectedVideoImage);
+		mockVideoFrame.setVideoFrameImage(mockVideoFrameImage);
+
+		final MockVideoFrameSequence mockVideoFrameSequence = new MockVideoFrameSequence();
+		mockVideoFrameSequence.setFrameToReturn(mockVideoFrame);
+
+		final NullBufferedImage expectedDisplayImage = new NullBufferedImage();
+		final MockDisplayFrameImage mockDisplayFrameImage = new MockDisplayFrameImage();
+		final MockFrameImageAssembler mockFrameImageAssembler = new MockFrameImageAssembler();
+
+		mockDisplayFrameImage.setBufferedImage(expectedDisplayImage);
+		mockFrameImageAssembler.setDisplayImageToReturn(mockDisplayFrameImage);
+
+		final VideoPanelViewController viewController = new VideoPanelViewController(
+				new MockVideoFrameHandler(), mockFrameImageAssembler);
+
+		final VideoPanel videoPanel = assertIsOfTypeAndGet(VideoPanel.class,
+				viewController.getVideoPanel());
+		final JLabel imageLabel = videoPanel.getImageLabel();
+		final ImageIcon imageLabelIconBefore = assertIsOfTypeAndGet(ImageIcon.class,
+				imageLabel.getIcon());
+
+		final BufferedImage defaultImage = assertIsOfTypeAndGet(BufferedImage.class,
+				imageLabelIconBefore.getImage());
+		assertNotSame(expectedDisplayImage, defaultImage);
+
+		viewController.updateDisplay(mockDisplayInformation, mockVideoFrameSequence);
+
+		assertTrue(mockVideoFrameSequence.wasGetFrameCalled());
+		assertTrue(mockDisplayInformation.wasGetFrameNumberCalled());
+		assertEquals(expectedFrameNumber, mockVideoFrameSequence.getFrameNumberToGet());
+
+		assertTrue(mockFrameImageAssembler.wasCreateDisplayFrameImageCalled());
+		assertTrue(mockVideoFrame.wasGetVideoFrameImageCalled());
+		assertSame(expectedVideoImage, mockFrameImageAssembler.getDisplayImageToUse());
+
+		final ImageIcon imageLabelIconAfter = assertIsOfTypeAndGet(ImageIcon.class,
+				imageLabel.getIcon());
+		final NullBufferedImage actualImage = assertIsOfTypeAndGet(NullBufferedImage.class,
+				imageLabelIconAfter.getImage());
+
+		assertSame(expectedDisplayImage, actualImage);
 	}
 }
