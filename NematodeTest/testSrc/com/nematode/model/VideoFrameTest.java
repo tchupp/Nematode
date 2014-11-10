@@ -4,7 +4,7 @@ import org.junit.Test;
 
 import com.nematode.image.MockDisplayFrameImage;
 import com.nematode.image.MockVideoFrameImage;
-import com.nematode.nullmodel.NullFrameImage;
+import com.nematode.image.NullFrameImage;
 import com.nematode.unittesting.AssertTestCase;
 
 public class VideoFrameTest extends AssertTestCase {

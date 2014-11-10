@@ -14,9 +14,10 @@ public class ImageFileChooserTest extends AssertTestCase {
 	@Test
 	public void testFileChooserCorrectlyAssembled() throws Exception {
 		final ImageFileChooser imageFileChooser = new ImageFileChooser();
+
 		assertEquals("Open", imageFileChooser.getApproveButtonText());
 		assertEquals(1, imageFileChooser.getChoosableFileFilters().length);
-		assertIsOfTypeAndGet(ImageFileFilter.class,
-				imageFileChooser.getChoosableFileFilters()[0]);
+
+		assertIsOfTypeAndGet(ImageFileFilter.class, imageFileChooser.getChoosableFileFilters()[0]);
 	}
 }

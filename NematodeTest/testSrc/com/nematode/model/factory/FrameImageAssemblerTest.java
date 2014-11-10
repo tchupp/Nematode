@@ -4,8 +4,8 @@ import org.junit.Test;
 
 import com.nematode.gui.GuiConstants;
 import com.nematode.image.DisplayFrameImageInterface;
+import com.nematode.image.NullBufferedImage;
 import com.nematode.image.VideoFrameImageInterface;
-import com.nematode.nullmodel.NullBufferedImage;
 import com.nematode.unittesting.AssertTestCase;
 
 public class FrameImageAssemblerTest extends AssertTestCase {

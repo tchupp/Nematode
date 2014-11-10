@@ -1,9 +1,10 @@
-package com.nematode.nullmodel;
+package com.nematode.image;
 
 import java.awt.image.BufferedImage;
 
 import org.junit.Test;
 
+import com.nematode.image.NullBufferedImage;
 import com.nematode.unittesting.AssertTestCase;
 
 public class NullBufferedImageTest extends AssertTestCase {

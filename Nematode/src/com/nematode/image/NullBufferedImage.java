@@ -1,4 +1,4 @@
-package com.nematode.nullmodel;
+package com.nematode.image;
 
 import java.awt.image.BufferedImage;
 

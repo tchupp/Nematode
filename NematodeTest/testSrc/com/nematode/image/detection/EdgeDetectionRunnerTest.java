@@ -10,9 +10,9 @@ import com.nematode.image.MockContourLines;
 import com.nematode.image.MockImageProcessingHelper;
 import com.nematode.image.MockProcessedFrameImage;
 import com.nematode.image.MockSquareContourTracer;
+import com.nematode.image.NullBufferedImage;
 import com.nematode.model.MockNematodeWormBuilder;
 import com.nematode.model.NematodeWormInterface;
-import com.nematode.nullmodel.NullBufferedImage;
 import com.nematode.unittesting.AssertTestCase;
 
 public class EdgeDetectionRunnerTest extends AssertTestCase {

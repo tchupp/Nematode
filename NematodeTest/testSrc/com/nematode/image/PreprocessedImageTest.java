@@ -5,7 +5,6 @@ import java.awt.image.BufferedImage;
 import org.junit.Test;
 
 import com.nematode.image.PreprocessedImage;
-import com.nematode.nullmodel.NullBufferedImage;
 import com.nematode.unittesting.AssertTestCase;
 
 public class PreprocessedImageTest extends AssertTestCase {

@@ -7,7 +7,6 @@ import com.nematode.image.BlackAndWhiteImage;
 import com.nematode.image.GreyScaleImage;
 import com.nematode.image.processing.ImageProcessingHelperInterface;
 import com.nematode.model.NematodeWormInterface;
-import com.nematode.nullmodel.NullBufferedImage;
 
 public class MockImageProcessingHelper implements ImageProcessingHelperInterface {
 

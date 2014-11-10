@@ -6,7 +6,7 @@ import java.io.IOException;
 
 import javax.imageio.ImageIO;
 
-import com.nematode.nullmodel.NullBufferedImage;
+import com.nematode.image.NullBufferedImage;
 
 public class ValidatedImageFile implements ValidatedImageFileInterface {
 

@@ -3,7 +3,6 @@ package com.nematode.image;
 import java.awt.image.BufferedImage;
 
 import com.nematode.image.DisplayFrameImageInterface;
-import com.nematode.nullmodel.NullBufferedImage;
 
 public class MockDisplayFrameImage implements DisplayFrameImageInterface {
 

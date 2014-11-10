@@ -1,19 +1,18 @@
-package com.nematode.nullmodel;
+package com.nematode.model;
 
 import java.lang.reflect.Constructor;
 import java.lang.reflect.Modifier;
 
 import org.junit.Test;
 
-import com.nematode.model.VideoFrameInterface;
+import com.nematode.image.NullFrameImage;
 import com.nematode.unittesting.AssertTestCase;
 
 public class NullVideoFrameTest extends AssertTestCase {
 
 	@Test
 	public void testImplementsInterface() throws Exception {
-		assertImplementsInterface(VideoFrameInterface.class,
-				NullVideoFrame.class);
+		assertImplementsInterface(VideoFrameInterface.class, NullVideoFrame.class);
 	}
 
 	@Test
@@ -27,15 +26,13 @@ public class NullVideoFrameTest extends AssertTestCase {
 
 	@Test
 	public void testNullReturnsCorrectObject() throws Exception {
-		assertIsOfTypeAndGet(NullVideoFrame.class,
-				NullVideoFrame.NULL);
+		assertIsOfTypeAndGet(NullVideoFrame.class, NullVideoFrame.NULL);
 	}
 
 	@Test
 	public void testGetVideoFrameImageReturnsNullFrameImage() throws Exception {
 		final VideoFrameInterface nullVideoFrame = NullVideoFrame.NULL;
-		assertIsOfTypeAndGet(NullFrameImage.class,
-				nullVideoFrame.getVideoFrameImage());
+		assertIsOfTypeAndGet(NullFrameImage.class, nullVideoFrame.getVideoFrameImage());
 	}
 
 }

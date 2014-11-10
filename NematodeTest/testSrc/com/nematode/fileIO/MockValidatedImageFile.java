@@ -3,7 +3,7 @@ package com.nematode.fileIO;
 import java.awt.image.BufferedImage;
 import java.io.File;
 
-import com.nematode.nullmodel.NullBufferedImage;
+import com.nematode.image.NullBufferedImage;
 
 public class MockValidatedImageFile implements ValidatedImageFileInterface {
 

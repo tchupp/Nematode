@@ -1,13 +1,11 @@
-package com.nematode.nullmodel;
+package com.nematode.model;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import com.nematode.image.DisplayFrameImageInterface;
+import com.nematode.image.NullFrameImage;
 import com.nematode.image.VideoFrameImageInterface;
-import com.nematode.model.NematodeWormInterface;
-import com.nematode.model.VideoFrameInterface;
-import com.nematode.model.VideoFrameObserverInterface;
 
 public class NullVideoFrame implements VideoFrameInterface {
 

@@ -3,7 +3,6 @@ package com.nematode.image;
 import java.awt.image.BufferedImage;
 
 import com.nematode.image.VideoFrameImageInterface;
-import com.nematode.nullmodel.NullBufferedImage;
 
 public class MockVideoFrameImage implements VideoFrameImageInterface {
 

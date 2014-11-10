@@ -5,7 +5,6 @@ import java.awt.image.BufferedImage;
 import com.nematode.image.DisplayFrameImageInterface;
 import com.nematode.image.VideoFrameImageInterface;
 import com.nematode.model.factory.FrameImageAssemblerInterface;
-import com.nematode.nullmodel.NullFrameImage;
 
 public class MockFrameImageAssembler implements FrameImageAssemblerInterface {
 

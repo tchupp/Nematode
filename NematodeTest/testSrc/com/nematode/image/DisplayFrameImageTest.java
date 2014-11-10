@@ -4,7 +4,6 @@ import org.junit.Test;
 
 import com.nematode.image.DisplayFrameImage;
 import com.nematode.image.DisplayFrameImageInterface;
-import com.nematode.nullmodel.NullBufferedImage;
 import com.nematode.unittesting.AssertTestCase;
 
 public class DisplayFrameImageTest extends AssertTestCase {

@@ -5,7 +5,6 @@ import java.awt.image.BufferedImage;
 import org.junit.Test;
 
 import com.nematode.image.GreyScaleImage;
-import com.nematode.nullmodel.NullBufferedImage;
 import com.nematode.unittesting.AssertTestCase;
 
 public class GreyScaleImageTest extends AssertTestCase {

@@ -3,7 +3,6 @@ package com.nematode.image;
 import java.awt.image.BufferedImage;
 
 import com.nematode.image.ProcessedFrameImageInterface;
-import com.nematode.nullmodel.NullBufferedImage;
 
 public class MockProcessedFrameImage implements ProcessedFrameImageInterface {
 

@@ -4,7 +4,6 @@ import org.junit.Test;
 
 import com.nematode.image.ProcessedFrameImage;
 import com.nematode.image.ProcessedFrameImageInterface;
-import com.nematode.nullmodel.NullBufferedImage;
 import com.nematode.unittesting.AssertTestCase;
 
 public class ProcessedFrameImageTest extends AssertTestCase {

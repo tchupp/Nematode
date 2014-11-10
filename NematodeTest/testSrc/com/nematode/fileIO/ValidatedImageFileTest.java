@@ -7,7 +7,7 @@ import javax.imageio.ImageIO;
 
 import org.junit.Test;
 
-import com.nematode.nullmodel.NullBufferedImage;
+import com.nematode.image.NullBufferedImage;
 import com.nematode.unittesting.AssertTestCase;
 
 public class ValidatedImageFileTest extends AssertTestCase {

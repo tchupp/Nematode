@@ -6,12 +6,12 @@ import java.util.List;
 import com.nematode.fileIO.ValidatedImageFileInterface;
 import com.nematode.image.BlackAndWhiteImage;
 import com.nematode.image.DisplayFrameImageInterface;
+import com.nematode.image.NullFrameImage;
 import com.nematode.image.ProcessedFrameImageInterface;
 import com.nematode.image.VideoFrameImageInterface;
 import com.nematode.image.detection.EdgeDetectionRunnerInterface;
 import com.nematode.image.processing.ImageProcessingRunnerInterface;
 import com.nematode.model.factory.FrameImageAssemblerInterface;
-import com.nematode.nullmodel.NullFrameImage;
 
 public class VideoFrameHandler implements VideoFrameHandlerInterface {
 

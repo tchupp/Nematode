@@ -9,9 +9,9 @@ import org.junit.Test;
 
 import com.nematode.image.MockDisplayFrameImage;
 import com.nematode.image.MockVideoFrameHandler;
+import com.nematode.image.NullBufferedImage;
 import com.nematode.model.DisplayFrameImageChangeObserver;
 import com.nematode.model.VideoFrame;
-import com.nematode.nullmodel.NullBufferedImage;
 import com.nematode.unittesting.AssertTestCase;
 
 public class VideoPanelViewControllerTest extends AssertTestCase {

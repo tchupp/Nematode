@@ -11,12 +11,12 @@ import com.nematode.image.MockDisplayFrameImage;
 import com.nematode.image.MockEdgeDetectionRunner;
 import com.nematode.image.MockFrameImageAssembler;
 import com.nematode.image.MockImageProcessingRunner;
+import com.nematode.image.NullBufferedImage;
+import com.nematode.image.NullFrameImage;
 import com.nematode.model.VideoFrameInterface;
 import com.nematode.model.NematodeWormInterface;
 import com.nematode.model.VideoFrameHandler;
 import com.nematode.model.VideoFrameHandlerInterface;
-import com.nematode.nullmodel.NullBufferedImage;
-import com.nematode.nullmodel.NullFrameImage;
 import com.nematode.unittesting.AssertTestCase;
 
 public class VideoFrameHandlerTest extends AssertTestCase {

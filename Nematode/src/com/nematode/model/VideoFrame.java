@@ -4,8 +4,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.nematode.image.DisplayFrameImageInterface;
+import com.nematode.image.NullFrameImage;
 import com.nematode.image.VideoFrameImageInterface;
-import com.nematode.nullmodel.NullFrameImage;
 
 public class VideoFrame implements VideoFrameInterface {
 
