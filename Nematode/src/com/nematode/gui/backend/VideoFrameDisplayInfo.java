@@ -1,10 +1,10 @@
 package com.nematode.gui.backend;
 
-public class VideoFrameDisplayInformation implements VideoFrameDisplayInformationInterface {
+public class VideoFrameDisplayInfo implements VideoFrameDisplayInfoInterface {
 
 	private final int frameNumber;
 
-	public VideoFrameDisplayInformation(final int frameNumber) {
+	public VideoFrameDisplayInfo(final int frameNumber) {
 		this.frameNumber = frameNumber;
 	}
 

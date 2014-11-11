@@ -1,6 +1,6 @@
 package com.nematode.gui.backend;
 
-public class MockVideoFrameDisplayInformation implements VideoFrameDisplayInformationInterface {
+public class MockVideoFrameDisplayInfo implements VideoFrameDisplayInfoInterface {
 
 	private int frameNumberToReturn = 0;
 	private boolean getFrameNumberWasCalled = false;

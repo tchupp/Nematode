@@ -1,6 +1,6 @@
 package com.nematode.gui;
 
-import com.nematode.gui.backend.VideoFrameDisplayInformationInterface;
+import com.nematode.gui.backend.VideoFrameDisplayInfoInterface;
 import com.nematode.model.VideoFrameSequenceInterface;
 
 public class MockVideoPanelViewController implements VideoPanelViewControllerInterface {
@@ -22,7 +22,7 @@ public class MockVideoPanelViewController implements VideoPanelViewControllerInt
 	}
 
 	@Override
-	public void updateDisplay(final VideoFrameDisplayInformationInterface displayInfo,
+	public void updateDisplay(final VideoFrameDisplayInfoInterface displayInfo,
 			final VideoFrameSequenceInterface videoSequence) {
 	}
 

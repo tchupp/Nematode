@@ -5,7 +5,7 @@ import java.awt.image.BufferedImage;
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 
-import com.nematode.gui.backend.VideoFrameDisplayInformationInterface;
+import com.nematode.gui.backend.VideoFrameDisplayInfoInterface;
 import com.nematode.image.DisplayFrameImageInterface;
 import com.nematode.model.DisplayFrameImageChangeObserver;
 import com.nematode.model.VideoFrameHandlerInterface;
@@ -47,7 +47,7 @@ public class VideoPanelViewController implements VideoPanelViewControllerInterfa
 	}
 
 	@Override
-	public void updateDisplay(final VideoFrameDisplayInformationInterface displayInfo,
+	public void updateDisplay(final VideoFrameDisplayInfoInterface displayInfo,
 			final VideoFrameSequenceInterface videoSequence) {
 		final VideoFrameInterface videoFrameAtNumber = videoSequence.getFrame(displayInfo
 				.getFrameNumber());

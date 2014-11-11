@@ -7,7 +7,7 @@ import javax.swing.JLabel;
 
 import org.junit.Test;
 
-import com.nematode.gui.backend.MockVideoFrameDisplayInformation;
+import com.nematode.gui.backend.MockVideoFrameDisplayInfo;
 import com.nematode.image.MockDisplayFrameImage;
 import com.nematode.image.MockFrameImageAssembler;
 import com.nematode.image.MockVideoFrameHandler;
@@ -115,9 +115,9 @@ public class VideoPanelViewControllerTest extends AssertTestCase {
 
 	@Test
 	public void testUpdateDisplayImagePlacesCorrectImageOnPanel() throws Exception {
-		final MockVideoFrameDisplayInformation mockDisplayInformation = new MockVideoFrameDisplayInformation();
+		final MockVideoFrameDisplayInfo mockDisplayInfo = new MockVideoFrameDisplayInfo();
 		final int expectedFrameNumber = 3;
-		mockDisplayInformation.setFrameNumber(expectedFrameNumber);
+		mockDisplayInfo.setFrameNumber(expectedFrameNumber);
 
 		final NullBufferedImage expectedVideoImage = new NullBufferedImage();
 		final MockVideoFrameImage mockVideoFrameImage = new MockVideoFrameImage();
@@ -149,10 +149,10 @@ public class VideoPanelViewControllerTest extends AssertTestCase {
 				imageLabelIconBefore.getImage());
 		assertNotSame(expectedDisplayImage, defaultImage);
 
-		viewController.updateDisplay(mockDisplayInformation, mockVideoFrameSequence);
+		viewController.updateDisplay(mockDisplayInfo, mockVideoFrameSequence);
 
 		assertTrue(mockVideoFrameSequence.wasGetFrameCalled());
-		assertTrue(mockDisplayInformation.wasGetFrameNumberCalled());
+		assertTrue(mockDisplayInfo.wasGetFrameNumberCalled());
 		assertEquals(expectedFrameNumber, mockVideoFrameSequence.getFrameNumberToGet());
 
 		assertTrue(mockFrameImageAssembler.wasCreateDisplayFrameImageCalled());

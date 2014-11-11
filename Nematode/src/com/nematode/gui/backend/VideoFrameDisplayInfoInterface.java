@@ -1,6 +1,6 @@
 package com.nematode.gui.backend;
 
-public interface VideoFrameDisplayInformationInterface {
+public interface VideoFrameDisplayInfoInterface {
 
 	public int getFrameNumber();
 

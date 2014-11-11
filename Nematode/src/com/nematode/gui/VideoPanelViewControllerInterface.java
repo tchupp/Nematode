@@ -1,6 +1,6 @@
 package com.nematode.gui;
 
-import com.nematode.gui.backend.VideoFrameDisplayInformationInterface;
+import com.nematode.gui.backend.VideoFrameDisplayInfoInterface;
 import com.nematode.model.VideoFrameSequenceInterface;
 
 public interface VideoPanelViewControllerInterface {
@@ -9,6 +9,6 @@ public interface VideoPanelViewControllerInterface {
 
 	public void updateVideoDisplay();
 
-	public void updateDisplay(VideoFrameDisplayInformationInterface displayInfo,
+	public void updateDisplay(VideoFrameDisplayInfoInterface displayInfo,
 			VideoFrameSequenceInterface videoSequence);
 }
