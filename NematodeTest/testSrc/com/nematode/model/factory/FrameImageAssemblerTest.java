@@ -1,5 +1,7 @@
 package com.nematode.model.factory;
 
+import java.awt.image.BufferedImage;
+
 import org.junit.Test;
 
 import com.nematode.gui.GuiConstants;
@@ -22,8 +24,9 @@ public class FrameImageAssemblerTest extends AssertTestCase {
 		final DisplayFrameImageInterface displayFrameImage = imageAssembler
 				.createDisplayFrameImage(new NullBufferedImage());
 
-		assertEquals(GuiConstants.DISPLAY_WIDTH, displayFrameImage.getImage().getWidth());
-		assertEquals(GuiConstants.DISPLAY_HEIGHT, displayFrameImage.getImage().getHeight());
+		final BufferedImage newDisplayImage = displayFrameImage.getImage();
+		assertEquals(GuiConstants.DISPLAY_WIDTH, newDisplayImage.getWidth());
+		assertEquals(GuiConstants.DISPLAY_HEIGHT, newDisplayImage.getHeight());
 	}
 
 	@Test

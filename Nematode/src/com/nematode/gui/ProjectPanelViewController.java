@@ -1,5 +1,7 @@
 package com.nematode.gui;
 
+import java.awt.event.ActionListener;
+
 import javax.swing.JButton;
 
 import com.nematode.fileIO.ImageFileChooser;
@@ -16,7 +18,7 @@ public class ProjectPanelViewController implements ProjectPanelViewControllerInt
 	}
 
 	private void addListenerToOpenImageButton() {
-		final OpenImageButtonActionListener openImageButtonActionListener = new OpenImageButtonActionListener(
+		final ActionListener openImageButtonActionListener = new OpenImageButtonActionListener(
 				new ImageFileChooser(), this.videoFrameHandler);
 		final JButton openImageButton = this.projectPanel.getOpenImageButton();
 		openImageButton.addActionListener(openImageButtonActionListener);

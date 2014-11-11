@@ -10,6 +10,7 @@ public class VideoFrameImage implements VideoFrameImageInterface {
 		this.bufferedImage = bufferedImage;
 	}
 
+	@Override
 	public BufferedImage getImage() {
 		return this.bufferedImage;
 	}

@@ -17,7 +17,7 @@ public class VideoFrame implements VideoFrameInterface {
 	public VideoFrame() {
 		this.videoFrameImage = NullFrameImage.NULL;
 		this.displayFrameImage = NullFrameImage.NULL;
-		this.setObjectsOnImage(new ArrayList<NematodeWormInterface>());
+		this.objectsOnImage = new ArrayList<NematodeWormInterface>();
 		this.videoFrameObservers = new ArrayList<VideoFrameObserverInterface>();
 	}
 
@@ -32,8 +32,7 @@ public class VideoFrame implements VideoFrameInterface {
 	}
 
 	@Override
-	public void setVideoFrameImage(
-			final VideoFrameImageInterface videoFrameImage) {
+	public void setVideoFrameImage(final VideoFrameImageInterface videoFrameImage) {
 		this.videoFrameImage = videoFrameImage;
 	}
 
@@ -43,8 +42,7 @@ public class VideoFrame implements VideoFrameInterface {
 	}
 
 	@Override
-	public void setDisplayFrameImage(
-			final DisplayFrameImageInterface displayFrameImage) {
+	public void setDisplayFrameImage(final DisplayFrameImageInterface displayFrameImage) {
 		this.displayFrameImage = displayFrameImage;
 		notifyDisplayFrameHasBeenSet();
 	}
@@ -55,20 +53,17 @@ public class VideoFrame implements VideoFrameInterface {
 	}
 
 	@Override
-	public void setObjectsOnImage(
-			final List<NematodeWormInterface> objectsOnImage) {
+	public void setObjectsOnImage(final List<NematodeWormInterface> objectsOnImage) {
 		this.objectsOnImage = objectsOnImage;
 	}
 
 	@Override
-	public void addObserver(
-			final VideoFrameObserverInterface videoFrameObserver) {
+	public void addObserver(final VideoFrameObserverInterface videoFrameObserver) {
 		this.videoFrameObservers.add(videoFrameObserver);
 	}
 
 	@Override
-	public void removeObserver(
-			final VideoFrameObserverInterface videoFrameObserver) {
+	public void removeObserver(final VideoFrameObserverInterface videoFrameObserver) {
 		this.videoFrameObservers.remove(videoFrameObserver);
 	}
 
