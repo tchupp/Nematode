@@ -10,6 +10,7 @@ public class MockValidatedImageFile implements ValidatedImageFileInterface {
 	private final File file;
 	private boolean isFileValid;
 	private BufferedImage bufferedImage;
+	private boolean isFileValidWasCalled = false;
 
 	public MockValidatedImageFile() {
 		this.file = new File("");
@@ -23,7 +24,12 @@ public class MockValidatedImageFile implements ValidatedImageFileInterface {
 
 	@Override
 	public boolean isFileValid() {
+		this.isFileValidWasCalled = true;
 		return this.isFileValid;
+	}
+
+	public boolean wasIsFileValidCalled() {
+		return this.isFileValidWasCalled;
 	}
 
 	public void setIsFileValid(final boolean isFileValid) {
