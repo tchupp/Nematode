@@ -151,7 +151,7 @@ public class VideoPanelViewControllerTest extends AssertTestCase {
 
 		viewController.updateDisplay(mockDisplayInfo, mockVideoFrameSequence);
 
-		assertTrue(mockVideoFrameSequence.wasGetFrameCalled());
+		assertTrue(mockVideoFrameSequence.wasGetVideoFrameCalled());
 		assertTrue(mockDisplayInfo.wasGetFrameNumberCalled());
 		assertEquals(expectedFrameNumber, mockVideoFrameSequence.getFrameNumberToGet());
 

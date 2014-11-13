@@ -49,7 +49,7 @@ public class VideoPanelViewController implements VideoPanelViewControllerInterfa
 	@Override
 	public void updateDisplay(final VideoFrameDisplayInfoInterface displayInfo,
 			final VideoFrameSequenceInterface videoSequence) {
-		final VideoFrameInterface videoFrameAtNumber = videoSequence.getFrame(displayInfo
+		final VideoFrameInterface videoFrameAtNumber = videoSequence.getVideoFrame(displayInfo
 				.getFrameNumber());
 		final DisplayFrameImageInterface newDisplayImage = this.frameImageAssembler
 				.createDisplayFrameImage(videoFrameAtNumber.getVideoFrameImage().getImage());

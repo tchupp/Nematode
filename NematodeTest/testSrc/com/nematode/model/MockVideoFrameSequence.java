@@ -6,15 +6,16 @@ public class MockVideoFrameSequence implements VideoFrameSequenceInterface {
 	private int size;
 	private int frameNumberToGet;
 	private boolean getFrameWasCalled = false;
+	private boolean clearWasCalled = false;
 
 	@Override
-	public VideoFrameInterface getFrame(final int frameNumber) {
+	public VideoFrameInterface getVideoFrame(final Integer frameNumber) {
 		this.frameNumberToGet = frameNumber;
 		this.getFrameWasCalled = true;
 		return this.frameToReturn;
 	}
 
-	public boolean wasGetFrameCalled() {
+	public boolean wasGetVideoFrameCalled() {
 		return this.getFrameWasCalled;
 	}
 
@@ -27,12 +28,30 @@ public class MockVideoFrameSequence implements VideoFrameSequenceInterface {
 	}
 
 	@Override
-	public int getSize() {
+	public int size() {
 		return this.size;
 	}
 
 	public void setSize(final int size) {
 		this.size = size;
+	}
+
+	@Override
+	public void addVideoFrame(final Integer index, final VideoFrameInterface videoFrame) {
+	}
+
+	@Override
+	public boolean isEmpty() {
+		return false;
+	}
+
+	@Override
+	public void clear() {
+		this.clearWasCalled = true;
+	}
+
+	public boolean wasClearCalled() {
+		return this.clearWasCalled;
 	}
 
 }

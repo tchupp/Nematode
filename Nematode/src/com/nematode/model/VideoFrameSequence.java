@@ -1,30 +1,45 @@
 package com.nematode.model;
 
-import java.util.List;
+import java.util.HashMap;
 
 public class VideoFrameSequence implements VideoFrameSequenceInterface {
 
-	private final List<VideoFrameInterface> videoFrameList;
+	private final HashMap<Integer, VideoFrameInterface> videoFrameMap;
 
-	public VideoFrameSequence(final List<VideoFrameInterface> videoFrameList) {
-		this.videoFrameList = videoFrameList;
+	public VideoFrameSequence() {
+		this.videoFrameMap = new HashMap<Integer, VideoFrameInterface>();
 	}
 
 	@Override
-	public VideoFrameInterface getFrame(final int frameNumber) {
-		try {
-			return this.videoFrameList.get(frameNumber);
-		} catch (final IndexOutOfBoundsException exception) {
-			return NullVideoFrame.NULL;
+	public void addVideoFrame(final Integer index, final VideoFrameInterface videoFrame) {
+		this.videoFrameMap.put(index, videoFrame);
+	}
+
+	@Override
+	public VideoFrameInterface getVideoFrame(final Integer frameNumber) {
+		final VideoFrameInterface videoFrame = this.videoFrameMap.get(frameNumber);
+		if (videoFrame != null) {
+			return videoFrame;
 		}
+		return NullVideoFrame.NULL;
 	}
 
 	@Override
-	public int getSize() {
-		return this.videoFrameList.size();
+	public int size() {
+		return this.videoFrameMap.size();
 	}
 
-	public List<VideoFrameInterface> getVideoFrameList() {
-		return this.videoFrameList;
+	@Override
+	public boolean isEmpty() {
+		return this.videoFrameMap.isEmpty();
+	}
+
+	@Override
+	public void clear() {
+		this.videoFrameMap.clear();
+	}
+
+	public HashMap<Integer, VideoFrameInterface> getVideoFrameMap() {
+		return this.videoFrameMap;
 	}
 }

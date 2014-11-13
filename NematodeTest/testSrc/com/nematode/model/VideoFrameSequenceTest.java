@@ -1,7 +1,6 @@
 package com.nematode.model;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.HashMap;
 
 import org.junit.Test;
 
@@ -15,42 +14,84 @@ public class VideoFrameSequenceTest extends AssertTestCase {
 	}
 
 	@Test
-	public void testGetsVideoFrameListPassedIn() throws Exception {
-		final List<VideoFrameInterface> expectedVideoFrameList = new ArrayList<VideoFrameInterface>();
-		final VideoFrameSequence videoFrameSequence = new VideoFrameSequence(expectedVideoFrameList);
-		assertSame(expectedVideoFrameList, videoFrameSequence.getVideoFrameList());
+	public void testVideoFrameSequenceInitializedWithEmptyMap() throws Exception {
+		final VideoFrameSequence videoFrameSequence = new VideoFrameSequence();
+		assertEquals(0, videoFrameSequence.getVideoFrameMap().size());
 	}
 
 	@Test
-	public void testGetFrameReturnsCorrectVideoFrame_InsideIndex() throws Exception {
-		final List<VideoFrameInterface> videoFrameList = new ArrayList<VideoFrameInterface>();
+	public void testAddingVideoFrameCorrectlyInsertsFrameIntoMap_AndCorrectlyUpdatesSize()
+			throws Exception {
+		final Integer videoFrameIndex = new Integer(5);
 		final MockVideoFrame expectedVideoFrame = new MockVideoFrame();
-		videoFrameList.add(expectedVideoFrame);
 
-		final VideoFrameSequence videoFrameSequence = new VideoFrameSequence(videoFrameList);
-		assertSame(expectedVideoFrame, videoFrameSequence.getFrame(0));
+		final VideoFrameSequence videoFrameSequence = new VideoFrameSequence();
+
+		assertEquals(0, videoFrameSequence.size());
+
+		videoFrameSequence.addVideoFrame(videoFrameIndex, expectedVideoFrame);
+
+		assertEquals(1, videoFrameSequence.size());
+
+		final HashMap<Integer, VideoFrameInterface> actualVideoFrameMap = videoFrameSequence
+				.getVideoFrameMap();
+		assertSame(expectedVideoFrame, actualVideoFrameMap.get(videoFrameIndex));
 	}
 
 	@Test
-	public void testGetFrameReturnsCorrectVideoFrame_OutsideIndex() throws Exception {
-		final List<VideoFrameInterface> expectedVideoFrameList = new ArrayList<VideoFrameInterface>();
-		final VideoFrameSequence videoFrameSequence = new VideoFrameSequence(expectedVideoFrameList);
+	public void testGetVideoFrameReturnsCorrectVideoFrame_ValidIndex() throws Exception {
+		final VideoFrameSequence videoFrameSequence = new VideoFrameSequence();
 
-		final NullVideoFrame actualVideoFrame = assertIsOfTypeAndGet(NullVideoFrame.class,
-				videoFrameSequence.getFrame(0));
-		assertSame(NullVideoFrame.NULL, actualVideoFrame);
+		final Integer videoFrameIndex = new Integer(5);
+		final MockVideoFrame expectedVideoFrame = new MockVideoFrame();
+		videoFrameSequence.addVideoFrame(videoFrameIndex, expectedVideoFrame);
+
+		final VideoFrameInterface actualVideoFrame = videoFrameSequence
+				.getVideoFrame(videoFrameIndex);
+		assertSame(expectedVideoFrame, actualVideoFrame);
 	}
 
 	@Test
-	public void testGetSizeReturnsCorrectSizeOfVideoFrameList() throws Exception {
-		final List<VideoFrameInterface> videoFrameList = new ArrayList<VideoFrameInterface>();
-		final VideoFrameSequence videoFrameSequence = new VideoFrameSequence(videoFrameList);
+	public void testGetVideoFrameReturnsCorrectNullVideoFrame_InvalidIndex() throws Exception {
+		final VideoFrameSequence videoFrameSequence = new VideoFrameSequence();
 
-		assertEquals(0, videoFrameSequence.getSize());
+		final Integer otherVideoFrameIndex = new Integer(7);
+		final Integer videoFrameIndex = new Integer(5);
+		final MockVideoFrame expectedVideoFrame = new MockVideoFrame();
+		videoFrameSequence.addVideoFrame(videoFrameIndex, expectedVideoFrame);
 
-		videoFrameList.add(new MockVideoFrame());
-		videoFrameList.add(new MockVideoFrame());
+		assertIsOfTypeAndGet(NullVideoFrame.class,
+				videoFrameSequence.getVideoFrame(otherVideoFrameIndex));
+	}
 
-		assertEquals(2, videoFrameSequence.getSize());
+	@Test
+	public void testVideoFrameSequenceWithNoVideoFramesReturnsTrueForIsEmpty_FalseIfThereAreVideoFrames()
+			throws Exception {
+		final Integer videoFrameIndex = new Integer(5);
+		final MockVideoFrame expectedVideoFrame = new MockVideoFrame();
+
+		final VideoFrameSequence videoFrameSequence = new VideoFrameSequence();
+
+		assertTrue(videoFrameSequence.isEmpty());
+
+		videoFrameSequence.addVideoFrame(videoFrameIndex, expectedVideoFrame);
+
+		assertFalse(videoFrameSequence.isEmpty());
+	}
+
+	@Test
+	public void testClearRemovesAllVideoFramesFromTheSequence() throws Exception {
+		final Integer videoFrameIndex = new Integer(5);
+		final MockVideoFrame expectedVideoFrame = new MockVideoFrame();
+
+		final VideoFrameSequence videoFrameSequence = new VideoFrameSequence();
+
+		videoFrameSequence.addVideoFrame(videoFrameIndex, expectedVideoFrame);
+
+		assertFalse(videoFrameSequence.isEmpty());
+
+		videoFrameSequence.clear();
+
+		assertTrue(videoFrameSequence.isEmpty());
 	}
 }
