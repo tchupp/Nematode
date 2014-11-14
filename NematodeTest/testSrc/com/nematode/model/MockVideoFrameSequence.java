@@ -7,6 +7,9 @@ public class MockVideoFrameSequence implements VideoFrameSequenceInterface {
 	private int frameNumberToGet;
 	private boolean getFrameWasCalled = false;
 	private boolean clearWasCalled = false;
+	private boolean addVideoFrameWasCalled = false;
+	private Integer frameIndexToAdd;
+	private VideoFrameInterface videoFrameToAdd;
 
 	@Override
 	public VideoFrameInterface getVideoFrame(final Integer frameNumber) {
@@ -38,6 +41,21 @@ public class MockVideoFrameSequence implements VideoFrameSequenceInterface {
 
 	@Override
 	public void addVideoFrame(final Integer index, final VideoFrameInterface videoFrame) {
+		this.frameIndexToAdd = index;
+		this.videoFrameToAdd = videoFrame;
+		this.addVideoFrameWasCalled = true;
+	}
+
+	public boolean wasAddVideoFrameCalled() {
+		return this.addVideoFrameWasCalled;
+	}
+
+	public Integer getFrameIndexToAdd() {
+		return this.frameIndexToAdd;
+	}
+
+	public VideoFrameInterface getVideoFrameToAdd() {
+		return this.videoFrameToAdd;
 	}
 
 	@Override

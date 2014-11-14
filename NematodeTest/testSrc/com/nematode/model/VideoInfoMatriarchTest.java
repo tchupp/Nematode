@@ -1,5 +1,7 @@
 package com.nematode.model;
 
+import java.util.Map;
+
 import org.junit.Test;
 
 import com.nematode.unittesting.AssertTestCase;
@@ -19,5 +21,14 @@ public class VideoInfoMatriarchTest extends AssertTestCase {
 				VideoFrameSequence.class, videoInfoMatriarch.getVideoFrameSequence());
 
 		assertTrue(videoFrameSequence.isEmpty());
+	}
+
+	@Test
+	public void testMatriarchIsConstructedWithEmptyVideoFrameInfoMap() throws Exception {
+		final VideoInfoMatriarch videoInfoMatriarch = new VideoInfoMatriarch();
+		final Map<VideoFrameInterface, VideoFrameInfoInterface> videoFrameInfoMap = videoInfoMatriarch
+				.getVideoFrameInfoMap();
+
+		assertTrue(videoFrameInfoMap.isEmpty());
 	}
 }

@@ -19,8 +19,14 @@ public class VideoFrameTest extends AssertTestCase {
 		final VideoFrame videoFrame = new VideoFrame();
 
 		assertIsOfTypeAndGet(NullFrameImage.class, videoFrame.getVideoFrameImage());
-
 		assertIsOfTypeAndGet(NullFrameImage.class, videoFrame.getDisplayFrameImage());
+	}
+
+	@Test
+	public void testGetsVideoFrameImagePassedIn_NullFrameForDisplayImage() throws Exception {
+		final MockVideoFrameImage videoFrameImage = new MockVideoFrameImage();
+		final VideoFrame videoFrame = new VideoFrame(videoFrameImage);
+		assertSame(videoFrameImage, videoFrame.getVideoFrameImage());
 	}
 
 	@Test

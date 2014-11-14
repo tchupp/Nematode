@@ -15,7 +15,11 @@ public class VideoFrame implements VideoFrameInterface {
 	private final List<VideoFrameObserverInterface> videoFrameObservers;
 
 	public VideoFrame() {
-		this.videoFrameImage = NullFrameImage.NULL;
+		this(NullFrameImage.NULL);
+	}
+
+	public VideoFrame(final VideoFrameImageInterface videoFrameImage) {
+		this.videoFrameImage = videoFrameImage;
 		this.displayFrameImage = NullFrameImage.NULL;
 		this.objectsOnImage = new ArrayList<NematodeWormInterface>();
 		this.videoFrameObservers = new ArrayList<VideoFrameObserverInterface>();
