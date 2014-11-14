@@ -4,6 +4,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 import com.nematode.fileIO.VideoFrameAssembler;
+import com.nematode.fileIO.VideoFrameAssemblerInterface;
 import com.nematode.model.factory.FrameImageAssembler;
 
 public class VideoInfoMatriarch implements VideoInfoMatriarchInterface {
@@ -27,7 +28,8 @@ public class VideoInfoMatriarch implements VideoInfoMatriarchInterface {
 		return this.videoFrameInfoMap;
 	}
 
-	public VideoFrameAssembler getVideoFrameAssembler() {
+	@Override
+	public VideoFrameAssemblerInterface getVideoFrameAssembler() {
 		return this.videoFrameAssembler;
 	}
 }

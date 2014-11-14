@@ -38,12 +38,13 @@ public class VideoInfoMatriarchTest extends AssertTestCase {
 	public void testMatriarchConstructsVideoFrameAssemblerWithCorrectSequence_AndAssembler()
 			throws Exception {
 		final VideoInfoMatriarch videoInfoMatriarch = new VideoInfoMatriarch();
-		final VideoFrameAssembler videoFrameAssembler = videoInfoMatriarch.getVideoFrameAssembler();
+		final VideoFrameAssembler videoFrameAssembler = assertIsOfTypeAndGet(
+				VideoFrameAssembler.class, videoInfoMatriarch.getVideoFrameAssembler());
 
 		assertSame(videoInfoMatriarch.getVideoFrameSequence(),
 				videoFrameAssembler.getVideoFrameSequence());
 
-		assertIsOfTypeAndGet(FrameImageAssembler.class, videoInfoMatriarch.getVideoFrameAssembler()
-				.getFrameImageAssembler());
+		assertIsOfTypeAndGet(FrameImageAssembler.class,
+				videoFrameAssembler.getFrameImageAssembler());
 	}
 }

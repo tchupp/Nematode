@@ -14,6 +14,7 @@ import com.nematode.image.processing.ImageProcessingRunner;
 import com.nematode.model.VideoFrame;
 import com.nematode.model.VideoFrameHandler;
 import com.nematode.model.VideoFrameHandlerInterface;
+import com.nematode.model.VideoInfoMatriarchInterface;
 import com.nematode.model.factory.FrameImageAssembler;
 import com.nematode.model.factory.NematodeWormBuilder;
 import com.nematode.unittesting.AssertTestCase;
@@ -262,16 +263,16 @@ public class MainWindowViewControllerTest extends AssertTestCase {
 	}
 
 	@Test
-	public void testProjectPanelViewControllerIsCreatedWithCorrectVideoFrameHandler()
+	public void testProjectPanelViewControllerIsCreatedWithCorrectVideoInfoMatriarch()
 			throws Exception {
 		final MainWindowViewController viewController = new MainWindowViewController();
 		final ProjectPanelViewController projectPanelViewController = assertIsOfTypeAndGet(
 				ProjectPanelViewController.class, viewController.getProjectPanelViewController());
 
-		final VideoFrameHandlerInterface actualVideoFrameHandler = projectPanelViewController
-				.getVideoFrameHandler();
+		final VideoInfoMatriarchInterface videoInfoMatriarch = projectPanelViewController
+				.getVideoInfoMatriarch();
 
-		assertSame(viewController.getVideoFrameHandler(), actualVideoFrameHandler);
+		assertSame(viewController.getVideoInfoMatriarch(), videoInfoMatriarch);
 	}
 
 	@Test

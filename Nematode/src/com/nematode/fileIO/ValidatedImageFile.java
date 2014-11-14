@@ -30,6 +30,7 @@ public class ValidatedImageFile implements ValidatedImageFileInterface {
 		}
 	}
 
+	@Override
 	public BufferedImage getFileImage() {
 		return this.fileImage;
 	}

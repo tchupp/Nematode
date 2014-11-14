@@ -7,17 +7,17 @@ import javax.swing.JFileChooser;
 
 import com.nematode.fileIO.AbstractFileChooser;
 import com.nematode.fileIO.ValidatedImageFile;
-import com.nematode.model.VideoFrameHandlerInterface;
+import com.nematode.fileIO.VideoFrameAssemblerInterface;
 
 public class OpenImageButtonActionListener implements ActionListener {
 
 	private final AbstractFileChooser fileChooser;
-	private final VideoFrameHandlerInterface videoFrameHandler;
+	private final VideoFrameAssemblerInterface videoFrameAssembler;
 
 	public OpenImageButtonActionListener(final AbstractFileChooser fileChooser,
-			final VideoFrameHandlerInterface videoFrameHandler) {
+			final VideoFrameAssemblerInterface videoFrameAssembler) {
 		this.fileChooser = fileChooser;
-		this.videoFrameHandler = videoFrameHandler;
+		this.videoFrameAssembler = videoFrameAssembler;
 	}
 
 	@Override
@@ -27,7 +27,8 @@ public class OpenImageButtonActionListener implements ActionListener {
 		if (dialogResult == JFileChooser.APPROVE_OPTION) {
 			final ValidatedImageFile validatedImageFile = new ValidatedImageFile(
 					this.fileChooser.getSelectedFile());
-			this.videoFrameHandler.buildNewFrameImageFromFile(validatedImageFile);
+
+			this.videoFrameAssembler.addNewVideoFrame(validatedImageFile, 0);
 		}
 	}
 
@@ -35,7 +36,7 @@ public class OpenImageButtonActionListener implements ActionListener {
 		return this.fileChooser;
 	}
 
-	public VideoFrameHandlerInterface getVideoFrameHandler() {
-		return this.videoFrameHandler;
+	public VideoFrameAssemblerInterface getVideoFrameAssembler() {
+		return this.videoFrameAssembler;
 	}
 }
