@@ -1,5 +1,7 @@
 package com.nematode.fileIO;
 
+import javax.swing.filechooser.FileFilter;
+
 import org.junit.Test;
 
 import com.nematode.unittesting.AssertTestCase;
@@ -7,7 +9,7 @@ import com.nematode.unittesting.AssertTestCase;
 public class ImageFileChooserTest extends AssertTestCase {
 
 	@Test
-	public void testExtendsJFileChooser() throws Exception {
+	public void testExtendsAbstractFileChooser() throws Exception {
 		assertExtends(AbstractFileChooser.class, ImageFileChooser.class);
 	}
 
@@ -16,8 +18,10 @@ public class ImageFileChooserTest extends AssertTestCase {
 		final ImageFileChooser imageFileChooser = new ImageFileChooser();
 
 		assertEquals("Open", imageFileChooser.getApproveButtonText());
-		assertEquals(1, imageFileChooser.getChoosableFileFilters().length);
 
-		assertIsOfTypeAndGet(ImageFileFilter.class, imageFileChooser.getChoosableFileFilters()[0]);
+		final FileFilter[] choosableFileFilters = imageFileChooser.getChoosableFileFilters();
+		assertEquals(1, choosableFileFilters.length);
+
+		assertIsOfTypeAndGet(ImageFileFilter.class, choosableFileFilters[0]);
 	}
 }
