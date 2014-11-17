@@ -20,7 +20,7 @@ public class OpenImageButtonActionListenerTest extends AssertTestCase {
 	}
 
 	@Test
-	public void testGetImageFileChooser() throws Exception {
+	public void testGetsImageFileChooser() throws Exception {
 		final MockFileChooser fileChooser = new MockFileChooser();
 		final OpenImageButtonActionListener openImageButtonListener = new OpenImageButtonActionListener(
 				fileChooser, new MockVideoFrameAssembler());
@@ -40,6 +40,7 @@ public class OpenImageButtonActionListenerTest extends AssertTestCase {
 		final MockFileChooser mockFileChooser = new MockFileChooser();
 		final OpenImageButtonActionListener openImageButtonListener = new OpenImageButtonActionListener(
 				mockFileChooser, new MockVideoFrameAssembler());
+
 		assertFalse(mockFileChooser.wasShowDialogCalled());
 		openImageButtonListener.actionPerformed(null);
 		assertTrue(mockFileChooser.wasShowDialogCalled());

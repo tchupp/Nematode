@@ -1,11 +1,14 @@
 package com.nematode.gui;
 
+import java.awt.event.ActionListener;
+
 import javax.swing.JButton;
 
 import org.junit.Test;
 
 import com.nematode.fileIO.ImageFileChooser;
 import com.nematode.fileIO.MockVideoFrameAssembler;
+import com.nematode.fileIO.VideoFileChooser;
 import com.nematode.model.MockVideoInfoMatriarch;
 import com.nematode.unittesting.AssertTestCase;
 
@@ -47,13 +50,34 @@ public class ProjectPanelViewControllerTest extends AssertTestCase {
 				projectPanelViewController.getProjectPanel());
 
 		final JButton openImageButton = projectPanel.getOpenImageButton();
-		assertEquals(1, openImageButton.getActionListeners().length);
+
+		final ActionListener[] actionListeners = openImageButton.getActionListeners();
+		assertEquals(1, actionListeners.length);
 
 		final OpenImageButtonActionListener openImageActionListener = assertIsOfTypeAndGet(
-				OpenImageButtonActionListener.class, openImageButton.getActionListeners()[0]);
+				OpenImageButtonActionListener.class, actionListeners[0]);
 
 		assertSame(mockVideoFrameAssembler, openImageActionListener.getVideoFrameAssembler());
 
 		assertIsOfTypeAndGet(ImageFileChooser.class, openImageActionListener.getFileChooser());
+	}
+
+	@Test
+	public void testConstructionAddsCorrectListener_OpenVideoButtonOnPanel() throws Exception {
+		final ProjectPanelViewController projectPanelViewController = new ProjectPanelViewController(
+				new MockVideoInfoMatriarch());
+
+		final ProjectPanel projectPanel = assertIsOfTypeAndGet(ProjectPanel.class,
+				projectPanelViewController.getProjectPanel());
+
+		final JButton openVideoButton = projectPanel.getOpenVideoButton();
+
+		final ActionListener[] actionListeners = openVideoButton.getActionListeners();
+		assertEquals(1, actionListeners.length);
+
+		final OpenVideoButtonActionListener openVideoActionListener = assertIsOfTypeAndGet(
+				OpenVideoButtonActionListener.class, actionListeners[0]);
+
+		assertIsOfTypeAndGet(VideoFileChooser.class, openVideoActionListener.getFileChooser());
 	}
 }
