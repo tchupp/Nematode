@@ -17,9 +17,9 @@ public class ImageFileFilter extends FileFilter {
 		if (fileExtention.equals("jpeg") || fileExtention.equals("jpg")
 				|| fileExtention.equals("png") || fileExtention.equals("bmp")) {
 			return true;
-		} else {
-			return false;
 		}
+
+		return false;
 	}
 
 	@Override
