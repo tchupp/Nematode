@@ -1,5 +1,8 @@
 package com.nematode.gui;
 
+import java.lang.reflect.Field;
+import java.util.Vector;
+
 import org.junit.Test;
 
 import com.nematode.unittesting.AssertTestCase;
@@ -29,5 +32,18 @@ public class NematodeTrackingLauncherTest extends AssertTestCase {
 		assertTrue(mainWindow.isVisible());
 
 		mainWindow.dispose();
+	}
+
+	@Test
+	public void testLoadsOpenCVLibrary() throws Exception {
+		final ClassLoader classLoader = NematodeTrackingLauncher.class.getClassLoader();
+		final Field declaredLibraries = ClassLoader.class.getDeclaredField("loadedLibraryNames");
+		declaredLibraries.setAccessible(true);
+
+		@SuppressWarnings("unchecked")
+		final Vector<String> loadedLibraries = assertIsOfTypeAndGet(Vector.class,
+				declaredLibraries.get(classLoader));
+
+		assertTrue(loadedLibraries.lastElement().contains("opencv_java2410.dll"));
 	}
 }
