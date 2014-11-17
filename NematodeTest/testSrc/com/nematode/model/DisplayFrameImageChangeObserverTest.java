@@ -20,14 +20,4 @@ public class DisplayFrameImageChangeObserverTest extends AssertTestCase {
 				mockVideoPanelViewController);
 		assertSame(mockVideoPanelViewController, imageChangeObserver.getPanelViewController());
 	}
-
-	@Test
-	public void testNotifyDisplayFrameHasBeenSet() throws Exception {
-		final MockVideoPanelViewController mockVideoPanelViewController = new MockVideoPanelViewController();
-		final DisplayFrameImageChangeObserver observer = new DisplayFrameImageChangeObserver(
-				mockVideoPanelViewController);
-		assertFalse(mockVideoPanelViewController.wasUpdateVideoDisplayCalled());
-		observer.notifyDisplayFrameHasBeenSet();
-		assertTrue(mockVideoPanelViewController.wasUpdateVideoDisplayCalled());
-	}
 }

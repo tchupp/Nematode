@@ -17,7 +17,6 @@ public class DisplayFrameImageChangeObserver implements VideoFrameObserverInterf
 
 	@Override
 	public void notifyDisplayFrameHasBeenSet() {
-		this.videoPanelViewController.updateVideoDisplay();
 	}
 
 	public VideoPanelViewControllerInterface getPanelViewController() {

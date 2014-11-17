@@ -13,10 +13,6 @@ import com.nematode.image.MockFrameImageAssembler;
 import com.nematode.image.MockImageProcessingRunner;
 import com.nematode.image.NullBufferedImage;
 import com.nematode.image.NullFrameImage;
-import com.nematode.model.VideoFrameInterface;
-import com.nematode.model.NematodeWormInterface;
-import com.nematode.model.VideoFrameHandler;
-import com.nematode.model.VideoFrameHandlerInterface;
 import com.nematode.unittesting.AssertTestCase;
 
 public class VideoFrameHandlerTest extends AssertTestCase {
@@ -29,21 +25,20 @@ public class VideoFrameHandlerTest extends AssertTestCase {
 	@Test
 	public void testGetsVideoFrame() throws Exception {
 		final MockVideoFrame expectedVideoFrame = new MockVideoFrame();
-		final VideoFrameHandler videoFrameHandler = new VideoFrameHandler(
-				expectedVideoFrame, new MockFrameImageAssembler(),
-				new MockImageProcessingRunner(), new MockEdgeDetectionRunner());
+		final VideoFrameHandler videoFrameHandler = new VideoFrameHandler(expectedVideoFrame,
+				new MockFrameImageAssembler(), new MockImageProcessingRunner(),
+				new MockEdgeDetectionRunner());
 
-		final VideoFrameInterface actualVideoFrame = videoFrameHandler
-				.getVideoFrame();
+		final VideoFrameInterface actualVideoFrame = videoFrameHandler.getVideoFrame();
 		assertSame(expectedVideoFrame, actualVideoFrame);
 	}
 
 	@Test
 	public void testGetsFrameImageAssembler() throws Exception {
 		final MockFrameImageAssembler expectedFrameImageAssembler = new MockFrameImageAssembler();
-		final VideoFrameHandler videoFrameHandler = new VideoFrameHandler(
-				new MockVideoFrame(), expectedFrameImageAssembler,
-				new MockImageProcessingRunner(), new MockEdgeDetectionRunner());
+		final VideoFrameHandler videoFrameHandler = new VideoFrameHandler(new MockVideoFrame(),
+				expectedFrameImageAssembler, new MockImageProcessingRunner(),
+				new MockEdgeDetectionRunner());
 
 		assertSame(expectedFrameImageAssembler, videoFrameHandler.getFrameImageAssembler());
 	}
@@ -51,9 +46,9 @@ public class VideoFrameHandlerTest extends AssertTestCase {
 	@Test
 	public void testGetsImageProcessingRunner() throws Exception {
 		final MockImageProcessingRunner expectedImageProcessingRunner = new MockImageProcessingRunner();
-		final VideoFrameHandler videoFrameHandler = new VideoFrameHandler(
-				new MockVideoFrame(), new MockFrameImageAssembler(),
-				expectedImageProcessingRunner, new MockEdgeDetectionRunner());
+		final VideoFrameHandler videoFrameHandler = new VideoFrameHandler(new MockVideoFrame(),
+				new MockFrameImageAssembler(), expectedImageProcessingRunner,
+				new MockEdgeDetectionRunner());
 
 		assertSame(expectedImageProcessingRunner, videoFrameHandler.getImageProcessingRunner());
 	}
@@ -61,9 +56,8 @@ public class VideoFrameHandlerTest extends AssertTestCase {
 	@Test
 	public void testGetsEdgeDetectionRunner() throws Exception {
 		final MockEdgeDetectionRunner edgeDetectionRunner = new MockEdgeDetectionRunner();
-		final VideoFrameHandler videoFrameHandler = new VideoFrameHandler(
-				new MockVideoFrame(), new MockFrameImageAssembler(),
-				new MockImageProcessingRunner(), edgeDetectionRunner);
+		final VideoFrameHandler videoFrameHandler = new VideoFrameHandler(new MockVideoFrame(),
+				new MockFrameImageAssembler(), new MockImageProcessingRunner(), edgeDetectionRunner);
 
 		assertSame(edgeDetectionRunner, videoFrameHandler.getEdgeDetectionRunner());
 	}
@@ -86,19 +80,13 @@ public class VideoFrameHandlerTest extends AssertTestCase {
 				mockAssembler, imageProcessingRunner, new MockEdgeDetectionRunner());
 
 		assertFalse(mockAssembler.wasCreateDisplayFrameImageCalled());
-		assertFalse(videoFrame.wasSetDisplayFrameImageCalled());
 		assertFalse(imageProcessingRunner.wasCreateImageWithIdentifiedObjectsCalled());
 
 		videoFrameHandler.updateDisplayImageFromScannedObjects();
 
-		assertTrue(imageProcessingRunner.wasCreateImageWithIdentifiedObjectsCalled());
-		assertSame(videoFrame, imageProcessingRunner.getVideoFrameDrawn());
+		assertFalse(imageProcessingRunner.wasCreateImageWithIdentifiedObjectsCalled());
 
-		assertTrue(mockAssembler.wasCreateDisplayFrameImageCalled());
-		assertSame(expectedImageWithObjects, mockAssembler.getDisplayImageToUse());
-
-		assertTrue(videoFrame.wasSetDisplayFrameImageCalled());
-		assertSame(expectedDisplayImage, videoFrame.getDisplayFrameImage());
+		assertFalse(mockAssembler.wasCreateDisplayFrameImageCalled());
 	}
 
 	@Test
@@ -115,37 +103,30 @@ public class VideoFrameHandlerTest extends AssertTestCase {
 		assertFalse(mockAssembler.wasCreateDisplayFrameImageCalled());
 		assertFalse(mockAssembler.wasCreateVideoFrameImageCalled());
 		videoFrameHandler.buildNewFrameImageFromFile(mockValidatedImageFile);
-		assertTrue(mockAssembler.wasCreateDisplayFrameImageCalled());
+		assertFalse(mockAssembler.wasCreateDisplayFrameImageCalled());
 		assertTrue(mockAssembler.wasCreateVideoFrameImageCalled());
 	}
 
 	@Test
 	public void testBuildNewFrameImage_WithInvalidImage_DoesntCallCreateFromFrameAssembler()
 			throws Exception {
-		final MockVideoFrame videoFrame = new MockVideoFrame();
 		final MockFrameImageAssembler mockAssembler = new MockFrameImageAssembler();
-		final VideoFrameHandler videoFrameHandler = new VideoFrameHandler(videoFrame,
+		final VideoFrameHandler videoFrameHandler = new VideoFrameHandler(new MockVideoFrame(),
 				mockAssembler, new MockImageProcessingRunner(), new MockEdgeDetectionRunner());
 
 		final MockValidatedImageFile mockValidatedImageFile = new MockValidatedImageFile();
 		mockValidatedImageFile.setIsFileValid(false);
 
-		assertFalse(videoFrame.wasSetVideoFrameImageCalled());
-		assertFalse(videoFrame.wasSetDisplayFrameImageCalled());
-
 		assertFalse(mockAssembler.wasCreateVideoFrameImageCalled());
 		assertFalse(mockAssembler.wasCreateDisplayFrameImageCalled());
 
 		videoFrameHandler.buildNewFrameImageFromFile(mockValidatedImageFile);
+		final VideoFrameInterface videoFrame = videoFrameHandler.getVideoFrame();
 
 		assertFalse(mockAssembler.wasCreateVideoFrameImageCalled());
 		assertFalse(mockAssembler.wasCreateDisplayFrameImageCalled());
 
-		assertTrue(videoFrame.wasSetVideoFrameImageCalled());
-		assertTrue(videoFrame.wasSetDisplayFrameImageCalled());
-
 		assertIsOfTypeAndGet(NullFrameImage.class, videoFrame.getVideoFrameImage());
-		assertIsOfTypeAndGet(NullFrameImage.class, videoFrame.getDisplayFrameImage());
 	}
 
 	@Test

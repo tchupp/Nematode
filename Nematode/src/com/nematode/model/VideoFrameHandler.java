@@ -4,8 +4,6 @@ import java.awt.image.BufferedImage;
 import java.util.List;
 
 import com.nematode.fileIO.ValidatedImageFileInterface;
-import com.nematode.image.BlackAndWhiteImage;
-import com.nematode.image.DisplayFrameImageInterface;
 import com.nematode.image.NullFrameImage;
 import com.nematode.image.ProcessedFrameImageInterface;
 import com.nematode.image.VideoFrameImageInterface;
@@ -15,7 +13,7 @@ import com.nematode.model.factory.FrameImageAssemblerInterface;
 
 public class VideoFrameHandler implements VideoFrameHandlerInterface {
 
-	private final VideoFrameInterface videoFrame;
+	private VideoFrameInterface videoFrame;
 	private final FrameImageAssemblerInterface frameImageAssembler;
 	private final ImageProcessingRunnerInterface imageProcessingRunner;
 	private final EdgeDetectionRunnerInterface edgeDetectionRunner;
@@ -38,27 +36,14 @@ public class VideoFrameHandler implements VideoFrameHandlerInterface {
 
 			final VideoFrameImageInterface videoFrameImage = this.frameImageAssembler
 					.createVideoFrameImage(fileImage);
-			this.videoFrame.setVideoFrameImage(videoFrameImage);
-
-			final DisplayFrameImageInterface displayFrameImage = this.frameImageAssembler
-					.createDisplayFrameImage(fileImage);
-			this.videoFrame.setDisplayFrameImage(displayFrameImage);
-
+			this.videoFrame = new VideoFrame(videoFrameImage);
 		} else {
-			this.videoFrame.setVideoFrameImage(NullFrameImage.NULL);
-			this.videoFrame.setDisplayFrameImage(NullFrameImage.NULL);
+			this.videoFrame = new VideoFrame(NullFrameImage.NULL);
 		}
 	}
 
 	@Override
 	public void updateDisplayImageFromScannedObjects() {
-		final BlackAndWhiteImage imageWithDrawnObjects = this.imageProcessingRunner
-				.createImageWithIdentifiedObjects(this.videoFrame);
-
-		final DisplayFrameImageInterface displayFrameImage = this.frameImageAssembler
-				.createDisplayFrameImage(imageWithDrawnObjects);
-
-		this.videoFrame.setDisplayFrameImage(displayFrameImage);
 	}
 
 	@Override

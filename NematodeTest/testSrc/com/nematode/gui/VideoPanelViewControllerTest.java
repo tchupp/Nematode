@@ -13,9 +13,7 @@ import com.nematode.image.MockFrameImageAssembler;
 import com.nematode.image.MockVideoFrameHandler;
 import com.nematode.image.MockVideoFrameImage;
 import com.nematode.image.NullBufferedImage;
-import com.nematode.model.DisplayFrameImageChangeObserver;
 import com.nematode.model.MockVideoFrameSequence;
-import com.nematode.model.VideoFrame;
 import com.nematode.unittesting.AssertTestCase;
 
 public class VideoPanelViewControllerTest extends AssertTestCase {
@@ -48,69 +46,6 @@ public class VideoPanelViewControllerTest extends AssertTestCase {
 		final VideoPanelViewController viewController = new VideoPanelViewController(
 				new MockVideoFrameHandler(), frameImageAssembler);
 		assertSame(frameImageAssembler, viewController.getFrameImageAssembler());
-	}
-
-	@Test
-	public void testGetsFrameObserver() throws Exception {
-		final VideoPanelViewController videoPanelViewController = new VideoPanelViewController(
-				new MockVideoFrameHandler(), new MockFrameImageAssembler());
-		assertIsOfTypeAndGet(DisplayFrameImageChangeObserver.class,
-				videoPanelViewController.getFrameObserver());
-	}
-
-	@Test
-	public void testConstructorAddsObserverToVideoFrameWithCorrectViewController() throws Exception {
-		final VideoFrame videoFrame = new VideoFrame();
-		final MockVideoFrameHandler mockFrameHandler = new MockVideoFrameHandler();
-		mockFrameHandler.setVideoFrame(videoFrame);
-
-		final VideoPanelViewController viewController = new VideoPanelViewController(
-				mockFrameHandler, new MockFrameImageAssembler());
-		assertEquals(1, videoFrame.getListOfObservers().size());
-
-		final DisplayFrameImageChangeObserver observer = assertIsOfTypeAndGet(
-				DisplayFrameImageChangeObserver.class, viewController.getFrameObserver());
-
-		final VideoPanelViewControllerInterface actualViewController = observer
-				.getPanelViewController();
-		assertSame(viewController, actualViewController);
-
-		videoFrame.dispose();
-		assertEquals(0, videoFrame.getListOfObservers().size());
-	}
-
-	@Test
-	public void testUpdateVideoDisplayPlacesCorrectImageOnPanel() throws Exception {
-
-		final MockVideoFrame videoFrame = new MockVideoFrame();
-		final MockDisplayFrameImage displayFrameImage = new MockDisplayFrameImage();
-		final NullBufferedImage expectedImage = new NullBufferedImage();
-
-		displayFrameImage.setBufferedImage(expectedImage);
-		videoFrame.setDisplayFrameImage(displayFrameImage);
-
-		final MockVideoFrameHandler mockFrameHandler = new MockVideoFrameHandler();
-		mockFrameHandler.setVideoFrame(videoFrame);
-
-		final VideoPanelViewController viewController = new VideoPanelViewController(
-				mockFrameHandler, new MockFrameImageAssembler());
-		final VideoPanel videoPanel = assertIsOfTypeAndGet(VideoPanel.class,
-				viewController.getVideoPanel());
-		final JLabel imageLabel = videoPanel.getImageLabel();
-		final ImageIcon imageLabelIconBefore = assertIsOfTypeAndGet(ImageIcon.class,
-				imageLabel.getIcon());
-
-		final BufferedImage defaultImage = assertIsOfTypeAndGet(BufferedImage.class,
-				imageLabelIconBefore.getImage());
-		assertNotSame(expectedImage, defaultImage);
-
-		viewController.updateVideoDisplay();
-
-		final ImageIcon imageLabelIconAfter = assertIsOfTypeAndGet(ImageIcon.class,
-				imageLabel.getIcon());
-		final NullBufferedImage actualImage = assertIsOfTypeAndGet(NullBufferedImage.class,
-				imageLabelIconAfter.getImage());
-		assertSame(expectedImage, actualImage);
 	}
 
 	@Test

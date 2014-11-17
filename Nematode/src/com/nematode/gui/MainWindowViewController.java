@@ -3,6 +3,7 @@ package com.nematode.gui;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 
+import com.nematode.image.NullFrameImage;
 import com.nematode.image.detection.ContourAreaCalculator;
 import com.nematode.image.detection.EdgeDetectionRunner;
 import com.nematode.image.detection.SquareContourTracer;
@@ -30,6 +31,7 @@ public class MainWindowViewController implements MainWindowControllerInterface {
 		this.mainWindow = new MainWindow();
 
 		setUpVideoFrameHandler();
+
 		this.videoInfoMatriarch = new VideoInfoMatriarch();
 
 		this.projectPanelViewController = new ProjectPanelViewController(this.videoInfoMatriarch);
@@ -43,7 +45,7 @@ public class MainWindowViewController implements MainWindowControllerInterface {
 	}
 
 	private void setUpVideoFrameHandler() {
-		final VideoFrame videoFrame = new VideoFrame();
+		final VideoFrame videoFrame = new VideoFrame(NullFrameImage.NULL);
 
 		final ImageProcessingRunner imageProcessingRunner = new ImageProcessingRunner(
 				new ImageProcessingHelper());
