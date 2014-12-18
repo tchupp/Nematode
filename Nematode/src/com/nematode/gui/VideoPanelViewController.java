@@ -5,7 +5,6 @@ import javax.swing.JLabel;
 
 import com.nematode.gui.backend.VideoFrameDisplayInfoInterface;
 import com.nematode.image.DisplayFrameImageInterface;
-import com.nematode.model.VideoFrameHandlerInterface;
 import com.nematode.model.VideoFrameInterface;
 import com.nematode.model.VideoFrameSequenceInterface;
 import com.nematode.model.factory.FrameImageAssemblerInterface;
@@ -13,14 +12,10 @@ import com.nematode.model.factory.FrameImageAssemblerInterface;
 public class VideoPanelViewController implements VideoPanelViewControllerInterface {
 
 	private final VideoPanel videoPanel;
-	private final VideoFrameHandlerInterface videoFrameHandler;
 	private final FrameImageAssemblerInterface frameImageAssembler;
 
-	public VideoPanelViewController(final VideoFrameHandlerInterface videoFrameHandler,
-			final FrameImageAssemblerInterface frameImageAssembler) {
-		this.videoFrameHandler = videoFrameHandler;
+	public VideoPanelViewController(final FrameImageAssemblerInterface frameImageAssembler) {
 		this.frameImageAssembler = frameImageAssembler;
-		
 		this.videoPanel = new VideoPanel();
 	}
 
@@ -40,10 +35,6 @@ public class VideoPanelViewController implements VideoPanelViewControllerInterfa
 		final ImageIcon newImageIcon = new ImageIcon(newDisplayImage.getImage());
 		final JLabel imageLabel = this.videoPanel.getImageLabel();
 		imageLabel.setIcon(newImageIcon);
-	}
-
-	public VideoFrameHandlerInterface getVideoFrameHandler() {
-		return this.videoFrameHandler;
 	}
 
 	public FrameImageAssemblerInterface getFrameImageAssembler() {

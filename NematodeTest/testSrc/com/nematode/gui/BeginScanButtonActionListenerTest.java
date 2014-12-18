@@ -37,7 +37,7 @@ public class BeginScanButtonActionListenerTest extends AssertTestCase {
 		SwingUtilities.invokeLater(new Runnable() {
 			@Override
 			public void run() {
-				assertTrue(mockViewController.wasUpdateImageCalled());
+				assertFalse(mockViewController.wasUpdateImageCalled());
 			}
 		});
 	}

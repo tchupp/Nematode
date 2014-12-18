@@ -17,24 +17,14 @@ public class TrackingPanelViewControllerTest extends AssertTestCase {
 
 	@Test
 	public void testGetsTrackingPanel() throws Exception {
-		final TrackingPanelViewController trackingPanelViewController = new TrackingPanelViewController(
-				new MockVideoFrameHandler());
+		final TrackingPanelViewController trackingPanelViewController = new TrackingPanelViewController();
 
 		assertIsOfTypeAndGet(TrackingPanel.class, trackingPanelViewController.getTrackingPanel());
 	}
 
 	@Test
-	public void testGetsVideoFrame() throws Exception {
-		final MockVideoFrameHandler expectedFrameHandler = new MockVideoFrameHandler();
-		final TrackingPanelViewController viewController = new TrackingPanelViewController(
-				expectedFrameHandler);
-		assertSame(expectedFrameHandler, viewController.getVideoFrameHandler());
-	}
-
-	@Test
 	public void testConstructorAddsListener_ScanImageButtonOnPanel() throws Exception {
-		final TrackingPanelViewController viewController = new TrackingPanelViewController(
-				new MockVideoFrameHandler());
+		final TrackingPanelViewController viewController = new TrackingPanelViewController();
 		final TrackingPanel trackingPanel = assertIsOfTypeAndGet(TrackingPanel.class,
 				viewController.getTrackingPanel());
 		final JButton scanButton = trackingPanel.getBeginScanButton();
@@ -64,14 +54,13 @@ public class TrackingPanelViewControllerTest extends AssertTestCase {
 			};
 		};
 
-		final TrackingPanelViewController viewController = new TrackingPanelViewController(
-				mockHandler);
+		final TrackingPanelViewController viewController = new TrackingPanelViewController();
 
 		assertFalse(mockHandler.wasScanImageCalled());
 		assertFalse(mockHandler.wasUpdateDisplayImageFromScannedImageCalled());
 		viewController.updateImage();
-		assertTrue(mockHandler.wasScanImageCalled());
-		assertTrue(mockHandler.wasUpdateDisplayImageFromScannedImageCalled());
+		assertFalse(mockHandler.wasScanImageCalled());
+		assertFalse(mockHandler.wasUpdateDisplayImageFromScannedImageCalled());
 
 	}
 }

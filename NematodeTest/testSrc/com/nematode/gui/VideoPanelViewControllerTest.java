@@ -10,7 +10,6 @@ import org.junit.Test;
 import com.nematode.gui.backend.MockVideoFrameDisplayInfo;
 import com.nematode.image.MockDisplayFrameImage;
 import com.nematode.image.MockFrameImageAssembler;
-import com.nematode.image.MockVideoFrameHandler;
 import com.nematode.image.MockVideoFrameImage;
 import com.nematode.image.NullBufferedImage;
 import com.nematode.model.MockVideoFrameSequence;
@@ -27,24 +26,16 @@ public class VideoPanelViewControllerTest extends AssertTestCase {
 	@Test
 	public void testGetsNematodeVideoPanel() throws Exception {
 		final VideoPanelViewController videoPanelViewController = new VideoPanelViewController(
-				new MockVideoFrameHandler(), new MockFrameImageAssembler());
+				new MockFrameImageAssembler());
 
 		assertIsOfTypeAndGet(VideoPanel.class, videoPanelViewController.getVideoPanel());
-	}
-
-	@Test
-	public void testGetVideoFrameHandler() throws Exception {
-		final MockVideoFrameHandler expectedFrameHandler = new MockVideoFrameHandler();
-		final VideoPanelViewController videoPanelViewController = new VideoPanelViewController(
-				expectedFrameHandler, new MockFrameImageAssembler());
-		assertSame(expectedFrameHandler, videoPanelViewController.getVideoFrameHandler());
 	}
 
 	@Test
 	public void testGetsFrameImageAssembler() throws Exception {
 		final MockFrameImageAssembler frameImageAssembler = new MockFrameImageAssembler();
 		final VideoPanelViewController viewController = new VideoPanelViewController(
-				new MockVideoFrameHandler(), frameImageAssembler);
+				frameImageAssembler);
 		assertSame(frameImageAssembler, viewController.getFrameImageAssembler());
 	}
 
@@ -72,7 +63,7 @@ public class VideoPanelViewControllerTest extends AssertTestCase {
 		mockFrameImageAssembler.setDisplayImageToReturn(mockDisplayFrameImage);
 
 		final VideoPanelViewController viewController = new VideoPanelViewController(
-				new MockVideoFrameHandler(), mockFrameImageAssembler);
+				mockFrameImageAssembler);
 
 		final VideoPanel videoPanel = assertIsOfTypeAndGet(VideoPanel.class,
 				viewController.getVideoPanel());

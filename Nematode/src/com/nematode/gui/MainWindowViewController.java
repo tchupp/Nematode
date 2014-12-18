@@ -3,18 +3,8 @@ package com.nematode.gui;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 
-import com.nematode.image.NullFrameImage;
-import com.nematode.image.detection.ContourAreaCalculator;
-import com.nematode.image.detection.EdgeDetectionRunner;
-import com.nematode.image.detection.SquareContourTracer;
-import com.nematode.image.processing.ImageProcessingHelper;
-import com.nematode.image.processing.ImageProcessingRunner;
-import com.nematode.model.VideoFrame;
-import com.nematode.model.VideoFrameHandler;
-import com.nematode.model.VideoFrameHandlerInterface;
 import com.nematode.model.VideoInfoMatriarch;
 import com.nematode.model.factory.FrameImageAssembler;
-import com.nematode.model.factory.NematodeWormBuilder;
 
 public class MainWindowViewController implements MainWindowControllerInterface {
 
@@ -24,38 +14,20 @@ public class MainWindowViewController implements MainWindowControllerInterface {
 	private final ToolbarPanelViewControllerInterface toolbarPanelViewController;
 	private final StatusPanelViewControllerInterface statusPanelViewController;
 	private final ExtendableJFrame mainWindow;
-	private VideoFrameHandlerInterface videoFrameHandler;
 	private final VideoInfoMatriarch videoInfoMatriarch;
 
 	public MainWindowViewController() {
 		this.mainWindow = new MainWindow();
 
-		setUpVideoFrameHandler();
-
 		this.videoInfoMatriarch = new VideoInfoMatriarch();
 
 		this.projectPanelViewController = new ProjectPanelViewController(this.videoInfoMatriarch);
-		this.videoPanelViewController = new VideoPanelViewController(this.videoFrameHandler,
-				new FrameImageAssembler());
-		this.trackingPanelViewController = new TrackingPanelViewController(this.videoFrameHandler);
+		this.videoPanelViewController = new VideoPanelViewController(new FrameImageAssembler());
+		this.trackingPanelViewController = new TrackingPanelViewController();
 		this.toolbarPanelViewController = new ToolbarPanelViewController();
 		this.statusPanelViewController = new StatusPanelViewController();
 
 		addPanelsToFrame();
-	}
-
-	private void setUpVideoFrameHandler() {
-		final VideoFrame videoFrame = new VideoFrame(NullFrameImage.NULL);
-
-		final ImageProcessingRunner imageProcessingRunner = new ImageProcessingRunner(
-				new ImageProcessingHelper());
-		final NematodeWormBuilder nematodeWormBuilder = new NematodeWormBuilder(
-				new ContourAreaCalculator());
-		final EdgeDetectionRunner edgeDetectionRunner = new EdgeDetectionRunner(
-				new SquareContourTracer(), nematodeWormBuilder, new ImageProcessingHelper());
-
-		this.videoFrameHandler = new VideoFrameHandler(videoFrame, new FrameImageAssembler(),
-				imageProcessingRunner, edgeDetectionRunner);
 	}
 
 	private void addPanelsToFrame() {
@@ -102,7 +74,7 @@ public class MainWindowViewController implements MainWindowControllerInterface {
 		projectPanelConstraints.weighty = 0.5;
 		projectPanelConstraints.fill = GridBagConstraints.BOTH;
 		controlPanel
-		.add(this.projectPanelViewController.getProjectPanel(), projectPanelConstraints);
+				.add(this.projectPanelViewController.getProjectPanel(), projectPanelConstraints);
 	}
 
 	private void addTrackingPanel(final ExtendableJPanel controlPanel) {
@@ -176,10 +148,6 @@ public class MainWindowViewController implements MainWindowControllerInterface {
 
 	public StatusPanelViewControllerInterface getStatusPanelViewController() {
 		return this.statusPanelViewController;
-	}
-
-	public VideoFrameHandlerInterface getVideoFrameHandler() {
-		return this.videoFrameHandler;
 	}
 
 	public VideoInfoMatriarch getVideoInfoMatriarch() {

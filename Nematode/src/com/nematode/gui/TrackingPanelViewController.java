@@ -2,15 +2,11 @@ package com.nematode.gui;
 
 import javax.swing.JButton;
 
-import com.nematode.model.VideoFrameHandlerInterface;
-
 public class TrackingPanelViewController implements TrackingPanelViewControllerInterface {
 
 	private final TrackingPanel trackingPanel;
-	private final VideoFrameHandlerInterface videoFrameHandler;
 
-	public TrackingPanelViewController(final VideoFrameHandlerInterface videoFrameHandler) {
-		this.videoFrameHandler = videoFrameHandler;
+	public TrackingPanelViewController() {
 		this.trackingPanel = new TrackingPanel();
 
 		addListenerToBeginScanButton();
@@ -30,11 +26,6 @@ public class TrackingPanelViewController implements TrackingPanelViewControllerI
 
 	@Override
 	public void updateImage() {
-		this.videoFrameHandler.scanImage();
-		this.videoFrameHandler.updateDisplayImageFromScannedObjects();
 	}
 
-	public VideoFrameHandlerInterface getVideoFrameHandler() {
-		return this.videoFrameHandler;
-	}
 }

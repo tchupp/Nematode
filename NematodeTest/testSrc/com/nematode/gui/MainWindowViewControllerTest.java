@@ -6,17 +6,7 @@ import java.awt.GridBagLayout;
 
 import org.junit.Test;
 
-import com.nematode.image.detection.ContourAreaCalculator;
-import com.nematode.image.detection.EdgeDetectionRunner;
-import com.nematode.image.detection.SquareContourTracer;
-import com.nematode.image.processing.ImageProcessingHelper;
-import com.nematode.image.processing.ImageProcessingRunner;
-import com.nematode.model.VideoFrame;
-import com.nematode.model.VideoFrameHandler;
-import com.nematode.model.VideoFrameHandlerInterface;
 import com.nematode.model.VideoInfoMatriarchInterface;
-import com.nematode.model.factory.FrameImageAssembler;
-import com.nematode.model.factory.NematodeWormBuilder;
 import com.nematode.unittesting.AssertTestCase;
 
 public class MainWindowViewControllerTest extends AssertTestCase {
@@ -210,33 +200,6 @@ public class MainWindowViewControllerTest extends AssertTestCase {
 	}
 
 	@Test
-	public void testGetVideoFrameHandler() throws Exception {
-		final MainWindowViewController mainWindowViewController = new MainWindowViewController();
-
-		final VideoFrameHandler videoFrameHandler = assertIsOfTypeAndGet(VideoFrameHandler.class,
-				mainWindowViewController.getVideoFrameHandler());
-
-		assertIsOfTypeAndGet(VideoFrame.class, videoFrameHandler.getVideoFrame());
-		assertIsOfTypeAndGet(FrameImageAssembler.class, videoFrameHandler.getFrameImageAssembler());
-
-		final ImageProcessingRunner imageProcessingRunner = assertIsOfTypeAndGet(
-				ImageProcessingRunner.class, videoFrameHandler.getImageProcessingRunner());
-		assertIsOfTypeAndGet(ImageProcessingHelper.class,
-				imageProcessingRunner.getImageProcessingHelper());
-
-		final EdgeDetectionRunner edgeDetectionRunner = assertIsOfTypeAndGet(
-				EdgeDetectionRunner.class, videoFrameHandler.getEdgeDetectionRunner());
-		assertIsOfTypeAndGet(SquareContourTracer.class, edgeDetectionRunner.getContourTracer());
-		final NematodeWormBuilder nematodeWormBuilder = assertIsOfTypeAndGet(
-				NematodeWormBuilder.class, edgeDetectionRunner.getNematodeWormBuilder());
-		assertIsOfTypeAndGet(ImageProcessingHelper.class,
-				edgeDetectionRunner.getImageProcessingHelper());
-
-		assertIsOfTypeAndGet(ContourAreaCalculator.class,
-				nematodeWormBuilder.getContourAreaCalculator());
-	}
-
-	@Test
 	public void testGetsMainWindow() throws Exception {
 		final MainWindowViewController mainWindowViewController = new MainWindowViewController();
 		assertIsOfTypeAndGet(MainWindow.class, mainWindowViewController.getMainWindow());
@@ -273,37 +236,5 @@ public class MainWindowViewControllerTest extends AssertTestCase {
 				.getVideoInfoMatriarch();
 
 		assertSame(viewController.getVideoInfoMatriarch(), videoInfoMatriarch);
-	}
-
-	@Test
-	public void testVideoPanelControllerIsCreatedWithCorrectVideoFrameHander() throws Exception {
-
-		final MainWindowViewController viewController = new MainWindowViewController();
-		final VideoPanelViewController videoPanelViewController = assertIsOfTypeAndGet(
-				VideoPanelViewController.class, viewController.getVideoPanelViewController());
-
-		final VideoFrameHandler expectedFrameHandler = assertIsOfTypeAndGet(
-				VideoFrameHandler.class, viewController.getVideoFrameHandler());
-		final VideoFrameHandlerInterface actualFrameHandler = videoPanelViewController
-				.getVideoFrameHandler();
-		assertSame(expectedFrameHandler, actualFrameHandler);
-
-		assertIsOfTypeAndGet(FrameImageAssembler.class,
-				videoPanelViewController.getFrameImageAssembler());
-	}
-
-	@Test
-	public void testTrackingPanelControllerIsCreadtedWithCorrectVideoFrameHandler()
-			throws Exception {
-		final MainWindowViewController viewController = new MainWindowViewController();
-		final TrackingPanelViewController trackingPanelViewController = assertIsOfTypeAndGet(
-				TrackingPanelViewController.class, viewController.getTrackingPanelViewController());
-
-		final VideoFrameHandler expectedFrameHandler = assertIsOfTypeAndGet(
-				VideoFrameHandler.class, viewController.getVideoFrameHandler());
-		final VideoFrameHandlerInterface actualFrameHandler = trackingPanelViewController
-				.getVideoFrameHandler();
-
-		assertSame(expectedFrameHandler, actualFrameHandler);
 	}
 }

@@ -16,7 +16,6 @@ public class BeginScanButtonActionListener implements ActionListener {
 		final Thread thread = new Thread() {
 			@Override
 			public void run() {
-				BeginScanButtonActionListener.this.viewController.updateImage();
 			}
 		};
 
