@@ -3,7 +3,6 @@ package com.nematode.gui;
 import java.awt.event.ActionListener;
 
 import org.junit.Test;
-import org.opencv.core.Core;
 
 import com.nematode.fileIO.MockFileChooser;
 import com.nematode.unittesting.AssertTestCase;
@@ -25,7 +24,6 @@ public class OpenVideoButtonActionListenerTest extends AssertTestCase {
 
 	@Test
 	public void testActionPerformedCallsShowDialog() throws Exception {
-		System.loadLibrary(Core.NATIVE_LIBRARY_NAME);
 		final MockFileChooser fileChooser = new MockFileChooser();
 		final OpenVideoButtonActionListener openVideoButtonListener = new OpenVideoButtonActionListener(
 				fileChooser);

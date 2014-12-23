@@ -20,6 +20,11 @@ public class VideoInfoMatriarch implements VideoInfoMatriarchInterface {
 				new FrameImageAssembler());
 	}
 
+	@Override
+	public VideoFrameAssemblerInterface getVideoFrameAssembler() {
+		return this.videoFrameAssembler;
+	}
+
 	public VideoFrameSequenceInterface getVideoFrameSequence() {
 		return this.videoFrameSequence;
 	}
@@ -28,8 +33,4 @@ public class VideoInfoMatriarch implements VideoInfoMatriarchInterface {
 		return this.videoFrameInfoMap;
 	}
 
-	@Override
-	public VideoFrameAssemblerInterface getVideoFrameAssembler() {
-		return this.videoFrameAssembler;
-	}
 }

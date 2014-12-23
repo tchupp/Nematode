@@ -1,13 +1,10 @@
 package com.nematode.gui;
 
-import org.opencv.core.Core;
-
 public class NematodeTrackingLauncher {
 
 	private final MainWindowControllerInterface mainWindowViewController;
 
 	public NematodeTrackingLauncher(final MainWindowControllerInterface mainWindowViewController) {
-		System.loadLibrary(Core.NATIVE_LIBRARY_NAME);
 		this.mainWindowViewController = mainWindowViewController;
 	}
 
