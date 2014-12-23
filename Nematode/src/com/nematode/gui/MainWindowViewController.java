@@ -3,6 +3,7 @@ package com.nematode.gui;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 
+import com.nematode.model.VideoMatriarch;
 import com.nematode.model.factory.FrameImageAssembler;
 
 public class MainWindowViewController implements MainWindowControllerInterface {
@@ -13,11 +14,14 @@ public class MainWindowViewController implements MainWindowControllerInterface {
 	private final ToolbarPanelViewControllerInterface toolbarPanelViewController;
 	private final StatusPanelViewControllerInterface statusPanelViewController;
 	private final ExtendableJFrame mainWindow;
+	private final VideoMatriarch videoMatriarch;
 
 	public MainWindowViewController() {
 		this.mainWindow = new MainWindow();
 
-		this.projectPanelViewController = new ProjectPanelViewController();
+		this.videoMatriarch = new VideoMatriarch();
+
+		this.projectPanelViewController = new ProjectPanelViewController(this.videoMatriarch);
 		this.videoPanelViewController = new VideoPanelViewController(new FrameImageAssembler());
 		this.trackingPanelViewController = new TrackingPanelViewController();
 		this.toolbarPanelViewController = new ToolbarPanelViewController();
@@ -70,7 +74,7 @@ public class MainWindowViewController implements MainWindowControllerInterface {
 		projectPanelConstraints.weighty = 0.5;
 		projectPanelConstraints.fill = GridBagConstraints.BOTH;
 		controlPanel
-				.add(this.projectPanelViewController.getProjectPanel(), projectPanelConstraints);
+		.add(this.projectPanelViewController.getProjectPanel(), projectPanelConstraints);
 	}
 
 	private void addTrackingPanel(final ExtendableJPanel controlPanel) {
@@ -144,5 +148,9 @@ public class MainWindowViewController implements MainWindowControllerInterface {
 
 	public StatusPanelViewControllerInterface getStatusPanelViewController() {
 		return this.statusPanelViewController;
+	}
+
+	public VideoMatriarch getVideoMatriarch() {
+		return this.videoMatriarch;
 	}
 }

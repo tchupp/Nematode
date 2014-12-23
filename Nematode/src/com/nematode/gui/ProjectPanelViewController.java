@@ -6,12 +6,15 @@ import javax.swing.JButton;
 
 import com.nematode.fileIO.ImageFileChooser;
 import com.nematode.fileIO.VideoFileChooser;
+import com.nematode.model.VideoMatriarchInterface;
 
 public class ProjectPanelViewController implements ProjectPanelViewControllerInterface {
 
 	private final ProjectPanel projectPanel;
+	private final VideoMatriarchInterface videoMatriarch;
 
-	public ProjectPanelViewController() {
+	public ProjectPanelViewController(final VideoMatriarchInterface videoMatriarch) {
+		this.videoMatriarch = videoMatriarch;
 		this.projectPanel = new ProjectPanel();
 
 		addListenerToOpenImageButton();
@@ -20,7 +23,7 @@ public class ProjectPanelViewController implements ProjectPanelViewControllerInt
 
 	private void addListenerToOpenVideoButton() {
 		final OpenVideoButtonActionListener openVideoButtonActionListener = new OpenVideoButtonActionListener(
-				new VideoFileChooser());
+				new VideoFileChooser(), this.videoMatriarch);
 
 		final JButton openVideoButton = this.projectPanel.getOpenVideoButton();
 		openVideoButton.addActionListener(openVideoButtonActionListener);
@@ -37,5 +40,9 @@ public class ProjectPanelViewController implements ProjectPanelViewControllerInt
 	@Override
 	public ExtendableJPanel getProjectPanel() {
 		return this.projectPanel;
+	}
+
+	public VideoMatriarchInterface getVideoMatriarch() {
+		return this.videoMatriarch;
 	}
 }

@@ -6,6 +6,8 @@ import java.awt.GridBagLayout;
 
 import org.junit.Test;
 
+import com.nematode.model.NullVideo;
+import com.nematode.model.VideoMatriarch;
 import com.nematode.model.factory.FrameImageAssembler;
 import com.nematode.unittesting.AssertTestCase;
 
@@ -200,6 +202,15 @@ public class MainWindowViewControllerTest extends AssertTestCase {
 	}
 
 	@Test
+	public void testGetsVideoMatriarch_WithNullVideoJustAfterConstruction() throws Exception {
+		final MainWindowViewController viewController = new MainWindowViewController();
+		final VideoMatriarch videoMatriarch = assertIsOfTypeAndGet(VideoMatriarch.class,
+				viewController.getVideoMatriarch());
+
+		assertIsOfTypeAndGet(NullVideo.class, videoMatriarch.getVideo());
+	}
+
+	@Test
 	public void testGetsMainWindow() throws Exception {
 		final MainWindowViewController mainWindowViewController = new MainWindowViewController();
 		assertIsOfTypeAndGet(MainWindow.class, mainWindowViewController.getMainWindow());
@@ -226,7 +237,8 @@ public class MainWindowViewControllerTest extends AssertTestCase {
 	}
 
 	@Test
-	public void testVideoPanelViewControllerHasCorrectArguments() throws Exception {
+	public void testVideoPanelViewControllerHasCorrectArguments_FrameImageAssembler()
+			throws Exception {
 		final MainWindowViewController viewController = new MainWindowViewController();
 
 		final VideoPanelViewController videoViewController = assertIsOfTypeAndGet(
@@ -234,5 +246,15 @@ public class MainWindowViewControllerTest extends AssertTestCase {
 
 		assertIsOfTypeAndGet(FrameImageAssembler.class,
 				videoViewController.getFrameImageAssembler());
+	}
+
+	@Test
+	public void testProjectPanelViewControllerHasCorrectArguments_VideoMatriarch() throws Exception {
+		final MainWindowViewController viewController = new MainWindowViewController();
+
+		final ProjectPanelViewController projectViewController = assertIsOfTypeAndGet(
+				ProjectPanelViewController.class, viewController.getProjectPanelViewController());
+
+		assertSame(viewController.getVideoMatriarch(), projectViewController.getVideoMatriarch());
 	}
 }
