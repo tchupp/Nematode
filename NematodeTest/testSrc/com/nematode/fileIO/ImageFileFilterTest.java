@@ -34,6 +34,6 @@ public class ImageFileFilterTest extends AssertTestCase {
 	@Test
 	public void testGetDescription() throws Exception {
 		final ImageFileFilter imageFileFilter = new ImageFileFilter();
-		assertEquals("Just Images", imageFileFilter.getDescription());
+		assertEquals("JPEG, PNG, JPG, and BMP image files", imageFileFilter.getDescription());
 	}
 }

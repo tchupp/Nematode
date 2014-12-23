@@ -32,6 +32,6 @@ public class VideoFileFilterTest extends AssertTestCase {
 	@Test
 	public void testGetsDescription() throws Exception {
 		final VideoFileFilter videoFileFilter = new VideoFileFilter();
-		assertEquals("AVI and MP4 video files", videoFileFilter.getDescription());
+		assertEquals("AVI, and MP4 video files", videoFileFilter.getDescription());
 	}
 }

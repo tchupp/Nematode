@@ -23,7 +23,7 @@ public class VideoFileFilter extends FileFilter {
 
 	@Override
 	public String getDescription() {
-		return "AVI and MP4 video files";
+		return "AVI, and MP4 video files";
 	}
 
 	private String getFileExtention(final File file) {

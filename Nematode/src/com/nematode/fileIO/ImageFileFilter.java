@@ -24,7 +24,7 @@ public class ImageFileFilter extends FileFilter {
 
 	@Override
 	public String getDescription() {
-		return "Just Images";
+		return "JPEG, PNG, JPG, and BMP image files";
 	}
 
 	private String getFileExtention(final File file) {
