@@ -29,10 +29,7 @@ public class OpenVideoButtonActionListenerTest extends AssertTestCase {
 				fileChooser);
 
 		assertFalse(fileChooser.wasShowDialogCalled());
-
 		openVideoButtonListener.actionPerformed(null);
-
 		assertTrue(fileChooser.wasShowDialogCalled());
 	}
-
 }

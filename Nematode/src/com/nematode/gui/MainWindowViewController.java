@@ -3,7 +3,6 @@ package com.nematode.gui;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 
-import com.nematode.model.VideoInfoMatriarch;
 import com.nematode.model.factory.FrameImageAssembler;
 
 public class MainWindowViewController implements MainWindowControllerInterface {
@@ -14,14 +13,11 @@ public class MainWindowViewController implements MainWindowControllerInterface {
 	private final ToolbarPanelViewControllerInterface toolbarPanelViewController;
 	private final StatusPanelViewControllerInterface statusPanelViewController;
 	private final ExtendableJFrame mainWindow;
-	private final VideoInfoMatriarch videoInfoMatriarch;
 
 	public MainWindowViewController() {
 		this.mainWindow = new MainWindow();
 
-		this.videoInfoMatriarch = new VideoInfoMatriarch();
-
-		this.projectPanelViewController = new ProjectPanelViewController(this.videoInfoMatriarch);
+		this.projectPanelViewController = new ProjectPanelViewController();
 		this.videoPanelViewController = new VideoPanelViewController(new FrameImageAssembler());
 		this.trackingPanelViewController = new TrackingPanelViewController();
 		this.toolbarPanelViewController = new ToolbarPanelViewController();
@@ -148,9 +144,5 @@ public class MainWindowViewController implements MainWindowControllerInterface {
 
 	public StatusPanelViewControllerInterface getStatusPanelViewController() {
 		return this.statusPanelViewController;
-	}
-
-	public VideoInfoMatriarch getVideoInfoMatriarch() {
-		return this.videoInfoMatriarch;
 	}
 }

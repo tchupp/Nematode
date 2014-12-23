@@ -6,7 +6,7 @@ import java.awt.GridBagLayout;
 
 import org.junit.Test;
 
-import com.nematode.model.VideoInfoMatriarchInterface;
+import com.nematode.model.factory.FrameImageAssembler;
 import com.nematode.unittesting.AssertTestCase;
 
 public class MainWindowViewControllerTest extends AssertTestCase {
@@ -226,15 +226,13 @@ public class MainWindowViewControllerTest extends AssertTestCase {
 	}
 
 	@Test
-	public void testProjectPanelViewControllerIsCreatedWithCorrectVideoInfoMatriarch()
-			throws Exception {
+	public void testVideoPanelViewControllerHasCorrectArguments() throws Exception {
 		final MainWindowViewController viewController = new MainWindowViewController();
-		final ProjectPanelViewController projectPanelViewController = assertIsOfTypeAndGet(
-				ProjectPanelViewController.class, viewController.getProjectPanelViewController());
 
-		final VideoInfoMatriarchInterface videoInfoMatriarch = projectPanelViewController
-				.getVideoInfoMatriarch();
+		final VideoPanelViewController videoViewController = assertIsOfTypeAndGet(
+				VideoPanelViewController.class, viewController.getVideoPanelViewController());
 
-		assertSame(viewController.getVideoInfoMatriarch(), videoInfoMatriarch);
+		assertIsOfTypeAndGet(FrameImageAssembler.class,
+				videoViewController.getFrameImageAssembler());
 	}
 }
