@@ -25,4 +25,14 @@ public class MockVideoMatriarch implements VideoMatriarchInterface {
 	public boolean wasSetVideoCalled() {
 		return this.setVideoWasCalled;
 	}
+
+	@Override
+	public void addObserver(final VideoObserverInterface observer) {
+		// TODO Auto-generated method stub
+	}
+
+	@Override
+	public void removeObserver(final VideoObserverInterface observer) {
+		// TODO Auto-generated method stub
+	}
 }

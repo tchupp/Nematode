@@ -4,6 +4,9 @@ import org.bytedeco.javacpp.opencv_core.Mat;
 
 public class MockVideo implements VideoInterface {
 
+	private Mat thumbnailToReturn = new Mat();
+	private boolean getThumbnailWasCalled = false;
+
 	@Override
 	public void start() {
 		// TODO Auto-generated method stub
@@ -29,8 +32,16 @@ public class MockVideo implements VideoInterface {
 
 	@Override
 	public Mat getThumbnail() {
-		// TODO Auto-generated method stub
-		return null;
+		this.getThumbnailWasCalled = true;
+		return this.thumbnailToReturn;
+	}
+
+	public boolean wasGetThumbnailCalled() {
+		return this.getThumbnailWasCalled;
+	}
+
+	public void setThumbnailToReturn(final Mat thumbnail) {
+		this.thumbnailToReturn = thumbnail;
 	}
 
 	@Override

@@ -5,6 +5,8 @@ import java.awt.image.BufferedImage;
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 
+import org.bytedeco.javacpp.Loader;
+import org.bytedeco.javacpp.opencv_core.Mat;
 import org.junit.Test;
 
 import com.nematode.gui.backend.MockVideoFrameDisplayInfo;
@@ -16,6 +18,11 @@ import com.nematode.model.MockVideoFrameSequence;
 import com.nematode.unittesting.AssertTestCase;
 
 public class VideoPanelViewControllerTest extends AssertTestCase {
+
+	@Override
+	protected void setUp() throws Exception {
+		Loader.load(org.bytedeco.javacpp.opencv_core.class);
+	}
 
 	@Test
 	public void testImplementsInterface() throws Exception {
@@ -91,5 +98,34 @@ public class VideoPanelViewControllerTest extends AssertTestCase {
 				imageLabelIconAfter.getImage());
 
 		assertSame(expectedDisplayImage, actualImage);
+	}
+
+	@Test
+	public void testShowImageCorrectlyDisplaysImageOnPanel() throws Exception {
+		final NullBufferedImage expectedImage = new NullBufferedImage();
+		final Mat expectedMat = Mat.createFrom(expectedImage);
+
+		final VideoPanelViewController viewController = new VideoPanelViewController(
+				new MockFrameImageAssembler());
+
+		final VideoPanel videoPanel = assertIsOfTypeAndGet(VideoPanel.class,
+				viewController.getVideoPanel());
+		final JLabel imageLabel = videoPanel.getImageLabel();
+		final ImageIcon imageLabelIconBefore = assertIsOfTypeAndGet(ImageIcon.class,
+				imageLabel.getIcon());
+
+		final BufferedImage defaultImage = assertIsOfTypeAndGet(BufferedImage.class,
+				imageLabelIconBefore.getImage());
+
+		assertNotSame(expectedImage, defaultImage);
+
+		viewController.showImage(expectedMat);
+
+		final ImageIcon imageLabelIconAfter = assertIsOfTypeAndGet(ImageIcon.class,
+				imageLabel.getIcon());
+		final NullBufferedImage actualImage = assertIsOfTypeAndGet(NullBufferedImage.class,
+				imageLabelIconAfter.getImage());
+
+		assertSame(expectedImage, actualImage);
 	}
 }

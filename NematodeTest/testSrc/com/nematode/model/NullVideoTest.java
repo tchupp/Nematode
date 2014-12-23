@@ -8,6 +8,11 @@ import com.nematode.unittesting.AssertTestCase;
 
 public class NullVideoTest extends AssertTestCase {
 
+	@Override
+	protected void setUp() throws Exception {
+		Loader.load(org.bytedeco.javacpp.opencv_core.class);
+	}
+
 	@Test
 	public void testImplementsInterface() throws Exception {
 		assertImplementsInterface(VideoInterface.class, NullVideo.class);
@@ -30,8 +35,6 @@ public class NullVideoTest extends AssertTestCase {
 
 	@Test
 	public void testGetThumbnailReturnsEmptyMat() throws Exception {
-		Loader.load(org.bytedeco.javacpp.opencv_core.class);
-
 		final NullVideo video = new NullVideo();
 
 		video.start();

@@ -1,9 +1,14 @@
 package com.nematode.gui;
 
+import org.bytedeco.javacpp.opencv_core.Mat;
+
 import com.nematode.gui.backend.VideoFrameDisplayInfoInterface;
 import com.nematode.model.VideoFrameSequenceInterface;
 
 public class MockVideoPanelViewController implements VideoPanelViewControllerInterface {
+
+	private Mat displayImagePassedIn;
+	private boolean showImageWasCalled = false;
 
 	@Override
 	public ExtendableJPanel getVideoPanel() {
@@ -13,6 +18,20 @@ public class MockVideoPanelViewController implements VideoPanelViewControllerInt
 	@Override
 	public void updateDisplay(final VideoFrameDisplayInfoInterface displayInfo,
 			final VideoFrameSequenceInterface videoSequence) {
+	}
+
+	@Override
+	public void showImage(final Mat displayImage) {
+		this.showImageWasCalled = true;
+		this.displayImagePassedIn = displayImage;
+	}
+
+	public boolean wasShowImageCalled() {
+		return this.showImageWasCalled;
+	}
+
+	public Mat getDisplayImagePassedIn() {
+		return this.displayImagePassedIn;
 	}
 
 }

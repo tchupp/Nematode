@@ -3,6 +3,8 @@ package com.nematode.gui;
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 
+import org.bytedeco.javacpp.opencv_core.Mat;
+
 import com.nematode.gui.backend.VideoFrameDisplayInfoInterface;
 import com.nematode.image.DisplayFrameImageInterface;
 import com.nematode.model.VideoFrameInterface;
@@ -33,6 +35,13 @@ public class VideoPanelViewController implements VideoPanelViewControllerInterfa
 				.createDisplayFrameImage(videoFrameAtNumber.getVideoFrameImage().getImage());
 
 		final ImageIcon newImageIcon = new ImageIcon(newDisplayImage.getImage());
+		final JLabel imageLabel = this.videoPanel.getImageLabel();
+		imageLabel.setIcon(newImageIcon);
+	}
+
+	@Override
+	public void showImage(final Mat displayImage) {
+		final ImageIcon newImageIcon = new ImageIcon(displayImage.getBufferedImage());
 		final JLabel imageLabel = this.videoPanel.getImageLabel();
 		imageLabel.setIcon(newImageIcon);
 	}
