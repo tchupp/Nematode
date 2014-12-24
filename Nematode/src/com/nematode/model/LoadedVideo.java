@@ -41,12 +41,12 @@ public class LoadedVideo implements VideoInterface {
 	@Override
 	public Mat getThumbnail() {
 		try {
-			this.frameGrabber.stop();
 			this.frameGrabber.start();
 			final IplImage image = this.frameGrabber.grab();
+			final Mat mat = new Mat(image, true);
 			this.frameGrabber.stop();
 
-			return new Mat(image);
+			return mat;
 		} catch (final FrameGrabber.Exception exception) {
 		}
 		return new Mat();

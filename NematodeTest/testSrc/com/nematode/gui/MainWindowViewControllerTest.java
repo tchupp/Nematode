@@ -3,11 +3,14 @@ package com.nematode.gui;
 import java.awt.Container;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
+import java.util.List;
 
 import org.junit.Test;
 
 import com.nematode.model.NullVideo;
 import com.nematode.model.VideoMatriarch;
+import com.nematode.model.VideoObserverInterface;
+import com.nematode.model.VideoSetObserver;
 import com.nematode.model.factory.FrameImageAssembler;
 import com.nematode.unittesting.AssertTestCase;
 
@@ -256,5 +259,22 @@ public class MainWindowViewControllerTest extends AssertTestCase {
 				ProjectPanelViewController.class, viewController.getProjectPanelViewController());
 
 		assertSame(viewController.getVideoMatriarch(), projectViewController.getVideoMatriarch());
+	}
+
+	@Test
+	public void testVideoSetObserverIsAddedToVideoMatriarch() throws Exception {
+		final MainWindowViewController viewController = new MainWindowViewController();
+
+		final VideoMatriarch videoMatriarch = viewController.getVideoMatriarch();
+
+		final List<VideoObserverInterface> observerList = videoMatriarch.getObserverList();
+
+		assertEquals(1, observerList.size());
+		final VideoSetObserver videoSetObserver = assertIsOfTypeAndGet(VideoSetObserver.class,
+				observerList.get(0));
+
+		final VideoPanelViewControllerInterface actualVideoViewController = videoSetObserver
+				.getVideoPanelViewController();
+		assertSame(viewController.getVideoPanelViewController(), actualVideoViewController);
 	}
 }

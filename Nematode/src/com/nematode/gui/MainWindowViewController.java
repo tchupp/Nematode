@@ -4,6 +4,7 @@ import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 
 import com.nematode.model.VideoMatriarch;
+import com.nematode.model.VideoSetObserver;
 import com.nematode.model.factory.FrameImageAssembler;
 
 public class MainWindowViewController implements MainWindowControllerInterface {
@@ -28,6 +29,10 @@ public class MainWindowViewController implements MainWindowControllerInterface {
 		this.statusPanelViewController = new StatusPanelViewController();
 
 		addPanelsToFrame();
+
+		final VideoSetObserver videoSetObserver = new VideoSetObserver(
+				this.videoPanelViewController);
+		this.videoMatriarch.addObserver(videoSetObserver);
 	}
 
 	private void addPanelsToFrame() {
@@ -74,7 +79,7 @@ public class MainWindowViewController implements MainWindowControllerInterface {
 		projectPanelConstraints.weighty = 0.5;
 		projectPanelConstraints.fill = GridBagConstraints.BOTH;
 		controlPanel
-				.add(this.projectPanelViewController.getProjectPanel(), projectPanelConstraints);
+		.add(this.projectPanelViewController.getProjectPanel(), projectPanelConstraints);
 	}
 
 	private void addTrackingPanel(final ExtendableJPanel controlPanel) {

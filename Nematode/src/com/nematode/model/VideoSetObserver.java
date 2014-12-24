@@ -14,9 +14,10 @@ public class VideoSetObserver implements VideoObserverInterface {
 
 	@Override
 	public void notifyVideoHasBeenSet(final Mat thumbnail) {
+		this.videoPanelViewController.showImage(thumbnail);
 	}
 
-	public VideoPanelViewControllerInterface getPanelViewController() {
+	public VideoPanelViewControllerInterface getVideoPanelViewController() {
 		return this.videoPanelViewController;
 	}
 
