@@ -1,5 +1,7 @@
 package com.nematode.gui;
 
+import java.awt.Color;
+
 import org.junit.Test;
 
 import com.nematode.unittesting.AssertTestCase;
@@ -22,6 +24,11 @@ public class GuiConstantsTest extends AssertTestCase {
 	public void testImagePaths() throws Exception {
 		assertEquals("resources/gui/buttons/cropScanAreaButtonImage.png",
 				GuiConstants.CROP_AREA_BUTTON_IMAGE_PATH);
+	}
+
+	@Test
+	public void testBackgroundColor() throws Exception {
+		assertEquals(new Color(0, 32, 64, 64), GuiConstants.backgroundColor);
 	}
 
 }

@@ -24,6 +24,7 @@ public class TrackingPanelTest extends AssertTestCase {
 
 		assertEquals("trackingPanel", trackingPanel.getName());
 
+		assertEquals(GuiConstants.backgroundColor, trackingPanel.getBackground());
 		assertEquals(1, trackingPanel.getComponentCount());
 		assertIsOfTypeAndGet(CompoundBorder.class, trackingPanel.getBorder());
 
@@ -53,13 +54,13 @@ public class TrackingPanelTest extends AssertTestCase {
 	}
 
 	@Test
-		public void testGetBeginScanButton() throws Exception {
-			final TrackingPanel trackingPanel = new TrackingPanel();
-	
-			final JButton scanButtonFromIOTAG = assertIsOfTypeAndGet(JButton.class,
-					trackingPanel.getComponent(0));
-			final JButton scanButtonFromGetter = trackingPanel.getBeginScanButton();
-	
-			assertSame(scanButtonFromGetter, scanButtonFromIOTAG);
-		}
+	public void testGetBeginScanButton() throws Exception {
+		final TrackingPanel trackingPanel = new TrackingPanel();
+
+		final JButton scanButtonFromIOTAG = assertIsOfTypeAndGet(JButton.class,
+				trackingPanel.getComponent(0));
+		final JButton scanButtonFromGetter = trackingPanel.getBeginScanButton();
+
+		assertSame(scanButtonFromGetter, scanButtonFromIOTAG);
+	}
 }

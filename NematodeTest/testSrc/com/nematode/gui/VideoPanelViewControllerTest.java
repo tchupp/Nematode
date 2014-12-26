@@ -9,7 +9,6 @@ import org.bytedeco.javacpp.Loader;
 import org.bytedeco.javacpp.opencv_core.Mat;
 import org.junit.Test;
 
-import com.nematode.image.MockFrameImageAssembler;
 import com.nematode.image.NullBufferedImage;
 import com.nematode.image.processing.MockImageResizer;
 import com.nematode.unittesting.AssertTestCase;
@@ -30,24 +29,16 @@ public class VideoPanelViewControllerTest extends AssertTestCase {
 	@Test
 	public void testGetsNematodeVideoPanel() throws Exception {
 		final VideoPanelViewController videoPanelViewController = new VideoPanelViewController(
-				new MockFrameImageAssembler(), new MockImageResizer());
+				new MockImageResizer());
 
 		assertIsOfTypeAndGet(VideoPanel.class, videoPanelViewController.getVideoPanel());
-	}
-
-	@Test
-	public void testGetsFrameImageAssembler() throws Exception {
-		final MockFrameImageAssembler frameImageAssembler = new MockFrameImageAssembler();
-		final VideoPanelViewController viewController = new VideoPanelViewController(
-				frameImageAssembler, new MockImageResizer());
-		assertSame(frameImageAssembler, viewController.getFrameImageAssembler());
 	}
 
 	@Test
 	public void testGetsImageResizer() throws Exception {
 		final MockImageResizer imageResizer = new MockImageResizer();
 		final VideoPanelViewController videoPanelViewController = new VideoPanelViewController(
-				new MockFrameImageAssembler(), imageResizer);
+				imageResizer);
 
 		assertSame(imageResizer, videoPanelViewController.getImageResizer());
 	}
@@ -61,8 +52,7 @@ public class VideoPanelViewControllerTest extends AssertTestCase {
 		final NullBufferedImage expectedImage = new NullBufferedImage();
 		imageResizer.setImageWithAspectToReturn(expectedImage);
 
-		final VideoPanelViewController viewController = new VideoPanelViewController(
-				new MockFrameImageAssembler(), imageResizer);
+		final VideoPanelViewController viewController = new VideoPanelViewController(imageResizer);
 
 		final VideoPanel videoPanel = assertIsOfTypeAndGet(VideoPanel.class,
 				viewController.getVideoPanel());

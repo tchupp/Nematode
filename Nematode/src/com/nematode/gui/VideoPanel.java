@@ -17,7 +17,9 @@ public class VideoPanel extends ExtendableJPanel {
 	private JLabel imageLabel;
 
 	public VideoPanel() {
+		this.setName("videoPanel");
 		this.setLayout(new GridBagLayout());
+		this.setBackground(GuiConstants.backgroundColor);
 
 		addImagePanelAndImageIcon();
 		addBorder();

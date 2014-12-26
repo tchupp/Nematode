@@ -19,6 +19,8 @@ public class StatusPanelTest extends AssertTestCase {
 		final StatusPanel statusPanel = new StatusPanel();
 
 		assertEquals("statusPanel", statusPanel.getName());
+
+		assertEquals(GuiConstants.backgroundColor, statusPanel.getBackground());
 		assertEquals(1, statusPanel.getComponentCount());
 		assertIsOfTypeAndGet(CompoundBorder.class, statusPanel.getBorder());
 	}

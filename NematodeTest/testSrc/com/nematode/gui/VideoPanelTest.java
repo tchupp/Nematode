@@ -25,10 +25,11 @@ public class VideoPanelTest extends AssertTestCase {
 	public void testConstructorCorrectlySetsUpPanel() throws Exception {
 		final VideoPanel videoPanel = new VideoPanel();
 
+		assertEquals("videoPanel", videoPanel.getName());
+		assertEquals(GuiConstants.backgroundColor, videoPanel.getBackground());
 		assertEquals(1, videoPanel.getComponentCount());
 
 		assertIsOfTypeAndGet(CompoundBorder.class, videoPanel.getBorder());
-
 		assertIsOfTypeAndGet(GridBagLayout.class, videoPanel.getLayout());
 	}
 

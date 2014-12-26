@@ -37,6 +37,7 @@ public class ToolbarPanelTest extends AssertTestCase {
 
 		assertEquals("toolbarPanel", toolbarPanel.getName());
 
+		assertEquals(GuiConstants.backgroundColor, toolbarPanel.getBackground());
 		assertEquals(1, toolbarPanel.getComponentCount());
 		assertIsOfTypeAndGet(CompoundBorder.class, toolbarPanel.getBorder());
 

@@ -8,17 +8,13 @@ import javax.swing.JLabel;
 import org.bytedeco.javacpp.opencv_core.Mat;
 
 import com.nematode.image.processing.ImageResizerInterface;
-import com.nematode.model.factory.FrameImageAssemblerInterface;
 
 public class VideoPanelViewController implements VideoPanelViewControllerInterface {
 
 	private final VideoPanel videoPanel;
-	private final FrameImageAssemblerInterface frameImageAssembler;
 	private final ImageResizerInterface imageResizer;
 
-	public VideoPanelViewController(final FrameImageAssemblerInterface frameImageAssembler,
-			final ImageResizerInterface imageResizer) {
-		this.frameImageAssembler = frameImageAssembler;
+	public VideoPanelViewController(final ImageResizerInterface imageResizer) {
 		this.imageResizer = imageResizer;
 		this.videoPanel = new VideoPanel();
 	}
@@ -38,10 +34,6 @@ public class VideoPanelViewController implements VideoPanelViewControllerInterfa
 		final JLabel imageLabel = this.videoPanel.getImageLabel();
 
 		imageLabel.setIcon(newImageIcon);
-	}
-
-	public FrameImageAssemblerInterface getFrameImageAssembler() {
-		return this.frameImageAssembler;
 	}
 
 	public ImageResizerInterface getImageResizer() {

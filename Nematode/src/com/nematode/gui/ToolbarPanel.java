@@ -18,6 +18,7 @@ public class ToolbarPanel extends ExtendableJPanel {
 	public ToolbarPanel() {
 		this.setName("toolbarPanel");
 		this.setLayout(new GridBagLayout());
+		this.setBackground(GuiConstants.backgroundColor);
 
 		addCropScanAreaButton();
 		addBorder();

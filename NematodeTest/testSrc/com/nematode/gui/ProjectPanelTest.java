@@ -24,6 +24,7 @@ public class ProjectPanelTest extends AssertTestCase {
 
 		assertEquals("projectPanel", projectPanel.getName());
 
+		assertEquals(GuiConstants.backgroundColor, projectPanel.getBackground());
 		assertEquals(2, projectPanel.getComponentCount());
 		assertIsOfTypeAndGet(CompoundBorder.class, projectPanel.getBorder());
 

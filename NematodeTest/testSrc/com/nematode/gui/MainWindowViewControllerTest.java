@@ -12,7 +12,6 @@ import com.nematode.model.NullVideo;
 import com.nematode.model.VideoMatriarch;
 import com.nematode.model.VideoObserverInterface;
 import com.nematode.model.VideoSetObserver;
-import com.nematode.model.factory.FrameImageAssembler;
 import com.nematode.unittesting.AssertTestCase;
 
 public class MainWindowViewControllerTest extends AssertTestCase {
@@ -241,15 +240,11 @@ public class MainWindowViewControllerTest extends AssertTestCase {
 	}
 
 	@Test
-	public void testVideoPanelViewControllerHasCorrectArguments_FrameImageAssembler_ImageResizer()
-			throws Exception {
+	public void testVideoPanelViewControllerHasCorrectArguments_ImageResizer() throws Exception {
 		final MainWindowViewController viewController = new MainWindowViewController();
 
 		final VideoPanelViewController videoViewController = assertIsOfTypeAndGet(
 				VideoPanelViewController.class, viewController.getVideoPanelViewController());
-
-		assertIsOfTypeAndGet(FrameImageAssembler.class,
-				videoViewController.getFrameImageAssembler());
 
 		assertIsOfTypeAndGet(ImageResizer.class, videoViewController.getImageResizer());
 	}
