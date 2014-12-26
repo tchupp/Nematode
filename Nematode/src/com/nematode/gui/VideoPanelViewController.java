@@ -1,23 +1,25 @@
 package com.nematode.gui;
 
+import java.awt.image.BufferedImage;
+
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 
 import org.bytedeco.javacpp.opencv_core.Mat;
 
-import com.nematode.gui.backend.VideoFrameDisplayInfoInterface;
-import com.nematode.image.DisplayFrameImageInterface;
-import com.nematode.model.VideoFrameInterface;
-import com.nematode.model.VideoFrameSequenceInterface;
+import com.nematode.image.processing.ImageResizerInterface;
 import com.nematode.model.factory.FrameImageAssemblerInterface;
 
 public class VideoPanelViewController implements VideoPanelViewControllerInterface {
 
 	private final VideoPanel videoPanel;
 	private final FrameImageAssemblerInterface frameImageAssembler;
+	private final ImageResizerInterface imageResizer;
 
-	public VideoPanelViewController(final FrameImageAssemblerInterface frameImageAssembler) {
+	public VideoPanelViewController(final FrameImageAssemblerInterface frameImageAssembler,
+			final ImageResizerInterface imageResizer) {
 		this.frameImageAssembler = frameImageAssembler;
+		this.imageResizer = imageResizer;
 		this.videoPanel = new VideoPanel();
 	}
 
@@ -27,27 +29,23 @@ public class VideoPanelViewController implements VideoPanelViewControllerInterfa
 	}
 
 	@Override
-	public void updateDisplay(final VideoFrameDisplayInfoInterface displayInfo,
-			final VideoFrameSequenceInterface videoSequence) {
-		final VideoFrameInterface videoFrameAtNumber = videoSequence.getVideoFrame(displayInfo
-				.getFrameNumber());
-		final DisplayFrameImageInterface newDisplayImage = this.frameImageAssembler
-				.createDisplayFrameImage(videoFrameAtNumber.getVideoFrameImage().getImage());
-
-		final ImageIcon newImageIcon = new ImageIcon(newDisplayImage.getImage());
-		final JLabel imageLabel = this.videoPanel.getImageLabel();
-		imageLabel.setIcon(newImageIcon);
-	}
-
-	@Override
 	public void showImage(final Mat displayImage) {
-		final ImageIcon newImageIcon = new ImageIcon(displayImage.getBufferedImage());
+		final BufferedImage newImageForLabel = this.imageResizer.resizeImageWithAspect(
+				displayImage.getBufferedImage(), GuiConstants.DISPLAY_WIDTH,
+				GuiConstants.DISPLAY_HEIGHT);
+
+		final ImageIcon newImageIcon = new ImageIcon(newImageForLabel);
 		final JLabel imageLabel = this.videoPanel.getImageLabel();
+
 		imageLabel.setIcon(newImageIcon);
 	}
 
 	public FrameImageAssemblerInterface getFrameImageAssembler() {
 		return this.frameImageAssembler;
+	}
+
+	public ImageResizerInterface getImageResizer() {
+		return this.imageResizer;
 	}
 
 }

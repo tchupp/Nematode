@@ -3,6 +3,7 @@ package com.nematode.gui;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 
+import com.nematode.image.processing.ImageResizer;
 import com.nematode.model.VideoMatriarch;
 import com.nematode.model.VideoSetObserver;
 import com.nematode.model.factory.FrameImageAssembler;
@@ -23,7 +24,8 @@ public class MainWindowViewController implements MainWindowControllerInterface {
 		this.videoMatriarch = new VideoMatriarch();
 
 		this.projectPanelViewController = new ProjectPanelViewController(this.videoMatriarch);
-		this.videoPanelViewController = new VideoPanelViewController(new FrameImageAssembler());
+		this.videoPanelViewController = new VideoPanelViewController(new FrameImageAssembler(),
+				new ImageResizer());
 		this.trackingPanelViewController = new TrackingPanelViewController();
 		this.toolbarPanelViewController = new ToolbarPanelViewController();
 		this.statusPanelViewController = new StatusPanelViewController();

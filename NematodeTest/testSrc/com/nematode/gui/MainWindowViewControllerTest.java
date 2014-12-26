@@ -7,6 +7,7 @@ import java.util.List;
 
 import org.junit.Test;
 
+import com.nematode.image.processing.ImageResizer;
 import com.nematode.model.NullVideo;
 import com.nematode.model.VideoMatriarch;
 import com.nematode.model.VideoObserverInterface;
@@ -240,7 +241,7 @@ public class MainWindowViewControllerTest extends AssertTestCase {
 	}
 
 	@Test
-	public void testVideoPanelViewControllerHasCorrectArguments_FrameImageAssembler()
+	public void testVideoPanelViewControllerHasCorrectArguments_FrameImageAssembler_ImageResizer()
 			throws Exception {
 		final MainWindowViewController viewController = new MainWindowViewController();
 
@@ -249,6 +250,8 @@ public class MainWindowViewControllerTest extends AssertTestCase {
 
 		assertIsOfTypeAndGet(FrameImageAssembler.class,
 				videoViewController.getFrameImageAssembler());
+
+		assertIsOfTypeAndGet(ImageResizer.class, videoViewController.getImageResizer());
 	}
 
 	@Test

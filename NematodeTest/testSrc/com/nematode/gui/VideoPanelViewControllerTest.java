@@ -9,12 +9,9 @@ import org.bytedeco.javacpp.Loader;
 import org.bytedeco.javacpp.opencv_core.Mat;
 import org.junit.Test;
 
-import com.nematode.gui.backend.MockVideoFrameDisplayInfo;
-import com.nematode.image.MockDisplayFrameImage;
 import com.nematode.image.MockFrameImageAssembler;
-import com.nematode.image.MockVideoFrameImage;
 import com.nematode.image.NullBufferedImage;
-import com.nematode.model.MockVideoFrameSequence;
+import com.nematode.image.processing.MockImageResizer;
 import com.nematode.unittesting.AssertTestCase;
 
 public class VideoPanelViewControllerTest extends AssertTestCase {
@@ -33,7 +30,7 @@ public class VideoPanelViewControllerTest extends AssertTestCase {
 	@Test
 	public void testGetsNematodeVideoPanel() throws Exception {
 		final VideoPanelViewController videoPanelViewController = new VideoPanelViewController(
-				new MockFrameImageAssembler());
+				new MockFrameImageAssembler(), new MockImageResizer());
 
 		assertIsOfTypeAndGet(VideoPanel.class, videoPanelViewController.getVideoPanel());
 	}
@@ -42,71 +39,30 @@ public class VideoPanelViewControllerTest extends AssertTestCase {
 	public void testGetsFrameImageAssembler() throws Exception {
 		final MockFrameImageAssembler frameImageAssembler = new MockFrameImageAssembler();
 		final VideoPanelViewController viewController = new VideoPanelViewController(
-				frameImageAssembler);
+				frameImageAssembler, new MockImageResizer());
 		assertSame(frameImageAssembler, viewController.getFrameImageAssembler());
 	}
 
 	@Test
-	public void testUpdateDisplayImagePlacesCorrectImageOnPanel() throws Exception {
-		final MockVideoFrameDisplayInfo mockDisplayInfo = new MockVideoFrameDisplayInfo();
-		final int expectedFrameNumber = 3;
-		mockDisplayInfo.setFrameNumber(expectedFrameNumber);
+	public void testGetsImageResizer() throws Exception {
+		final MockImageResizer imageResizer = new MockImageResizer();
+		final VideoPanelViewController videoPanelViewController = new VideoPanelViewController(
+				new MockFrameImageAssembler(), imageResizer);
 
-		final NullBufferedImage expectedVideoImage = new NullBufferedImage();
-		final MockVideoFrameImage mockVideoFrameImage = new MockVideoFrameImage();
-		final MockVideoFrame mockVideoFrame = new MockVideoFrame();
-
-		mockVideoFrameImage.setBufferedImage(expectedVideoImage);
-		mockVideoFrame.setVideoFrameImage(mockVideoFrameImage);
-
-		final MockVideoFrameSequence mockVideoFrameSequence = new MockVideoFrameSequence();
-		mockVideoFrameSequence.setFrameToReturn(mockVideoFrame);
-
-		final NullBufferedImage expectedDisplayImage = new NullBufferedImage();
-		final MockDisplayFrameImage mockDisplayFrameImage = new MockDisplayFrameImage();
-		final MockFrameImageAssembler mockFrameImageAssembler = new MockFrameImageAssembler();
-
-		mockDisplayFrameImage.setBufferedImage(expectedDisplayImage);
-		mockFrameImageAssembler.setDisplayImageToReturn(mockDisplayFrameImage);
-
-		final VideoPanelViewController viewController = new VideoPanelViewController(
-				mockFrameImageAssembler);
-
-		final VideoPanel videoPanel = assertIsOfTypeAndGet(VideoPanel.class,
-				viewController.getVideoPanel());
-		final JLabel imageLabel = videoPanel.getImageLabel();
-		final ImageIcon imageLabelIconBefore = assertIsOfTypeAndGet(ImageIcon.class,
-				imageLabel.getIcon());
-
-		final BufferedImage defaultImage = assertIsOfTypeAndGet(BufferedImage.class,
-				imageLabelIconBefore.getImage());
-		assertNotSame(expectedDisplayImage, defaultImage);
-
-		viewController.updateDisplay(mockDisplayInfo, mockVideoFrameSequence);
-
-		assertTrue(mockVideoFrameSequence.wasGetVideoFrameCalled());
-		assertTrue(mockDisplayInfo.wasGetFrameNumberCalled());
-		assertEquals(expectedFrameNumber, mockVideoFrameSequence.getFrameNumberToGet());
-
-		assertTrue(mockFrameImageAssembler.wasCreateDisplayFrameImageCalled());
-		assertTrue(mockVideoFrame.wasGetVideoFrameImageCalled());
-		assertSame(expectedVideoImage, mockFrameImageAssembler.getDisplayImageToUse());
-
-		final ImageIcon imageLabelIconAfter = assertIsOfTypeAndGet(ImageIcon.class,
-				imageLabel.getIcon());
-		final NullBufferedImage actualImage = assertIsOfTypeAndGet(NullBufferedImage.class,
-				imageLabelIconAfter.getImage());
-
-		assertSame(expectedDisplayImage, actualImage);
+		assertSame(imageResizer, videoPanelViewController.getImageResizer());
 	}
 
 	@Test
 	public void testShowImageCorrectlyDisplaysImageOnPanel() throws Exception {
+		final NullBufferedImage originalImage = new NullBufferedImage();
+		final Mat originalMat = Mat.createFrom(originalImage);
+
+		final MockImageResizer imageResizer = new MockImageResizer();
 		final NullBufferedImage expectedImage = new NullBufferedImage();
-		final Mat expectedMat = Mat.createFrom(expectedImage);
+		imageResizer.setImageWithAspectToReturn(expectedImage);
 
 		final VideoPanelViewController viewController = new VideoPanelViewController(
-				new MockFrameImageAssembler());
+				new MockFrameImageAssembler(), imageResizer);
 
 		final VideoPanel videoPanel = assertIsOfTypeAndGet(VideoPanel.class,
 				viewController.getVideoPanel());
@@ -117,9 +73,14 @@ public class VideoPanelViewControllerTest extends AssertTestCase {
 		final BufferedImage defaultImage = assertIsOfTypeAndGet(BufferedImage.class,
 				imageLabelIconBefore.getImage());
 
-		assertNotSame(expectedImage, defaultImage);
+		assertNotSame(originalImage, defaultImage);
+		assertFalse(imageResizer.wasResizeImageWithAspectCalled());
 
-		viewController.showImage(expectedMat);
+		viewController.showImage(originalMat);
+
+		assertTrue(imageResizer.wasResizeImageWithAspectCalled());
+		assertEquals(GuiConstants.DISPLAY_WIDTH, imageResizer.getWidthWithAspect());
+		assertEquals(GuiConstants.DISPLAY_HEIGHT, imageResizer.getHeightWithAspect());
 
 		final ImageIcon imageLabelIconAfter = assertIsOfTypeAndGet(ImageIcon.class,
 				imageLabel.getIcon());

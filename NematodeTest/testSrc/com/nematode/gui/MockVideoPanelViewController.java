@@ -2,9 +2,6 @@ package com.nematode.gui;
 
 import org.bytedeco.javacpp.opencv_core.Mat;
 
-import com.nematode.gui.backend.VideoFrameDisplayInfoInterface;
-import com.nematode.model.VideoFrameSequenceInterface;
-
 public class MockVideoPanelViewController implements VideoPanelViewControllerInterface {
 
 	private Mat displayImagePassedIn;
@@ -13,11 +10,6 @@ public class MockVideoPanelViewController implements VideoPanelViewControllerInt
 	@Override
 	public ExtendableJPanel getVideoPanel() {
 		return new ExtendableJPanel();
-	}
-
-	@Override
-	public void updateDisplay(final VideoFrameDisplayInfoInterface displayInfo,
-			final VideoFrameSequenceInterface videoSequence) {
 	}
 
 	@Override
