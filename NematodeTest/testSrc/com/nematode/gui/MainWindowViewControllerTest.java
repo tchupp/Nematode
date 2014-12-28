@@ -45,6 +45,7 @@ public class MainWindowViewControllerTest extends AssertTestCase {
 
 		assertEquals("controlPanel", controlPanel.getName());
 		assertEquals(2, controlPanel.getComponentCount());
+		assertFalse(controlPanel.isOpaque());
 		assertIsOfTypeAndGet(GridBagLayout.class, controlPanel.getLayout());
 
 		final GridBagConstraints controlPanelContraints = mainWindowLayout
@@ -71,6 +72,7 @@ public class MainWindowViewControllerTest extends AssertTestCase {
 
 		assertEquals("scanningPanel", scanningPanel.getName());
 		assertEquals(3, scanningPanel.getComponentCount());
+		assertFalse(scanningPanel.isOpaque());
 		assertIsOfTypeAndGet(GridBagLayout.class, scanningPanel.getLayout());
 
 		final GridBagConstraints scanningPanelConstraints = mainWindowLayout

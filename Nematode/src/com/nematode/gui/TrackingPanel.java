@@ -18,6 +18,7 @@ public class TrackingPanel extends ExtendableJPanel {
 		this.setName("trackingPanel");
 		this.setLayout(new GridBagLayout());
 		this.setBackground(GuiConstants.backgroundColor);
+		this.setOpaque(false);
 
 		addBeginScanButton();
 		addBorder();

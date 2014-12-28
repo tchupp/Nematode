@@ -39,6 +39,7 @@ public class MainWindowViewController implements MainWindowControllerInterface {
 		final ExtendableJPanel controlPanel = new ExtendableJPanel();
 		controlPanel.setName("controlPanel");
 		controlPanel.setLayout(new GridBagLayout());
+		controlPanel.setOpaque(false);
 
 		addProjectPanel(controlPanel);
 		addTrackingPanel(controlPanel);
@@ -55,6 +56,7 @@ public class MainWindowViewController implements MainWindowControllerInterface {
 		final ExtendableJPanel scanningPanel = new ExtendableJPanel();
 		scanningPanel.setName("scanningPanel");
 		scanningPanel.setLayout(new GridBagLayout());
+		scanningPanel.setOpaque(false);
 
 		addVideoPanel(scanningPanel);
 		addToolbarPanel(scanningPanel);
@@ -79,7 +81,7 @@ public class MainWindowViewController implements MainWindowControllerInterface {
 		projectPanelConstraints.weighty = 0.5;
 		projectPanelConstraints.fill = GridBagConstraints.BOTH;
 		controlPanel
-		.add(this.projectPanelViewController.getProjectPanel(), projectPanelConstraints);
+				.add(this.projectPanelViewController.getProjectPanel(), projectPanelConstraints);
 	}
 
 	private void addTrackingPanel(final ExtendableJPanel controlPanel) {

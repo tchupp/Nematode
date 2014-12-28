@@ -14,6 +14,8 @@ public class GuiConstants {
 
 	public static final String CROP_AREA_BUTTON_IMAGE_PATH = "resources/gui/buttons/cropScanAreaButtonImage.png";
 
-	public static final Color backgroundColor = new Color(0, 32, 64, 64);
+	public static final String MAIN_WINDOW_BACKGROUND_IMAGE_PATH = "resources/gui/backgrounds/darkWood.jpg";
+
+	public static final Color backgroundColor = new Color(0, 32, 64, 128);
 
 }

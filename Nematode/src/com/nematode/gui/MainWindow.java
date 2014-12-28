@@ -2,20 +2,35 @@ package com.nematode.gui;
 
 import java.awt.Container;
 import java.awt.GridBagLayout;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
+
+import javax.imageio.ImageIO;
+
+import com.nematode.image.NullBufferedImage;
 
 public class MainWindow extends ExtendableJFrame {
-
-	public static final int FRAME_WIDTH = 1920;
-	public static final int FRAME_HEIGHT = 1080;
 
 	private static final long serialVersionUID = 1L;
 
 	public MainWindow() {
-		this.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
+		this.setDefaultCloseOperation(EXIT_ON_CLOSE);
+		this.setSize(GuiConstants.VIDEO_FRAME_WIDTH, GuiConstants.VIDEO_FRAME_HEIGHT);
 
-		final Container contentPane = this.getContentPane();
+		addContentPane();
+	}
+
+	private void addContentPane() {
+		BufferedImage backgroundImage = new NullBufferedImage();
+		try {
+			backgroundImage = ImageIO
+					.read(new File(GuiConstants.MAIN_WINDOW_BACKGROUND_IMAGE_PATH));
+		} catch (final IOException exception) {
+		}
+
+		final Container contentPane = new ImagePanel(backgroundImage);
 		contentPane.setLayout(new GridBagLayout());
-
-		this.setSize(FRAME_WIDTH, FRAME_HEIGHT);
+		this.setContentPane(contentPane);
 	}
 }

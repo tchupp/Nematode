@@ -2,8 +2,11 @@ package com.nematode.gui;
 
 import java.awt.Container;
 import java.awt.GridBagLayout;
+import java.awt.image.BufferedImage;
+import java.io.File;
 
-import javax.swing.WindowConstants;
+import javax.imageio.ImageIO;
+import javax.swing.JFrame;
 
 import org.junit.Test;
 
@@ -23,21 +26,28 @@ public class MainWindowTest extends AssertTestCase {
 	public void testConstructorSetsUpPanelCorrectly() throws Exception {
 		final MainWindow mainWindow = new MainWindow();
 
-		assertEquals(WindowConstants.DISPOSE_ON_CLOSE, mainWindow.getDefaultCloseOperation());
+		assertEquals(JFrame.EXIT_ON_CLOSE, mainWindow.getDefaultCloseOperation());
+
+		assertEquals(GuiConstants.VIDEO_FRAME_HEIGHT, mainWindow.getHeight());
+		assertEquals(GuiConstants.VIDEO_FRAME_WIDTH, mainWindow.getWidth());
+		assertTrue(mainWindow.isResizable());
 
 		final Container contentPane = mainWindow.getContentPane();
 		assertIsOfTypeAndGet(GridBagLayout.class, contentPane.getLayout());
-
-		assertEquals(MainWindow.FRAME_HEIGHT, mainWindow.getHeight());
-		assertEquals(MainWindow.FRAME_WIDTH, mainWindow.getWidth());
-		assertTrue(mainWindow.isResizable());
 
 		mainWindow.dispose();
 	}
 
 	@Test
-	public void testFrameWidthAndHeightConstants() throws Exception {
-		assertEquals(1920, MainWindow.FRAME_WIDTH);
-		assertEquals(1080, MainWindow.FRAME_HEIGHT);
+	public void testConstructorCorrectlySetsUpContentPane() throws Exception {
+		final BufferedImage expectedBackgroundImage = ImageIO.read(new File(
+				GuiConstants.MAIN_WINDOW_BACKGROUND_IMAGE_PATH));
+
+		final MainWindow mainWindow = new MainWindow();
+
+		final ImagePanel imageContentPane = assertIsOfTypeAndGet(ImagePanel.class,
+				mainWindow.getContentPane());
+
+		assertImagesAreEqual(expectedBackgroundImage, imageContentPane.getImage());
 	}
 }
