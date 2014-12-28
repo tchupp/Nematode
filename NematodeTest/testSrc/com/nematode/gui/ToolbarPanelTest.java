@@ -4,6 +4,7 @@ import java.awt.Dimension;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Insets;
+import java.awt.MediaTracker;
 import java.awt.image.BufferedImage;
 import java.io.File;
 
@@ -76,6 +77,8 @@ public class ToolbarPanelTest extends AssertTestCase {
 
 		final ImageIcon buttonImageIcon = assertIsOfTypeAndGet(ImageIcon.class,
 				cropScanAreaButton.getIcon());
+
+		assertEquals(MediaTracker.COMPLETE, buttonImageIcon.getImageLoadStatus());
 		assertEquals(this.expectedCropButtonImage.getWidth(), buttonImageIcon.getIconWidth());
 		assertEquals(this.expectedCropButtonImage.getHeight(), buttonImageIcon.getIconHeight());
 	}

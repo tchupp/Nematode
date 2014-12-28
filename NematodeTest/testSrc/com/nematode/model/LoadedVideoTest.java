@@ -1,7 +1,5 @@
 package com.nematode.model;
 
-import java.awt.image.BufferedImage;
-
 import org.bytedeco.javacpp.opencv_core.Mat;
 import org.bytedeco.javacv.OpenCVFrameGrabber;
 import org.junit.Test;
@@ -40,7 +38,7 @@ public class LoadedVideoTest extends AssertTestCase {
 			final Mat actualFrame = video.grab();
 			final Mat expectedFrame = new Mat(realFrameGrabber.grab());
 
-			assertMatsAreEqual(expectedFrame, actualFrame);
+			assertImagesAreEqual(expectedFrame.getBufferedImage(), actualFrame.getBufferedImage());
 		}
 	}
 
@@ -94,7 +92,8 @@ public class LoadedVideoTest extends AssertTestCase {
 
 		final Mat expectedFirstFrame = new Mat(realFrameGrabber.grab());
 
-		assertMatsAreEqual(expectedFirstFrame, actualThumbnail);
+		assertImagesAreEqual(expectedFirstFrame.getBufferedImage(),
+				actualThumbnail.getBufferedImage());
 	}
 
 	@Test
@@ -126,7 +125,7 @@ public class LoadedVideoTest extends AssertTestCase {
 
 		final Mat expectedFirstFrame = new Mat(realFrameGrabber.grab());
 
-		assertMatsAreEqual(expectedFirstFrame, actualFrame);
+		assertImagesAreEqual(expectedFirstFrame.getBufferedImage(), actualFrame.getBufferedImage());
 	}
 
 	@Test
@@ -201,22 +200,5 @@ public class LoadedVideoTest extends AssertTestCase {
 		final LoadedVideo video = new LoadedVideo(emptyFrameGrabber);
 
 		assertFalse(video.isValid());
-	}
-
-	private void assertMatsAreEqual(final Mat expected, final Mat actual) {
-
-		final BufferedImage actualImage = actual.getBufferedImage();
-		final BufferedImage expectedImage = expected.getBufferedImage();
-
-		final int height = expectedImage.getHeight();
-		final int width = expectedImage.getWidth();
-		assertEquals("Heights are different", height, actualImage.getHeight());
-		assertEquals("Widths are different", width, actualImage.getWidth());
-
-		for (int y = 0; y < actualImage.getHeight(); y++) {
-			for (int x = 0; x < actualImage.getWidth(); x++) {
-				assertEquals(expectedImage.getRGB(x, y), actualImage.getRGB(x, y));
-			}
-		}
 	}
 }

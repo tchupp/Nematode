@@ -1,5 +1,6 @@
 package com.nematode.unittesting;
 
+import java.awt.image.BufferedImage;
 import java.lang.reflect.Constructor;
 import java.lang.reflect.Modifier;
 import java.nio.ByteBuffer;
@@ -253,5 +254,14 @@ public class AssertTestCase extends TestCase {
 		assertEquals(1, declaredConstructors.length);
 		final String msg = class1.getSimpleName() + " should have a single private constructor.";
 		assertTrue(msg, Modifier.isPrivate(declaredConstructors[0].getModifiers()));
+	}
+
+	public void assertImagesAreEqual(final BufferedImage expected, final BufferedImage actual) {
+		final int[] actualRGB = actual.getRGB(0, 0, actual.getWidth(), actual.getHeight(), null, 0,
+				actual.getWidth());
+		final int[] expectedRGB = expected.getRGB(0, 0, expected.getWidth(), expected.getHeight(),
+				null, 0, expected.getWidth());
+
+		assertEquals(expectedRGB, actualRGB);
 	}
 }
