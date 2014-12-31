@@ -20,11 +20,14 @@ import com.nematode.unittesting.AssertTestCase;
 public class ToolbarPanelTest extends AssertTestCase {
 
 	private BufferedImage expectedCropButtonImage;
+	private BufferedImage expectedPlayButtonImage;
 
 	@Override
 	protected void setUp() throws Exception {
 		this.expectedCropButtonImage = ImageIO.read(new File(
 				GuiConstants.CROP_AREA_BUTTON_IMAGE_PATH));
+
+		this.expectedPlayButtonImage = ImageIO.read(new File(GuiConstants.PLAY_BUTTON_IMAGE_PATH));
 	}
 
 	@Test
@@ -38,7 +41,7 @@ public class ToolbarPanelTest extends AssertTestCase {
 
 		assertEquals("toolbarPanel", toolbarPanel.getName());
 		assertEquals(GuiConstants.backgroundColor, toolbarPanel.getBackground());
-		assertEquals(1, toolbarPanel.getComponentCount());
+		assertEquals(2, toolbarPanel.getComponentCount());
 		assertFalse(toolbarPanel.isOpaque());
 
 		assertIsOfTypeAndGet(CompoundBorder.class, toolbarPanel.getBorder());
@@ -62,7 +65,7 @@ public class ToolbarPanelTest extends AssertTestCase {
 				.getConstraints(cropScanAreaButton);
 		assertEquals(0, constraints.gridx);
 		assertEquals(0, constraints.gridy);
-		assertEquals(1.0, constraints.weightx);
+		assertEquals(0.0, constraints.weightx);
 		assertEquals(GridBagConstraints.WEST, constraints.anchor);
 		assertEquals(new Insets(5, 5, 5, 5), constraints.insets);
 	}
@@ -81,5 +84,39 @@ public class ToolbarPanelTest extends AssertTestCase {
 		assertEquals(MediaTracker.COMPLETE, buttonImageIcon.getImageLoadStatus());
 		assertEquals(this.expectedCropButtonImage.getWidth(), buttonImageIcon.getIconWidth());
 		assertEquals(this.expectedCropButtonImage.getHeight(), buttonImageIcon.getIconHeight());
+	}
+
+	@Test
+	public void testPlayButtonCorrectlySetupOnPanel() throws Exception {
+		final ToolbarPanel toolbarPanel = new ToolbarPanel();
+
+		final GridBagLayout toolbarPanelLayout = assertIsOfTypeAndGet(GridBagLayout.class,
+				toolbarPanel.getLayout());
+
+		final JButton playButton = assertIsOfTypeAndGet(JButton.class, toolbarPanel.getComponent(1));
+		assertEquals("playButton", playButton.getName());
+		assertEquals(new Dimension(20, 20), playButton.getPreferredSize());
+
+		final GridBagConstraints constraints = toolbarPanelLayout.getConstraints(playButton);
+		assertEquals(1, constraints.gridx);
+		assertEquals(0, constraints.gridy);
+		assertEquals(1.0, constraints.weightx);
+		assertEquals(GridBagConstraints.WEST, constraints.anchor);
+		assertEquals(new Insets(5, 5, 5, 5), constraints.insets);
+	}
+
+	@Test
+	public void testPlayButtonHasCorrectImageIcon() throws Exception {
+		final ToolbarPanel toolbarPanel = new ToolbarPanel();
+
+		final JButton playButton = assertIsOfTypeAndGet(JButton.class, toolbarPanel.getComponent(1));
+		assertEquals("playButton", playButton.getName());
+
+		final ImageIcon buttonImageIcon = assertIsOfTypeAndGet(ImageIcon.class,
+				playButton.getIcon());
+
+		assertEquals(MediaTracker.COMPLETE, buttonImageIcon.getImageLoadStatus());
+		assertEquals(this.expectedPlayButtonImage.getWidth(), buttonImageIcon.getIconWidth());
+		assertEquals(this.expectedPlayButtonImage.getHeight(), buttonImageIcon.getIconHeight());
 	}
 }

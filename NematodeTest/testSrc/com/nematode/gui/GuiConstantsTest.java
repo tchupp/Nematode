@@ -24,6 +24,10 @@ public class GuiConstantsTest extends AssertTestCase {
 	public void testImagePaths() throws Exception {
 		assertEquals("resources/gui/buttons/cropScanAreaButtonImage.png",
 				GuiConstants.CROP_AREA_BUTTON_IMAGE_PATH);
+
+		assertEquals("resources/gui/buttons/playButtonImage.png",
+				GuiConstants.PLAY_BUTTON_IMAGE_PATH);
+
 		assertEquals("resources/gui/backgrounds/darkWood.jpg",
 				GuiConstants.MAIN_WINDOW_BACKGROUND_IMAGE_PATH);
 	}

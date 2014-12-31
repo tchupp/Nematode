@@ -22,6 +22,8 @@ public class ToolbarPanel extends ExtendableJPanel {
 		this.setOpaque(false);
 
 		addCropScanAreaButton();
+		addPlayButton();
+
 		addBorder();
 	}
 
@@ -38,11 +40,29 @@ public class ToolbarPanel extends ExtendableJPanel {
 		final GridBagConstraints constraints = new GridBagConstraints();
 		constraints.gridx = 0;
 		constraints.gridy = 0;
-		constraints.weightx = 1.0;
+		constraints.weightx = 0.0;
 		constraints.anchor = GridBagConstraints.WEST;
 		constraints.insets = new Insets(5, 5, 5, 5);
 
 		this.add(cropScanAreaButton, constraints);
+	}
+
+	private void addPlayButton() {
+		final JButton playButton = new JButton();
+		playButton.setName("playButton");
+		playButton.setPreferredSize(new Dimension(20, 20));
+
+		final ImageIcon playButtonImageIcon = new ImageIcon(GuiConstants.PLAY_BUTTON_IMAGE_PATH);
+		playButton.setIcon(playButtonImageIcon);
+
+		final GridBagConstraints constraints = new GridBagConstraints();
+		constraints.gridx = 1;
+		constraints.gridy = 0;
+		constraints.weightx = 1.0;
+		constraints.anchor = GridBagConstraints.WEST;
+		constraints.insets = new Insets(5, 5, 5, 5);
+
+		this.add(playButton, constraints);
 	}
 
 	private void addBorder() {

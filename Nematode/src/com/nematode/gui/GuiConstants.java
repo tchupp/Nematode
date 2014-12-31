@@ -16,6 +16,8 @@ public class GuiConstants {
 
 	public static final String MAIN_WINDOW_BACKGROUND_IMAGE_PATH = "resources/gui/backgrounds/darkWood.jpg";
 
+	public static final String PLAY_BUTTON_IMAGE_PATH = "resources/gui/buttons/playButtonImage.png";
+
 	public static final Color backgroundColor = new Color(0, 32, 64, 128);
 
 }
