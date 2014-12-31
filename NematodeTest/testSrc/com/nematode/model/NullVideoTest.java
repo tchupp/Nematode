@@ -56,4 +56,48 @@ public class NullVideoTest extends AssertTestCase {
 		assertEquals(0, frame.cols());
 		assertEquals(0, frame.rows());
 	}
+
+	@Test
+	public void testGetFrameRateReturnsZero() throws Exception {
+		final NullVideo video = new NullVideo();
+
+		assertEquals(-1.0, video.getFrameRate());
+
+		video.start();
+
+		assertEquals(-1.0, video.getFrameRate());
+	}
+
+	@Test
+	public void testGetDurrationReturnsZero() throws Exception {
+		final NullVideo video = new NullVideo();
+
+		assertEquals(-1, video.getDurration());
+
+		video.start();
+
+		assertEquals(-1, video.getDurration());
+	}
+
+	@Test
+	public void testGetFrameLengthReturnsZero() throws Exception {
+		final NullVideo video = new NullVideo();
+
+		assertEquals(-1, video.getFrameLength());
+
+		video.start();
+
+		assertEquals(-1, video.getFrameLength());
+	}
+
+	@Test
+	public void testGetCurrentFrameReturnsZero() throws Exception {
+		final NullVideo video = new NullVideo();
+
+		assertEquals(-1, video.getCurrentFrame());
+
+		video.start();
+
+		assertEquals(-1, video.getCurrentFrame());
+	}
 }

@@ -55,4 +55,28 @@ public class MockVideo implements VideoInterface {
 		return null;
 	}
 
+	@Override
+	public double getFrameRate() {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	@Override
+	public long getDurration() {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	@Override
+	public int getFrameLength() {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	@Override
+	public int getCurrentFrame() {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
 }

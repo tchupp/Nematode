@@ -36,4 +36,24 @@ public class NullVideo implements VideoInterface {
 	public Mat grab() {
 		return new Mat();
 	}
+
+	@Override
+	public double getFrameRate() {
+		return -1;
+	}
+
+	@Override
+	public long getDurration() {
+		return -1;
+	}
+
+	@Override
+	public int getFrameLength() {
+		return -1;
+	}
+
+	@Override
+	public int getCurrentFrame() {
+		return -1;
+	}
 }

@@ -1,5 +1,6 @@
 package com.nematode.model;
 
+import org.bytedeco.javacpp.Loader;
 import org.bytedeco.javacpp.opencv_core.Mat;
 import org.bytedeco.javacv.OpenCVFrameGrabber;
 import org.junit.Test;
@@ -7,6 +8,11 @@ import org.junit.Test;
 import com.nematode.unittesting.AssertTestCase;
 
 public class LoadedVideoTest extends AssertTestCase {
+
+	@Override
+	protected void setUp() throws Exception {
+		Loader.load(org.bytedeco.javacpp.opencv_core.class);
+	}
 
 	@Test
 	public void testImplementsInterface() throws Exception {
@@ -116,7 +122,10 @@ public class LoadedVideoTest extends AssertTestCase {
 		final LoadedVideo video = new LoadedVideo(frameGrabber);
 		video.start();
 
-		final Mat actualFrame = video.grab();
+		video.grab();
+		video.grab();
+
+		final Mat actualFrame = video.getThumbnail();
 
 		final OpenCVFrameGrabber realFrameGrabber = new OpenCVFrameGrabber(
 				"testResources/Videos/shortNematode_10.avi");
@@ -142,17 +151,18 @@ public class LoadedVideoTest extends AssertTestCase {
 	}
 
 	@Test
-	public void testGettingWidthAndHeightReturnZero_StartNotCalled_ValidVideo() throws Exception {
+	public void testGettingWidthAndHeightReturnCorrectValue_StartNotCalled_ValidVideo()
+			throws Exception {
 		final OpenCVFrameGrabber frameGrabber = new OpenCVFrameGrabber(
 				"testResources/Videos/shortNematode_10.avi");
 		final LoadedVideo video = new LoadedVideo(frameGrabber);
 
-		assertEquals(0, video.getWidth());
-		assertEquals(0, video.getHeight());
+		assertEquals(2200, video.getWidth());
+		assertEquals(2054, video.getHeight());
 	}
 
 	@Test
-	public void testGettingWidthAndHeightReturnZero_StartCalledThenStopCalled_ValidVideo()
+	public void testGettingWidthAndHeightReturnCorrectValue_StartCalledThenStopCalled_ValidVideo()
 			throws Exception {
 		final OpenCVFrameGrabber frameGrabber = new OpenCVFrameGrabber(
 				"testResources/Videos/shortNematode_10.avi");
@@ -161,8 +171,8 @@ public class LoadedVideoTest extends AssertTestCase {
 		video.start();
 		video.stop();
 
-		assertEquals(0, video.getWidth());
-		assertEquals(0, video.getHeight());
+		assertEquals(2200, video.getWidth());
+		assertEquals(2054, video.getHeight());
 	}
 
 	@Test
@@ -200,5 +210,107 @@ public class LoadedVideoTest extends AssertTestCase {
 		final LoadedVideo video = new LoadedVideo(emptyFrameGrabber);
 
 		assertFalse(video.isValid());
+	}
+
+	@Test
+	public void testGetFrameRateReturnsCorrectValue_ValidVideo() throws Exception {
+		final OpenCVFrameGrabber frameGrabber = new OpenCVFrameGrabber(
+				"testResources/Videos/shortNematode_10.mp4");
+		final LoadedVideo video = new LoadedVideo(frameGrabber);
+
+		assertEquals(0.0, video.getFrameRate());
+
+		video.start();
+
+		assertEquals(31.0, video.getFrameRate());
+	}
+
+	@Test
+	public void testGetFrameRateReturnsZero_InvalidVideo() throws Exception {
+		final OpenCVFrameGrabber frameGrabber = new OpenCVFrameGrabber("");
+		final LoadedVideo video = new LoadedVideo(frameGrabber);
+
+		assertEquals(0.0, video.getFrameRate());
+
+		video.start();
+
+		assertEquals(0.0, video.getFrameRate());
+	}
+
+	@Test
+	public void testGetDurrationReturnsCorrectValue_ValidVideo() throws Exception {
+		final OpenCVFrameGrabber frameGrabber = new OpenCVFrameGrabber(
+				"testResources/Videos/shortNematode_10.mp4");
+		final LoadedVideo video = new LoadedVideo(frameGrabber);
+
+		assertEquals(0, video.getDurration());
+
+		video.start();
+
+		assertEquals(4354839, video.getDurration());
+	}
+
+	@Test
+	public void testGetDurrationReturnsZero_InvalidVideo() throws Exception {
+		final OpenCVFrameGrabber frameGrabber = new OpenCVFrameGrabber("");
+		final LoadedVideo video = new LoadedVideo(frameGrabber);
+
+		assertEquals(0, video.getDurration());
+
+		video.start();
+
+		assertEquals(0, video.getDurration());
+	}
+
+	@Test
+	public void testGetFrameLengthReturnsCorrectValue_ValidVideo() throws Exception {
+		final OpenCVFrameGrabber frameGrabber = new OpenCVFrameGrabber(
+				"testResources/Videos/shortNematode_10.mp4");
+		final LoadedVideo video = new LoadedVideo(frameGrabber);
+
+		assertEquals(0, video.getFrameLength());
+
+		video.start();
+
+		assertEquals(135, video.getFrameLength());
+	}
+
+	@Test
+	public void testGetFrameLengthReturnsZero_InvalidVideo() throws Exception {
+		final OpenCVFrameGrabber frameGrabber = new OpenCVFrameGrabber("");
+		final LoadedVideo video = new LoadedVideo(frameGrabber);
+
+		assertEquals(0, video.getFrameLength());
+
+		video.start();
+
+		assertEquals(0, video.getFrameLength());
+	}
+
+	@Test
+	public void testGetCurrentFrameReturnsCorrectValue_ValidVideo() throws Exception {
+		final OpenCVFrameGrabber frameGrabber = new OpenCVFrameGrabber(
+				"testResources/Videos/shortNematode_10.mp4");
+		final LoadedVideo video = new LoadedVideo(frameGrabber);
+
+		assertEquals(0, video.getCurrentFrame());
+		video.start();
+		assertEquals(2, video.getCurrentFrame());
+		video.grab();
+		assertEquals(3, video.getCurrentFrame());
+		video.grab();
+		assertEquals(4, video.getCurrentFrame());
+	}
+
+	@Test
+	public void testGetCurrentFrameReturnsZero_InvalidVideo() throws Exception {
+		final OpenCVFrameGrabber frameGrabber = new OpenCVFrameGrabber("");
+		final LoadedVideo video = new LoadedVideo(frameGrabber);
+
+		assertEquals(0, video.getCurrentFrame());
+
+		video.start();
+
+		assertEquals(0, video.getCurrentFrame());
 	}
 }

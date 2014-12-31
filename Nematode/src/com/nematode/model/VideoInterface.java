@@ -18,4 +18,12 @@ public interface VideoInterface {
 
 	public Mat grab();
 
+	public double getFrameRate();
+
+	public long getDurration();
+
+	public int getFrameLength();
+
+	public int getCurrentFrame();
+
 }

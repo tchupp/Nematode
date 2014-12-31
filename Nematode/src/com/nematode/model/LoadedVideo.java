@@ -3,13 +3,24 @@ package com.nematode.model;
 import org.bytedeco.javacpp.opencv_core.IplImage;
 import org.bytedeco.javacpp.opencv_core.Mat;
 import org.bytedeco.javacv.FrameGrabber;
+import org.bytedeco.javacv.FrameGrabber.Exception;
 
 public class LoadedVideo implements VideoInterface {
 
 	private final FrameGrabber frameGrabber;
+	private Mat thumbnail;
 
 	public LoadedVideo(final FrameGrabber frameGrabber) {
 		this.frameGrabber = frameGrabber;
+
+		try {
+			this.frameGrabber.start();
+			final IplImage image = this.frameGrabber.grab();
+			this.thumbnail = new Mat(image, true);
+			this.frameGrabber.stop();
+		} catch (final Exception exception) {
+			this.thumbnail = new Mat();
+		}
 	}
 
 	@Override
@@ -32,7 +43,7 @@ public class LoadedVideo implements VideoInterface {
 	public Mat grab() {
 		try {
 			final IplImage image = this.frameGrabber.grab();
-			return new Mat(image);
+			return new Mat(image, true);
 		} catch (final FrameGrabber.Exception exception) {
 			return new Mat();
 		}
@@ -40,16 +51,7 @@ public class LoadedVideo implements VideoInterface {
 
 	@Override
 	public Mat getThumbnail() {
-		try {
-			this.frameGrabber.start();
-			final IplImage image = this.frameGrabber.grab();
-			final Mat mat = new Mat(image, true);
-			this.frameGrabber.stop();
-
-			return mat;
-		} catch (final FrameGrabber.Exception exception) {
-		}
-		return new Mat();
+		return this.thumbnail;
 	}
 
 	@Override
@@ -71,6 +73,26 @@ public class LoadedVideo implements VideoInterface {
 		} catch (final FrameGrabber.Exception exception) {
 		}
 		return false;
+	}
+
+	@Override
+	public double getFrameRate() {
+		return this.frameGrabber.getFrameRate();
+	}
+
+	@Override
+	public long getDurration() {
+		return this.frameGrabber.getLengthInTime();
+	}
+
+	@Override
+	public int getFrameLength() {
+		return this.frameGrabber.getLengthInFrames();
+	}
+
+	@Override
+	public int getCurrentFrame() {
+		return this.frameGrabber.getFrameNumber();
 	}
 
 	public FrameGrabber getFrameGrabber() {
