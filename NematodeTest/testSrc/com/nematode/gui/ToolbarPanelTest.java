@@ -94,6 +94,7 @@ public class ToolbarPanelTest extends AssertTestCase {
 				toolbarPanel.getLayout());
 
 		final JButton playButton = assertIsOfTypeAndGet(JButton.class, toolbarPanel.getComponent(1));
+		assertSame(playButton, toolbarPanel.getPlayButton());
 		assertEquals("playButton", playButton.getName());
 		assertEquals(new Dimension(20, 20), playButton.getPreferredSize());
 

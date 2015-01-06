@@ -14,6 +14,7 @@ import javax.swing.border.CompoundBorder;
 public class ToolbarPanel extends ExtendableJPanel {
 
 	private static final long serialVersionUID = 1L;
+	private JButton playButton;
 
 	public ToolbarPanel() {
 		this.setName("toolbarPanel");
@@ -48,12 +49,12 @@ public class ToolbarPanel extends ExtendableJPanel {
 	}
 
 	private void addPlayButton() {
-		final JButton playButton = new JButton();
-		playButton.setName("playButton");
-		playButton.setPreferredSize(new Dimension(20, 20));
+		this.playButton = new JButton();
+		this.playButton.setName("playButton");
+		this.playButton.setPreferredSize(new Dimension(20, 20));
 
 		final ImageIcon playButtonImageIcon = new ImageIcon(GuiConstants.PLAY_BUTTON_IMAGE_PATH);
-		playButton.setIcon(playButtonImageIcon);
+		this.playButton.setIcon(playButtonImageIcon);
 
 		final GridBagConstraints constraints = new GridBagConstraints();
 		constraints.gridx = 1;
@@ -62,7 +63,7 @@ public class ToolbarPanel extends ExtendableJPanel {
 		constraints.anchor = GridBagConstraints.WEST;
 		constraints.insets = new Insets(5, 5, 5, 5);
 
-		this.add(playButton, constraints);
+		this.add(this.playButton, constraints);
 	}
 
 	private void addBorder() {
@@ -73,4 +74,7 @@ public class ToolbarPanel extends ExtendableJPanel {
 		this.setBorder(compoundBorder);
 	}
 
+	public JButton getPlayButton() {
+		return this.playButton;
+	}
 }
