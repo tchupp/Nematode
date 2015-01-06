@@ -4,9 +4,9 @@
 	<classpathentry kind="src" path="/Nematode"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.junit.JUNIT_CONTAINER/4"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
-	<classpathentry kind="lib" path="D:/Users/Theo/Documents/eclipse/workspaceNematode/Jars/ffmpeg-windows-x86_64.jar"/>
-	<classpathentry kind="lib" path="D:/Users/Theo/Documents/eclipse/workspaceNematode/Jars/javacpp.jar"/>
-	<classpathentry kind="lib" path="D:/Users/Theo/Documents/eclipse/workspaceNematode/Jars/javacv.jar"/>
-	<classpathentry kind="lib" path="D:/Users/Theo/Documents/eclipse/workspaceNematode/Jars/opencv-windows-x86_64.jar"/>
+	<classpathentry kind="var" path="JAVACV_HOME/javacpp.jar"/>
+	<classpathentry kind="var" path="JAVACV_HOME/opencv-windows-x86_64.jar"/>
+	<classpathentry kind="var" path="JAVACV_HOME/javacv.jar"/>
+	<classpathentry kind="var" path="JAVACV_HOME/ffmpeg-windows-x86_64.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
