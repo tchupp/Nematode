@@ -76,4 +76,25 @@ public class ToolbarPanelViewControllerTest extends AssertTestCase {
 		assertFalse(observerList.contains(mockObserverOne));
 		assertTrue(observerList.contains(mockObserverTwo));
 	}
+
+	@Test
+	public void testPlayButtonPressedNotifiesObserversCorrectly() throws Exception {
+		final ToolbarPanelViewController viewController = new ToolbarPanelViewController();
+		final ArrayList<ToolbarObserverInterface> observerList = viewController.getObserverList();
+
+		final MockToolbarObserver observerOne = new MockToolbarObserver();
+		final MockToolbarObserver observerTwo = new MockToolbarObserver();
+
+		viewController.addObserver(observerOne);
+		viewController.addObserver(observerTwo);
+		assertEquals(2, observerList.size());
+
+		assertFalse(observerOne.wasNotifyPlayButtonPressedCalled());
+		assertFalse(observerTwo.wasNotifyPlayButtonPressedCalled());
+
+		viewController.playButtonPressed();
+
+		assertTrue(observerOne.wasNotifyPlayButtonPressedCalled());
+		assertTrue(observerTwo.wasNotifyPlayButtonPressedCalled());
+	}
 }

@@ -12,6 +12,7 @@ public class ToolbarPanelViewController implements ToolbarPanelViewControllerInt
 	public ToolbarPanelViewController() {
 		this.toolbarPanel = new ToolbarPanel();
 		this.observerList = new ArrayList<ToolbarObserverInterface>();
+
 		addListenerToPlayButton();
 	}
 
@@ -35,6 +36,9 @@ public class ToolbarPanelViewController implements ToolbarPanelViewControllerInt
 
 	@Override
 	public void playButtonPressed() {
+		for (final ToolbarObserverInterface observer : this.observerList) {
+			observer.notifyPlayButtonPressed();
+		}
 	}
 
 	@Override
