@@ -18,4 +18,12 @@ public class MockToolbarPanelViewController implements ToolbarPanelViewControlle
 		return new ExtendableJPanel();
 	}
 
+	@Override
+	public void addObserver(final ToolbarObserverInterface observer) {
+	}
+
+	@Override
+	public void removeObserver(final ToolbarObserverInterface observer) {
+	}
+
 }

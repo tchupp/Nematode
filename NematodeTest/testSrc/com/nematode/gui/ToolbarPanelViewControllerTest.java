@@ -1,6 +1,7 @@
 package com.nematode.gui;
 
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
 
 import javax.swing.JButton;
 
@@ -39,5 +40,40 @@ public class ToolbarPanelViewControllerTest extends AssertTestCase {
 				PlayButtonActionListener.class, actionListeners[0]);
 
 		assertSame(toolbarViewController, playButtonActionListener.getViewController());
+	}
+
+	@Test
+	public void testAddObserverCorrectlyAddsTheObserver() throws Exception {
+		final ToolbarPanelViewController viewController = new ToolbarPanelViewController();
+		final ArrayList<ToolbarObserverInterface> observerList = viewController.getObserverList();
+
+		final MockToolbarObserver observer = new MockToolbarObserver();
+
+		assertEquals(0, observerList.size());
+
+		viewController.addObserver(observer);
+
+		assertEquals(1, observerList.size());
+		assertSame(observer, observerList.get(0));
+	}
+
+	@Test
+	public void testRemoveObserverRemovesTheCorrectObserver() throws Exception {
+		final ToolbarPanelViewController viewController = new ToolbarPanelViewController();
+		final ArrayList<ToolbarObserverInterface> observerList = viewController.getObserverList();
+
+		final MockToolbarObserver mockObserverOne = new MockToolbarObserver();
+		final MockToolbarObserver mockObserverTwo = new MockToolbarObserver();
+
+		viewController.addObserver(mockObserverOne);
+		viewController.addObserver(mockObserverTwo);
+
+		assertEquals(2, observerList.size());
+
+		viewController.removeObserver(mockObserverOne);
+
+		assertEquals(1, observerList.size());
+		assertFalse(observerList.contains(mockObserverOne));
+		assertTrue(observerList.contains(mockObserverTwo));
 	}
 }

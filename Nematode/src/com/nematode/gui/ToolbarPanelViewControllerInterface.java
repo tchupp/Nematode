@@ -6,4 +6,8 @@ public interface ToolbarPanelViewControllerInterface {
 
 	public ExtendableJPanel getToolbarPanel();
 
+	public void addObserver(ToolbarObserverInterface observer);
+
+	public void removeObserver(ToolbarObserverInterface observer);
+
 }
