@@ -4,6 +4,7 @@ import java.awt.Container;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.event.WindowListener;
+import java.util.ArrayList;
 import java.util.List;
 
 import org.junit.Test;
@@ -302,6 +303,39 @@ public class MainWindowViewControllerTest extends AssertTestCase {
 				viewController.getVideoMatriarch());
 
 		final List<VideoObserverInterface> observerList = videoMatriarch.getObserverList();
+		assertEquals(1, observerList.size());
+
+		viewController.dispose();
+
+		assertEquals(0, observerList.size());
+	}
+
+	@Test
+	public void testPlayButtonObserverIsAddedToToolbarPanelViewController() throws Exception {
+		final MainWindowViewController viewController = new MainWindowViewController();
+
+		final ToolbarPanelViewController toolbarPanelViewController = assertIsOfTypeAndGet(
+				ToolbarPanelViewController.class, viewController.getToolbarPanelViewController());
+
+		final ArrayList<ToolbarObserverInterface> observerList = toolbarPanelViewController
+				.getObserverList();
+		assertEquals(1, observerList.size());
+
+		final PlayButtonObserver playButtonObserver = assertIsOfTypeAndGet(
+				PlayButtonObserver.class, observerList.get(0));
+		assertSame(viewController.getPlayButtonObserver(), playButtonObserver);
+	}
+
+	@Test
+	public void testDisposeRemovedPlayButtonObserverFromToolbarPanelViewController()
+			throws Exception {
+		final MainWindowViewController viewController = new MainWindowViewController();
+
+		final ToolbarPanelViewController toolbarPanelViewController = assertIsOfTypeAndGet(
+				ToolbarPanelViewController.class, viewController.getToolbarPanelViewController());
+
+		final ArrayList<ToolbarObserverInterface> observerList = toolbarPanelViewController
+				.getObserverList();
 		assertEquals(1, observerList.size());
 
 		viewController.dispose();

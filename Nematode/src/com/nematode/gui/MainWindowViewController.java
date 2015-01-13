@@ -18,6 +18,7 @@ public class MainWindowViewController implements MainWindowControllerInterface {
 	private final ExtendableJFrame mainWindow;
 	private final VideoMatriarch videoMatriarch;
 	private final VideoSetObserver videoSetObserver;
+	private final PlayButtonObserver playButtonObserver;
 
 	public MainWindowViewController() {
 		this.mainWindow = new MainWindow();
@@ -33,6 +34,9 @@ public class MainWindowViewController implements MainWindowControllerInterface {
 
 		this.videoSetObserver = new VideoSetObserver(this.videoPanelViewController);
 		this.videoMatriarch.addObserver(this.videoSetObserver);
+
+		this.playButtonObserver = new PlayButtonObserver();
+		this.toolbarPanelViewController.addObserver(this.playButtonObserver);
 
 		addPanelsToFrame();
 	}
@@ -142,6 +146,7 @@ public class MainWindowViewController implements MainWindowControllerInterface {
 	@Override
 	public void dispose() {
 		this.videoMatriarch.removeObserver(this.videoSetObserver);
+		this.toolbarPanelViewController.removeObserver(this.playButtonObserver);
 	}
 
 	public ProjectPanelViewControllerInterface getProjectPanelViewController() {
@@ -170,5 +175,9 @@ public class MainWindowViewController implements MainWindowControllerInterface {
 
 	public VideoSetObserver getVideoSetObserver() {
 		return this.videoSetObserver;
+	}
+
+	public PlayButtonObserver getPlayButtonObserver() {
+		return this.playButtonObserver;
 	}
 }
