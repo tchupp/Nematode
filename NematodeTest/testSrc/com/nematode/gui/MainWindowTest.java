@@ -26,7 +26,7 @@ public class MainWindowTest extends AssertTestCase {
 	public void testConstructorSetsUpPanelCorrectly() throws Exception {
 		final MainWindow mainWindow = new MainWindow();
 
-		assertEquals(JFrame.EXIT_ON_CLOSE, mainWindow.getDefaultCloseOperation());
+		assertEquals(JFrame.DISPOSE_ON_CLOSE, mainWindow.getDefaultCloseOperation());
 
 		assertEquals(GuiConstants.VIDEO_FRAME_HEIGHT, mainWindow.getHeight());
 		assertEquals(GuiConstants.VIDEO_FRAME_WIDTH, mainWindow.getWidth());

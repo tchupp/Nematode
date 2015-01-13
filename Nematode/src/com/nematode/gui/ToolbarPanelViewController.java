@@ -49,5 +49,4 @@ public class ToolbarPanelViewController implements ToolbarPanelViewControllerInt
 	public ArrayList<ToolbarObserverInterface> getObserverList() {
 		return this.observerList;
 	}
-
 }

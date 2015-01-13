@@ -15,7 +15,7 @@ public class MainWindow extends ExtendableJFrame {
 	private static final long serialVersionUID = 1L;
 
 	public MainWindow() {
-		this.setDefaultCloseOperation(EXIT_ON_CLOSE);
+		this.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
 		this.setSize(GuiConstants.VIDEO_FRAME_WIDTH, GuiConstants.VIDEO_FRAME_HEIGHT);
 
 		addContentPane();
