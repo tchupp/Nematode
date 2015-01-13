@@ -20,7 +20,6 @@ public class ProjectPanel extends ExtendableJPanel {
 		this.setName("projectPanel");
 		this.setLayout(new GridBagLayout());
 		this.setBackground(GuiConstants.backgroundColor);
-		this.setOpaque(false);
 
 		setupBorder();
 		setupOpenImageButton();

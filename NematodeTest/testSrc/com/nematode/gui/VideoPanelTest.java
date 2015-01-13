@@ -28,7 +28,7 @@ public class VideoPanelTest extends AssertTestCase {
 		assertEquals("videoPanel", videoPanel.getName());
 		assertEquals(GuiConstants.backgroundColor, videoPanel.getBackground());
 		assertEquals(1, videoPanel.getComponentCount());
-		assertFalse(videoPanel.isOpaque());
+		assertTrue(videoPanel.isOpaque());
 
 		assertIsOfTypeAndGet(CompoundBorder.class, videoPanel.getBorder());
 		assertIsOfTypeAndGet(GridBagLayout.class, videoPanel.getLayout());

@@ -25,7 +25,7 @@ public class TrackingPanelTest extends AssertTestCase {
 		assertEquals("trackingPanel", trackingPanel.getName());
 		assertEquals(GuiConstants.backgroundColor, trackingPanel.getBackground());
 		assertEquals(1, trackingPanel.getComponentCount());
-		assertFalse(trackingPanel.isOpaque());
+		assertTrue(trackingPanel.isOpaque());
 
 		assertIsOfTypeAndGet(CompoundBorder.class, trackingPanel.getBorder());
 		assertIsOfTypeAndGet(GridBagLayout.class, trackingPanel.getLayout());

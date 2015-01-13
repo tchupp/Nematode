@@ -13,7 +13,6 @@ public class StatusPanel extends ExtendableJPanel {
 	public StatusPanel() {
 		this.setName("statusPanel");
 		this.setBackground(GuiConstants.backgroundColor);
-		this.setOpaque(false);
 
 		addStatusLabel();
 		addBorder();

@@ -22,7 +22,7 @@ public class StatusPanelTest extends AssertTestCase {
 
 		assertEquals(GuiConstants.backgroundColor, statusPanel.getBackground());
 		assertEquals(1, statusPanel.getComponentCount());
-		assertFalse(statusPanel.isOpaque());
+		assertTrue(statusPanel.isOpaque());
 
 		assertIsOfTypeAndGet(CompoundBorder.class, statusPanel.getBorder());
 	}

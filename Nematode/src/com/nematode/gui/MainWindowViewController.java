@@ -80,7 +80,8 @@ public class MainWindowViewController implements MainWindowControllerInterface {
 		projectPanelConstraints.gridy = 0;
 		projectPanelConstraints.weighty = 0.5;
 		projectPanelConstraints.fill = GridBagConstraints.BOTH;
-		controlPanel.add(this.projectPanelViewController.getProjectPanel(), projectPanelConstraints);
+		controlPanel
+				.add(this.projectPanelViewController.getProjectPanel(), projectPanelConstraints);
 	}
 
 	private void addTrackingPanel(final ExtendableJPanel controlPanel) {
