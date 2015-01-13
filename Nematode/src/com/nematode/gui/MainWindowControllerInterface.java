@@ -4,4 +4,6 @@ public interface MainWindowControllerInterface {
 
 	public ExtendableJFrame getMainWindow();
 
+	public void dispose();
+
 }

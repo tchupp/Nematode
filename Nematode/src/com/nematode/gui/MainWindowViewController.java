@@ -81,7 +81,7 @@ public class MainWindowViewController implements MainWindowControllerInterface {
 		projectPanelConstraints.weighty = 0.5;
 		projectPanelConstraints.fill = GridBagConstraints.BOTH;
 		controlPanel
-				.add(this.projectPanelViewController.getProjectPanel(), projectPanelConstraints);
+		.add(this.projectPanelViewController.getProjectPanel(), projectPanelConstraints);
 	}
 
 	private void addTrackingPanel(final ExtendableJPanel controlPanel) {
@@ -137,6 +137,10 @@ public class MainWindowViewController implements MainWindowControllerInterface {
 		return this.mainWindow;
 	}
 
+	@Override
+	public void dispose() {
+	}
+
 	public ProjectPanelViewControllerInterface getProjectPanelViewController() {
 		return this.projectPanelViewController;
 	}
@@ -160,4 +164,5 @@ public class MainWindowViewController implements MainWindowControllerInterface {
 	public VideoMatriarch getVideoMatriarch() {
 		return this.videoMatriarch;
 	}
+
 }

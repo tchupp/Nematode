@@ -21,13 +21,13 @@ public class NematodeTrackingLauncherTest extends AssertTestCase {
 		final NematodeTrackingLauncher nematodeTrackingLauncher = new NematodeTrackingLauncher(
 				mockMainWindowViewController);
 
-		final MockNematodeFrame mainWindow = assertIsOfTypeAndGet(MockNematodeFrame.class,
-				mockMainWindowViewController.getMainWindow());
+		final MockExtendableFrame mainWindow = new MockExtendableFrame();
+		mockMainWindowViewController.setMockNematodeFrame(mainWindow);
 
 		assertFalse(mainWindow.isVisible());
-		nematodeTrackingLauncher.launchApplication();
-		assertTrue(mainWindow.isVisible());
 
-		mainWindow.dispose();
+		nematodeTrackingLauncher.launchApplication();
+
+		assertTrue(mainWindow.isVisible());
 	}
 }
