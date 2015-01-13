@@ -5,6 +5,7 @@ import java.awt.GridBagLayout;
 
 import com.nematode.image.processing.ImageResizer;
 import com.nematode.model.VideoMatriarch;
+import com.nematode.model.VideoMatriarchInterface;
 import com.nematode.model.VideoSetObserver;
 
 public class MainWindowViewController implements MainWindowControllerInterface {
@@ -16,9 +17,11 @@ public class MainWindowViewController implements MainWindowControllerInterface {
 	private final StatusPanelViewControllerInterface statusPanelViewController;
 	private final ExtendableJFrame mainWindow;
 	private final VideoMatriarch videoMatriarch;
+	private final VideoSetObserver videoSetObserver;
 
 	public MainWindowViewController() {
 		this.mainWindow = new MainWindow();
+		this.mainWindow.addWindowListener(new MainWindowCloseListener(this));
 
 		this.videoMatriarch = new VideoMatriarch();
 
@@ -28,11 +31,10 @@ public class MainWindowViewController implements MainWindowControllerInterface {
 		this.toolbarPanelViewController = new ToolbarPanelViewController();
 		this.statusPanelViewController = new StatusPanelViewController();
 
-		addPanelsToFrame();
+		this.videoSetObserver = new VideoSetObserver(this.videoPanelViewController);
+		this.videoMatriarch.addObserver(this.videoSetObserver);
 
-		final VideoSetObserver videoSetObserver = new VideoSetObserver(
-				this.videoPanelViewController);
-		this.videoMatriarch.addObserver(videoSetObserver);
+		addPanelsToFrame();
 	}
 
 	private void addPanelsToFrame() {
@@ -81,7 +83,7 @@ public class MainWindowViewController implements MainWindowControllerInterface {
 		projectPanelConstraints.weighty = 0.5;
 		projectPanelConstraints.fill = GridBagConstraints.BOTH;
 		controlPanel
-		.add(this.projectPanelViewController.getProjectPanel(), projectPanelConstraints);
+				.add(this.projectPanelViewController.getProjectPanel(), projectPanelConstraints);
 	}
 
 	private void addTrackingPanel(final ExtendableJPanel controlPanel) {
@@ -139,6 +141,7 @@ public class MainWindowViewController implements MainWindowControllerInterface {
 
 	@Override
 	public void dispose() {
+		this.videoMatriarch.removeObserver(this.videoSetObserver);
 	}
 
 	public ProjectPanelViewControllerInterface getProjectPanelViewController() {
@@ -161,8 +164,11 @@ public class MainWindowViewController implements MainWindowControllerInterface {
 		return this.statusPanelViewController;
 	}
 
-	public VideoMatriarch getVideoMatriarch() {
+	public VideoMatriarchInterface getVideoMatriarch() {
 		return this.videoMatriarch;
 	}
 
+	public VideoSetObserver getVideoSetObserver() {
+		return this.videoSetObserver;
+	}
 }

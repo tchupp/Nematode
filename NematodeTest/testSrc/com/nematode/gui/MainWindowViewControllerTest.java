@@ -3,6 +3,7 @@ package com.nematode.gui;
 import java.awt.Container;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
+import java.awt.event.WindowListener;
 import java.util.List;
 
 import org.junit.Test;
@@ -29,6 +30,20 @@ public class MainWindowViewControllerTest extends AssertTestCase {
 
 		final Container contentPane = mainWindow.getContentPane();
 		assertEquals(2, contentPane.getComponentCount());
+	}
+
+	@Test
+	public void testConstructionAddsCorrectWindowListenerToMainWindow() throws Exception {
+		final MainWindowViewController mainWindowViewController = new MainWindowViewController();
+
+		final MainWindow mainWindow = assertIsOfTypeAndGet(MainWindow.class,
+				mainWindowViewController.getMainWindow());
+		final WindowListener[] windowListeners = mainWindow.getWindowListeners();
+		assertEquals(1, windowListeners.length);
+
+		final MainWindowCloseListener mainWindowCloseListener = assertIsOfTypeAndGet(
+				MainWindowCloseListener.class, windowListeners[0]);
+		assertSame(mainWindowViewController, mainWindowCloseListener.getViewController());
 	}
 
 	@Test
@@ -265,16 +280,32 @@ public class MainWindowViewControllerTest extends AssertTestCase {
 	public void testVideoSetObserverIsAddedToVideoMatriarch() throws Exception {
 		final MainWindowViewController viewController = new MainWindowViewController();
 
-		final VideoMatriarch videoMatriarch = viewController.getVideoMatriarch();
-
+		final VideoMatriarch videoMatriarch = assertIsOfTypeAndGet(VideoMatriarch.class,
+				viewController.getVideoMatriarch());
 		final List<VideoObserverInterface> observerList = videoMatriarch.getObserverList();
-
 		assertEquals(1, observerList.size());
+
 		final VideoSetObserver videoSetObserver = assertIsOfTypeAndGet(VideoSetObserver.class,
 				observerList.get(0));
+		assertSame(viewController.getVideoSetObserver(), videoSetObserver);
 
 		final VideoPanelViewControllerInterface actualVideoViewController = videoSetObserver
 				.getVideoPanelViewController();
 		assertSame(viewController.getVideoPanelViewController(), actualVideoViewController);
+	}
+
+	@Test
+	public void testDisposeRemovesVideoSetObserverFromVideoMatriarch() throws Exception {
+		final MainWindowViewController viewController = new MainWindowViewController();
+
+		final VideoMatriarch videoMatriarch = assertIsOfTypeAndGet(VideoMatriarch.class,
+				viewController.getVideoMatriarch());
+
+		final List<VideoObserverInterface> observerList = videoMatriarch.getObserverList();
+		assertEquals(1, observerList.size());
+
+		viewController.dispose();
+
+		assertEquals(0, observerList.size());
 	}
 }
