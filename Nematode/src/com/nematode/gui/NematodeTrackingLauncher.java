@@ -19,7 +19,6 @@ public class NematodeTrackingLauncher {
 
 	public static void main(final String[] args) {
 		final MainWindowViewController mainWindowViewController = new MainWindowViewController();
-
 		final NematodeTrackingLauncher nematodeTrackingLauncher = new NematodeTrackingLauncher(
 				mainWindowViewController);
 
