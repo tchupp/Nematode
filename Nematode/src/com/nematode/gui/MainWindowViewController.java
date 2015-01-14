@@ -6,6 +6,7 @@ import java.awt.GridBagLayout;
 import com.nematode.image.processing.ImageResizer;
 import com.nematode.model.VideoMatriarch;
 import com.nematode.model.VideoMatriarchInterface;
+import com.nematode.model.VideoObserverInterface;
 import com.nematode.model.VideoSetObserver;
 
 public class MainWindowViewController implements MainWindowControllerInterface {
@@ -16,9 +17,9 @@ public class MainWindowViewController implements MainWindowControllerInterface {
 	private final ToolbarPanelViewControllerInterface toolbarPanelViewController;
 	private final StatusPanelViewControllerInterface statusPanelViewController;
 	private final ExtendableJFrame mainWindow;
-	private final VideoMatriarch videoMatriarch;
-	private final VideoSetObserver videoSetObserver;
-	private final PlayButtonObserver playButtonObserver;
+	private final VideoMatriarchInterface videoMatriarch;
+	private final VideoObserverInterface videoSetObserver;
+	private final ToolbarObserverInterface playButtonObserver;
 
 	public MainWindowViewController() {
 		this.mainWindow = new MainWindow();
@@ -173,11 +174,11 @@ public class MainWindowViewController implements MainWindowControllerInterface {
 		return this.videoMatriarch;
 	}
 
-	public VideoSetObserver getVideoSetObserver() {
+	public VideoObserverInterface getVideoSetObserver() {
 		return this.videoSetObserver;
 	}
 
-	public PlayButtonObserver getPlayButtonObserver() {
+	public ToolbarObserverInterface getPlayButtonObserver() {
 		return this.playButtonObserver;
 	}
 }
