@@ -18,6 +18,8 @@ public class GuiConstants {
 
 	public static final String PLAY_BUTTON_IMAGE_PATH = "resources/gui/buttons/playButtonImage.png";
 
+	public static final String PAUSE_BUTTON_IMAGE_PATH = "resources/gui/buttons/pauseButtonImage.png";
+
 	public static final Color backgroundColor = new Color(0, 32, 64, 128);
 
 }

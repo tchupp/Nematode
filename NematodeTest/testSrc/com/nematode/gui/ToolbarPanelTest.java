@@ -21,6 +21,7 @@ public class ToolbarPanelTest extends AssertTestCase {
 
 	private BufferedImage expectedCropButtonImage;
 	private BufferedImage expectedPlayButtonImage;
+	private BufferedImage expectedPauseButtonImage;
 
 	@Override
 	protected void setUp() throws Exception {
@@ -28,6 +29,9 @@ public class ToolbarPanelTest extends AssertTestCase {
 				GuiConstants.CROP_AREA_BUTTON_IMAGE_PATH));
 
 		this.expectedPlayButtonImage = ImageIO.read(new File(GuiConstants.PLAY_BUTTON_IMAGE_PATH));
+
+		this.expectedPauseButtonImage = ImageIO
+				.read(new File(GuiConstants.PAUSE_BUTTON_IMAGE_PATH));
 	}
 
 	@Test
@@ -41,7 +45,7 @@ public class ToolbarPanelTest extends AssertTestCase {
 
 		assertEquals("toolbarPanel", toolbarPanel.getName());
 		assertEquals(GuiConstants.backgroundColor, toolbarPanel.getBackground());
-		assertEquals(2, toolbarPanel.getComponentCount());
+		assertEquals(3, toolbarPanel.getComponentCount());
 		assertTrue(toolbarPanel.isOpaque());
 
 		assertIsOfTypeAndGet(CompoundBorder.class, toolbarPanel.getBorder());
@@ -101,7 +105,7 @@ public class ToolbarPanelTest extends AssertTestCase {
 		final GridBagConstraints constraints = toolbarPanelLayout.getConstraints(playButton);
 		assertEquals(1, constraints.gridx);
 		assertEquals(0, constraints.gridy);
-		assertEquals(1.0, constraints.weightx);
+		assertEquals(0.0, constraints.weightx);
 		assertEquals(GridBagConstraints.WEST, constraints.anchor);
 		assertEquals(new Insets(5, 5, 5, 5), constraints.insets);
 	}
@@ -119,5 +123,40 @@ public class ToolbarPanelTest extends AssertTestCase {
 		assertEquals(MediaTracker.COMPLETE, buttonImageIcon.getImageLoadStatus());
 		assertEquals(this.expectedPlayButtonImage.getWidth(), buttonImageIcon.getIconWidth());
 		assertEquals(this.expectedPlayButtonImage.getHeight(), buttonImageIcon.getIconHeight());
+	}
+
+	@Test
+	public void testPauseButtonCorrectlySetupOnPanel() throws Exception {
+		final ToolbarPanel toolbarPanel = new ToolbarPanel();
+
+		final GridBagLayout toolbarPanelLayout = assertIsOfTypeAndGet(GridBagLayout.class,
+				toolbarPanel.getLayout());
+
+		final JButton pauseButton = assertIsOfTypeAndGet(JButton.class,
+				toolbarPanel.getComponent(2));
+		assertSame(toolbarPanel.getPauseButton(), pauseButton);
+		assertEquals("pauseButton", pauseButton.getName());
+		assertEquals(new Dimension(20, 20), pauseButton.getPreferredSize());
+
+		final GridBagConstraints constraints = toolbarPanelLayout.getConstraints(pauseButton);
+		assertEquals(2, constraints.gridx);
+		assertEquals(0, constraints.gridy);
+		assertEquals(1.0, constraints.weightx);
+		assertEquals(GridBagConstraints.WEST, constraints.anchor);
+		assertEquals(new Insets(5, 5, 5, 5), constraints.insets);
+	}
+
+	@Test
+	public void testPauseButtonHasCorrectImageIcon() throws Exception {
+		final ToolbarPanel toolbarPanel = new ToolbarPanel();
+
+		final JButton pauseButton = toolbarPanel.getPauseButton();
+
+		final ImageIcon buttonImageIcon = assertIsOfTypeAndGet(ImageIcon.class,
+				pauseButton.getIcon());
+
+		assertEquals(MediaTracker.COMPLETE, buttonImageIcon.getImageLoadStatus());
+		assertEquals(this.expectedPauseButtonImage.getWidth(), buttonImageIcon.getIconWidth());
+		assertEquals(this.expectedPauseButtonImage.getHeight(), buttonImageIcon.getIconHeight());
 	}
 }

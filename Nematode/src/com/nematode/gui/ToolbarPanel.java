@@ -15,6 +15,7 @@ public class ToolbarPanel extends ExtendableJPanel {
 
 	private static final long serialVersionUID = 1L;
 	private JButton playButton;
+	private JButton pauseButton;
 
 	public ToolbarPanel() {
 		this.setName("toolbarPanel");
@@ -23,6 +24,7 @@ public class ToolbarPanel extends ExtendableJPanel {
 
 		addCropScanAreaButton();
 		addPlayButton();
+		addPauseButton();
 
 		addBorder();
 	}
@@ -58,11 +60,29 @@ public class ToolbarPanel extends ExtendableJPanel {
 		final GridBagConstraints constraints = new GridBagConstraints();
 		constraints.gridx = 1;
 		constraints.gridy = 0;
-		constraints.weightx = 1.0;
+		constraints.weightx = 0.0;
 		constraints.anchor = GridBagConstraints.WEST;
 		constraints.insets = new Insets(5, 5, 5, 5);
 
 		this.add(this.playButton, constraints);
+	}
+
+	private void addPauseButton() {
+		this.pauseButton = new JButton();
+		this.pauseButton.setName("pauseButton");
+		this.pauseButton.setPreferredSize(new Dimension(20, 20));
+
+		final ImageIcon pauseButtonImageIcon = new ImageIcon(GuiConstants.PAUSE_BUTTON_IMAGE_PATH);
+		this.pauseButton.setIcon(pauseButtonImageIcon);
+
+		final GridBagConstraints constraints = new GridBagConstraints();
+		constraints.gridx = 2;
+		constraints.gridy = 0;
+		constraints.weightx = 1.0;
+		constraints.anchor = GridBagConstraints.WEST;
+		constraints.insets = new Insets(5, 5, 5, 5);
+
+		this.add(this.pauseButton, constraints);
 	}
 
 	private void addBorder() {
@@ -75,5 +95,9 @@ public class ToolbarPanel extends ExtendableJPanel {
 
 	public JButton getPlayButton() {
 		return this.playButton;
+	}
+
+	public JButton getPauseButton() {
+		return this.pauseButton;
 	}
 }
