@@ -6,7 +6,6 @@ import org.bytedeco.javacpp.Loader;
 import org.junit.Test;
 
 import com.nematode.model.MockVideoMatriarch;
-import com.nematode.model.VideoSetObserver;
 import com.nematode.unittesting.AssertTestCase;
 
 public class MainWindowViewControllerTest extends AssertTestCase {
@@ -63,34 +62,6 @@ public class MainWindowViewControllerTest extends AssertTestCase {
 		final MainWindowCloseListener mainWindowCloseListener = assertIsOfTypeAndGet(
 				MainWindowCloseListener.class, windowListeners[0]);
 		assertSame(mainWindowViewController, mainWindowCloseListener.getViewController());
-	}
-
-	@Test
-	public void testVideoSetObserverIsAddedToVideoMatriarch() throws Exception {
-		final MockVideoMatriarch videoMatriarch = new MockVideoMatriarch();
-		final MainWindowViewController viewController = new MainWindowViewController(
-				new MockExtendableFrame(), videoMatriarch);
-
-		assertEquals(1, videoMatriarch.getNumberOfObservers());
-
-		final VideoSetObserver videoSetObserver = assertIsOfTypeAndGet(VideoSetObserver.class,
-				videoMatriarch.getObserverToAdd());
-		assertSame(videoSetObserver, viewController.getVideoSetObserver());
-	}
-
-	@Test
-	public void testDisposeRemovesVideoSetObserverFromVideoMatriarch() throws Exception {
-		final MockVideoMatriarch videoMatriarch = new MockVideoMatriarch();
-		final MainWindowViewController viewController = new MainWindowViewController(
-				new MockExtendableFrame(), videoMatriarch);
-
-		assertEquals(1, videoMatriarch.getNumberOfObservers());
-		assertSame(viewController.getVideoSetObserver(), videoMatriarch.getObserverToAdd());
-
-		viewController.dispose();
-
-		assertEquals(0, videoMatriarch.getNumberOfObservers());
-		assertSame(viewController.getVideoSetObserver(), videoMatriarch.getObserverToRemove());
 	}
 
 }
