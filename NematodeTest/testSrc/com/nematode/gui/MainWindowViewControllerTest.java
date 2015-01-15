@@ -1,12 +1,10 @@
 package com.nematode.gui;
 
 import java.awt.event.WindowListener;
-import java.util.ArrayList;
 
 import org.bytedeco.javacpp.Loader;
 import org.junit.Test;
 
-import com.nematode.image.processing.ImageResizer;
 import com.nematode.model.MockVideoMatriarch;
 import com.nematode.model.VideoSetObserver;
 import com.nematode.unittesting.AssertTestCase;
@@ -68,49 +66,6 @@ public class MainWindowViewControllerTest extends AssertTestCase {
 	}
 
 	@Test
-	public void testGetPanelViewControllers() throws Exception {
-		final MainWindowViewController viewController = new MainWindowViewController(
-				new MockExtendableFrame(), new MockVideoMatriarch());
-
-		assertIsOfTypeAndGet(ProjectPanelViewController.class,
-				viewController.getProjectPanelViewController());
-
-		assertIsOfTypeAndGet(TrackingPanelViewController.class,
-				viewController.getTrackingPanelViewController());
-
-		assertIsOfTypeAndGet(VideoPanelViewController.class,
-				viewController.getVideoPanelViewController());
-
-		assertIsOfTypeAndGet(ToolbarPanelViewController.class,
-				viewController.getToolbarPanelViewController());
-
-		assertIsOfTypeAndGet(StatusPanelViewController.class,
-				viewController.getStatusPanelViewController());
-	}
-
-	@Test
-	public void testVideoPanelViewControllerHasCorrectArguments_ImageResizer() throws Exception {
-		final MainWindowViewController viewController = new MainWindowViewController(
-				new MockExtendableFrame(), new MockVideoMatriarch());
-
-		final VideoPanelViewController videoViewController = assertIsOfTypeAndGet(
-				VideoPanelViewController.class, viewController.getVideoPanelViewController());
-
-		assertIsOfTypeAndGet(ImageResizer.class, videoViewController.getImageResizer());
-	}
-
-	@Test
-	public void testProjectPanelViewControllerHasCorrectArguments_VideoMatriarch() throws Exception {
-		final MainWindowViewController viewController = new MainWindowViewController(
-				new MockExtendableFrame(), new MockVideoMatriarch());
-
-		final ProjectPanelViewController projectViewController = assertIsOfTypeAndGet(
-				ProjectPanelViewController.class, viewController.getProjectPanelViewController());
-
-		assertSame(viewController.getVideoMatriarch(), projectViewController.getVideoMatriarch());
-	}
-
-	@Test
 	public void testVideoSetObserverIsAddedToVideoMatriarch() throws Exception {
 		final MockVideoMatriarch videoMatriarch = new MockVideoMatriarch();
 		final MainWindowViewController viewController = new MainWindowViewController(
@@ -138,38 +93,4 @@ public class MainWindowViewControllerTest extends AssertTestCase {
 		assertSame(viewController.getVideoSetObserver(), videoMatriarch.getObserverToRemove());
 	}
 
-	@Test
-	public void testPlayButtonObserverIsAddedToToolbarPanelViewController() throws Exception {
-		final MainWindowViewController viewController = new MainWindowViewController(
-				new MockExtendableFrame(), new MockVideoMatriarch());
-
-		final ToolbarPanelViewController toolbarPanelViewController = assertIsOfTypeAndGet(
-				ToolbarPanelViewController.class, viewController.getToolbarPanelViewController());
-
-		final ArrayList<ToolbarObserverInterface> observerList = toolbarPanelViewController
-				.getObserverList();
-		assertEquals(1, observerList.size());
-
-		final PlayButtonObserver playButtonObserver = assertIsOfTypeAndGet(
-				PlayButtonObserver.class, observerList.get(0));
-		assertSame(viewController.getPlayButtonObserver(), playButtonObserver);
-	}
-
-	@Test
-	public void testDisposeRemovedPlayButtonObserverFromToolbarPanelViewController()
-			throws Exception {
-		final MainWindowViewController viewController = new MainWindowViewController(
-				new MockExtendableFrame(), new MockVideoMatriarch());
-
-		final ToolbarPanelViewController toolbarPanelViewController = assertIsOfTypeAndGet(
-				ToolbarPanelViewController.class, viewController.getToolbarPanelViewController());
-
-		final ArrayList<ToolbarObserverInterface> observerList = toolbarPanelViewController
-				.getObserverList();
-		assertEquals(1, observerList.size());
-
-		viewController.dispose();
-
-		assertEquals(0, observerList.size());
-	}
 }
