@@ -43,6 +43,17 @@ public class MainWindowViewControllerTest extends AssertTestCase {
 	}
 
 	@Test
+	public void testShowViewSetsTheVisabilityOfMainWindowToTrue() throws Exception {
+		final MockExtendableFrame mainWindow = new MockExtendableFrame();
+		final MainWindowViewController mainWindowViewController = new MainWindowViewController(
+				mainWindow, new MockVideoMatriarch());
+
+		assertFalse(mainWindow.isVisible());
+		mainWindowViewController.showView();
+		assertTrue(mainWindow.isVisible());
+	}
+
+	@Test
 	public void testConstructionAddsCorrectWindowListenerToMainWindow() throws Exception {
 		final MockExtendableFrame mainWindow = new MockExtendableFrame();
 		final MainWindowViewController mainWindowViewController = new MainWindowViewController(

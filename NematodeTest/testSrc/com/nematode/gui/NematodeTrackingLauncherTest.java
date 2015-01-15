@@ -16,16 +16,13 @@ public class NematodeTrackingLauncherTest extends AssertTestCase {
 	}
 
 	@Test
-	public void testLaunchApplicationSetsFrameVisable() throws Exception {
+	public void testLaunchApplicationCallsShowViewOnViewController() throws Exception {
 		final MockMainWindowViewController mockMainWindowViewController = new MockMainWindowViewController();
 		final NematodeTrackingLauncher nematodeTrackingLauncher = new NematodeTrackingLauncher(
 				mockMainWindowViewController);
 
-		final MockExtendableFrame mainWindow = new MockExtendableFrame();
-		mockMainWindowViewController.setMainWindowToReturn(mainWindow);
-
-		assertFalse(mainWindow.isVisible());
+		assertFalse(mockMainWindowViewController.wasShowViewCalled());
 		nematodeTrackingLauncher.launchApplication();
-		assertTrue(mainWindow.isVisible());
+		assertTrue(mockMainWindowViewController.wasShowViewCalled());
 	}
 }

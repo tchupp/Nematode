@@ -38,8 +38,8 @@ public class MainWindowViewController implements MainWindowControllerInterface {
 	}
 
 	@Override
-	public ExtendableJFrame getMainWindow() {
-		return this.mainWindow;
+	public void showView() {
+		this.mainWindow.setVisible(true);
 	}
 
 	@Override
@@ -78,5 +78,9 @@ public class MainWindowViewController implements MainWindowControllerInterface {
 
 	public ToolbarObserverInterface getPlayButtonObserver() {
 		return this.playButtonObserver;
+	}
+
+	public ExtendableJFrame getMainWindow() {
+		return this.mainWindow;
 	}
 }

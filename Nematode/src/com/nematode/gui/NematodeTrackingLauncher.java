@@ -11,8 +11,7 @@ public class NematodeTrackingLauncher {
 	}
 
 	public void launchApplication() {
-		final ExtendableJFrame mainWindow = this.mainWindowViewController.getMainWindow();
-		mainWindow.setVisible(true);
+		this.mainWindowViewController.showView();
 	}
 
 	public MainWindowControllerInterface getMainWindowViewController() {
