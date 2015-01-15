@@ -1,7 +1,6 @@
 package com.nematode.gui;
 
 import com.nematode.image.processing.ImageResizer;
-import com.nematode.model.VideoMatriarch;
 import com.nematode.model.VideoMatriarchInterface;
 import com.nematode.model.VideoObserverInterface;
 import com.nematode.model.VideoSetObserver;
@@ -18,11 +17,12 @@ public class MainWindowViewController implements MainWindowControllerInterface {
 	private final VideoObserverInterface videoSetObserver;
 	private final ToolbarObserverInterface playButtonObserver;
 
-	public MainWindowViewController() {
-		this.mainWindow = new MainWindow();
+	public MainWindowViewController(final ExtendableJFrame mainWindow,
+			final VideoMatriarchInterface videoMatriarch) {
+		this.mainWindow = mainWindow;
 		this.mainWindow.addWindowListener(new MainWindowCloseListener(this));
 
-		this.videoMatriarch = new VideoMatriarch();
+		this.videoMatriarch = videoMatriarch;
 
 		this.projectPanelViewController = new ProjectPanelViewController(this.videoMatriarch);
 		this.videoPanelViewController = new VideoPanelViewController(new ImageResizer());

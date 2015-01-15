@@ -2,18 +2,21 @@ package com.nematode.gui;
 
 import java.awt.event.WindowListener;
 import java.util.ArrayList;
-import java.util.List;
 
+import org.bytedeco.javacpp.Loader;
 import org.junit.Test;
 
 import com.nematode.image.processing.ImageResizer;
-import com.nematode.model.NullVideo;
-import com.nematode.model.VideoMatriarch;
-import com.nematode.model.VideoObserverInterface;
+import com.nematode.model.MockVideoMatriarch;
 import com.nematode.model.VideoSetObserver;
 import com.nematode.unittesting.AssertTestCase;
 
 public class MainWindowViewControllerTest extends AssertTestCase {
+
+	@Override
+	protected void setUp() throws Exception {
+		Loader.load(org.bytedeco.javacpp.opencv_core.class);
+	}
 
 	@Test
 	public void testImplementsInterface() throws Exception {
@@ -22,11 +25,29 @@ public class MainWindowViewControllerTest extends AssertTestCase {
 	}
 
 	@Test
-	public void testConstructionAddsCorrectWindowListenerToMainWindow() throws Exception {
-		final MainWindowViewController mainWindowViewController = new MainWindowViewController();
+	public void testGetsMainWindowPassedIn() throws Exception {
+		final MockExtendableFrame mockExtendableFrame = new MockExtendableFrame();
+		final MainWindowViewController mainWindowViewController = new MainWindowViewController(
+				mockExtendableFrame, new MockVideoMatriarch());
 
-		final MainWindow mainWindow = assertIsOfTypeAndGet(MainWindow.class,
-				mainWindowViewController.getMainWindow());
+		assertSame(mockExtendableFrame, mainWindowViewController.getMainWindow());
+	}
+
+	@Test
+	public void testGetsVideoMatriarchPassedIn() throws Exception {
+		final MockVideoMatriarch mockVideoMatriarch = new MockVideoMatriarch();
+		final MainWindowViewController mainWindowViewController = new MainWindowViewController(
+				new MockExtendableFrame(), mockVideoMatriarch);
+
+		assertSame(mockVideoMatriarch, mainWindowViewController.getVideoMatriarch());
+	}
+
+	@Test
+	public void testConstructionAddsCorrectWindowListenerToMainWindow() throws Exception {
+		final MockExtendableFrame mainWindow = new MockExtendableFrame();
+		final MainWindowViewController mainWindowViewController = new MainWindowViewController(
+				mainWindow, new MockVideoMatriarch());
+
 		final WindowListener[] windowListeners = mainWindow.getWindowListeners();
 		assertEquals(1, windowListeners.length);
 
@@ -36,23 +57,9 @@ public class MainWindowViewControllerTest extends AssertTestCase {
 	}
 
 	@Test
-	public void testGetsVideoMatriarch_WithNullVideoJustAfterConstruction() throws Exception {
-		final MainWindowViewController viewController = new MainWindowViewController();
-		final VideoMatriarch videoMatriarch = assertIsOfTypeAndGet(VideoMatriarch.class,
-				viewController.getVideoMatriarch());
-
-		assertIsOfTypeAndGet(NullVideo.class, videoMatriarch.getVideo());
-	}
-
-	@Test
-	public void testGetsMainWindow() throws Exception {
-		final MainWindowViewController mainWindowViewController = new MainWindowViewController();
-		assertIsOfTypeAndGet(MainWindow.class, mainWindowViewController.getMainWindow());
-	}
-
-	@Test
 	public void testGetPanelViewControllers() throws Exception {
-		final MainWindowViewController viewController = new MainWindowViewController();
+		final MainWindowViewController viewController = new MainWindowViewController(
+				new MockExtendableFrame(), new MockVideoMatriarch());
 
 		assertIsOfTypeAndGet(ProjectPanelViewController.class,
 				viewController.getProjectPanelViewController());
@@ -72,7 +79,8 @@ public class MainWindowViewControllerTest extends AssertTestCase {
 
 	@Test
 	public void testVideoPanelViewControllerHasCorrectArguments_ImageResizer() throws Exception {
-		final MainWindowViewController viewController = new MainWindowViewController();
+		final MainWindowViewController viewController = new MainWindowViewController(
+				new MockExtendableFrame(), new MockVideoMatriarch());
 
 		final VideoPanelViewController videoViewController = assertIsOfTypeAndGet(
 				VideoPanelViewController.class, viewController.getVideoPanelViewController());
@@ -82,7 +90,8 @@ public class MainWindowViewControllerTest extends AssertTestCase {
 
 	@Test
 	public void testProjectPanelViewControllerHasCorrectArguments_VideoMatriarch() throws Exception {
-		final MainWindowViewController viewController = new MainWindowViewController();
+		final MainWindowViewController viewController = new MainWindowViewController(
+				new MockExtendableFrame(), new MockVideoMatriarch());
 
 		final ProjectPanelViewController projectViewController = assertIsOfTypeAndGet(
 				ProjectPanelViewController.class, viewController.getProjectPanelViewController());
@@ -92,40 +101,36 @@ public class MainWindowViewControllerTest extends AssertTestCase {
 
 	@Test
 	public void testVideoSetObserverIsAddedToVideoMatriarch() throws Exception {
-		final MainWindowViewController viewController = new MainWindowViewController();
+		final MockVideoMatriarch videoMatriarch = new MockVideoMatriarch();
+		final MainWindowViewController viewController = new MainWindowViewController(
+				new MockExtendableFrame(), videoMatriarch);
 
-		final VideoMatriarch videoMatriarch = assertIsOfTypeAndGet(VideoMatriarch.class,
-				viewController.getVideoMatriarch());
-		final List<VideoObserverInterface> observerList = videoMatriarch.getObserverList();
-		assertEquals(1, observerList.size());
+		assertEquals(1, videoMatriarch.getNumberOfObservers());
 
 		final VideoSetObserver videoSetObserver = assertIsOfTypeAndGet(VideoSetObserver.class,
-				observerList.get(0));
-		assertSame(viewController.getVideoSetObserver(), videoSetObserver);
-
-		final VideoPanelViewControllerInterface actualVideoViewController = videoSetObserver
-				.getVideoPanelViewController();
-		assertSame(viewController.getVideoPanelViewController(), actualVideoViewController);
+				videoMatriarch.getObserverToAdd());
+		assertSame(videoSetObserver, viewController.getVideoSetObserver());
 	}
 
 	@Test
 	public void testDisposeRemovesVideoSetObserverFromVideoMatriarch() throws Exception {
-		final MainWindowViewController viewController = new MainWindowViewController();
+		final MockVideoMatriarch videoMatriarch = new MockVideoMatriarch();
+		final MainWindowViewController viewController = new MainWindowViewController(
+				new MockExtendableFrame(), videoMatriarch);
 
-		final VideoMatriarch videoMatriarch = assertIsOfTypeAndGet(VideoMatriarch.class,
-				viewController.getVideoMatriarch());
-
-		final List<VideoObserverInterface> observerList = videoMatriarch.getObserverList();
-		assertEquals(1, observerList.size());
+		assertEquals(1, videoMatriarch.getNumberOfObservers());
+		assertSame(viewController.getVideoSetObserver(), videoMatriarch.getObserverToAdd());
 
 		viewController.dispose();
 
-		assertEquals(0, observerList.size());
+		assertEquals(0, videoMatriarch.getNumberOfObservers());
+		assertSame(viewController.getVideoSetObserver(), videoMatriarch.getObserverToRemove());
 	}
 
 	@Test
 	public void testPlayButtonObserverIsAddedToToolbarPanelViewController() throws Exception {
-		final MainWindowViewController viewController = new MainWindowViewController();
+		final MainWindowViewController viewController = new MainWindowViewController(
+				new MockExtendableFrame(), new MockVideoMatriarch());
 
 		final ToolbarPanelViewController toolbarPanelViewController = assertIsOfTypeAndGet(
 				ToolbarPanelViewController.class, viewController.getToolbarPanelViewController());
@@ -142,7 +147,8 @@ public class MainWindowViewControllerTest extends AssertTestCase {
 	@Test
 	public void testDisposeRemovedPlayButtonObserverFromToolbarPanelViewController()
 			throws Exception {
-		final MainWindowViewController viewController = new MainWindowViewController();
+		final MainWindowViewController viewController = new MainWindowViewController(
+				new MockExtendableFrame(), new MockVideoMatriarch());
 
 		final ToolbarPanelViewController toolbarPanelViewController = assertIsOfTypeAndGet(
 				ToolbarPanelViewController.class, viewController.getToolbarPanelViewController());

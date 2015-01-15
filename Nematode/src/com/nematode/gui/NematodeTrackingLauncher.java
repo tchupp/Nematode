@@ -1,5 +1,7 @@
 package com.nematode.gui;
 
+import com.nematode.model.VideoMatriarch;
+
 public class NematodeTrackingLauncher {
 
 	private final MainWindowControllerInterface mainWindowViewController;
@@ -18,7 +20,11 @@ public class NematodeTrackingLauncher {
 	}
 
 	public static void main(final String[] args) {
-		final MainWindowViewController mainWindowViewController = new MainWindowViewController();
+		final MainWindow mainWindow = new MainWindow();
+		final VideoMatriarch videoMatriarch = new VideoMatriarch();
+		final MainWindowViewController mainWindowViewController = new MainWindowViewController(
+				mainWindow, videoMatriarch);
+
 		final NematodeTrackingLauncher nematodeTrackingLauncher = new NematodeTrackingLauncher(
 				mainWindowViewController);
 

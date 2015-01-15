@@ -22,12 +22,10 @@ public class NematodeTrackingLauncherTest extends AssertTestCase {
 				mockMainWindowViewController);
 
 		final MockExtendableFrame mainWindow = new MockExtendableFrame();
-		mockMainWindowViewController.setMockNematodeFrame(mainWindow);
+		mockMainWindowViewController.setMainWindowToReturn(mainWindow);
 
 		assertFalse(mainWindow.isVisible());
-
 		nematodeTrackingLauncher.launchApplication();
-
 		assertTrue(mainWindow.isVisible());
 	}
 }
