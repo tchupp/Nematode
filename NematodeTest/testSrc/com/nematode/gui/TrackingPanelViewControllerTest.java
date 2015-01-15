@@ -4,7 +4,6 @@ import javax.swing.JButton;
 
 import org.junit.Test;
 
-import com.nematode.image.MockVideoFrameHandler;
 import com.nematode.unittesting.AssertTestCase;
 
 public class TrackingPanelViewControllerTest extends AssertTestCase {
@@ -35,32 +34,5 @@ public class TrackingPanelViewControllerTest extends AssertTestCase {
 		final TrackingPanelViewControllerInterface actualViewController = buttonActionListener
 				.getPanelViewController();
 		assertSame(viewController, actualViewController);
-	}
-
-	@Test
-	public void testUpdateImageCallsScan_AndUpdateDisplayImage_OnFrameHandler() throws Exception {
-
-		final MockVideoFrameHandler mockHandler = new MockVideoFrameHandler() {
-			@Override
-			public void scanImage() {
-				assertFalse(wasBuildVideoFrameCalled());
-				super.scanImage();
-			}
-
-			@Override
-			public void updateDisplayImageFromScannedObjects() {
-				assertTrue(wasScanImageCalled());
-				super.updateDisplayImageFromScannedObjects();
-			};
-		};
-
-		final TrackingPanelViewController viewController = new TrackingPanelViewController();
-
-		assertFalse(mockHandler.wasScanImageCalled());
-		assertFalse(mockHandler.wasUpdateDisplayImageFromScannedImageCalled());
-		viewController.updateImage();
-		assertFalse(mockHandler.wasScanImageCalled());
-		assertFalse(mockHandler.wasUpdateDisplayImageFromScannedImageCalled());
-
 	}
 }

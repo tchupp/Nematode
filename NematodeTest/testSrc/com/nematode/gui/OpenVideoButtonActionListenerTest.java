@@ -5,6 +5,7 @@ import java.io.File;
 
 import javax.swing.JFileChooser;
 
+import org.bytedeco.javacpp.Loader;
 import org.junit.Test;
 
 import com.nematode.fileIO.MockFileChooser;
@@ -14,6 +15,11 @@ import com.nematode.model.NullVideo;
 import com.nematode.unittesting.AssertTestCase;
 
 public class OpenVideoButtonActionListenerTest extends AssertTestCase {
+
+	@Override
+	protected void setUp() throws Exception {
+		Loader.load(org.bytedeco.javacpp.opencv_core.class);
+	}
 
 	@Test
 	public void testExtendsActionListener() throws Exception {

@@ -13,13 +13,6 @@ public class BeginScanButtonActionListener implements ActionListener {
 
 	@Override
 	public void actionPerformed(final ActionEvent arg0) {
-		final Thread thread = new Thread() {
-			@Override
-			public void run() {
-			}
-		};
-
-		thread.start();
 	}
 
 	public TrackingPanelViewControllerInterface getPanelViewController() {

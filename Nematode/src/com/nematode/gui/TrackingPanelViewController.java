@@ -23,9 +23,4 @@ public class TrackingPanelViewController implements TrackingPanelViewControllerI
 	public ExtendableJPanel getTrackingPanel() {
 		return this.trackingPanel;
 	}
-
-	@Override
-	public void updateImage() {
-	}
-
 }
