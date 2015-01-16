@@ -107,7 +107,12 @@ public class MainWindow extends ExtendableJFrame {
 		trackingPanelConstraints.weighty = 0.5;
 		trackingPanelConstraints.fill = GridBagConstraints.BOTH;
 
-		final ExtendableJPanel trackingPanel = new TrackingPanel();
+		final ExtendableJPanel trackingPanel = new ExtendableJPanel();
+		trackingPanel.setName("trackingPanel");
+		trackingPanel.setLayout(new GridBagLayout());
+		trackingPanel.setBackground(GuiConstants.backgroundColor);
+		addCompoundBorder(trackingPanel);
+
 		controlPanel.add(trackingPanel, trackingPanelConstraints);
 	}
 

@@ -39,14 +39,11 @@ public class MainWindowTest extends AssertTestCase {
 
 	@Test
 	public void testExtendsJFrame() throws Exception {
-		final MainWindow mainWindow = new MainWindow();
-		assertExtends(ExtendableJFrame.class, mainWindow.getClass());
-
-		mainWindow.dispose();
+		assertExtends(ExtendableJFrame.class, MainWindow.class);
 	}
 
 	@Test
-	public void testConstructorSetsUpPanelCorrectly() throws Exception {
+	public void testConstructorSetsUpFrameCorrectly() throws Exception {
 		final MainWindow mainWindow = new MainWindow();
 
 		assertEquals(JFrame.DISPOSE_ON_CLOSE, mainWindow.getDefaultCloseOperation());
@@ -57,8 +54,6 @@ public class MainWindowTest extends AssertTestCase {
 
 		final Container contentPane = mainWindow.getContentPane();
 		assertIsOfTypeAndGet(GridBagLayout.class, contentPane.getLayout());
-
-		mainWindow.dispose();
 	}
 
 	@Test
@@ -158,6 +153,28 @@ public class MainWindowTest extends AssertTestCase {
 	}
 
 	@Test
+	public void testTrackingPanelIsCorrectlySetUp() throws Exception {
+		final MainWindow mainWindow = new MainWindow();
+
+		final Container contentPane = mainWindow.getContentPane();
+
+		final ExtendableJPanel controlPanel = assertIsOfTypeAndGet(ExtendableJPanel.class,
+				contentPane.getComponent(0));
+
+		final ExtendableJPanel trackingPanel = assertIsOfTypeAndGet(ExtendableJPanel.class,
+				controlPanel.getComponent(1));
+
+		assertEquals("trackingPanel", trackingPanel.getName());
+
+		assertEquals(GuiConstants.backgroundColor, trackingPanel.getBackground());
+		assertEquals(0, trackingPanel.getComponentCount());
+		assertTrue(trackingPanel.isOpaque());
+
+		assertIsOfTypeAndGet(CompoundBorder.class, trackingPanel.getBorder());
+		assertIsOfTypeAndGet(GridBagLayout.class, trackingPanel.getLayout());
+	}
+
+	@Test
 	public void testTrackingPanelIsCorrectlyAddedToControlPanel() throws Exception {
 		final MainWindow mainWindow = new MainWindow();
 
@@ -168,7 +185,7 @@ public class MainWindowTest extends AssertTestCase {
 		final GridBagLayout controlPanelLayout = assertIsOfTypeAndGet(GridBagLayout.class,
 				controlPanel.getLayout());
 
-		final TrackingPanel trackingPanel = assertIsOfTypeAndGet(TrackingPanel.class,
+		final ExtendableJPanel trackingPanel = assertIsOfTypeAndGet(ExtendableJPanel.class,
 				controlPanel.getComponent(1));
 
 		final GridBagConstraints trackingPanelConstraints = controlPanelLayout
