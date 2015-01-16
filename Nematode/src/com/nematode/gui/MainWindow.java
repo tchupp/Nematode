@@ -1,23 +1,38 @@
 package com.nematode.gui;
 
 import java.awt.Container;
+import java.awt.Dimension;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
+import java.awt.Insets;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 
 import javax.imageio.ImageIO;
+import javax.swing.BorderFactory;
+import javax.swing.ImageIcon;
+import javax.swing.JButton;
+import javax.swing.JLabel;
+import javax.swing.border.Border;
+import javax.swing.border.CompoundBorder;
 
 import com.nematode.image.NullBufferedImage;
 
 public class MainWindow extends ExtendableJFrame {
 
 	private static final long serialVersionUID = 1L;
+	private JButton playButton;
+	private JButton pauseButton;
+	private JLabel videoLabel;
 
 	public MainWindow() {
 		this.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
 		this.setSize(GuiConstants.VIDEO_FRAME_WIDTH, GuiConstants.VIDEO_FRAME_HEIGHT);
+
+		setupPlayButton();
+		setupPauseButton();
+		setupVideoLabel();
 
 		addContentPane();
 		addPanelsToContentPane();
@@ -105,7 +120,17 @@ public class MainWindow extends ExtendableJFrame {
 		videoPanelConstraints.weighty = 0.1;
 		videoPanelConstraints.fill = GridBagConstraints.BOTH;
 
-		final ExtendableJPanel videoPanel = new VideoPanel();
+		final ExtendableJPanel videoPanel = new ExtendableJPanel();
+		videoPanel.setName("videoPanel");
+		videoPanel.setLayout(new GridBagLayout());
+		videoPanel.setBackground(GuiConstants.backgroundColor);
+		addCompoundBorder(videoPanel);
+
+		final GridBagConstraints videoLabelConstraints = new GridBagConstraints();
+		videoLabelConstraints.anchor = GridBagConstraints.CENTER;
+		videoLabelConstraints.insets = new Insets(1, 1, 1, 1);
+		videoPanel.add(this.videoLabel, videoLabelConstraints);
+
 		scanningPanel.add(videoPanel, videoPanelConstraints);
 	}
 
@@ -118,7 +143,28 @@ public class MainWindow extends ExtendableJFrame {
 		toolbarPanelConstraints.anchor = GridBagConstraints.PAGE_START;
 		toolbarPanelConstraints.fill = GridBagConstraints.BOTH;
 
-		final ExtendableJPanel toolbarPanel = new ToolbarPanel();
+		final ExtendableJPanel toolbarPanel = new ExtendableJPanel();
+		toolbarPanel.setName("toolbarPanel");
+		toolbarPanel.setLayout(new GridBagLayout());
+		toolbarPanel.setBackground(GuiConstants.backgroundColor);
+		addCompoundBorder(toolbarPanel);
+
+		final GridBagConstraints playButtonConstraints = new GridBagConstraints();
+		playButtonConstraints.gridx = 0;
+		playButtonConstraints.gridy = 0;
+		playButtonConstraints.weightx = 0.0;
+		playButtonConstraints.anchor = GridBagConstraints.WEST;
+		playButtonConstraints.insets = new Insets(5, 5, 5, 5);
+		toolbarPanel.add(this.playButton, playButtonConstraints);
+
+		final GridBagConstraints pauseButtonConstraints = new GridBagConstraints();
+		pauseButtonConstraints.gridx = 1;
+		pauseButtonConstraints.gridy = 0;
+		pauseButtonConstraints.weightx = 1.0;
+		pauseButtonConstraints.anchor = GridBagConstraints.WEST;
+		pauseButtonConstraints.insets = new Insets(5, 5, 5, 5);
+		toolbarPanel.add(this.pauseButton, pauseButtonConstraints);
+
 		scanningPanel.add(toolbarPanel, toolbarPanelConstraints);
 	}
 
@@ -131,7 +177,60 @@ public class MainWindow extends ExtendableJFrame {
 		statusPanelConstraints.anchor = GridBagConstraints.PAGE_END;
 		statusPanelConstraints.fill = GridBagConstraints.BOTH;
 
-		final ExtendableJPanel statusPanel = new StatusPanel();
+		final ExtendableJPanel statusPanel = new ExtendableJPanel();
+		statusPanel.setName("statusPanel");
+		statusPanel.setBackground(GuiConstants.backgroundColor);
+		addCompoundBorder(statusPanel);
+
 		scanningPanel.add(statusPanel, statusPanelConstraints);
+	}
+
+	private void addCompoundBorder(final ExtendableJPanel panel) {
+		final Border raisedBevelBorder = BorderFactory.createRaisedBevelBorder();
+		final Border loweredBevelBorder = BorderFactory.createLoweredBevelBorder();
+		final CompoundBorder compoundBorder = BorderFactory.createCompoundBorder(raisedBevelBorder,
+				loweredBevelBorder);
+
+		panel.setBorder(compoundBorder);
+	}
+
+	private void setupPlayButton() {
+		this.playButton = new JButton();
+		this.playButton.setName("playButton");
+		this.playButton.setPreferredSize(new Dimension(20, 20));
+
+		final ImageIcon playButtonImageIcon = new ImageIcon(GuiConstants.PLAY_BUTTON_IMAGE_PATH);
+		this.playButton.setIcon(playButtonImageIcon);
+	}
+
+	private void setupPauseButton() {
+		this.pauseButton = new JButton();
+		this.pauseButton.setName("pauseButton");
+		this.pauseButton.setPreferredSize(new Dimension(20, 20));
+
+		final ImageIcon pauseButtonImageIcon = new ImageIcon(GuiConstants.PAUSE_BUTTON_IMAGE_PATH);
+		this.pauseButton.setIcon(pauseButtonImageIcon);
+	}
+
+	private void setupVideoLabel() {
+		final ImageIcon defaultImageIcon = new ImageIcon(new BufferedImage(
+				GuiConstants.DISPLAY_WIDTH, GuiConstants.DISPLAY_HEIGHT,
+				BufferedImage.TYPE_INT_ARGB));
+
+		this.videoLabel = new JLabel(defaultImageIcon);
+		this.videoLabel.setName("videoLabel");
+		this.videoLabel.setSize(GuiConstants.DISPLAY_WIDTH, GuiConstants.DISPLAY_HEIGHT);
+	}
+
+	public JButton getPlayButton() {
+		return this.playButton;
+	}
+
+	public JButton getPauseButton() {
+		return this.pauseButton;
+	}
+
+	public JLabel getVideoLabel() {
+		return this.videoLabel;
 	}
 }
