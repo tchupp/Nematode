@@ -25,6 +25,7 @@ public class MainWindow extends ExtendableJFrame {
 	private JButton playButton;
 	private JButton pauseButton;
 	private JLabel videoLabel;
+	private JButton openVideoButton;
 
 	public MainWindow() {
 		this.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
@@ -33,6 +34,7 @@ public class MainWindow extends ExtendableJFrame {
 		setupPlayButton();
 		setupPauseButton();
 		setupVideoLabel();
+		setupOpenVideoButton();
 
 		addContentPane();
 		addPanelsToContentPane();
@@ -96,7 +98,21 @@ public class MainWindow extends ExtendableJFrame {
 		projectPanelConstraints.weighty = 0.5;
 		projectPanelConstraints.fill = GridBagConstraints.BOTH;
 
-		final ExtendableJPanel projectPanel = new ProjectPanel();
+		final ExtendableJPanel projectPanel = new ExtendableJPanel();
+		projectPanel.setName("projectPanel");
+		projectPanel.setLayout(new GridBagLayout());
+		projectPanel.setBackground(GuiConstants.backgroundColor);
+		addCompoundBorder(projectPanel);
+
+		final GridBagConstraints openVideoButtonConstraints = new GridBagConstraints();
+		openVideoButtonConstraints.gridx = 0;
+		openVideoButtonConstraints.gridy = 0;
+		openVideoButtonConstraints.weighty = 1.0;
+		openVideoButtonConstraints.fill = GridBagConstraints.HORIZONTAL;
+		openVideoButtonConstraints.anchor = GridBagConstraints.NORTH;
+		openVideoButtonConstraints.insets = new Insets(5, 5, 5, 5);
+		projectPanel.add(this.openVideoButton, openVideoButtonConstraints);
+
 		controlPanel.add(projectPanel, projectPanelConstraints);
 	}
 
@@ -227,6 +243,12 @@ public class MainWindow extends ExtendableJFrame {
 		this.videoLabel.setSize(GuiConstants.DISPLAY_WIDTH, GuiConstants.DISPLAY_HEIGHT);
 	}
 
+	private void setupOpenVideoButton() {
+		this.openVideoButton = new JButton();
+		this.openVideoButton.setName("openVideoButton");
+		this.openVideoButton.setText("Open Video");
+	}
+
 	public JButton getPlayButton() {
 		return this.playButton;
 	}
@@ -237,5 +259,9 @@ public class MainWindow extends ExtendableJFrame {
 
 	public JLabel getVideoLabel() {
 		return this.videoLabel;
+	}
+
+	public JButton getOpenVideoButton() {
+		return this.openVideoButton;
 	}
 }

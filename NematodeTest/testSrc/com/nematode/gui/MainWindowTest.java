@@ -130,6 +130,60 @@ public class MainWindowTest extends AssertTestCase {
 	}
 
 	@Test
+	public void testProjectPanelIsCorrectlySetUp() throws Exception {
+		final MainWindow mainWindow = new MainWindow();
+
+		final Container contentPane = mainWindow.getContentPane();
+
+		final ExtendableJPanel controlPanel = assertIsOfTypeAndGet(ExtendableJPanel.class,
+				contentPane.getComponent(0));
+
+		final ExtendableJPanel projectPanel = assertIsOfTypeAndGet(ExtendableJPanel.class,
+				controlPanel.getComponent(0));
+
+		assertEquals("projectPanel", projectPanel.getName());
+
+		assertEquals(GuiConstants.backgroundColor, projectPanel.getBackground());
+		assertEquals(1, projectPanel.getComponentCount());
+		assertTrue(projectPanel.isOpaque());
+
+		assertIsOfTypeAndGet(CompoundBorder.class, projectPanel.getBorder());
+		assertIsOfTypeAndGet(GridBagLayout.class, projectPanel.getLayout());
+	}
+
+	@Test
+	public void testOpenVideoButtonIsCorrectlyAddedToProjectPanel() throws Exception {
+		final MainWindow mainWindow = new MainWindow();
+
+		final Container contentPane = mainWindow.getContentPane();
+
+		final ExtendableJPanel controlPanel = assertIsOfTypeAndGet(ExtendableJPanel.class,
+				contentPane.getComponent(0));
+
+		final ExtendableJPanel projectPanel = assertIsOfTypeAndGet(ExtendableJPanel.class,
+				controlPanel.getComponent(0));
+
+		final GridBagLayout projectPanelLayout = assertIsOfTypeAndGet(GridBagLayout.class,
+				projectPanel.getLayout());
+
+		final JButton openVideoButton = assertIsOfTypeAndGet(JButton.class,
+				projectPanel.getComponent(0));
+		assertSame(mainWindow.getOpenVideoButton(), openVideoButton);
+		assertEquals("openVideoButton", openVideoButton.getName());
+		assertEquals("Open Video", openVideoButton.getText());
+
+		final GridBagConstraints openVideoButtonConstraints = projectPanelLayout
+				.getConstraints(openVideoButton);
+
+		assertEquals(0, openVideoButtonConstraints.gridx);
+		assertEquals(0, openVideoButtonConstraints.gridy);
+		assertEquals(1.0, openVideoButtonConstraints.weighty);
+		assertEquals(GridBagConstraints.NORTH, openVideoButtonConstraints.anchor);
+		assertEquals(GridBagConstraints.HORIZONTAL, openVideoButtonConstraints.fill);
+		assertEquals(new Insets(5, 5, 5, 5), openVideoButtonConstraints.insets);
+	}
+
+	@Test
 	public void testProjectPanelIsCorrectlyAddedToControlPanel() throws Exception {
 		final MainWindow mainWindow = new MainWindow();
 
@@ -140,7 +194,7 @@ public class MainWindowTest extends AssertTestCase {
 		final GridBagLayout controlPanelLayout = assertIsOfTypeAndGet(GridBagLayout.class,
 				controlPanel.getLayout());
 
-		final ProjectPanel projectPanel = assertIsOfTypeAndGet(ProjectPanel.class,
+		final ExtendableJPanel projectPanel = assertIsOfTypeAndGet(ExtendableJPanel.class,
 				controlPanel.getComponent(0));
 
 		final GridBagConstraints projectPanelConstraints = controlPanelLayout
