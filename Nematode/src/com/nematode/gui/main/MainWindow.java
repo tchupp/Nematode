@@ -1,4 +1,4 @@
-package com.nematode.gui;
+package com.nematode.gui.main;
 
 import java.awt.Container;
 import java.awt.Dimension;
@@ -17,6 +17,10 @@ import javax.swing.JLabel;
 import javax.swing.border.Border;
 import javax.swing.border.CompoundBorder;
 
+import com.nematode.gui.ExtendableJFrame;
+import com.nematode.gui.ExtendableJPanel;
+import com.nematode.gui.GuiConstants;
+import com.nematode.gui.ImagePanel;
 import com.nematode.image.NullBufferedImage;
 
 public class MainWindow extends ExtendableJFrame {

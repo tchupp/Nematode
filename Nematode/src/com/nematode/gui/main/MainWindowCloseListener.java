@@ -1,7 +1,9 @@
-package com.nematode.gui;
+package com.nematode.gui.main;
 
 import java.awt.event.WindowEvent;
 import java.awt.event.WindowListener;
+
+import com.nematode.gui.MainWindowControllerInterface;
 
 public class MainWindowCloseListener implements WindowListener {
 

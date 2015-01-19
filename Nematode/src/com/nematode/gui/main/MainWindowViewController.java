@@ -1,5 +1,7 @@
-package com.nematode.gui;
+package com.nematode.gui.main;
 
+import com.nematode.gui.ExtendableJFrame;
+import com.nematode.gui.MainWindowControllerInterface;
 import com.nematode.model.VideoMatriarchInterface;
 
 public class MainWindowViewController implements MainWindowControllerInterface {

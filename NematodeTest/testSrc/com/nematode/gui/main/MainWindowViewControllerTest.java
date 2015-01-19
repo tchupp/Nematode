@@ -1,10 +1,14 @@
-package com.nematode.gui;
+package com.nematode.gui.main;
 
 import java.awt.event.WindowListener;
 
 import org.bytedeco.javacpp.Loader;
 import org.junit.Test;
 
+import com.nematode.gui.MainWindowControllerInterface;
+import com.nematode.gui.MockExtendableFrame;
+import com.nematode.gui.main.MainWindowCloseListener;
+import com.nematode.gui.main.MainWindowViewController;
 import com.nematode.model.MockVideoMatriarch;
 import com.nematode.unittesting.AssertTestCase;
 

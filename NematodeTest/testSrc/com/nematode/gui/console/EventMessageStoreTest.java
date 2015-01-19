@@ -1,10 +1,11 @@
-package com.nematode.bucket;
+package com.nematode.gui.console;
 
 import java.util.ArrayList;
 
 import org.junit.Test;
 
-import com.nematode.gui.backend.StatusMessage;
+import com.nematode.gui.console.EventMessageStore;
+import com.nematode.gui.console.StatusMessage;
 import com.nematode.unittesting.AssertTestCase;
 
 public class EventMessageStoreTest extends AssertTestCase {

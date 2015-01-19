@@ -1,4 +1,4 @@
-package com.nematode.gui.backend;
+package com.nematode.gui.console;
 
 public enum StatusMessage {
 	VIDEO_LOADED("Video correctly loaded."), VIDEO_LOADED_ERROR("Error loading video.");

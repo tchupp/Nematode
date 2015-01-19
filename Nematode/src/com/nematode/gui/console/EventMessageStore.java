@@ -1,8 +1,6 @@
-package com.nematode.bucket;
+package com.nematode.gui.console;
 
 import java.util.ArrayList;
-
-import com.nematode.gui.backend.StatusMessage;
 
 public class EventMessageStore {
 

@@ -1,9 +1,11 @@
-package com.nematode.gui;
+package com.nematode.gui.main;
 
 import java.awt.event.WindowListener;
 
 import org.junit.Test;
 
+import com.nematode.gui.MockMainWindowViewController;
+import com.nematode.gui.main.MainWindowCloseListener;
 import com.nematode.unittesting.AssertTestCase;
 
 public class MainWindowCloseListenerTest extends AssertTestCase {

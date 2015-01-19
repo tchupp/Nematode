@@ -1,4 +1,4 @@
-package com.nematode.gui;
+package com.nematode.gui.main;
 
 import java.awt.Container;
 import java.awt.Dimension;
@@ -18,6 +18,11 @@ import javax.swing.border.CompoundBorder;
 
 import org.junit.Test;
 
+import com.nematode.gui.ExtendableJFrame;
+import com.nematode.gui.ExtendableJPanel;
+import com.nematode.gui.GuiConstants;
+import com.nematode.gui.ImagePanel;
+import com.nematode.gui.main.MainWindow;
 import com.nematode.unittesting.AssertTestCase;
 
 public class MainWindowTest extends AssertTestCase {
