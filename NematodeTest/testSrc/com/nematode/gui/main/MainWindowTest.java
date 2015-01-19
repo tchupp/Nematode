@@ -6,6 +6,7 @@ import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Insets;
 import java.awt.MediaTracker;
+import java.awt.event.ActionListener;
 import java.awt.image.BufferedImage;
 import java.io.File;
 
@@ -18,11 +19,9 @@ import javax.swing.border.CompoundBorder;
 
 import org.junit.Test;
 
-import com.nematode.gui.ExtendableJFrame;
 import com.nematode.gui.ExtendableJPanel;
 import com.nematode.gui.GuiConstants;
 import com.nematode.gui.ImagePanel;
-import com.nematode.gui.main.MainWindow;
 import com.nematode.unittesting.AssertTestCase;
 
 public class MainWindowTest extends AssertTestCase {
@@ -43,8 +42,54 @@ public class MainWindowTest extends AssertTestCase {
 	}
 
 	@Test
-	public void testExtendsJFrame() throws Exception {
-		assertExtends(ExtendableJFrame.class, MainWindow.class);
+	public void testExtendsClass() throws Exception {
+		assertExtends(AbstractMainWindow.class, MainWindow.class);
+	}
+
+	@Test
+	public void testAddListenerToPlayButtonAddsCorrectListenerToPlayButton() throws Exception {
+		final MockMainWindowActionListener mockActionListener = new MockMainWindowActionListener();
+		final MainWindow mainWindow = new MainWindow();
+
+		final JButton playButton = mainWindow.getPlayButton();
+		assertEquals(0, playButton.getActionListeners().length);
+
+		mainWindow.addListenerToPlayButton(mockActionListener);
+
+		final ActionListener[] actionListeners = playButton.getActionListeners();
+		assertEquals(1, actionListeners.length);
+		assertSame(mockActionListener, actionListeners[0]);
+	}
+
+	@Test
+	public void testAddListenerToPauseButtonAddsCorrectListenerToPauseButton() throws Exception {
+		final MockMainWindowActionListener mockActionListener = new MockMainWindowActionListener();
+		final MainWindow mainWindow = new MainWindow();
+
+		final JButton pauseButton = mainWindow.getPauseButton();
+		assertEquals(0, pauseButton.getActionListeners().length);
+
+		mainWindow.addListenerToPauseButton(mockActionListener);
+
+		final ActionListener[] actionListeners = pauseButton.getActionListeners();
+		assertEquals(1, actionListeners.length);
+		assertSame(mockActionListener, actionListeners[0]);
+	}
+
+	@Test
+	public void testAddListenerToOpenVideoButtonAddsCorrectListenerToOpenVideoButton()
+			throws Exception {
+		final MockMainWindowActionListener mockActionListener = new MockMainWindowActionListener();
+		final MainWindow mainWindow = new MainWindow();
+
+		final JButton openVideoButton = mainWindow.getOpenVideoButton();
+		assertEquals(0, openVideoButton.getActionListeners().length);
+
+		mainWindow.addListenerToOpenVideoButton(mockActionListener);
+
+		final ActionListener[] actionListeners = openVideoButton.getActionListeners();
+		assertEquals(1, actionListeners.length);
+		assertSame(mockActionListener, actionListeners[0]);
 	}
 
 	@Test

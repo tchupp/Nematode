@@ -17,13 +17,12 @@ import javax.swing.JLabel;
 import javax.swing.border.Border;
 import javax.swing.border.CompoundBorder;
 
-import com.nematode.gui.ExtendableJFrame;
 import com.nematode.gui.ExtendableJPanel;
 import com.nematode.gui.GuiConstants;
 import com.nematode.gui.ImagePanel;
 import com.nematode.image.NullBufferedImage;
 
-public class MainWindow extends ExtendableJFrame {
+public class MainWindow extends AbstractMainWindow {
 
 	private static final long serialVersionUID = 1L;
 	private JButton playButton;
@@ -253,6 +252,21 @@ public class MainWindow extends ExtendableJFrame {
 		this.openVideoButton.setText("Open Video");
 	}
 
+	@Override
+	public void addListenerToPlayButton(final MainWindowActionListener listener) {
+		this.playButton.addActionListener(listener);
+	}
+
+	@Override
+	public void addListenerToPauseButton(final MainWindowActionListener listener) {
+		this.pauseButton.addActionListener(listener);
+	}
+
+	@Override
+	public void addListenerToOpenVideoButton(final MainWindowActionListener listener) {
+		this.openVideoButton.addActionListener(listener);
+	}
+
 	public JButton getPlayButton() {
 		return this.playButton;
 	}
@@ -268,4 +282,5 @@ public class MainWindow extends ExtendableJFrame {
 	public JButton getOpenVideoButton() {
 		return this.openVideoButton;
 	}
+
 }
