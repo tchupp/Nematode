@@ -1,5 +1,7 @@
 package com.nematode.gui;
 
+import com.nematode.model.VideoInterface;
+
 public class MockMainWindowViewController implements MainWindowControllerInterface {
 
 	private ExtendableJFrame mainWindow;
@@ -7,6 +9,8 @@ public class MockMainWindowViewController implements MainWindowControllerInterfa
 	private boolean showViewWasCalled;
 	private boolean playButtonPressedWasCalled;
 	private boolean pauseButtonPressedWasCalled;
+	private boolean setVideoWasCalled;
+	private VideoInterface videoToSet;
 
 	public void setMainWindowToReturn(final ExtendableJFrame setMainWindowToReturn) {
 		this.mainWindow = setMainWindowToReturn;
@@ -50,5 +54,19 @@ public class MockMainWindowViewController implements MainWindowControllerInterfa
 
 	public boolean wasPauseButtonPressedCalled() {
 		return this.pauseButtonPressedWasCalled;
+	}
+
+	@Override
+	public void setVideo(final VideoInterface video) {
+		this.videoToSet = video;
+		this.setVideoWasCalled = true;
+	}
+
+	public boolean wasSetVideoCalled() {
+		return this.setVideoWasCalled;
+	}
+
+	public VideoInterface getVideoToSet() {
+		return this.videoToSet;
 	}
 }

@@ -3,6 +3,7 @@ package com.nematode.gui.main;
 import com.nematode.fileIO.VideoFileChooser;
 import com.nematode.gui.ExtendableJFrame;
 import com.nematode.gui.MainWindowControllerInterface;
+import com.nematode.model.VideoInterface;
 import com.nematode.model.VideoMatriarchInterface;
 
 public class MainWindowViewController implements MainWindowControllerInterface {
@@ -41,6 +42,11 @@ public class MainWindowViewController implements MainWindowControllerInterface {
 
 	@Override
 	public void pauseButtonPressed() {
+	}
+
+	@Override
+	public void setVideo(final VideoInterface video) {
+		this.videoMatriarch.setVideo(video);
 	}
 
 	public ExtendableJFrame getMainWindow() {

@@ -7,6 +7,7 @@ import org.junit.Test;
 
 import com.nematode.fileIO.VideoFileChooser;
 import com.nematode.gui.MainWindowControllerInterface;
+import com.nematode.model.MockVideo;
 import com.nematode.model.MockVideoMatriarch;
 import com.nematode.unittesting.AssertTestCase;
 
@@ -119,5 +120,21 @@ public class MainWindowViewControllerTest extends AssertTestCase {
 
 		assertIsOfTypeAndGet(VideoFileChooser.class,
 				listenerToAddToOpenVideoButton.getFileChooser());
+	}
+
+	@Test
+	public void testSetVideoCallsSetVideoOnTheVideoMatriarchWithTheCorrectVideo() throws Exception {
+		final MockVideo mockVideo = new MockVideo();
+		final MockVideoMatriarch mockVideoMatriarch = new MockVideoMatriarch();
+
+		final MainWindowViewController mainWindowViewController = new MainWindowViewController(
+				new MockMainWindow(), mockVideoMatriarch);
+
+		assertFalse(mockVideoMatriarch.wasSetVideoCalled());
+
+		mainWindowViewController.setVideo(mockVideo);
+
+		assertTrue(mockVideoMatriarch.wasSetVideoCalled());
+		assertSame(mockVideo, mockVideoMatriarch.getVideo());
 	}
 }
