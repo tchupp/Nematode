@@ -17,6 +17,8 @@ import javax.swing.JLabel;
 import javax.swing.border.Border;
 import javax.swing.border.CompoundBorder;
 
+import org.bytedeco.javacpp.opencv_core.Mat;
+
 import com.nematode.gui.ExtendableJPanel;
 import com.nematode.gui.GuiConstants;
 import com.nematode.gui.ImagePanel;
@@ -265,6 +267,12 @@ public class MainWindow extends AbstractMainWindow {
 	@Override
 	public void addListenerToOpenVideoButton(final MainWindowActionListener listener) {
 		this.openVideoButton.addActionListener(listener);
+	}
+
+	@Override
+	public void displayImage(final Mat displayImage) {
+		final ImageIcon newImageIcon = new ImageIcon(displayImage.getBufferedImage());
+		this.videoLabel.setIcon(newImageIcon);
 	}
 
 	public JButton getPlayButton() {

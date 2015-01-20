@@ -47,6 +47,7 @@ public class MainWindowViewController implements MainWindowControllerInterface {
 	@Override
 	public void setVideo(final VideoInterface video) {
 		this.videoMatriarch.setVideo(video);
+		this.mainWindow.displayImage(video.getThumbnail());
 	}
 
 	public ExtendableJFrame getMainWindow() {

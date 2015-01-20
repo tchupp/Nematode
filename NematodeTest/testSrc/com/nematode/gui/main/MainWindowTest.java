@@ -17,6 +17,8 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.border.CompoundBorder;
 
+import org.bytedeco.javacpp.Loader;
+import org.bytedeco.javacpp.opencv_core.Mat;
 import org.junit.Test;
 
 import com.nematode.gui.ExtendableJPanel;
@@ -32,6 +34,8 @@ public class MainWindowTest extends AssertTestCase {
 
 	@Override
 	protected void setUp() throws Exception {
+		Loader.load(org.bytedeco.javacpp.opencv_core.class);
+
 		this.expectedBackgroundImage = ImageIO.read(new File(
 				GuiConstants.MAIN_WINDOW_BACKGROUND_IMAGE_PATH));
 
@@ -90,6 +94,25 @@ public class MainWindowTest extends AssertTestCase {
 		final ActionListener[] actionListeners = openVideoButton.getActionListeners();
 		assertEquals(1, actionListeners.length);
 		assertSame(mockActionListener, actionListeners[0]);
+	}
+
+	@Test
+	public void testDisplayImageWriteImageCorrectlyToImageLabel() throws Exception {
+		final MainWindow mainWindow = new MainWindow();
+
+		final JLabel videoLabel = mainWindow.getVideoLabel();
+		final ImageIcon defaultImageIcon = assertIsOfTypeAndGet(ImageIcon.class,
+				videoLabel.getIcon());
+
+		final Mat displayImage = new Mat(1, 1, 1);
+		mainWindow.displayImage(displayImage);
+
+		final ImageIcon newImageIcon = assertIsOfTypeAndGet(ImageIcon.class, videoLabel.getIcon());
+		assertNotSame(defaultImageIcon, newImageIcon);
+
+		final BufferedImage actualImage = assertIsOfTypeAndGet(BufferedImage.class,
+				newImageIcon.getImage());
+		assertSame(displayImage.getBufferedImage(), actualImage);
 	}
 
 	@Test

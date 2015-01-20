@@ -3,6 +3,7 @@ package com.nematode.gui.main;
 import java.awt.event.WindowListener;
 
 import org.bytedeco.javacpp.Loader;
+import org.bytedeco.javacpp.opencv_core.Mat;
 import org.junit.Test;
 
 import com.nematode.fileIO.VideoFileChooser;
@@ -123,18 +124,28 @@ public class MainWindowViewControllerTest extends AssertTestCase {
 	}
 
 	@Test
-	public void testSetVideoCallsSetVideoOnTheVideoMatriarchWithTheCorrectVideo() throws Exception {
+	public void testSetVideoCallsSetVideoOnTheVideoMatriarchWithTheCorrectVideo_ThenCallsDisplayImageOnMainWindowWithCorrectImage()
+			throws Exception {
 		final MockVideo mockVideo = new MockVideo();
+		final Mat expectedThumbnail = new Mat(1, 1, 1);
+		mockVideo.setThumbnailToReturn(expectedThumbnail);
+
 		final MockVideoMatriarch mockVideoMatriarch = new MockVideoMatriarch();
 
+		final MockMainWindow mainWindow = new MockMainWindow();
 		final MainWindowViewController mainWindowViewController = new MainWindowViewController(
-				new MockMainWindow(), mockVideoMatriarch);
+				mainWindow, mockVideoMatriarch);
 
 		assertFalse(mockVideoMatriarch.wasSetVideoCalled());
+		assertFalse(mainWindow.wasDisplayImageCalled());
 
 		mainWindowViewController.setVideo(mockVideo);
 
 		assertTrue(mockVideoMatriarch.wasSetVideoCalled());
 		assertSame(mockVideo, mockVideoMatriarch.getVideo());
+
+		assertTrue(mainWindow.wasDisplayImageCalled());
+		assertSame(expectedThumbnail, mainWindow.getImageToDisplay());
+
 	}
 }

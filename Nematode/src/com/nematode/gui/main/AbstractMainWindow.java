@@ -1,5 +1,7 @@
 package com.nematode.gui.main;
 
+import org.bytedeco.javacpp.opencv_core.Mat;
+
 import com.nematode.gui.ExtendableJFrame;
 
 public abstract class AbstractMainWindow extends ExtendableJFrame {
@@ -11,5 +13,7 @@ public abstract class AbstractMainWindow extends ExtendableJFrame {
 	public abstract void addListenerToPauseButton(final MainWindowActionListener listener);
 
 	public abstract void addListenerToOpenVideoButton(final MainWindowActionListener listener);
+
+	public abstract void displayImage(Mat displayImage);
 
 }

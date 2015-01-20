@@ -1,6 +1,5 @@
 package com.nematode.model;
 
-
 public class VideoMatriarch implements VideoMatriarchInterface {
 
 	private VideoInterface video;
@@ -10,12 +9,11 @@ public class VideoMatriarch implements VideoMatriarchInterface {
 	}
 
 	@Override
-	public VideoInterface getVideo() {
-		return this.video;
-	}
-
-	@Override
 	public void setVideo(final VideoInterface video) {
 		this.video = video;
+	}
+
+	public VideoInterface getVideo() {
+		return this.video;
 	}
 }

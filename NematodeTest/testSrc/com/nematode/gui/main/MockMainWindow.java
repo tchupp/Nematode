@@ -1,5 +1,7 @@
 package com.nematode.gui.main;
 
+import org.bytedeco.javacpp.opencv_core.Mat;
+
 public class MockMainWindow extends AbstractMainWindow {
 
 	private static final long serialVersionUID = 1L;
@@ -11,6 +13,8 @@ public class MockMainWindow extends AbstractMainWindow {
 	private MainWindowActionListener listenerToAddToOpenVideoButton;
 	private boolean isVisable;
 	private boolean setVisibleWasCalled;
+	private Mat imageToDisplay;
+	private boolean displayImageWasCalled;
 
 	@Override
 	public void addListenerToPlayButton(final MainWindowActionListener listener) {
@@ -67,5 +71,19 @@ public class MockMainWindow extends AbstractMainWindow {
 	@Override
 	public boolean isVisible() {
 		return this.isVisable;
+	}
+
+	@Override
+	public void displayImage(final Mat displayImage) {
+		this.imageToDisplay = displayImage;
+		this.displayImageWasCalled = true;
+	}
+
+	public boolean wasDisplayImageCalled() {
+		return this.displayImageWasCalled;
+	}
+
+	public Mat getImageToDisplay() {
+		return this.imageToDisplay;
 	}
 }
