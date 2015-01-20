@@ -1,5 +1,6 @@
 package com.nematode.gui.main;
 
+import com.nematode.fileIO.VideoFileChooser;
 import com.nematode.gui.ExtendableJFrame;
 import com.nematode.gui.MainWindowControllerInterface;
 import com.nematode.model.VideoMatriarchInterface;
@@ -12,12 +13,17 @@ public class MainWindowViewController implements MainWindowControllerInterface {
 	public MainWindowViewController(final AbstractMainWindow mainWindow,
 			final VideoMatriarchInterface videoMatriarch) {
 		this.mainWindow = mainWindow;
+		this.videoMatriarch = videoMatriarch;
+
+		addListenersToMainWindow();
+	}
+
+	private void addListenersToMainWindow() {
 		this.mainWindow.addWindowListener(new MainWindowCloseListener(this));
 		this.mainWindow.addListenerToPlayButton(new PlayButtonListener(this));
 		this.mainWindow.addListenerToPauseButton(new PauseButtonListener(this));
-		this.mainWindow.addListenerToOpenVideoButton(new OpenVideoButtonListener(this));
-
-		this.videoMatriarch = videoMatriarch;
+		this.mainWindow.addListenerToOpenVideoButton(new OpenVideoButtonListener(this,
+				new VideoFileChooser()));
 	}
 
 	@Override
@@ -29,11 +35,11 @@ public class MainWindowViewController implements MainWindowControllerInterface {
 	public void dispose() {
 	}
 
-	public VideoMatriarchInterface getVideoMatriarch() {
-		return this.videoMatriarch;
-	}
-
 	public ExtendableJFrame getMainWindow() {
 		return this.mainWindow;
+	}
+
+	public VideoMatriarchInterface getVideoMatriarch() {
+		return this.videoMatriarch;
 	}
 }

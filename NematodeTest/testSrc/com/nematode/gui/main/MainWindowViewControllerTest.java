@@ -5,6 +5,7 @@ import java.awt.event.WindowListener;
 import org.bytedeco.javacpp.Loader;
 import org.junit.Test;
 
+import com.nematode.fileIO.VideoFileChooser;
 import com.nematode.gui.MainWindowControllerInterface;
 import com.nematode.model.MockVideoMatriarch;
 import com.nematode.unittesting.AssertTestCase;
@@ -115,5 +116,8 @@ public class MainWindowViewControllerTest extends AssertTestCase {
 		final OpenVideoButtonListener listenerToAddToOpenVideoButton = assertIsOfTypeAndGet(
 				OpenVideoButtonListener.class, mockMainWindow.getListenerToAddToOpenVideoButton());
 		assertSame(mainWindowViewController, listenerToAddToOpenVideoButton.getViewController());
+
+		assertIsOfTypeAndGet(VideoFileChooser.class,
+				listenerToAddToOpenVideoButton.getFileChooser());
 	}
 }
