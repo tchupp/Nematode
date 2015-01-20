@@ -35,6 +35,14 @@ public class MainWindowViewController implements MainWindowControllerInterface {
 	public void dispose() {
 	}
 
+	@Override
+	public void playButtonPressed() {
+	}
+
+	@Override
+	public void pauseButtonPressed() {
+	}
+
 	public ExtendableJFrame getMainWindow() {
 		return this.mainWindow;
 	}

@@ -22,4 +22,18 @@ public class PlayButtonListenerTest extends AssertTestCase {
 		assertSame(mockMainWindowViewController, playButtonListener.getViewController());
 	}
 
+	@Test
+	public void testActionPerformedCallsPlayButtonPressedOnViewController() throws Exception {
+		final MockMainWindowViewController mockMainWindowViewController = new MockMainWindowViewController();
+
+		final PlayButtonListener playButtonListener = new PlayButtonListener(
+				mockMainWindowViewController);
+
+		assertFalse(mockMainWindowViewController.wasPlayButtonPressedCalled());
+
+		playButtonListener.actionPerformed(null);
+
+		assertTrue(mockMainWindowViewController.wasPlayButtonPressedCalled());
+	}
+
 }

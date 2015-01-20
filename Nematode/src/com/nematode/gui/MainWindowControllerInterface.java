@@ -4,6 +4,10 @@ public interface MainWindowControllerInterface {
 
 	public void dispose();
 
-	void showView();
+	public void showView();
+
+	public void playButtonPressed();
+
+	public void pauseButtonPressed();
 
 }

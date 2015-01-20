@@ -22,4 +22,18 @@ public class PauseButtonListenerTest extends AssertTestCase {
 		assertSame(mockMainWindowViewController, pauseButtonListener.getViewController());
 	}
 
+	@Test
+	public void testActionPerformedCallsPauseButtonPressedOnViewController() throws Exception {
+		final MockMainWindowViewController mockMainWindowViewController = new MockMainWindowViewController();
+
+		final PauseButtonListener pauseButtonListener = new PauseButtonListener(
+				mockMainWindowViewController);
+
+		assertFalse(mockMainWindowViewController.wasPauseButtonPressedCalled());
+
+		pauseButtonListener.actionPerformed(null);
+
+		assertTrue(mockMainWindowViewController.wasPauseButtonPressedCalled());
+	}
+
 }

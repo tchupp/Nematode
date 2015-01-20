@@ -14,6 +14,7 @@ public class PauseButtonListener implements MainWindowActionListener {
 
 	@Override
 	public void actionPerformed(final ActionEvent arg0) {
+		this.viewController.pauseButtonPressed();
 	}
 
 	public MainWindowControllerInterface getViewController() {

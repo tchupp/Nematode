@@ -14,6 +14,7 @@ public class PlayButtonListener implements MainWindowActionListener {
 
 	@Override
 	public void actionPerformed(final ActionEvent arg0) {
+		this.viewController.playButtonPressed();
 	}
 
 	public MainWindowControllerInterface getViewController() {
