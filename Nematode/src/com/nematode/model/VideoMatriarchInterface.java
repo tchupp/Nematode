@@ -6,8 +6,4 @@ public interface VideoMatriarchInterface {
 
 	public void setVideo(VideoInterface video);
 
-	public void addObserver(VideoObserverInterface observer);
-
-	public void removeObserver(VideoObserverInterface observer);
-
 }
