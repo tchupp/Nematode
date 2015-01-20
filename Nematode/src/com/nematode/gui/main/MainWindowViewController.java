@@ -6,13 +6,16 @@ import com.nematode.model.VideoMatriarchInterface;
 
 public class MainWindowViewController implements MainWindowControllerInterface {
 
-	private final ExtendableJFrame mainWindow;
+	private final AbstractMainWindow mainWindow;
 	private final VideoMatriarchInterface videoMatriarch;
 
-	public MainWindowViewController(final ExtendableJFrame mainWindow,
+	public MainWindowViewController(final AbstractMainWindow mainWindow,
 			final VideoMatriarchInterface videoMatriarch) {
 		this.mainWindow = mainWindow;
 		this.mainWindow.addWindowListener(new MainWindowCloseListener(this));
+		this.mainWindow.addListenerToPlayButton(new PlayButtonListener(this));
+		this.mainWindow.addListenerToPauseButton(new PauseButtonListener(this));
+		this.mainWindow.addListenerToOpenVideoButton(new OpenVideoButtonListener(this));
 
 		this.videoMatriarch = videoMatriarch;
 	}

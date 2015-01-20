@@ -6,9 +6,6 @@ import org.bytedeco.javacpp.Loader;
 import org.junit.Test;
 
 import com.nematode.gui.MainWindowControllerInterface;
-import com.nematode.gui.MockExtendableFrame;
-import com.nematode.gui.main.MainWindowCloseListener;
-import com.nematode.gui.main.MainWindowViewController;
 import com.nematode.model.MockVideoMatriarch;
 import com.nematode.unittesting.AssertTestCase;
 
@@ -27,7 +24,7 @@ public class MainWindowViewControllerTest extends AssertTestCase {
 
 	@Test
 	public void testGetsMainWindowPassedIn() throws Exception {
-		final MockExtendableFrame mockExtendableFrame = new MockExtendableFrame();
+		final MockMainWindow mockExtendableFrame = new MockMainWindow();
 		final MainWindowViewController mainWindowViewController = new MainWindowViewController(
 				mockExtendableFrame, new MockVideoMatriarch());
 
@@ -38,25 +35,29 @@ public class MainWindowViewControllerTest extends AssertTestCase {
 	public void testGetsVideoMatriarchPassedIn() throws Exception {
 		final MockVideoMatriarch mockVideoMatriarch = new MockVideoMatriarch();
 		final MainWindowViewController mainWindowViewController = new MainWindowViewController(
-				new MockExtendableFrame(), mockVideoMatriarch);
+				new MockMainWindow(), mockVideoMatriarch);
 
 		assertSame(mockVideoMatriarch, mainWindowViewController.getVideoMatriarch());
 	}
 
 	@Test
 	public void testShowViewSetsTheVisabilityOfMainWindowToTrue() throws Exception {
-		final MockExtendableFrame mainWindow = new MockExtendableFrame();
+		final MockMainWindow mainWindow = new MockMainWindow();
 		final MainWindowViewController mainWindowViewController = new MainWindowViewController(
 				mainWindow, new MockVideoMatriarch());
 
 		assertFalse(mainWindow.isVisible());
+		assertFalse(mainWindow.wasSetVisableCalled());
+
 		mainWindowViewController.showView();
+
 		assertTrue(mainWindow.isVisible());
+		assertTrue(mainWindow.wasSetVisableCalled());
 	}
 
 	@Test
 	public void testConstructionAddsCorrectWindowListenerToMainWindow() throws Exception {
-		final MockExtendableFrame mainWindow = new MockExtendableFrame();
+		final MockMainWindow mainWindow = new MockMainWindow();
 		final MainWindowViewController mainWindowViewController = new MainWindowViewController(
 				mainWindow, new MockVideoMatriarch());
 
@@ -68,4 +69,51 @@ public class MainWindowViewControllerTest extends AssertTestCase {
 		assertSame(mainWindowViewController, mainWindowCloseListener.getViewController());
 	}
 
+	@Test
+	public void testConstructionAddsCorrectActionListenerToPlayButton() throws Exception {
+		final MockMainWindow mockMainWindow = new MockMainWindow();
+
+		assertFalse(mockMainWindow.wasAddListenerToPlayButtonCalled());
+
+		final MainWindowViewController mainWindowViewController = new MainWindowViewController(
+				mockMainWindow, new MockVideoMatriarch());
+
+		assertTrue(mockMainWindow.wasAddListenerToPlayButtonCalled());
+
+		final PlayButtonListener listenerToAddToPlayButton = assertIsOfTypeAndGet(
+				PlayButtonListener.class, mockMainWindow.getListenerToAddToPlayButton());
+		assertSame(mainWindowViewController, listenerToAddToPlayButton.getViewController());
+	}
+
+	@Test
+	public void testConstructionAddsCorrectActionListenerToPauseButton() throws Exception {
+		final MockMainWindow mockMainWindow = new MockMainWindow();
+
+		assertFalse(mockMainWindow.wasAddListenerToPauseButtonCalled());
+
+		final MainWindowViewController mainWindowViewController = new MainWindowViewController(
+				mockMainWindow, new MockVideoMatriarch());
+
+		assertTrue(mockMainWindow.wasAddListenerToPauseButtonCalled());
+
+		final PauseButtonListener listenerToAddToPauseButton = assertIsOfTypeAndGet(
+				PauseButtonListener.class, mockMainWindow.getListenerToAddToPauseButton());
+		assertSame(mainWindowViewController, listenerToAddToPauseButton.getViewController());
+	}
+
+	@Test
+	public void testConstructionAddsCorrectActionListenerToOpenVideoButton() throws Exception {
+		final MockMainWindow mockMainWindow = new MockMainWindow();
+
+		assertFalse(mockMainWindow.wasAddListenerToOpenVideoButtonCalled());
+
+		final MainWindowViewController mainWindowViewController = new MainWindowViewController(
+				mockMainWindow, new MockVideoMatriarch());
+
+		assertTrue(mockMainWindow.wasAddListenerToOpenVideoButtonCalled());
+
+		final OpenVideoButtonListener listenerToAddToOpenVideoButton = assertIsOfTypeAndGet(
+				OpenVideoButtonListener.class, mockMainWindow.getListenerToAddToOpenVideoButton());
+		assertSame(mainWindowViewController, listenerToAddToOpenVideoButton.getViewController());
+	}
 }
