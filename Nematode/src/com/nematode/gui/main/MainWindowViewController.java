@@ -1,7 +1,6 @@
 package com.nematode.gui.main;
 
 import com.nematode.fileIO.VideoFileChooser;
-import com.nematode.gui.ExtendableJFrame;
 import com.nematode.gui.MainWindowControllerInterface;
 import com.nematode.model.VideoInterface;
 import com.nematode.model.VideoMatriarchInterface;
@@ -50,7 +49,7 @@ public class MainWindowViewController implements MainWindowControllerInterface {
 		this.mainWindow.displayImage(video.getThumbnail());
 	}
 
-	public ExtendableJFrame getMainWindow() {
+	public AbstractMainWindow getMainWindow() {
 		return this.mainWindow;
 	}
 

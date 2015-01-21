@@ -1,10 +1,11 @@
 package com.nematode.gui;
 
+import com.nematode.gui.main.AbstractMainWindow;
 import com.nematode.model.VideoInterface;
 
 public class MockMainWindowViewController implements MainWindowControllerInterface {
 
-	private ExtendableJFrame mainWindow;
+	private AbstractMainWindow mainWindow;
 	private boolean disposeWasCalled;
 	private boolean showViewWasCalled;
 	private boolean playButtonPressedWasCalled;
@@ -12,11 +13,11 @@ public class MockMainWindowViewController implements MainWindowControllerInterfa
 	private boolean setVideoWasCalled;
 	private VideoInterface videoToSet;
 
-	public void setMainWindowToReturn(final ExtendableJFrame setMainWindowToReturn) {
+	public void setMainWindowToReturn(final AbstractMainWindow setMainWindowToReturn) {
 		this.mainWindow = setMainWindowToReturn;
 	}
 
-	public ExtendableJFrame getMainWindow() {
+	public AbstractMainWindow getMainWindow() {
 		return this.mainWindow;
 	}
 
