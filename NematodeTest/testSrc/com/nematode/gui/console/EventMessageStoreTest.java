@@ -4,11 +4,14 @@ import java.util.ArrayList;
 
 import org.junit.Test;
 
-import com.nematode.gui.console.EventMessageStore;
-import com.nematode.gui.console.StatusMessage;
 import com.nematode.unittesting.AssertTestCase;
 
 public class EventMessageStoreTest extends AssertTestCase {
+
+	@Test
+	public void testImplimentsInterface() throws Exception {
+		assertImplementsInterface(EventMessageStoreInterface.class, EventMessageStore.class);
+	}
 
 	@Test
 	public void testGetsEmptyMessageList_AfterConstruction() throws Exception {

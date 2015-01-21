@@ -2,7 +2,7 @@ package com.nematode.gui.console;
 
 import java.util.ArrayList;
 
-public class EventMessageStore {
+public class EventMessageStore implements EventMessageStoreInterface {
 
 	private final ArrayList<StatusMessage> messageList;
 
