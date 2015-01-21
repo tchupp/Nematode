@@ -1,6 +1,7 @@
 package com.nematode.gui;
 
 import com.nematode.gui.main.MainWindow;
+import com.nematode.gui.main.MainWindowControllerInterface;
 import com.nematode.gui.main.MainWindowViewController;
 import com.nematode.image.processing.ImageResizer;
 import com.nematode.model.VideoMatriarch;

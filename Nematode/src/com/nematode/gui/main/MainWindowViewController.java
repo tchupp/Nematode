@@ -1,7 +1,6 @@
 package com.nematode.gui.main;
 
 import com.nematode.fileIO.VideoFileChooser;
-import com.nematode.gui.MainWindowControllerInterface;
 import com.nematode.model.VideoInterface;
 import com.nematode.model.VideoMatriarchInterface;
 

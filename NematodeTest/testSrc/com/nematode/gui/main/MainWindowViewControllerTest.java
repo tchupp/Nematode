@@ -7,7 +7,6 @@ import org.bytedeco.javacpp.opencv_core.Mat;
 import org.junit.Test;
 
 import com.nematode.fileIO.VideoFileChooser;
-import com.nematode.gui.MainWindowControllerInterface;
 import com.nematode.model.MockVideo;
 import com.nematode.model.MockVideoMatriarch;
 import com.nematode.unittesting.AssertTestCase;

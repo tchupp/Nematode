@@ -2,8 +2,6 @@ package com.nematode.gui.main;
 
 import java.awt.event.ActionEvent;
 
-import com.nematode.gui.MainWindowControllerInterface;
-
 public class PauseButtonListener implements MainWindowActionListener {
 
 	private final MainWindowControllerInterface viewController;

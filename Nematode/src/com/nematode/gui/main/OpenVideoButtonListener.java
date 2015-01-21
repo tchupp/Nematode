@@ -9,7 +9,6 @@ import org.bytedeco.javacv.FrameGrabber;
 import org.bytedeco.javacv.OpenCVFrameGrabber;
 
 import com.nematode.fileIO.AbstractFileChooser;
-import com.nematode.gui.MainWindowControllerInterface;
 import com.nematode.model.LoadedVideo;
 import com.nematode.model.NullVideo;
 import com.nematode.model.VideoInterface;

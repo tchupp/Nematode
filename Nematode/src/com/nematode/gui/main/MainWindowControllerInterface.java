@@ -1,4 +1,4 @@
-package com.nematode.gui;
+package com.nematode.gui.main;
 
 import com.nematode.model.VideoInterface;
 

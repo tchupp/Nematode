@@ -1,6 +1,7 @@
 package com.nematode.gui;
 
 import com.nematode.gui.main.AbstractMainWindow;
+import com.nematode.gui.main.MainWindowControllerInterface;
 import com.nematode.model.VideoInterface;
 
 public class MockMainWindowViewController implements MainWindowControllerInterface {
