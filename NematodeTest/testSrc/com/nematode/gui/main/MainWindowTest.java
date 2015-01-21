@@ -24,6 +24,7 @@ import org.junit.Test;
 import com.nematode.gui.ExtendableJPanel;
 import com.nematode.gui.GuiConstants;
 import com.nematode.gui.ImagePanel;
+import com.nematode.image.processing.MockImageResizer;
 import com.nematode.unittesting.AssertTestCase;
 
 public class MainWindowTest extends AssertTestCase {
@@ -51,9 +52,17 @@ public class MainWindowTest extends AssertTestCase {
 	}
 
 	@Test
+	public void testGetsImageResizerPassedIn() throws Exception {
+		final MockImageResizer mockImageResizer = new MockImageResizer();
+		final MainWindow mainWindow = new MainWindow(mockImageResizer);
+
+		assertSame(mockImageResizer, mainWindow.getImageResizer());
+	}
+
+	@Test
 	public void testAddListenerToPlayButtonAddsCorrectListenerToPlayButton() throws Exception {
 		final MockMainWindowActionListener mockActionListener = new MockMainWindowActionListener();
-		final MainWindow mainWindow = new MainWindow();
+		final MainWindow mainWindow = new MainWindow(new MockImageResizer());
 
 		final JButton playButton = mainWindow.getPlayButton();
 		assertEquals(0, playButton.getActionListeners().length);
@@ -68,7 +77,7 @@ public class MainWindowTest extends AssertTestCase {
 	@Test
 	public void testAddListenerToPauseButtonAddsCorrectListenerToPauseButton() throws Exception {
 		final MockMainWindowActionListener mockActionListener = new MockMainWindowActionListener();
-		final MainWindow mainWindow = new MainWindow();
+		final MainWindow mainWindow = new MainWindow(new MockImageResizer());
 
 		final JButton pauseButton = mainWindow.getPauseButton();
 		assertEquals(0, pauseButton.getActionListeners().length);
@@ -84,7 +93,7 @@ public class MainWindowTest extends AssertTestCase {
 	public void testAddListenerToOpenVideoButtonAddsCorrectListenerToOpenVideoButton()
 			throws Exception {
 		final MockMainWindowActionListener mockActionListener = new MockMainWindowActionListener();
-		final MainWindow mainWindow = new MainWindow();
+		final MainWindow mainWindow = new MainWindow(new MockImageResizer());
 
 		final JButton openVideoButton = mainWindow.getOpenVideoButton();
 		assertEquals(0, openVideoButton.getActionListeners().length);
@@ -97,27 +106,39 @@ public class MainWindowTest extends AssertTestCase {
 	}
 
 	@Test
-	public void testDisplayImageWriteImageCorrectlyToImageLabel() throws Exception {
-		final MainWindow mainWindow = new MainWindow();
+	public void testDisplayImageCallsResizeImageWithAspect_AndWriteImageCorrectlyToImageLabel()
+			throws Exception {
+		final MockImageResizer imageResizer = new MockImageResizer();
+		final MainWindow mainWindow = new MainWindow(imageResizer);
+
+		final Mat expectedImage = new Mat(2, 2, 1);
+		imageResizer.setImageWithAspectToReturn(expectedImage.getBufferedImage());
 
 		final JLabel videoLabel = mainWindow.getVideoLabel();
 		final ImageIcon defaultImageIcon = assertIsOfTypeAndGet(ImageIcon.class,
 				videoLabel.getIcon());
 
 		final Mat displayImage = new Mat(1, 1, 1);
+
+		assertFalse(imageResizer.wasResizeImageWithAspectCalled());
 		mainWindow.displayImage(displayImage);
+		assertTrue(imageResizer.wasResizeImageWithAspectCalled());
+
+		assertSame(displayImage.getBufferedImage(), imageResizer.getImageWithAspectPassedIn());
+		assertEquals(GuiConstants.DISPLAY_HEIGHT, imageResizer.getHeightWithAspect());
+		assertEquals(GuiConstants.DISPLAY_WIDTH, imageResizer.getWidthWithAspect());
 
 		final ImageIcon newImageIcon = assertIsOfTypeAndGet(ImageIcon.class, videoLabel.getIcon());
 		assertNotSame(defaultImageIcon, newImageIcon);
 
 		final BufferedImage actualImage = assertIsOfTypeAndGet(BufferedImage.class,
 				newImageIcon.getImage());
-		assertSame(displayImage.getBufferedImage(), actualImage);
+		assertSame(expectedImage.getBufferedImage(), actualImage);
 	}
 
 	@Test
 	public void testConstructorSetsUpFrameCorrectly() throws Exception {
-		final MainWindow mainWindow = new MainWindow();
+		final MainWindow mainWindow = new MainWindow(new MockImageResizer());
 
 		assertEquals(JFrame.DISPOSE_ON_CLOSE, mainWindow.getDefaultCloseOperation());
 
@@ -131,7 +152,7 @@ public class MainWindowTest extends AssertTestCase {
 
 	@Test
 	public void testConstructorCorrectlySetsUpContentPane() throws Exception {
-		final MainWindow mainWindow = new MainWindow();
+		final MainWindow mainWindow = new MainWindow(new MockImageResizer());
 
 		final ImagePanel imageContentPane = assertIsOfTypeAndGet(ImagePanel.class,
 				mainWindow.getContentPane());
@@ -141,7 +162,7 @@ public class MainWindowTest extends AssertTestCase {
 
 	@Test
 	public void testHasCorrectNumberOfComponents_AndLayout() throws Exception {
-		final MainWindow mainWindow = new MainWindow();
+		final MainWindow mainWindow = new MainWindow(new MockImageResizer());
 
 		final Container contentPane = mainWindow.getContentPane();
 		assertEquals(2, contentPane.getComponentCount());
@@ -150,7 +171,7 @@ public class MainWindowTest extends AssertTestCase {
 
 	@Test
 	public void testControlPanelIsCorrectlyPlaced() throws Exception {
-		final MainWindow mainWindow = new MainWindow();
+		final MainWindow mainWindow = new MainWindow(new MockImageResizer());
 
 		final Container contentPane = mainWindow.getContentPane();
 
@@ -177,7 +198,7 @@ public class MainWindowTest extends AssertTestCase {
 
 	@Test
 	public void testScanningPanelIsCorrectlyPlaced() throws Exception {
-		final MainWindow mainWindow = new MainWindow();
+		final MainWindow mainWindow = new MainWindow(new MockImageResizer());
 
 		final Container contentPane = mainWindow.getContentPane();
 
@@ -204,7 +225,7 @@ public class MainWindowTest extends AssertTestCase {
 
 	@Test
 	public void testProjectPanelIsCorrectlySetUp() throws Exception {
-		final MainWindow mainWindow = new MainWindow();
+		final MainWindow mainWindow = new MainWindow(new MockImageResizer());
 
 		final Container contentPane = mainWindow.getContentPane();
 
@@ -226,7 +247,7 @@ public class MainWindowTest extends AssertTestCase {
 
 	@Test
 	public void testOpenVideoButtonIsCorrectlyAddedToProjectPanel() throws Exception {
-		final MainWindow mainWindow = new MainWindow();
+		final MainWindow mainWindow = new MainWindow(new MockImageResizer());
 
 		final Container contentPane = mainWindow.getContentPane();
 
@@ -258,7 +279,7 @@ public class MainWindowTest extends AssertTestCase {
 
 	@Test
 	public void testProjectPanelIsCorrectlyAddedToControlPanel() throws Exception {
-		final MainWindow mainWindow = new MainWindow();
+		final MainWindow mainWindow = new MainWindow(new MockImageResizer());
 
 		final Container contentPane = mainWindow.getContentPane();
 
@@ -281,7 +302,7 @@ public class MainWindowTest extends AssertTestCase {
 
 	@Test
 	public void testTrackingPanelIsCorrectlySetUp() throws Exception {
-		final MainWindow mainWindow = new MainWindow();
+		final MainWindow mainWindow = new MainWindow(new MockImageResizer());
 
 		final Container contentPane = mainWindow.getContentPane();
 
@@ -303,7 +324,7 @@ public class MainWindowTest extends AssertTestCase {
 
 	@Test
 	public void testTrackingPanelIsCorrectlyAddedToControlPanel() throws Exception {
-		final MainWindow mainWindow = new MainWindow();
+		final MainWindow mainWindow = new MainWindow(new MockImageResizer());
 
 		final Container contentPane = mainWindow.getContentPane();
 
@@ -326,7 +347,7 @@ public class MainWindowTest extends AssertTestCase {
 
 	@Test
 	public void testVideoPanelIsCorrectlySetUp() throws Exception {
-		final MainWindow mainWindow = new MainWindow();
+		final MainWindow mainWindow = new MainWindow(new MockImageResizer());
 
 		final Container contentPane = mainWindow.getContentPane();
 		final ExtendableJPanel scanningPanel = assertIsOfTypeAndGet(ExtendableJPanel.class,
@@ -347,7 +368,7 @@ public class MainWindowTest extends AssertTestCase {
 
 	@Test
 	public void testVideoLabelIsCorrectlyAddedToVideoPanel() throws Exception {
-		final MainWindow mainWindow = new MainWindow();
+		final MainWindow mainWindow = new MainWindow(new MockImageResizer());
 
 		final Container contentPane = mainWindow.getContentPane();
 		final ExtendableJPanel scanningPanel = assertIsOfTypeAndGet(ExtendableJPanel.class,
@@ -380,7 +401,7 @@ public class MainWindowTest extends AssertTestCase {
 
 	@Test
 	public void testVideoPanelIsCorrectlyAddedToScanningPanel() throws Exception {
-		final MainWindow mainWindow = new MainWindow();
+		final MainWindow mainWindow = new MainWindow(new MockImageResizer());
 
 		final Container contentPane = mainWindow.getContentPane();
 		final ExtendableJPanel scanningPanel = assertIsOfTypeAndGet(ExtendableJPanel.class,
@@ -403,7 +424,7 @@ public class MainWindowTest extends AssertTestCase {
 
 	@Test
 	public void testToolbarPanelIsCorrectlySetUp() throws Exception {
-		final MainWindow mainWindow = new MainWindow();
+		final MainWindow mainWindow = new MainWindow(new MockImageResizer());
 
 		final Container contentPane = mainWindow.getContentPane();
 		final ExtendableJPanel scanningPanel = assertIsOfTypeAndGet(ExtendableJPanel.class,
@@ -424,7 +445,7 @@ public class MainWindowTest extends AssertTestCase {
 
 	@Test
 	public void testPlayButtonIsCorrectlySetUpAndAddedToToolbarPanel() throws Exception {
-		final MainWindow mainWindow = new MainWindow();
+		final MainWindow mainWindow = new MainWindow(new MockImageResizer());
 
 		final Container contentPane = mainWindow.getContentPane();
 		final ExtendableJPanel scanningPanel = assertIsOfTypeAndGet(ExtendableJPanel.class,
@@ -457,7 +478,7 @@ public class MainWindowTest extends AssertTestCase {
 
 	@Test
 	public void testPauseButtonIsCorrectlySetUpAndAddedToToolbarPanel() throws Exception {
-		final MainWindow mainWindow = new MainWindow();
+		final MainWindow mainWindow = new MainWindow(new MockImageResizer());
 
 		final Container contentPane = mainWindow.getContentPane();
 		final ExtendableJPanel scanningPanel = assertIsOfTypeAndGet(ExtendableJPanel.class,
@@ -491,7 +512,7 @@ public class MainWindowTest extends AssertTestCase {
 
 	@Test
 	public void testToolbarPanelIsCorrectlyAddedToScanningPanel() throws Exception {
-		final MainWindow mainWindow = new MainWindow();
+		final MainWindow mainWindow = new MainWindow(new MockImageResizer());
 
 		final Container contentPane = mainWindow.getContentPane();
 		final ExtendableJPanel scanningPanel = assertIsOfTypeAndGet(ExtendableJPanel.class,
@@ -514,7 +535,7 @@ public class MainWindowTest extends AssertTestCase {
 
 	@Test
 	public void testStatusPanelIsCorrectlySetUp() throws Exception {
-		final MainWindow mainWindow = new MainWindow();
+		final MainWindow mainWindow = new MainWindow(new MockImageResizer());
 
 		final Container contentPane = mainWindow.getContentPane();
 		final ExtendableJPanel scanningPanel = assertIsOfTypeAndGet(ExtendableJPanel.class,
@@ -534,7 +555,7 @@ public class MainWindowTest extends AssertTestCase {
 
 	@Test
 	public void testStatusPanelIsCorrectlyAddedToScanningPanel() throws Exception {
-		final MainWindow mainWindow = new MainWindow();
+		final MainWindow mainWindow = new MainWindow(new MockImageResizer());
 
 		final Container contentPane = mainWindow.getContentPane();
 		final ExtendableJPanel scanningPanel = assertIsOfTypeAndGet(ExtendableJPanel.class,

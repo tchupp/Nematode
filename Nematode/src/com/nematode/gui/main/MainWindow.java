@@ -23,6 +23,7 @@ import com.nematode.gui.ExtendableJPanel;
 import com.nematode.gui.GuiConstants;
 import com.nematode.gui.ImagePanel;
 import com.nematode.image.NullBufferedImage;
+import com.nematode.image.processing.ImageResizerInterface;
 
 public class MainWindow extends AbstractMainWindow {
 
@@ -31,8 +32,11 @@ public class MainWindow extends AbstractMainWindow {
 	private JButton pauseButton;
 	private JLabel videoLabel;
 	private JButton openVideoButton;
+	private final ImageResizerInterface imageResizer;
 
-	public MainWindow() {
+	public MainWindow(final ImageResizerInterface imageResizer) {
+		this.imageResizer = imageResizer;
+
 		this.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
 		this.setSize(GuiConstants.VIDEO_FRAME_WIDTH, GuiConstants.VIDEO_FRAME_HEIGHT);
 
@@ -271,8 +275,18 @@ public class MainWindow extends AbstractMainWindow {
 
 	@Override
 	public void displayImage(final Mat displayImage) {
-		final ImageIcon newImageIcon = new ImageIcon(displayImage.getBufferedImage());
+		final BufferedImage bufferedImage = this.imageResizer.resizeImageWithAspect(
+				displayImage.getBufferedImage(), GuiConstants.DISPLAY_WIDTH,
+				GuiConstants.DISPLAY_HEIGHT);
+
+		final ImageIcon newImageIcon = new ImageIcon(bufferedImage);
 		this.videoLabel.setIcon(newImageIcon);
+
+		this.repaint();
+	}
+
+	public ImageResizerInterface getImageResizer() {
+		return this.imageResizer;
 	}
 
 	public JButton getPlayButton() {

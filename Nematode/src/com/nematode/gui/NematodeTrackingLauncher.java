@@ -2,6 +2,7 @@ package com.nematode.gui;
 
 import com.nematode.gui.main.MainWindow;
 import com.nematode.gui.main.MainWindowViewController;
+import com.nematode.image.processing.ImageResizer;
 import com.nematode.model.VideoMatriarch;
 
 public class NematodeTrackingLauncher {
@@ -21,8 +22,9 @@ public class NematodeTrackingLauncher {
 	}
 
 	public static void main(final String[] args) {
-		final MainWindow mainWindow = new MainWindow();
+		final MainWindow mainWindow = new MainWindow(new ImageResizer());
 		final VideoMatriarch videoMatriarch = new VideoMatriarch();
+
 		final MainWindowViewController mainWindowViewController = new MainWindowViewController(
 				mainWindow, videoMatriarch);
 
