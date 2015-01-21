@@ -145,6 +145,52 @@ public class MainWindowViewControllerTest extends AssertTestCase {
 
 		assertTrue(mainWindow.wasDisplayImageCalled());
 		assertSame(expectedThumbnail, mainWindow.getImageToDisplay());
+	}
+
+	@Test
+	public void testShowNextFrameCallsGrabCurrentFrameOnVideoMatriarch_ThenDisplayImageOnMainWindow_WithTheCurrentFrame()
+			throws Exception {
+		final MockVideoMatriarch mockVideoMatriarch = new MockVideoMatriarch();
+		final Mat currentFrame = new Mat();
+		mockVideoMatriarch.setCurrentFrameToReturn(currentFrame);
+
+		final MockMainWindow mainWindow = new MockMainWindow();
+		final MainWindowViewController mainWindowViewController = new MainWindowViewController(
+				mainWindow, mockVideoMatriarch);
+
+		assertFalse(mockVideoMatriarch.wasGrabCurrentFrameCalled());
+		assertFalse(mainWindow.wasDisplayImageCalled());
+
+		mainWindowViewController.showNextFrame();
+
+		assertTrue(mockVideoMatriarch.wasGrabCurrentFrameCalled());
+		assertTrue(mainWindow.wasDisplayImageCalled());
+
+		assertSame(currentFrame, mainWindow.getImageToDisplay());
+	}
+
+	@Test
+	public void testPlayButtonPressedCallsStartVideoOnVideoMatriarch() throws Exception {
+		final MockVideoMatriarch mockVideoMatriarch = new MockVideoMatriarch();
+
+		final MainWindowViewController mainWindowViewController = new MainWindowViewController(
+				new MockMainWindow(), mockVideoMatriarch);
+
+		assertFalse(mockVideoMatriarch.wasStartVideoCalled());
+		mainWindowViewController.playButtonPressed();
+		assertTrue(mockVideoMatriarch.wasStartVideoCalled());
+	}
+
+	@Test
+	public void testStopButtonPressedVallsStartVideoOnVideoMatriarch() throws Exception {
+		final MockVideoMatriarch mockVideoMatriarch = new MockVideoMatriarch();
+
+		final MainWindowViewController mainWindowViewController = new MainWindowViewController(
+				new MockMainWindow(), mockVideoMatriarch);
+
+		assertFalse(mockVideoMatriarch.wasStopVideoCalled());
+		mainWindowViewController.stopButtonPressed();
+		assertTrue(mockVideoMatriarch.wasStopVideoCalled());
 
 	}
 }

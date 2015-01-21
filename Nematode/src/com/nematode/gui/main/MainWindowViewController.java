@@ -1,5 +1,7 @@
 package com.nematode.gui.main;
 
+import org.bytedeco.javacpp.opencv_core.Mat;
+
 import com.nematode.fileIO.VideoFileChooser;
 import com.nematode.model.VideoInterface;
 import com.nematode.model.VideoMatriarchInterface;
@@ -36,10 +38,21 @@ public class MainWindowViewController implements MainWindowControllerInterface {
 
 	@Override
 	public void playButtonPressed() {
+		this.videoMatriarch.startVideo();
 	}
 
 	@Override
 	public void pauseButtonPressed() {
+	}
+
+	public void stopButtonPressed() {
+		this.videoMatriarch.stopVideo();
+	}
+
+	@Override
+	public void showNextFrame() {
+		final Mat currentFrame = this.videoMatriarch.grabCurrentFrame();
+		this.mainWindow.displayImage(currentFrame);
 	}
 
 	@Override

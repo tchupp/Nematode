@@ -14,4 +14,6 @@ public interface MainWindowControllerInterface {
 
 	public void setVideo(VideoInterface video);
 
+	public void showNextFrame();
+
 }

@@ -4,11 +4,29 @@ import org.bytedeco.javacpp.opencv_core.Mat;
 
 public class MockVideo implements VideoInterface {
 
-	private Mat thumbnailToReturn = new Mat();
+	private Mat thumbnailToReturn;
+	private Mat grabMatToReturn;
 	private boolean getThumbnailWasCalled = false;
+	private boolean grabWasCalled;
+	private boolean startWasCalled;
+	private boolean stopWasCalled;
 
 	@Override
 	public void start() {
+		this.startWasCalled = true;
+	}
+
+	public boolean wasStartCalled() {
+		return this.startWasCalled;
+	}
+
+	@Override
+	public void stop() {
+		this.stopWasCalled = true;
+	}
+
+	public boolean wasStopCalled() {
+		return this.stopWasCalled;
 	}
 
 	@Override
@@ -41,12 +59,17 @@ public class MockVideo implements VideoInterface {
 	}
 
 	@Override
-	public void stop() {
+	public Mat grab() {
+		this.grabWasCalled = true;
+		return this.grabMatToReturn;
 	}
 
-	@Override
-	public Mat grab() {
-		return null;
+	public boolean wasGrabCalled() {
+		return this.grabWasCalled;
+	}
+
+	public void setGrabMatToReturn(final Mat grabMatToReturn) {
+		this.grabMatToReturn = grabMatToReturn;
 	}
 
 	@Override
