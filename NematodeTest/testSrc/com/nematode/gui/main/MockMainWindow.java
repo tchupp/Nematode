@@ -15,6 +15,7 @@ public class MockMainWindow extends AbstractMainWindow {
 	private boolean setVisibleWasCalled;
 	private Mat imageToDisplay;
 	private boolean displayImageWasCalled;
+	private boolean disposeWasCalled;
 
 	@Override
 	public void addListenerToPlayButton(final MainWindowActionListener listener) {
@@ -85,5 +86,14 @@ public class MockMainWindow extends AbstractMainWindow {
 
 	public Mat getImageToDisplay() {
 		return this.imageToDisplay;
+	}
+
+	@Override
+	public void dispose() {
+		this.disposeWasCalled = true;
+	}
+
+	public boolean wasDisposeCalled() {
+		return this.disposeWasCalled;
 	}
 }

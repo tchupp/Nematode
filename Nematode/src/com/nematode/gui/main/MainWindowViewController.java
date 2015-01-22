@@ -34,6 +34,7 @@ public class MainWindowViewController implements MainWindowControllerInterface {
 
 	@Override
 	public void dispose() {
+		this.mainWindow.dispose();
 	}
 
 	@Override

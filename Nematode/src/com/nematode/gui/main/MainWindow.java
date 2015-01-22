@@ -37,7 +37,7 @@ public class MainWindow extends AbstractMainWindow {
 	public MainWindow(final ImageResizerInterface imageResizer) {
 		this.imageResizer = imageResizer;
 
-		this.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
+		this.setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
 		this.setSize(GuiConstants.VIDEO_FRAME_WIDTH, GuiConstants.VIDEO_FRAME_HEIGHT);
 
 		setupPlayButton();

@@ -43,6 +43,17 @@ public class MainWindowViewControllerTest extends AssertTestCase {
 	}
 
 	@Test
+	public void testDisposeCallsDisposeOnMainWindow() throws Exception {
+		final MockMainWindow mainWindow = new MockMainWindow();
+		final MainWindowViewController mainWindowViewController = new MainWindowViewController(
+				mainWindow, new MockVideoMatriarch());
+
+		assertFalse(mainWindow.wasDisposeCalled());
+		mainWindowViewController.dispose();
+		assertTrue(mainWindow.wasDisposeCalled());
+	}
+
+	@Test
 	public void testShowViewSetsTheVisabilityOfMainWindowToTrue() throws Exception {
 		final MockMainWindow mainWindow = new MockMainWindow();
 		final MainWindowViewController mainWindowViewController = new MainWindowViewController(
