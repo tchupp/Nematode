@@ -1,5 +1,7 @@
 package com.nematode.gui.main;
 
+import javax.swing.Timer;
+
 import org.bytedeco.javacpp.opencv_core.Mat;
 
 import com.nematode.fileIO.VideoFileChooser;
@@ -10,11 +12,14 @@ public class MainWindowViewController implements MainWindowControllerInterface {
 
 	private final AbstractMainWindow mainWindow;
 	private final VideoMatriarchInterface videoMatriarch;
+	private final Timer playVideoTimer;
 
 	public MainWindowViewController(final AbstractMainWindow mainWindow,
 			final VideoMatriarchInterface videoMatriarch) {
 		this.mainWindow = mainWindow;
 		this.videoMatriarch = videoMatriarch;
+
+		this.playVideoTimer = new PlayVideoTimer(1000, new PlayVideoTimerListener(this));
 
 		addListenersToMainWindow();
 	}
@@ -68,5 +73,9 @@ public class MainWindowViewController implements MainWindowControllerInterface {
 
 	public VideoMatriarchInterface getVideoMatriarch() {
 		return this.videoMatriarch;
+	}
+
+	public Timer getPlayVideoTimer() {
+		return this.playVideoTimer;
 	}
 }

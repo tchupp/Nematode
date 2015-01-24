@@ -1,5 +1,6 @@
 package com.nematode.gui.main;
 
+import java.awt.event.ActionListener;
 import java.awt.event.WindowListener;
 
 import org.bytedeco.javacpp.Loader;
@@ -40,6 +41,23 @@ public class MainWindowViewControllerTest extends AssertTestCase {
 				new MockMainWindow(), mockVideoMatriarch);
 
 		assertSame(mockVideoMatriarch, mainWindowViewController.getVideoMatriarch());
+	}
+
+	@Test
+	public void testConstructorCorrectlySetsUpDefaultTimer() throws Exception {
+		final MainWindowViewController mainWindowViewController = new MainWindowViewController(
+				new MockMainWindow(), new MockVideoMatriarch());
+
+		final PlayVideoTimer playVideoTimer = assertIsOfTypeAndGet(PlayVideoTimer.class,
+				mainWindowViewController.getPlayVideoTimer());
+		assertEquals(1000, playVideoTimer.getDelay());
+
+		final ActionListener[] actionListeners = playVideoTimer.getActionListeners();
+		assertEquals(1, actionListeners.length);
+
+		final PlayVideoTimerListener playVideoTimerListener = assertIsOfTypeAndGet(
+				PlayVideoTimerListener.class, actionListeners[0]);
+		assertSame(mainWindowViewController, playVideoTimerListener.getViewController());
 	}
 
 	@Test
