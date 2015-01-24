@@ -40,18 +40,22 @@ public class MainWindowViewController implements MainWindowControllerInterface {
 	@Override
 	public void dispose() {
 		this.mainWindow.dispose();
+		this.playVideoTimer.stop();
 	}
 
 	@Override
 	public void playButtonPressed() {
+		this.playVideoTimer.start();
 		this.videoMatriarch.startVideo();
 	}
 
 	@Override
 	public void pauseButtonPressed() {
+		this.playVideoTimer.stop();
 	}
 
 	public void stopButtonPressed() {
+		this.playVideoTimer.stop();
 		this.videoMatriarch.stopVideo();
 	}
 
@@ -65,6 +69,9 @@ public class MainWindowViewController implements MainWindowControllerInterface {
 	public void setVideo(final VideoInterface video) {
 		this.videoMatriarch.setVideo(video);
 		this.mainWindow.displayImage(video.getThumbnail());
+
+		final int newDelay = (int) (1000 / video.getFrameRate());
+		this.playVideoTimer.setDelay(newDelay);
 	}
 
 	public AbstractMainWindow getMainWindow() {

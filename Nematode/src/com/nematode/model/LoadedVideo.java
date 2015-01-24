@@ -77,7 +77,15 @@ public class LoadedVideo implements VideoInterface {
 
 	@Override
 	public double getFrameRate() {
-		return this.frameGrabber.getFrameRate();
+		try {
+			this.frameGrabber.start();
+			final double frameRate = this.frameGrabber.getFrameRate();
+			this.frameGrabber.stop();
+
+			return frameRate;
+		} catch (final Exception exception) {
+		}
+		return 0;
 	}
 
 	@Override

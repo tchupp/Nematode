@@ -218,10 +218,6 @@ public class LoadedVideoTest extends AssertTestCase {
 				"testResources/Videos/shortNematode_10.mp4");
 		final LoadedVideo video = new LoadedVideo(frameGrabber);
 
-		assertEquals(0.0, video.getFrameRate());
-
-		video.start();
-
 		assertEquals(31.0, video.getFrameRate());
 	}
 
@@ -229,10 +225,6 @@ public class LoadedVideoTest extends AssertTestCase {
 	public void testGetFrameRateReturnsZero_InvalidVideo() throws Exception {
 		final OpenCVFrameGrabber frameGrabber = new OpenCVFrameGrabber("");
 		final LoadedVideo video = new LoadedVideo(frameGrabber);
-
-		assertEquals(0.0, video.getFrameRate());
-
-		video.start();
 
 		assertEquals(0.0, video.getFrameRate());
 	}

@@ -10,6 +10,7 @@ public class MockVideo implements VideoInterface {
 	private boolean grabWasCalled;
 	private boolean startWasCalled;
 	private boolean stopWasCalled;
+	private double frameRateToReturn;
 
 	@Override
 	public void start() {
@@ -74,7 +75,11 @@ public class MockVideo implements VideoInterface {
 
 	@Override
 	public double getFrameRate() {
-		return 0;
+		return this.frameRateToReturn;
+	}
+
+	public void setFrameRateToReturn(final double frameRateToReturn) {
+		this.frameRateToReturn = frameRateToReturn;
 	}
 
 	@Override

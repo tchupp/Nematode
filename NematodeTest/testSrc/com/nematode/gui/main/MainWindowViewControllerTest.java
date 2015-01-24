@@ -211,7 +211,38 @@ public class MainWindowViewControllerTest extends AssertTestCase {
 	}
 
 	@Test
-	public void testStopButtonPressedVallsStartVideoOnVideoMatriarch() throws Exception {
+	public void testPlayButtonPressedStartsTimer_DisposeStopsTimer() throws Exception {
+		final MainWindowViewController mainWindowViewController = new MainWindowViewController(
+				new MockMainWindow(), new MockVideoMatriarch());
+
+		final PlayVideoTimer playVideoTimer = assertIsOfTypeAndGet(PlayVideoTimer.class,
+				mainWindowViewController.getPlayVideoTimer());
+
+		assertFalse(playVideoTimer.isRunning());
+		mainWindowViewController.playButtonPressed();
+		assertTrue(playVideoTimer.isRunning());
+
+		mainWindowViewController.dispose();
+		assertFalse(playVideoTimer.isRunning());
+	}
+
+	@Test
+	public void testPauseButtonPressedStopsTimer() throws Exception {
+		final MainWindowViewController mainWindowViewController = new MainWindowViewController(
+				new MockMainWindow(), new MockVideoMatriarch());
+
+		final PlayVideoTimer playVideoTimer = assertIsOfTypeAndGet(PlayVideoTimer.class,
+				mainWindowViewController.getPlayVideoTimer());
+
+		playVideoTimer.start();
+		assertTrue(playVideoTimer.isRunning());
+
+		mainWindowViewController.pauseButtonPressed();
+		assertFalse(playVideoTimer.isRunning());
+	}
+
+	@Test
+	public void testStopButtonPressedCallsStartVideoOnVideoMatriarch() throws Exception {
 		final MockVideoMatriarch mockVideoMatriarch = new MockVideoMatriarch();
 
 		final MainWindowViewController mainWindowViewController = new MainWindowViewController(
@@ -220,6 +251,39 @@ public class MainWindowViewControllerTest extends AssertTestCase {
 		assertFalse(mockVideoMatriarch.wasStopVideoCalled());
 		mainWindowViewController.stopButtonPressed();
 		assertTrue(mockVideoMatriarch.wasStopVideoCalled());
+	}
 
+	@Test
+	public void testStopButtonPressedStopsTimer() throws Exception {
+		final MainWindowViewController mainWindowViewController = new MainWindowViewController(
+				new MockMainWindow(), new MockVideoMatriarch());
+
+		final PlayVideoTimer playVideoTimer = assertIsOfTypeAndGet(PlayVideoTimer.class,
+				mainWindowViewController.getPlayVideoTimer());
+
+		playVideoTimer.start();
+		assertTrue(playVideoTimer.isRunning());
+
+		mainWindowViewController.stopButtonPressed();
+		assertFalse(playVideoTimer.isRunning());
+	}
+
+	@Test
+	public void testSetVideoCallsSetDelayOnTimerWithTheInverseOfTheFramerateFromTheVideo()
+			throws Exception {
+		final double expectedFrameRate = 25.;
+		final MockVideo mockVideo = new MockVideo();
+		mockVideo.setFrameRateToReturn(expectedFrameRate);
+
+		final MainWindowViewController mainWindowViewController = new MainWindowViewController(
+				new MockMainWindow(), new MockVideoMatriarch());
+
+		final PlayVideoTimer playVideoTimer = assertIsOfTypeAndGet(PlayVideoTimer.class,
+				mainWindowViewController.getPlayVideoTimer());
+
+		assertEquals(1000, playVideoTimer.getDelay());
+
+		mainWindowViewController.setVideo(mockVideo);
+		assertEquals(40, playVideoTimer.getDelay());
 	}
 }
