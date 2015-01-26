@@ -12,8 +12,9 @@ public interface MainWindowControllerInterface {
 
 	public void pauseButtonPressed();
 
+	public void stopButtonPressed();
+
 	public void setVideo(VideoInterface video);
 
 	public void showNextFrame();
-
 }

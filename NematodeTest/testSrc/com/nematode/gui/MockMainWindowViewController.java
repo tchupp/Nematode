@@ -14,6 +14,7 @@ public class MockMainWindowViewController implements MainWindowControllerInterfa
 	private boolean setVideoWasCalled;
 	private VideoInterface videoToSet;
 	private boolean showNextFrameWasCalled;
+	private boolean stopButtonPressedWasCalled;
 
 	public void setMainWindowToReturn(final AbstractMainWindow setMainWindowToReturn) {
 		this.mainWindow = setMainWindowToReturn;
@@ -57,6 +58,15 @@ public class MockMainWindowViewController implements MainWindowControllerInterfa
 
 	public boolean wasPauseButtonPressedCalled() {
 		return this.pauseButtonPressedWasCalled;
+	}
+
+	@Override
+	public void stopButtonPressed() {
+		this.stopButtonPressedWasCalled = true;
+	}
+
+	public boolean wasStopButtonPressedCalled() {
+		return this.stopButtonPressedWasCalled;
 	}
 
 	@Override
