@@ -9,4 +9,6 @@ public interface ImageStoreInterface {
 	public BufferedImage getPauseButtonImage();
 
 	public BufferedImage getMainWindowBackgroundImage();
+
+	public BufferedImage getStopButtonImage();
 }

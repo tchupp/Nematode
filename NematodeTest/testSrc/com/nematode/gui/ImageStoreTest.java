@@ -42,4 +42,13 @@ public class ImageStoreTest extends AssertTestCase {
 		assertImagesAreEqual(ImageIO.read(mainWindowBackgroundImageFile),
 				imageStore.getMainWindowBackgroundImage());
 	}
+
+	@Test
+	public void testStopButtonImageIsCorrectImage() throws Exception {
+		final ImageStore imageStore = new ImageStore();
+		final File stopButtonImageFile = imageStore.getStopButtonImageFile();
+
+		assertTrue(stopButtonImageFile.exists());
+		assertImagesAreEqual(ImageIO.read(stopButtonImageFile), imageStore.getStopButtonImage());
+	}
 }

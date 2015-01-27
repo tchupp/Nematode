@@ -17,9 +17,14 @@ public class MockImageStore implements ImageStoreInterface {
 	}
 
 	@Override
-	public BufferedImage getMainWindowBackgroundImage() {
+	public BufferedImage getStopButtonImage() {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
+	@Override
+	public BufferedImage getMainWindowBackgroundImage() {
+		// TODO Auto-generated method stub
+		return null;
+	}
 }

@@ -10,20 +10,24 @@ public class ImageStore implements ImageStoreInterface {
 
 	private final File playButtonImageFile;
 	private final File pauseButtonImageFile;
+	private final File stopButtonImageFile;
+	private final File mainWindowBackgroundImageFile;
+
 	private final BufferedImage playButtonImage;
 	private final BufferedImage pauseButtonImage;
-	private final File mainWindowBackgroundImageFile;
+	private final BufferedImage stopButtonImage;
 	private final BufferedImage mainWindowBackgroundImage;
 
 	public ImageStore() throws IOException {
 		this.playButtonImageFile = new File("resources/gui/buttons/playButtonImage.png");
 		this.pauseButtonImageFile = new File("resources/gui/buttons/pauseButtonImage.png");
 		this.mainWindowBackgroundImageFile = new File("resources/gui/backgrounds/darkWood.jpg");
+		this.stopButtonImageFile = new File("resources/gui/backgrounds/darkWood.jpg");
 
 		this.playButtonImage = ImageIO.read(this.playButtonImageFile);
 		this.pauseButtonImage = ImageIO.read(this.pauseButtonImageFile);
 		this.mainWindowBackgroundImage = ImageIO.read(this.mainWindowBackgroundImageFile);
-
+		this.stopButtonImage = ImageIO.read(this.stopButtonImageFile);
 	}
 
 	@Override
@@ -34,6 +38,10 @@ public class ImageStore implements ImageStoreInterface {
 	@Override
 	public BufferedImage getPauseButtonImage() {
 		return this.pauseButtonImage;
+	}
+
+	public BufferedImage getStopButtonImage() {
+		return this.stopButtonImage;
 	}
 
 	@Override
@@ -47,6 +55,10 @@ public class ImageStore implements ImageStoreInterface {
 
 	public File getPauseButtonImageFile() {
 		return this.pauseButtonImageFile;
+	}
+
+	public File getStopButtonImageFile() {
+		return this.stopButtonImageFile;
 	}
 
 	public File getMainWindowBackgroundImageFile() {
