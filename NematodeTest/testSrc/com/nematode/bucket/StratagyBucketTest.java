@@ -2,6 +2,7 @@ package com.nematode.bucket;
 
 import org.junit.Test;
 
+import com.nematode.gui.MockImageStore;
 import com.nematode.gui.console.EventMessageStoreInterface;
 import com.nematode.gui.console.MockEventMessageStore;
 import com.nematode.unittesting.AssertTestCase;
@@ -30,5 +31,16 @@ public class StratagyBucketTest extends AssertTestCase {
 		assertNotSame(mockEventMessageStore, StratagyBucket.getEventMessageStore());
 		StratagyBucket.setEventMessageStore(mockEventMessageStore);
 		assertSame(mockEventMessageStore, StratagyBucket.getEventMessageStore());
+	}
+
+	@Test
+	public void testImageStoreStartsNull_GetImageStoreReturnsSetObject() throws Exception {
+		final MockImageStore mockImageStore = new MockImageStore();
+
+		assertNull(StratagyBucket.getImageStore());
+
+		StratagyBucket.setImageStore(mockImageStore);
+
+		assertSame(mockImageStore, StratagyBucket.getImageStore());
 	}
 }
