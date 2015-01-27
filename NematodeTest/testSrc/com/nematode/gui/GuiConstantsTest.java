@@ -33,6 +33,9 @@ public class GuiConstantsTest extends AssertTestCase {
 
 		assertEquals("resources/gui/buttons/pauseButtonImage.png",
 				GuiConstants.PAUSE_BUTTON_IMAGE_PATH);
+
+		assertEquals("resources/gui/buttons/stopButtonImage.png",
+				GuiConstants.STOP_BUTTON_IMAGE_PATH);
 	}
 
 	@Test
