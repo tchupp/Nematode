@@ -4,27 +4,27 @@ import com.nematode.gui.ImageStoreInterface;
 import com.nematode.gui.console.EventMessageStore;
 import com.nematode.gui.console.EventMessageStoreInterface;
 
-public class StratagyBucket {
+public class StrategyBucket {
 
 	private static EventMessageStoreInterface eventMessageStore = new EventMessageStore();
 	private static ImageStoreInterface imageStore;
 
-	private StratagyBucket() {
+	private StrategyBucket() {
 	}
 
 	public static EventMessageStoreInterface getEventMessageStore() {
-		return StratagyBucket.eventMessageStore;
+		return StrategyBucket.eventMessageStore;
 	}
 
 	public static void setEventMessageStore(final EventMessageStoreInterface eventMessageStore) {
-		StratagyBucket.eventMessageStore = eventMessageStore;
+		StrategyBucket.eventMessageStore = eventMessageStore;
 	}
 
 	public static ImageStoreInterface getImageStore() {
-		return StratagyBucket.imageStore;
+		return StrategyBucket.imageStore;
 	}
 
 	public static void setImageStore(final ImageStoreInterface imageStore) {
-		StratagyBucket.imageStore = imageStore;
+		StrategyBucket.imageStore = imageStore;
 	}
 }

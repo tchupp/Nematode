@@ -7,18 +7,23 @@ import com.nematode.gui.console.EventMessageStoreInterface;
 import com.nematode.gui.console.MockEventMessageStore;
 import com.nematode.unittesting.AssertTestCase;
 
-public class StratagyBucketTest extends AssertTestCase {
+public class StrategyBucketTest extends AssertTestCase {
+
+	@Override
+	protected void setUp() throws Exception {
+		StrategyBucket.setImageStore(null);
+	}
 
 	@Test
 	public void testConstructorIsPrivate() throws Exception {
-		assertConstructorIsPrivate(StratagyBucket.class);
+		assertConstructorIsPrivate(StrategyBucket.class);
 	}
 
 	@Test
 	public void testGetEventMessageStoreAlwaysReturnsTheSameObject() throws Exception {
-		final EventMessageStoreInterface eventMessageStoreOne = StratagyBucket
+		final EventMessageStoreInterface eventMessageStoreOne = StrategyBucket
 				.getEventMessageStore();
-		final EventMessageStoreInterface eventMessageStoreTwo = StratagyBucket
+		final EventMessageStoreInterface eventMessageStoreTwo = StrategyBucket
 				.getEventMessageStore();
 
 		assertSame(eventMessageStoreOne, eventMessageStoreTwo);
@@ -28,19 +33,19 @@ public class StratagyBucketTest extends AssertTestCase {
 	public void testSetEventMessageStoreSetsCorrectObject() throws Exception {
 		final MockEventMessageStore mockEventMessageStore = new MockEventMessageStore();
 
-		assertNotSame(mockEventMessageStore, StratagyBucket.getEventMessageStore());
-		StratagyBucket.setEventMessageStore(mockEventMessageStore);
-		assertSame(mockEventMessageStore, StratagyBucket.getEventMessageStore());
+		assertNotSame(mockEventMessageStore, StrategyBucket.getEventMessageStore());
+		StrategyBucket.setEventMessageStore(mockEventMessageStore);
+		assertSame(mockEventMessageStore, StrategyBucket.getEventMessageStore());
 	}
 
 	@Test
 	public void testImageStoreStartsNull_GetImageStoreReturnsSetObject() throws Exception {
 		final MockImageStore mockImageStore = new MockImageStore();
 
-		assertNull(StratagyBucket.getImageStore());
+		assertNull(StrategyBucket.getImageStore());
 
-		StratagyBucket.setImageStore(mockImageStore);
+		StrategyBucket.setImageStore(mockImageStore);
 
-		assertSame(mockImageStore, StratagyBucket.getImageStore());
+		assertSame(mockImageStore, StrategyBucket.getImageStore());
 	}
 }

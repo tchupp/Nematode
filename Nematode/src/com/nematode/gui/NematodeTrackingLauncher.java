@@ -1,5 +1,8 @@
 package com.nematode.gui;
 
+import java.io.IOException;
+
+import com.nematode.bucket.StrategyBucket;
 import com.nematode.gui.main.MainWindow;
 import com.nematode.gui.main.MainWindowControllerInterface;
 import com.nematode.gui.main.MainWindowViewController;
@@ -11,6 +14,12 @@ public class NematodeTrackingLauncher implements NematodeTrackingLauncherInterfa
 	private MainWindowControllerInterface viewController;
 
 	public NematodeTrackingLauncher() {
+		try {
+			StrategyBucket.setImageStore(new ImageStore());
+		} catch (final IOException e) {
+			e.printStackTrace();
+		}
+
 		final ImageResizer imageResizer = new ImageResizer();
 		final MainWindow mainWindow = new MainWindow(imageResizer);
 		final VideoMatriarch videoMatriarch = new VideoMatriarch();
