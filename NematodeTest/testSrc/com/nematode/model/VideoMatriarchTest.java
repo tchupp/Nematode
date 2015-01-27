@@ -47,7 +47,7 @@ public class VideoMatriarchTest extends AssertTestCase {
 	}
 
 	@Test
-	public void testStartCallsStartOnVideo() throws Exception {
+	public void testStartVideoCallsStartOnVideo() throws Exception {
 		final VideoMatriarch videoMatriarch = new VideoMatriarch();
 		final MockVideo mockVideo = new MockVideo();
 		videoMatriarch.setVideo(mockVideo);
@@ -58,7 +58,7 @@ public class VideoMatriarchTest extends AssertTestCase {
 	}
 
 	@Test
-	public void testStopCallsStopOnVideo() throws Exception {
+	public void testStopVideoCallsStopOnVideo() throws Exception {
 		final VideoMatriarch videoMatriarch = new VideoMatriarch();
 		final MockVideo mockVideo = new MockVideo();
 		videoMatriarch.setVideo(mockVideo);
@@ -66,5 +66,18 @@ public class VideoMatriarchTest extends AssertTestCase {
 		assertFalse(mockVideo.wasStopCalled());
 		videoMatriarch.stopVideo();
 		assertTrue(mockVideo.wasStopCalled());
+	}
+
+	@Test
+	public void testStartSetsIsRunningToTrue_StopVideoSetsIsRunningToFalse() throws Exception {
+		final VideoMatriarch videoMatriarch = new VideoMatriarch();
+		final MockVideo mockVideo = new MockVideo();
+		videoMatriarch.setVideo(mockVideo);
+
+		assertFalse(videoMatriarch.isRunning());
+		videoMatriarch.startVideo();
+		assertTrue(videoMatriarch.isRunning());
+		videoMatriarch.stopVideo();
+		assertFalse(videoMatriarch.isRunning());
 	}
 }

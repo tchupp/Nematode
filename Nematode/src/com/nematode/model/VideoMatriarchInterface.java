@@ -12,4 +12,6 @@ public interface VideoMatriarchInterface {
 
 	public void stopVideo();
 
+	public boolean isRunning();
+
 }

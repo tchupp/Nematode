@@ -10,6 +10,7 @@ public class MockVideoMatriarch implements VideoMatriarchInterface {
 	private boolean stopVideoWasCalled;
 	private boolean grabCurrentFrameWasCalled;
 	private Mat currentFrameToReturn;
+	private boolean isRunning;
 
 	public VideoInterface getVideo() {
 		return this.video;
@@ -55,5 +56,14 @@ public class MockVideoMatriarch implements VideoMatriarchInterface {
 
 	public boolean wasStopVideoCalled() {
 		return this.stopVideoWasCalled;
+	}
+
+	@Override
+	public boolean isRunning() {
+		return this.isRunning;
+	}
+
+	public void setRunning(final boolean isRunning) {
+		this.isRunning = isRunning;
 	}
 }

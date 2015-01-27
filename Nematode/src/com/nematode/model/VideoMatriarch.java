@@ -5,6 +5,7 @@ import org.bytedeco.javacpp.opencv_core.Mat;
 public class VideoMatriarch implements VideoMatriarchInterface {
 
 	private VideoInterface video;
+	private boolean isRunning;
 
 	public VideoMatriarch() {
 		this.video = new NullVideo();
@@ -27,10 +28,17 @@ public class VideoMatriarch implements VideoMatriarchInterface {
 	@Override
 	public void startVideo() {
 		this.video.start();
+		this.isRunning = true;
 	}
 
 	@Override
 	public void stopVideo() {
 		this.video.stop();
+		this.isRunning = false;
+	}
+
+	@Override
+	public boolean isRunning() {
+		return this.isRunning;
 	}
 }

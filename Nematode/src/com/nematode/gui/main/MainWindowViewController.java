@@ -45,8 +45,10 @@ public class MainWindowViewController implements MainWindowControllerInterface {
 
 	@Override
 	public void playButtonPressed() {
+		if (!this.videoMatriarch.isRunning()) {
+			this.videoMatriarch.startVideo();
+		}
 		this.playVideoTimer.start();
-		this.videoMatriarch.startVideo();
 	}
 
 	@Override
@@ -54,6 +56,7 @@ public class MainWindowViewController implements MainWindowControllerInterface {
 		this.playVideoTimer.stop();
 	}
 
+	@Override
 	public void stopButtonPressed() {
 		this.playVideoTimer.stop();
 		this.videoMatriarch.stopVideo();

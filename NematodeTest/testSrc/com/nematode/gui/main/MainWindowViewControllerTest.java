@@ -199,15 +199,36 @@ public class MainWindowViewControllerTest extends AssertTestCase {
 	}
 
 	@Test
-	public void testPlayButtonPressedCallsStartVideoOnVideoMatriarch() throws Exception {
+	public void testPlayButtonPressedCallsStartVideoOnVideoMatriarch_VideoNotAlreadyRunning()
+			throws Exception {
 		final MockVideoMatriarch mockVideoMatriarch = new MockVideoMatriarch();
 
 		final MainWindowViewController mainWindowViewController = new MainWindowViewController(
 				new MockMainWindow(), mockVideoMatriarch);
 
 		assertFalse(mockVideoMatriarch.wasStartVideoCalled());
+
 		mainWindowViewController.playButtonPressed();
+
 		assertTrue(mockVideoMatriarch.wasStartVideoCalled());
+	}
+
+	@Test
+	public void testPlayButtonPressedDoesntCallStartOnVideoMatriarch_IfVideoAlreadyRunning()
+			throws Exception {
+		final MockVideoMatriarch mockVideoMatriarch = new MockVideoMatriarch();
+		mockVideoMatriarch.setRunning(true);
+
+		final MainWindowViewController mainWindowViewController = new MainWindowViewController(
+				new MockMainWindow(), mockVideoMatriarch);
+
+		assertFalse(mockVideoMatriarch.wasStartVideoCalled());
+		assertTrue(mockVideoMatriarch.isRunning());
+
+		mainWindowViewController.playButtonPressed();
+
+		assertFalse(mockVideoMatriarch.wasStartVideoCalled());
+		assertTrue(mockVideoMatriarch.isRunning());
 	}
 
 	@Test
