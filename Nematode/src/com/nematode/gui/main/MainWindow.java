@@ -288,6 +288,11 @@ public class MainWindow extends AbstractMainWindow {
 	}
 
 	@Override
+	public void addListenerToStopButton(final MainWindowActionListener listener) {
+		this.stopButton.addActionListener(listener);
+	}
+
+	@Override
 	public void addListenerToOpenVideoButton(final MainWindowActionListener listener) {
 		this.openVideoButton.addActionListener(listener);
 	}

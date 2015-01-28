@@ -133,6 +133,22 @@ public class MainWindowViewControllerTest extends AssertTestCase {
 	}
 
 	@Test
+	public void testConstuctionAddsCorrectActionListnerToStopButton() throws Exception {
+		final MockMainWindow mockMainWindow = new MockMainWindow();
+
+		assertFalse(mockMainWindow.wasAddListenerToStopButtonCalled());
+
+		final MainWindowViewController mainWindowViewController = new MainWindowViewController(
+				mockMainWindow, new MockVideoMatriarch());
+
+		assertTrue(mockMainWindow.wasAddListenerToStopButtonCalled());
+
+		final StopButtonListener stopButtonListener = assertIsOfTypeAndGet(
+				StopButtonListener.class, mockMainWindow.getListenerToAddToStopButton());
+		assertSame(mainWindowViewController, stopButtonListener.getViewController());
+	}
+
+	@Test
 	public void testConstructionAddsCorrectActionListenerToOpenVideoButton() throws Exception {
 		final MockMainWindow mockMainWindow = new MockMainWindow();
 

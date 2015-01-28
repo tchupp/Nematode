@@ -93,6 +93,21 @@ public class MainWindowTest extends AssertTestCase {
 	}
 
 	@Test
+	public void testAddListenerToStopButtonAddsCorrectListenerToStopButton() throws Exception {
+		final MockMainWindowActionListener mockActionListener = new MockMainWindowActionListener();
+		final MainWindow mainWindow = new MainWindow(new MockImageResizer());
+
+		final JButton stopButton = mainWindow.getStopButton();
+		assertEquals(0, stopButton.getActionListeners().length);
+
+		mainWindow.addListenerToStopButton(mockActionListener);
+
+		final ActionListener[] actionListeners = stopButton.getActionListeners();
+		assertEquals(1, actionListeners.length);
+		assertSame(mockActionListener, actionListeners[0]);
+	}
+
+	@Test
 	public void testAddListenerToOpenVideoButtonAddsCorrectListenerToOpenVideoButton()
 			throws Exception {
 		final MockMainWindowActionListener mockActionListener = new MockMainWindowActionListener();

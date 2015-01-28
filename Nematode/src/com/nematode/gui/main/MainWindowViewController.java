@@ -28,6 +28,7 @@ public class MainWindowViewController implements MainWindowControllerInterface {
 		this.mainWindow.addWindowListener(new MainWindowCloseListener(this));
 		this.mainWindow.addListenerToPlayButton(new PlayButtonListener(this));
 		this.mainWindow.addListenerToPauseButton(new PauseButtonListener(this));
+		this.mainWindow.addListenerToStopButton(new StopButtonListener(this));
 		this.mainWindow.addListenerToOpenVideoButton(new OpenVideoButtonListener(this,
 				new VideoFileChooser()));
 	}

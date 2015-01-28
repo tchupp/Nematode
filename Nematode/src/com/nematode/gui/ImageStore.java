@@ -21,13 +21,13 @@ public class ImageStore implements ImageStoreInterface {
 	public ImageStore() throws IOException {
 		this.playButtonImageFile = new File("resources/gui/buttons/playButtonImage.png");
 		this.pauseButtonImageFile = new File("resources/gui/buttons/pauseButtonImage.png");
-		this.mainWindowBackgroundImageFile = new File("resources/gui/backgrounds/darkWood.jpg");
 		this.stopButtonImageFile = new File("resources/gui/backgrounds/darkWood.jpg");
+		this.mainWindowBackgroundImageFile = new File("resources/gui/backgrounds/darkWood.jpg");
 
 		this.playButtonImage = ImageIO.read(this.playButtonImageFile);
 		this.pauseButtonImage = ImageIO.read(this.pauseButtonImageFile);
-		this.mainWindowBackgroundImage = ImageIO.read(this.mainWindowBackgroundImageFile);
 		this.stopButtonImage = ImageIO.read(this.stopButtonImageFile);
+		this.mainWindowBackgroundImage = ImageIO.read(this.mainWindowBackgroundImageFile);
 	}
 
 	@Override

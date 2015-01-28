@@ -16,6 +16,8 @@ public class MockMainWindow extends AbstractMainWindow {
 	private Mat imageToDisplay;
 	private boolean displayImageWasCalled;
 	private boolean disposeWasCalled;
+	private MainWindowActionListener listenerToAddToStopButton;
+	private boolean addListenerToStopButtonWasCalled;
 
 	@Override
 	public void addListenerToPlayButton(final MainWindowActionListener listener) {
@@ -43,6 +45,20 @@ public class MockMainWindow extends AbstractMainWindow {
 
 	public MainWindowActionListener getListenerToAddToPauseButton() {
 		return this.listenerToAddToPauseButton;
+	}
+
+	@Override
+	public void addListenerToStopButton(final MainWindowActionListener listener) {
+		this.listenerToAddToStopButton = listener;
+		this.addListenerToStopButtonWasCalled = true;
+	}
+
+	public boolean wasAddListenerToStopButtonCalled() {
+		return this.addListenerToStopButtonWasCalled;
+	}
+
+	public MainWindowActionListener getListenerToAddToStopButton() {
+		return this.listenerToAddToStopButton;
 	}
 
 	@Override
@@ -96,4 +112,5 @@ public class MockMainWindow extends AbstractMainWindow {
 	public boolean wasDisposeCalled() {
 		return this.disposeWasCalled;
 	}
+
 }

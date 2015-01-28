@@ -14,6 +14,8 @@ public abstract class AbstractMainWindow extends ExtendableJFrame {
 
 	public abstract void addListenerToOpenVideoButton(final MainWindowActionListener listener);
 
+	public abstract void addListenerToStopButton(MainWindowActionListener listener);
+
 	public abstract void displayImage(Mat displayImage);
 
 }
