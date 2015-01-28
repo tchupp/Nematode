@@ -11,6 +11,7 @@ public class MockVideo implements VideoInterface {
 	private boolean startWasCalled;
 	private boolean stopWasCalled;
 	private double frameRateToReturn;
+	private int frameLengthToReturn;
 
 	@Override
 	public void start() {
@@ -89,7 +90,11 @@ public class MockVideo implements VideoInterface {
 
 	@Override
 	public int getFrameLength() {
-		return 0;
+		return this.frameLengthToReturn;
+	}
+
+	public void setFrameLengthToReturn(final int frameLength) {
+		this.frameLengthToReturn = frameLength;
 	}
 
 	@Override

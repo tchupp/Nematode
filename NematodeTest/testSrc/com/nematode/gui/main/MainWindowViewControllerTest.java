@@ -203,6 +203,7 @@ public class MainWindowViewControllerTest extends AssertTestCase {
 		final MainWindowViewController mainWindowViewController = new MainWindowViewController(
 				mainWindow, mockVideoMatriarch);
 
+		mockVideoMatriarch.setRunning(true);
 		assertFalse(mockVideoMatriarch.wasGrabCurrentFrameCalled());
 		assertFalse(mainWindow.wasDisplayImageCalled());
 
@@ -212,6 +213,35 @@ public class MainWindowViewControllerTest extends AssertTestCase {
 		assertTrue(mainWindow.wasDisplayImageCalled());
 
 		assertSame(currentFrame, mainWindow.getImageToDisplay());
+	}
+
+	@Test
+	public void testShowNextFrameCallsStopButtonPressedIfIsRunningIsFalse() throws Exception {
+		final MockVideoMatriarch mockVideoMatriarch = new MockVideoMatriarch();
+		final MockMainWindow mockMainWindow = new MockMainWindow();
+		final MainWindowViewController mainWindowViewController = new MainWindowViewController(
+				mockMainWindow, mockVideoMatriarch);
+
+		final PlayVideoTimer videoTimer = assertIsOfTypeAndGet(PlayVideoTimer.class,
+				mainWindowViewController.getPlayVideoTimer());
+		videoTimer.start();
+		assertTrue(videoTimer.isRunning());
+
+		mockVideoMatriarch.setRunning(true);
+		mockMainWindow.setDisplayImageWasCalled(false);
+
+		mainWindowViewController.showNextFrame();
+		assertTrue(videoTimer.isRunning());
+		assertFalse(mockVideoMatriarch.wasStopVideoCalled());
+		assertTrue(mockMainWindow.wasDisplayImageCalled());
+
+		mockVideoMatriarch.setRunning(false);
+		mockMainWindow.setDisplayImageWasCalled(false);
+
+		mainWindowViewController.showNextFrame();
+		assertFalse(videoTimer.isRunning());
+		assertTrue(mockVideoMatriarch.wasStopVideoCalled());
+		assertFalse(mockMainWindow.wasDisplayImageCalled());
 	}
 
 	@Test

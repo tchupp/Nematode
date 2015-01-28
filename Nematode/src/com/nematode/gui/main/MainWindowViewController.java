@@ -65,6 +65,11 @@ public class MainWindowViewController implements MainWindowControllerInterface {
 
 	@Override
 	public void showNextFrame() {
+		if (!this.videoMatriarch.isRunning()) {
+			stopButtonPressed();
+			return;
+		}
+
 		final Mat currentFrame = this.videoMatriarch.grabCurrentFrame();
 		this.mainWindow.displayImage(currentFrame);
 	}

@@ -80,4 +80,52 @@ public class VideoMatriarchTest extends AssertTestCase {
 		videoMatriarch.stopVideo();
 		assertFalse(videoMatriarch.isRunning());
 	}
+
+	@Test
+	public void testCurrentFrameNumberStartsAtOne_IncreasedByGrabCurrentFrame() throws Exception {
+		final VideoMatriarch videoMatriarch = new VideoMatriarch();
+
+		assertEquals(1, videoMatriarch.getCurrentFrameNumber());
+		videoMatriarch.grabCurrentFrame();
+		assertEquals(2, videoMatriarch.getCurrentFrameNumber());
+		videoMatriarch.grabCurrentFrame();
+		assertEquals(3, videoMatriarch.getCurrentFrameNumber());
+	}
+
+	@Test
+	public void testStartVideoAndStopVideoSetCurrentFrameNumberToOne() throws Exception {
+		final VideoMatriarch videoMatriarch = new VideoMatriarch();
+
+		videoMatriarch.grabCurrentFrame();
+		videoMatriarch.grabCurrentFrame();
+		assertEquals(3, videoMatriarch.getCurrentFrameNumber());
+
+		videoMatriarch.startVideo();
+		assertEquals(1, videoMatriarch.getCurrentFrameNumber());
+
+		videoMatriarch.grabCurrentFrame();
+		videoMatriarch.grabCurrentFrame();
+		assertEquals(3, videoMatriarch.getCurrentFrameNumber());
+
+		videoMatriarch.stopVideo();
+		assertEquals(1, videoMatriarch.getCurrentFrameNumber());
+	}
+
+	@Test
+	public void testIfGrabCurrentFramePutsCurrentFrameNumberHigherThanVideosFrameLength_IsRunningSetToFalse()
+			throws Exception {
+		final VideoMatriarch videoMatriarch = new VideoMatriarch();
+		final MockVideo mockVideo = new MockVideo();
+		videoMatriarch.setVideo(mockVideo);
+		mockVideo.setFrameLengthToReturn(4);
+
+		videoMatriarch.startVideo();
+		videoMatriarch.grabCurrentFrame();
+		assertEquals(2, videoMatriarch.getCurrentFrameNumber());
+		assertTrue(videoMatriarch.isRunning());
+
+		videoMatriarch.grabCurrentFrame();
+		assertEquals(3, videoMatriarch.getCurrentFrameNumber());
+		assertFalse(videoMatriarch.isRunning());
+	}
 }

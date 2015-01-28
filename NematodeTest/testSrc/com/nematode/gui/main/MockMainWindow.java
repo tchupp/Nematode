@@ -100,6 +100,10 @@ public class MockMainWindow extends AbstractMainWindow {
 		return this.displayImageWasCalled;
 	}
 
+	public void setDisplayImageWasCalled(final boolean displayImageWasCalled) {
+		this.displayImageWasCalled = displayImageWasCalled;
+	}
+
 	public Mat getImageToDisplay() {
 		return this.imageToDisplay;
 	}
