@@ -40,6 +40,7 @@ public class ImageStore implements ImageStoreInterface {
 		return this.pauseButtonImage;
 	}
 
+	@Override
 	public BufferedImage getStopButtonImage() {
 		return this.stopButtonImage;
 	}

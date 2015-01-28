@@ -30,9 +30,10 @@ public class MainWindow extends AbstractMainWindow {
 	private static final long serialVersionUID = 1L;
 	private JButton playButton;
 	private JButton pauseButton;
-	private JLabel videoLabel;
 	private JButton openVideoButton;
+	private JLabel videoLabel;
 	private final ImageResizerInterface imageResizer;
+	private JButton stopButton;
 
 	public MainWindow(final ImageResizerInterface imageResizer) {
 		this.imageResizer = imageResizer;
@@ -42,6 +43,7 @@ public class MainWindow extends AbstractMainWindow {
 
 		setupPlayButton();
 		setupPauseButton();
+		setupStopButton();
 		setupVideoLabel();
 		setupOpenVideoButton();
 
@@ -190,10 +192,18 @@ public class MainWindow extends AbstractMainWindow {
 		final GridBagConstraints pauseButtonConstraints = new GridBagConstraints();
 		pauseButtonConstraints.gridx = 1;
 		pauseButtonConstraints.gridy = 0;
-		pauseButtonConstraints.weightx = 1.0;
+		pauseButtonConstraints.weightx = 0.0;
 		pauseButtonConstraints.anchor = GridBagConstraints.WEST;
 		pauseButtonConstraints.insets = new Insets(5, 5, 5, 5);
 		toolbarPanel.add(this.pauseButton, pauseButtonConstraints);
+
+		final GridBagConstraints stopButtonConstraints = new GridBagConstraints();
+		stopButtonConstraints.gridx = 2;
+		stopButtonConstraints.gridy = 0;
+		stopButtonConstraints.weightx = 1.0;
+		stopButtonConstraints.anchor = GridBagConstraints.WEST;
+		stopButtonConstraints.insets = new Insets(5, 5, 5, 5);
+		toolbarPanel.add(this.stopButton, stopButtonConstraints);
 
 		scanningPanel.add(toolbarPanel, toolbarPanelConstraints);
 	}
@@ -240,6 +250,15 @@ public class MainWindow extends AbstractMainWindow {
 
 		final ImageIcon pauseButtonImageIcon = new ImageIcon(GuiConstants.PAUSE_BUTTON_IMAGE_PATH);
 		this.pauseButton.setIcon(pauseButtonImageIcon);
+	}
+
+	private void setupStopButton() {
+		this.stopButton = new JButton();
+		this.stopButton.setName("stopButton");
+		this.stopButton.setPreferredSize(new Dimension(20, 20));
+
+		final ImageIcon stopButtonImageIcon = new ImageIcon(GuiConstants.STOP_BUTTON_IMAGE_PATH);
+		this.stopButton.setIcon(stopButtonImageIcon);
 	}
 
 	private void setupVideoLabel() {
@@ -295,6 +314,10 @@ public class MainWindow extends AbstractMainWindow {
 
 	public JButton getPauseButton() {
 		return this.pauseButton;
+	}
+
+	public JButton getStopButton() {
+		return this.stopButton;
 	}
 
 	public JLabel getVideoLabel() {
