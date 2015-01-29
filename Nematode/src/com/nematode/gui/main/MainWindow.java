@@ -1,7 +1,6 @@
 package com.nematode.gui.main;
 
 import java.awt.Container;
-import java.awt.Dimension;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Insets;
@@ -28,12 +27,10 @@ import com.nematode.image.processing.ImageResizerInterface;
 public class MainWindow extends AbstractMainWindow {
 
 	private static final long serialVersionUID = 1L;
-	private JButton playButton;
-	private JButton pauseButton;
 	private JButton openVideoButton;
 	private JLabel videoLabel;
 	private final ImageResizerInterface imageResizer;
-	private JButton stopButton;
+	private ToolbarPanel toolbarPanel;
 
 	public MainWindow(final ImageResizerInterface imageResizer) {
 		this.imageResizer = imageResizer;
@@ -41,9 +38,6 @@ public class MainWindow extends AbstractMainWindow {
 		this.setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
 		this.setSize(GuiConstants.VIDEO_FRAME_WIDTH, GuiConstants.VIDEO_FRAME_HEIGHT);
 
-		setupPlayButton();
-		setupPauseButton();
-		setupStopButton();
 		setupVideoLabel();
 		setupOpenVideoButton();
 
@@ -175,37 +169,9 @@ public class MainWindow extends AbstractMainWindow {
 		toolbarPanelConstraints.anchor = GridBagConstraints.PAGE_START;
 		toolbarPanelConstraints.fill = GridBagConstraints.BOTH;
 
-		final ExtendableJPanel toolbarPanel = new ExtendableJPanel();
-		toolbarPanel.setName("toolbarPanel");
-		toolbarPanel.setLayout(new GridBagLayout());
-		toolbarPanel.setBackground(GuiConstants.backgroundColor);
-		addCompoundBorder(toolbarPanel);
+		this.toolbarPanel = new ToolbarPanel();
 
-		final GridBagConstraints playButtonConstraints = new GridBagConstraints();
-		playButtonConstraints.gridx = 0;
-		playButtonConstraints.gridy = 0;
-		playButtonConstraints.weightx = 0.0;
-		playButtonConstraints.anchor = GridBagConstraints.WEST;
-		playButtonConstraints.insets = new Insets(5, 5, 5, 5);
-		toolbarPanel.add(this.playButton, playButtonConstraints);
-
-		final GridBagConstraints pauseButtonConstraints = new GridBagConstraints();
-		pauseButtonConstraints.gridx = 1;
-		pauseButtonConstraints.gridy = 0;
-		pauseButtonConstraints.weightx = 0.0;
-		pauseButtonConstraints.anchor = GridBagConstraints.WEST;
-		pauseButtonConstraints.insets = new Insets(5, 5, 5, 5);
-		toolbarPanel.add(this.pauseButton, pauseButtonConstraints);
-
-		final GridBagConstraints stopButtonConstraints = new GridBagConstraints();
-		stopButtonConstraints.gridx = 2;
-		stopButtonConstraints.gridy = 0;
-		stopButtonConstraints.weightx = 1.0;
-		stopButtonConstraints.anchor = GridBagConstraints.WEST;
-		stopButtonConstraints.insets = new Insets(5, 5, 5, 5);
-		toolbarPanel.add(this.stopButton, stopButtonConstraints);
-
-		scanningPanel.add(toolbarPanel, toolbarPanelConstraints);
+		scanningPanel.add(this.toolbarPanel, toolbarPanelConstraints);
 	}
 
 	private void addStatusPanel(final ExtendableJPanel scanningPanel) {
@@ -234,33 +200,6 @@ public class MainWindow extends AbstractMainWindow {
 		panel.setBorder(compoundBorder);
 	}
 
-	private void setupPlayButton() {
-		this.playButton = new JButton();
-		this.playButton.setName("playButton");
-		this.playButton.setPreferredSize(new Dimension(20, 20));
-
-		final ImageIcon playButtonImageIcon = new ImageIcon(GuiConstants.PLAY_BUTTON_IMAGE_PATH);
-		this.playButton.setIcon(playButtonImageIcon);
-	}
-
-	private void setupPauseButton() {
-		this.pauseButton = new JButton();
-		this.pauseButton.setName("pauseButton");
-		this.pauseButton.setPreferredSize(new Dimension(20, 20));
-
-		final ImageIcon pauseButtonImageIcon = new ImageIcon(GuiConstants.PAUSE_BUTTON_IMAGE_PATH);
-		this.pauseButton.setIcon(pauseButtonImageIcon);
-	}
-
-	private void setupStopButton() {
-		this.stopButton = new JButton();
-		this.stopButton.setName("stopButton");
-		this.stopButton.setPreferredSize(new Dimension(20, 20));
-
-		final ImageIcon stopButtonImageIcon = new ImageIcon(GuiConstants.STOP_BUTTON_IMAGE_PATH);
-		this.stopButton.setIcon(stopButtonImageIcon);
-	}
-
 	private void setupVideoLabel() {
 		final ImageIcon defaultImageIcon = new ImageIcon(new BufferedImage(
 				GuiConstants.DISPLAY_WIDTH, GuiConstants.DISPLAY_HEIGHT,
@@ -279,17 +218,20 @@ public class MainWindow extends AbstractMainWindow {
 
 	@Override
 	public void addListenerToPlayButton(final MainWindowActionListener listener) {
-		this.playButton.addActionListener(listener);
+		final JButton playButton = this.toolbarPanel.getPlayButton();
+		playButton.addActionListener(listener);
 	}
 
 	@Override
 	public void addListenerToPauseButton(final MainWindowActionListener listener) {
-		this.pauseButton.addActionListener(listener);
+		final JButton pauseButton = this.toolbarPanel.getPauseButton();
+		pauseButton.addActionListener(listener);
 	}
 
 	@Override
 	public void addListenerToStopButton(final MainWindowActionListener listener) {
-		this.stopButton.addActionListener(listener);
+		final JButton stopButton = this.toolbarPanel.getStopButton();
+		stopButton.addActionListener(listener);
 	}
 
 	@Override
@@ -313,16 +255,20 @@ public class MainWindow extends AbstractMainWindow {
 		return this.imageResizer;
 	}
 
+	public ToolbarPanel getToolbarPanel() {
+		return this.toolbarPanel;
+	}
+
 	public JButton getPlayButton() {
-		return this.playButton;
+		return this.toolbarPanel.getPlayButton();
 	}
 
 	public JButton getPauseButton() {
-		return this.pauseButton;
+		return this.toolbarPanel.getPauseButton();
 	}
 
 	public JButton getStopButton() {
-		return this.stopButton;
+		return this.toolbarPanel.getStopButton();
 	}
 
 	public JLabel getVideoLabel() {

@@ -5,7 +5,6 @@ import java.awt.Dimension;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Insets;
-import java.awt.MediaTracker;
 import java.awt.event.ActionListener;
 import java.awt.image.BufferedImage;
 import java.io.File;
@@ -21,32 +20,26 @@ import org.bytedeco.javacpp.Loader;
 import org.bytedeco.javacpp.opencv_core.Mat;
 import org.junit.Test;
 
+import com.nematode.bucket.StrategyBucket;
 import com.nematode.gui.ExtendableJPanel;
 import com.nematode.gui.GuiConstants;
 import com.nematode.gui.ImagePanel;
+import com.nematode.gui.ImageStore;
 import com.nematode.image.processing.MockImageResizer;
 import com.nematode.unittesting.AssertTestCase;
 
 public class MainWindowTest extends AssertTestCase {
 
 	private BufferedImage expectedBackgroundImage;
-	private BufferedImage expectedPlayButtonImage;
-	private BufferedImage expectedPauseButtonImage;
-	private BufferedImage expectedStopButtonImage;
 
 	@Override
 	protected void setUp() throws Exception {
 		Loader.load(org.bytedeco.javacpp.opencv_core.class);
 
+		StrategyBucket.setImageStore(new ImageStore());
+
 		this.expectedBackgroundImage = ImageIO.read(new File(
 				GuiConstants.MAIN_WINDOW_BACKGROUND_IMAGE_PATH));
-
-		this.expectedPlayButtonImage = ImageIO.read(new File(GuiConstants.PLAY_BUTTON_IMAGE_PATH));
-
-		this.expectedPauseButtonImage = ImageIO
-				.read(new File(GuiConstants.PAUSE_BUTTON_IMAGE_PATH));
-
-		this.expectedStopButtonImage = ImageIO.read(new File(GuiConstants.STOP_BUTTON_IMAGE_PATH));
 	}
 
 	@Test
@@ -441,127 +434,6 @@ public class MainWindowTest extends AssertTestCase {
 	}
 
 	@Test
-	public void testToolbarPanelIsCorrectlySetUp() throws Exception {
-		final MainWindow mainWindow = new MainWindow(new MockImageResizer());
-
-		final Container contentPane = mainWindow.getContentPane();
-		final ExtendableJPanel scanningPanel = assertIsOfTypeAndGet(ExtendableJPanel.class,
-				contentPane.getComponent(1));
-
-		final ExtendableJPanel toolbarPanel = assertIsOfTypeAndGet(ExtendableJPanel.class,
-				scanningPanel.getComponent(1));
-
-		assertEquals("toolbarPanel", toolbarPanel.getName());
-
-		assertEquals(GuiConstants.backgroundColor, toolbarPanel.getBackground());
-		assertEquals(3, toolbarPanel.getComponentCount());
-		assertTrue(toolbarPanel.isOpaque());
-
-		assertIsOfTypeAndGet(CompoundBorder.class, toolbarPanel.getBorder());
-		assertIsOfTypeAndGet(GridBagLayout.class, toolbarPanel.getLayout());
-	}
-
-	@Test
-	public void testPlayButtonIsCorrectlySetUpAndAddedToToolbarPanel() throws Exception {
-		final MainWindow mainWindow = new MainWindow(new MockImageResizer());
-
-		final Container contentPane = mainWindow.getContentPane();
-		final ExtendableJPanel scanningPanel = assertIsOfTypeAndGet(ExtendableJPanel.class,
-				contentPane.getComponent(1));
-
-		final ExtendableJPanel toolbarPanel = assertIsOfTypeAndGet(ExtendableJPanel.class,
-				scanningPanel.getComponent(1));
-		final GridBagLayout toolbarPanelLayout = assertIsOfTypeAndGet(GridBagLayout.class,
-				toolbarPanel.getLayout());
-
-		final JButton playButton = assertIsOfTypeAndGet(JButton.class, toolbarPanel.getComponent(0));
-		assertSame(mainWindow.getPlayButton(), playButton);
-		assertEquals("playButton", playButton.getName());
-		assertEquals(new Dimension(20, 20), playButton.getPreferredSize());
-
-		final GridBagConstraints constraints = toolbarPanelLayout.getConstraints(playButton);
-		assertEquals(0, constraints.gridx);
-		assertEquals(0, constraints.gridy);
-		assertEquals(0.0, constraints.weightx);
-		assertEquals(GridBagConstraints.WEST, constraints.anchor);
-		assertEquals(new Insets(5, 5, 5, 5), constraints.insets);
-
-		final ImageIcon buttonImageIcon = assertIsOfTypeAndGet(ImageIcon.class,
-				playButton.getIcon());
-
-		assertEquals(MediaTracker.COMPLETE, buttonImageIcon.getImageLoadStatus());
-		assertEquals(this.expectedPlayButtonImage.getWidth(), buttonImageIcon.getIconWidth());
-		assertEquals(this.expectedPlayButtonImage.getHeight(), buttonImageIcon.getIconHeight());
-	}
-
-	@Test
-	public void testPauseButtonIsCorrectlySetUpAndAddedToToolbarPanel() throws Exception {
-		final MainWindow mainWindow = new MainWindow(new MockImageResizer());
-
-		final Container contentPane = mainWindow.getContentPane();
-		final ExtendableJPanel scanningPanel = assertIsOfTypeAndGet(ExtendableJPanel.class,
-				contentPane.getComponent(1));
-
-		final ExtendableJPanel toolbarPanel = assertIsOfTypeAndGet(ExtendableJPanel.class,
-				scanningPanel.getComponent(1));
-		final GridBagLayout toolbarPanelLayout = assertIsOfTypeAndGet(GridBagLayout.class,
-				toolbarPanel.getLayout());
-
-		final JButton pauseButton = assertIsOfTypeAndGet(JButton.class,
-				toolbarPanel.getComponent(1));
-		assertSame(mainWindow.getPauseButton(), pauseButton);
-		assertEquals("pauseButton", pauseButton.getName());
-		assertEquals(new Dimension(20, 20), pauseButton.getPreferredSize());
-
-		final GridBagConstraints constraints = toolbarPanelLayout.getConstraints(pauseButton);
-		assertEquals(1, constraints.gridx);
-		assertEquals(0, constraints.gridy);
-		assertEquals(0.0, constraints.weightx);
-		assertEquals(GridBagConstraints.WEST, constraints.anchor);
-		assertEquals(new Insets(5, 5, 5, 5), constraints.insets);
-
-		final ImageIcon buttonImageIcon = assertIsOfTypeAndGet(ImageIcon.class,
-				pauseButton.getIcon());
-
-		assertEquals(MediaTracker.COMPLETE, buttonImageIcon.getImageLoadStatus());
-		assertEquals(this.expectedPauseButtonImage.getWidth(), buttonImageIcon.getIconWidth());
-		assertEquals(this.expectedPauseButtonImage.getHeight(), buttonImageIcon.getIconHeight());
-	}
-
-	@Test
-	public void testStopButtonIsCorrectlySetUpAndAddedToToolbarPanel() throws Exception {
-		final MainWindow mainWindow = new MainWindow(new MockImageResizer());
-
-		final Container contentPane = mainWindow.getContentPane();
-		final ExtendableJPanel scanningPanel = assertIsOfTypeAndGet(ExtendableJPanel.class,
-				contentPane.getComponent(1));
-
-		final ExtendableJPanel toolbarPanel = assertIsOfTypeAndGet(ExtendableJPanel.class,
-				scanningPanel.getComponent(1));
-		final GridBagLayout toolbarPanelLayout = assertIsOfTypeAndGet(GridBagLayout.class,
-				toolbarPanel.getLayout());
-
-		final JButton stopButton = assertIsOfTypeAndGet(JButton.class, toolbarPanel.getComponent(2));
-		assertSame(mainWindow.getStopButton(), stopButton);
-		assertEquals("stopButton", stopButton.getName());
-		assertEquals(new Dimension(20, 20), stopButton.getPreferredSize());
-
-		final GridBagConstraints constraints = toolbarPanelLayout.getConstraints(stopButton);
-		assertEquals(2, constraints.gridx);
-		assertEquals(0, constraints.gridy);
-		assertEquals(1.0, constraints.weightx);
-		assertEquals(GridBagConstraints.WEST, constraints.anchor);
-		assertEquals(new Insets(5, 5, 5, 5), constraints.insets);
-
-		final ImageIcon buttonImageIcon = assertIsOfTypeAndGet(ImageIcon.class,
-				stopButton.getIcon());
-
-		assertEquals(MediaTracker.COMPLETE, buttonImageIcon.getImageLoadStatus());
-		assertEquals(this.expectedStopButtonImage.getWidth(), buttonImageIcon.getIconWidth());
-		assertEquals(this.expectedStopButtonImage.getHeight(), buttonImageIcon.getIconHeight());
-	}
-
-	@Test
 	public void testToolbarPanelIsCorrectlyAddedToScanningPanel() throws Exception {
 		final MainWindow mainWindow = new MainWindow(new MockImageResizer());
 
@@ -571,8 +443,9 @@ public class MainWindowTest extends AssertTestCase {
 		final GridBagLayout scanningPanelLayout = assertIsOfTypeAndGet(GridBagLayout.class,
 				scanningPanel.getLayout());
 
-		final ExtendableJPanel toolbarPanel = assertIsOfTypeAndGet(ExtendableJPanel.class,
+		final ToolbarPanel toolbarPanel = assertIsOfTypeAndGet(ToolbarPanel.class,
 				scanningPanel.getComponent(1));
+		assertSame(mainWindow.getToolbarPanel(), toolbarPanel);
 
 		final GridBagConstraints toolbarPanelConstraints = scanningPanelLayout
 				.getConstraints(toolbarPanel);
@@ -582,6 +455,16 @@ public class MainWindowTest extends AssertTestCase {
 		assertEquals(0.1, toolbarPanelConstraints.weighty);
 		assertEquals(GridBagConstraints.PAGE_START, toolbarPanelConstraints.anchor);
 		assertEquals(GridBagConstraints.BOTH, toolbarPanelConstraints.fill);
+	}
+
+	@Test
+	public void testGettingToolbarButtonsReturnsCorrectButtons() throws Exception {
+		final MainWindow mainWindow = new MainWindow(new MockImageResizer());
+
+		final ToolbarPanel toolbarPanel = mainWindow.getToolbarPanel();
+		assertSame(toolbarPanel.getPlayButton(), mainWindow.getPlayButton());
+		assertSame(toolbarPanel.getPauseButton(), mainWindow.getPauseButton());
+		assertSame(toolbarPanel.getStopButton(), mainWindow.getStopButton());
 	}
 
 	@Test
