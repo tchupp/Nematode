@@ -5,10 +5,7 @@ import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Insets;
 import java.awt.image.BufferedImage;
-import java.io.File;
-import java.io.IOException;
 
-import javax.imageio.ImageIO;
 import javax.swing.BorderFactory;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -18,10 +15,11 @@ import javax.swing.border.CompoundBorder;
 
 import org.bytedeco.javacpp.opencv_core.Mat;
 
+import com.nematode.bucket.StrategyBucket;
 import com.nematode.gui.ExtendableJPanel;
 import com.nematode.gui.GuiConstants;
 import com.nematode.gui.ImagePanel;
-import com.nematode.image.NullBufferedImage;
+import com.nematode.gui.ImageStoreInterface;
 import com.nematode.image.processing.ImageResizerInterface;
 
 public class MainWindow extends AbstractMainWindow {
@@ -46,12 +44,8 @@ public class MainWindow extends AbstractMainWindow {
 	}
 
 	private void addContentPane() {
-		BufferedImage backgroundImage = new NullBufferedImage();
-		try {
-			backgroundImage = ImageIO
-					.read(new File(GuiConstants.MAIN_WINDOW_BACKGROUND_IMAGE_PATH));
-		} catch (final IOException exception) {
-		}
+		final ImageStoreInterface imageStore = StrategyBucket.getImageStore();
+		final BufferedImage backgroundImage = imageStore.getMainWindowBackgroundImage();
 
 		final Container contentPane = new ImagePanel(backgroundImage);
 		contentPane.setLayout(new GridBagLayout());
@@ -106,7 +100,7 @@ public class MainWindow extends AbstractMainWindow {
 		final ExtendableJPanel projectPanel = new ExtendableJPanel();
 		projectPanel.setName("projectPanel");
 		projectPanel.setLayout(new GridBagLayout());
-		projectPanel.setBackground(GuiConstants.backgroundColor);
+		projectPanel.setBackground(GuiConstants.BACKGROUND_COLOR);
 		addCompoundBorder(projectPanel);
 
 		final GridBagConstraints openVideoButtonConstraints = new GridBagConstraints();
@@ -131,7 +125,7 @@ public class MainWindow extends AbstractMainWindow {
 		final ExtendableJPanel trackingPanel = new ExtendableJPanel();
 		trackingPanel.setName("trackingPanel");
 		trackingPanel.setLayout(new GridBagLayout());
-		trackingPanel.setBackground(GuiConstants.backgroundColor);
+		trackingPanel.setBackground(GuiConstants.BACKGROUND_COLOR);
 		addCompoundBorder(trackingPanel);
 
 		controlPanel.add(trackingPanel, trackingPanelConstraints);
@@ -149,7 +143,7 @@ public class MainWindow extends AbstractMainWindow {
 		final ExtendableJPanel videoPanel = new ExtendableJPanel();
 		videoPanel.setName("videoPanel");
 		videoPanel.setLayout(new GridBagLayout());
-		videoPanel.setBackground(GuiConstants.backgroundColor);
+		videoPanel.setBackground(GuiConstants.BACKGROUND_COLOR);
 		addCompoundBorder(videoPanel);
 
 		final GridBagConstraints videoLabelConstraints = new GridBagConstraints();
@@ -185,7 +179,7 @@ public class MainWindow extends AbstractMainWindow {
 
 		final ExtendableJPanel statusPanel = new ExtendableJPanel();
 		statusPanel.setName("statusPanel");
-		statusPanel.setBackground(GuiConstants.backgroundColor);
+		statusPanel.setBackground(GuiConstants.BACKGROUND_COLOR);
 		addCompoundBorder(statusPanel);
 
 		scanningPanel.add(statusPanel, statusPanelConstraints);

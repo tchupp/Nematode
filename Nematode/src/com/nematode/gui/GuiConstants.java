@@ -22,6 +22,6 @@ public class GuiConstants {
 
 	public static final String STOP_BUTTON_IMAGE_PATH = "resources/gui/buttons/stopButtonImage.png";
 
-	public static final Color backgroundColor = new Color(0, 32, 64, 128);
+	public static final Color BACKGROUND_COLOR = new Color(0, 32, 64, 128);
 
 }

@@ -40,7 +40,7 @@ public class GuiConstantsTest extends AssertTestCase {
 
 	@Test
 	public void testBackgroundColor() throws Exception {
-		assertEquals(new Color(0, 32, 64, 128), GuiConstants.backgroundColor);
+		assertEquals(new Color(0, 32, 64, 128), GuiConstants.BACKGROUND_COLOR);
 	}
 
 }

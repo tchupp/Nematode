@@ -7,9 +7,7 @@ import java.awt.GridBagLayout;
 import java.awt.Insets;
 import java.awt.event.ActionListener;
 import java.awt.image.BufferedImage;
-import java.io.File;
 
-import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -36,10 +34,10 @@ public class MainWindowTest extends AssertTestCase {
 	protected void setUp() throws Exception {
 		Loader.load(org.bytedeco.javacpp.opencv_core.class);
 
-		StrategyBucket.setImageStore(new ImageStore());
+		final ImageStore imageStore = new ImageStore();
+		StrategyBucket.setImageStore(imageStore);
 
-		this.expectedBackgroundImage = ImageIO.read(new File(
-				GuiConstants.MAIN_WINDOW_BACKGROUND_IMAGE_PATH));
+		this.expectedBackgroundImage = imageStore.getMainWindowBackgroundImage();
 	}
 
 	@Test
@@ -168,7 +166,7 @@ public class MainWindowTest extends AssertTestCase {
 		final ImagePanel imageContentPane = assertIsOfTypeAndGet(ImagePanel.class,
 				mainWindow.getContentPane());
 
-		assertImagesAreEqual(this.expectedBackgroundImage, imageContentPane.getImage());
+		assertSame(this.expectedBackgroundImage, imageContentPane.getImage());
 	}
 
 	@Test
@@ -248,7 +246,7 @@ public class MainWindowTest extends AssertTestCase {
 
 		assertEquals("projectPanel", projectPanel.getName());
 
-		assertEquals(GuiConstants.backgroundColor, projectPanel.getBackground());
+		assertEquals(GuiConstants.BACKGROUND_COLOR, projectPanel.getBackground());
 		assertEquals(1, projectPanel.getComponentCount());
 		assertTrue(projectPanel.isOpaque());
 
@@ -325,7 +323,7 @@ public class MainWindowTest extends AssertTestCase {
 
 		assertEquals("trackingPanel", trackingPanel.getName());
 
-		assertEquals(GuiConstants.backgroundColor, trackingPanel.getBackground());
+		assertEquals(GuiConstants.BACKGROUND_COLOR, trackingPanel.getBackground());
 		assertEquals(0, trackingPanel.getComponentCount());
 		assertTrue(trackingPanel.isOpaque());
 
@@ -369,7 +367,7 @@ public class MainWindowTest extends AssertTestCase {
 
 		assertEquals("videoPanel", videoPanel.getName());
 
-		assertEquals(GuiConstants.backgroundColor, videoPanel.getBackground());
+		assertEquals(GuiConstants.BACKGROUND_COLOR, videoPanel.getBackground());
 		assertEquals(1, videoPanel.getComponentCount());
 		assertTrue(videoPanel.isOpaque());
 
@@ -480,7 +478,7 @@ public class MainWindowTest extends AssertTestCase {
 
 		assertEquals("statusPanel", statusPanel.getName());
 
-		assertEquals(GuiConstants.backgroundColor, statusPanel.getBackground());
+		assertEquals(GuiConstants.BACKGROUND_COLOR, statusPanel.getBackground());
 		assertEquals(0, statusPanel.getComponentCount());
 		assertTrue(statusPanel.isOpaque());
 
