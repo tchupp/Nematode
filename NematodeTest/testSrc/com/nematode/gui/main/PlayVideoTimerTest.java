@@ -33,5 +33,4 @@ public class PlayVideoTimerTest extends AssertTestCase {
 		assertEquals(1, actionListeners.length);
 		assertSame(mockActionListener, actionListeners[0]);
 	}
-
 }
